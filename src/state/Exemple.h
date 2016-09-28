@@ -9,6 +9,7 @@ namespace state {
     // Attributes
   public:
     int x;
+    int testo;
     // Operations
   public:
     void setX (int x);
