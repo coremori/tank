@@ -13,10 +13,22 @@ namespace State {
     // Attributes
   protected:
     ID id;
-    // Operations
-  public:
-    ElementAlloc (ID id);
-    Element* newInstance ();
+ 
+      
+      
+    template <  class E,   typename ID>  ElementAlloc::ElementAlloc(ID id){
+        
+        setID(id);
+        
+    };
+    
+    
+    
+    template <  class E,   typename ID> Element* ElementAlloc::newInstance (){
+        Element* newElement=  new E();
+        newElement.set<ID>(this->id);
+        return newElement;
+    };
   };
 
 };

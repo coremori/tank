@@ -9,7 +9,7 @@ namespace State {
   /// class Element - 
   class Element {
     // Associations
-    State::TypeId test;
+    State::TypeId typeid;
     // Attributes
   protected:
     int x;

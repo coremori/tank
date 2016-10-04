@@ -13,6 +13,7 @@ namespace State {
     Shell ();
     Element const clone ();
     bool const equals (const Element& other);
+    virtual bool const isMissile ();
   };
 
 };

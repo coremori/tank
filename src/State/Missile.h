@@ -17,6 +17,7 @@ namespace State {
     Missile ();
     Element const clone ();
     bool const equals (const Element& other);
+    virtual bool const isMissile ();
     void setCeiling (int p);
     int const getCeiling ();
     void setDistance (int d);

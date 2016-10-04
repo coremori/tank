@@ -8,16 +8,10 @@ namespace State {
 
   /// class Mobile - 
   class Mobile : public State::Element {
-    // Attributes
-  protected:
-    int position;
     // Operations
   public:
-    Tank ();
     bool const isStatic ();
     virtual bool const isTank () = 0;
-    void setPosition (int position);
-    int const getPosition ();
   };
 
 };
