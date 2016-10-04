@@ -9,7 +9,7 @@ namespace State {
     space = 2,
     tank = 3,
     missile = 4,
-    text = 5
+    shell = 5
   };
 
 };

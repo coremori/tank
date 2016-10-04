@@ -7,20 +7,20 @@
 namespace State {
 
   /// class Missile - 
-  class Missile : public State::Mobile {
-    // Associations
-    State::MissileType MissileType;
+  class Missile : public State::Projectile {
     // Attributes
-  protected:
-    MissileType type;
+  public:
+    int Ceiling;
+    int DistanceActuel;
     // Operations
   public:
     Missile ();
     Element const clone ();
     bool const equals (const Element& other);
-    bool const isTank ();
-    TypeId const getTypeId ();
-    MissileType getMissileType ();
+    void setCeiling (int p);
+    int const getCeiling ();
+    void setDistance (int d);
+    int getDistance ();
   };
 
 };

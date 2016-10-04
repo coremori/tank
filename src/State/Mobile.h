@@ -9,7 +9,7 @@ namespace State {
   /// class Mobile - 
   class Mobile : public State::Element {
     // Associations
-    State::Direction Orientation;
+    State::Orientation Orientation;
     // Attributes
   protected:
     int position;
@@ -20,8 +20,8 @@ namespace State {
     virtual bool const isTank () = 0;
     void setPosition (int position);
     int const getPosition ();
-    Direction const getOrientation ();
-    void setOrientation (Direction o);
+    Orientation const getOrientation ();
+    void setOrientation (Orientation o);
   };
 
 };
