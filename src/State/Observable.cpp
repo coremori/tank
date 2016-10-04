@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "State.h"
+#include "Observable.h"
 
-namespace State {
 
-  /// class Observable - 
-  class Observable {
-    // Associations
-    // Attributes
-  protected:
-    mutable std::vector<StateOberver*> observers;
-    // Operations
-  public:
-    virtual ~Observable ();
-    void const registerObserver (StateObserver* o);
-    void const unregisterObserver (const StateEvent& e);
-  };
+//namespace State {
 
-};
+
+    virtual Observable::~Observable (){
+        
+    };
+    void const Observable::registerObserver (StateObserver* o){
+        
+    };
+    void const Observable::unregisterObserver (const StateEvent& e){
+        
+    };
+ // };
+

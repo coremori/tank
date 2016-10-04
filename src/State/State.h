@@ -6,7 +6,6 @@
 namespace State {
 
   /// class State - mobiles-> liste des truc mobile (tank, misile)
-grid -> surface
   class State : public State::Observable {
     // Associations
     // Attributes
