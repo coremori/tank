@@ -11,9 +11,8 @@ namespace state {
     // Operations
   public:
     Shell ();
-    virtual Element* const clone ();
-    virtual bool const equals (const Element& other);
     virtual bool const isMissile ();
+    TypeId const getTypeId ();
   };
 
 };

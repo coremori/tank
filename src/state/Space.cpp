@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
+#include "SpaceTypeId.h"
 
-namespace State {
+namespace state {
 
   /// class Space - 
 
     // Associations
-    State::SpaceTypeId SpaceTypeId;
+    state::SpaceTypeId SpaceType;
     // Operations
   
     Space::Space (){
@@ -23,25 +24,16 @@ namespace State {
     };
     
     TypeId const Space::getTypeId (){
-        return Space;
+        return space;
     };
     
-    Element const Space::clone (){
-        Element clone = new Space();
-        clone.SpaceTypeId = this->SpaceTypeId;
-        return clone;
-    };
-    
-    bool const Space::equals (const Element& other){
-        return (Element::equals(other))&&(getSpaceTypeId(other)==this->SpaceTypeId);
-    };
     
     void Space::setSpaceTypeId (SpaceTypeId id){
-        this->SpaceTypeId = id;
+        this->SpaceType = id;
     };
         
-    SpaceTypeId const Space::getSpaceTypeId (){
-        return this->SpaceTypeId;
+    state::SpaceTypeId const Space::getSpaceTypeId (){
+        return this->SpaceType;
     };
   };
 

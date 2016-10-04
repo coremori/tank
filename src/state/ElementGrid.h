@@ -14,7 +14,7 @@ namespace state {
     int height;
     // Operations
   public:
-    ElementGrid (State& s);
+    ElementGrid ();
     ElementGrid* const clone ();
     void copy (const ElementGrid& other);
     bool const equals (const ElementGrid& other);

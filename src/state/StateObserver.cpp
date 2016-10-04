@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   /// class StateObserver - 
-  class StateObserver {
-    // Operations
-  public:
-    virtual void StateChanged (const StateEvent& e) = 0;
-  };
+
+    virtual void StateObserver::StateChanged (const StateEvent& e) = 0;
 
 };

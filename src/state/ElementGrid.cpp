@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "state.h"
-#include <assert.h> 
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   /// class ElementGrid - 
 
@@ -16,8 +15,7 @@ namespace State {
     int height;
     // Operations
   public:*/
-    ElementGrid::ElementGrid (State& s){
-        this->s = s;
+    ElementGrid::ElementGrid (){
         this->width = 0;
         this->height =0;
     };

@@ -4,16 +4,15 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
     
   /// class StaticElement - 
-
 
     bool const  StaticElement::isStatic (){
         return true;
     };
-    virtual bool const  StaticElement::isSpace () = 0;
+    
     
 };

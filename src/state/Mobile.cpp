@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "State.h"
+#include "state.hpp"
 
-
-#include "State.h"
-
-namespace State {
+namespace state {
 
     bool const Mobile::isStatic (){
         return false;
     };
     
-    virtual bool const Mobile::isTank () = 0;
   
 
 };

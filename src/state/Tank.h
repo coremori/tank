@@ -9,24 +9,22 @@ namespace state {
   /// class Tank - 
   class Tank : public state::Mobile {
     // Associations
-    state::Orientation Orientation;
-    state::PlayerType Player;
     state::TankTypeId TankType;
+    state::PlayerType Player;
+    state::Orientation orientation;
     // Attributes
   protected:
     int pv;
     // Operations
   public:
     Tank ();
-    virtual bool const equals (const Element& other);
-    virtual Element* const clone ();
     virtual bool const isTank ();
-    TypeId const getTypeId ();
+    virtual TypeId const getTypeId ();
     bool const isPlayer ();
     void setPv (int pv);
     int const getPv ();
-    state::Orientation const getOrientation ();
-    void setOrientation (state::Orientation o);
+    Orientation const getOrientation ();
+    void setOrientation (Orientation o);
     void setTankTypeId (TankTypeId id);
     TankTypeId getTankTypeId ();
   };

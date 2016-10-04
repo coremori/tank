@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "ElementList.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   /// class State - mobiles-> liste des truc mobile (tank, missile)
-  
+  /* ElementList mobiles;
+    ElementGrid grid;
+    */
     State::State (){
         
     };
@@ -17,35 +19,62 @@ namespace State {
         delete grid;
     };
     
-    State* const clone ();
-    bool const equals (const State& other);
-    const ElementGrid& const getGrid ();
-    const ElementList& const getMobiles ();
-    const Mobile* const getMobile ( int idx);
+    State* const State::clone (){
+        //not implemented
+    };
+    bool const State::equals (const State& other){
+        //not implemented
+    };
+    
+    const ElementGrid& const State::getGrid (){
+        return grid;
+    };
+    
+    const ElementList& const State::getMobiles (){
+        return mobiles;
+    };
+    
+    const Mobile* const State::getMobile ( int idx){
+        return mobiles.get(idx);
+    };
     
     
     
     
     
-    void setGrid (const ElementGrid& grid){
+    void State::setGrid (const ElementGrid& grid){
         this->*grid = grid;
     };
     
     
-    void setMobiles (const ElementList list){
+    void State::setMobiles (const ElementList list){
         this->*mobiles = list;
     };
     
     
-    void loadLevel (const char* file_name);
+    void State::loadLevel (const char* file_name){
+        delete grid;
+        delete mobiles;
+        grid = new ElementGrid();
+        grid.load(file_name);
+    };
+    
+    
+    
+    
+    
     
     void State::setElementFactory (ElementFactory* factory){
         mobiles.setElementFactory (ElementFactory* factory);
         grid.setElementFactory (ElementFactory* factory);
     };
     
-    void const notifyObservers (StateEventId id);
-    void const notifyObservers (const StateEvent& e);
+    void const State::notifyObservers (StateEventId id){
+        //not implemented
+    };
+    void const State::notifyObservers (const StateEvent& e){
+        //not implemented
+    };
   };
 
 

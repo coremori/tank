@@ -4,18 +4,19 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   
-    Shell::Shell ();
-    Element const Shell::clone (){
-        //not implemented
-    };
-    bool const Shell::equals (const Element& other){
-        //not implemented
-    };
+    Shell::Shell(){};
   
-
+    bool const Shell::isMissile (){
+        return false;
+        
+    };
+    
+    TypeId const Shell::getTypeId (){
+        return shell;
+    };
 };

@@ -4,23 +4,16 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
-  /// class StateEvent - 
-  class StateEvent : public State::ListEven {
-    // Associations
-    // Attributes
-  public:
-    const State state;
-    // Operations
-  public:
-    void StateEvent (const Stade& s, StateEventId id);
-    virtual ~StateEvent ();
-    virtual StateEvent* const clone ();
-    bool const operator== (StateEvenId id);
-    bool const operator!= (StateEvenId id);
-  };
+  
+    void StateEvent::StateEvent (const Stade& s, StateEventId id);
+    virtual StateEvent::~StateEvent ();
+    virtual StateEvent::StateEvent* const clone ();
+    bool const StateEvent::operator== (StateEvenId id);
+    bool const StateEvent::operator!= (StateEvenId id);
+  
 
 };

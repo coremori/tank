@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "state.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   /// class ElementList -  
      
-    ElementList::ElementList (State& s){
-        this->*s = s;
+    ElementList::ElementList (){
        
     };
     
@@ -42,7 +41,6 @@ namespace State {
     };
     
     
-    const State& const getState ();
     int const size ();
     
     

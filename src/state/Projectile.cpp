@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
     // state::OrientationMissile Orientation
 
   
-    virtual bool const Projectile::isTank () override{
+    bool const Projectile::isTank (){
         return false;
     };
     
-    virtual bool const Projectile::isMissile () = 0;
+  
     
     OrientationMissile const Projectile::getOrientation (){
         return Orientation;

@@ -11,7 +11,7 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    std map::<char ,AElementAlloc*> list;
+    std::map<char ,AElementAlloc*> list;
     // Operations
   public:
     ~ElementFactory ();

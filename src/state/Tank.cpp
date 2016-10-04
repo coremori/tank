@@ -4,20 +4,14 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
     Tank::Tank (){};
     
-    virtual bool const Tank::equals (const Element& other){//not implemented
     
-    };
-    virtual Element* const Tank::clone (){
-        //not implemented
-    };
-    
-    virtual bool const Tank::isTank () override {
+    bool const Tank::isTank () {
         return true;
     };
     
@@ -44,12 +38,12 @@ namespace State {
         return this->pv;
     };
     
-    Orientation const Tank::getOrientation (){
-        return Orientation;
+    state::Orientation const Tank::getOrientation (){
+        return orientation;
     };
     
-    void Tank::setOrientation (Orientation o){
-        this->Orientation = o;
+    void Tank::setOrientation (state::Orientation o){
+        this->orientation = o;
     };
     
     void Tank::setTankTypeId (TankTypeId id){
@@ -59,6 +53,6 @@ namespace State {
     TankTypeId Tank::getTankTypeId (){
         return TankType;
     };
+    
   };
 
-};

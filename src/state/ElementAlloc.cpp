@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   /// class ElementAlloc - 
   template <  class E,   typename ID>

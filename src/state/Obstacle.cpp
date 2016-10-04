@@ -4,18 +4,11 @@
  * and open the template in the editor.
  */
 
-#include "State.h"
+#include "state.hpp"
 
-namespace State {
+namespace state{
 
-  /// class Obstacle - 
-  class Obstacle : public State::StaticElement {
-    // Associations
-    State::ObstacleTypeId ObstacleType;
-    // Attributes
-  public:
-     ;
-     
+  
     Obstacle::Obstacle (ObstacleTypeId id){
         this->ObstacleType = id;
     };
@@ -28,14 +21,7 @@ namespace State {
         return obstacle;
     };
     
-    Element* const Obstacle::clone (){
-        Element clone = new Obstacle(this->ObstacleTypeId);
-        return *clone;
-    };
-    
-    bool const Obstacle::equals (const Element& other){
-        return
-    };
+   
     
     void Obstacle::setObstacleTypeId (ObstacleTypeId id){
         this->ObstacleType = id;
@@ -44,6 +30,6 @@ namespace State {
     ObstacleTypeId const Obstacle::getObstacleTypeId (){
         return this->ObstacleType;
     };
-  };
+  
 
 };

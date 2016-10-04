@@ -11,17 +11,15 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    State s;
     ElementFactory* factory;
     std::vector<Element*> elements;
     // Operations
   public:
-    ElementList (State& s);
+    ElementList ();
     ~ElementList ();
     ElementList* const clone ();
     bool const equals (const ElementList& other);
     void copy (const ElementList& list);
-    const State& const getState ();
     int const size ();
     Element* const get ( int idx);
     void clear ();

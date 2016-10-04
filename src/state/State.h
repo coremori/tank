@@ -2,7 +2,7 @@
 #ifndef STATE__STATE__H
 #define STATE__STATE__H
 
-#include "ElementList.h"
+#include "state.h"
 
 namespace state {
 
@@ -26,8 +26,6 @@ namespace state {
     void setMobiles (const ElementList& list);
     void loadLevel (const char* file_name);
     void setElementFactory (ElementFactory* factory);
-    void const notifyObservers (StateEventId id);
-    void const notifyObservers (const StateEvent& e);
   };
 
 };

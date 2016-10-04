@@ -12,7 +12,7 @@ namespace state {
     state::OrientationMissile Orientation;
     // Operations
   public:
-    bool const isTank ();
+    virtual bool const isTank ();
     virtual bool const isMissile () = 0;
     OrientationMissile const getOrientation ();
     void setOrientation (OrientationMissile o);

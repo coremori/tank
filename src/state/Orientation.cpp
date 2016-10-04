@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#include "state.hpp"
 
-namespace State {
+namespace state {
 
   enum Orientation {
     left down =1,

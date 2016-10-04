@@ -15,8 +15,6 @@ namespace state {
     Obstacle (ObstacleTypeId id);
     virtual bool const isSpace ();
     TypeId const getTypeId ();
-    virtual Element* const clone ();
-    virtual bool const equals (const Element& other);
     void setObstacleTypeId (ObstacleTypeId id);
     ObstacleTypeId const getObstacleTypeId ();
   };

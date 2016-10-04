@@ -9,16 +9,14 @@ namespace state {
   /// class Space - 
   class Space : public state::StaticElement {
     // Associations
-    state::SpaceTypeId SpaceTypeId;
+    state::SpaceTypeId SpaceType;
     // Operations
   public:
     Space ();
     virtual bool const isSpace ();
     TypeId const getTypeId ();
-    virtual Element* const clone ();
-    virtual bool const equals (const Element& other);
-    void setSpaceTypeId (state::SpaceTypeId id);
-    state::SpaceTypeId const getSpaceTypeId ();
+    void setSpaceTypeId (SpaceTypeId id);
+    SpaceTypeId const getSpaceTypeId ();
   };
 
 };

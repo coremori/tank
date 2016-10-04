@@ -15,13 +15,12 @@ namespace state {
     // Operations
   public:
     Missile ();
-    virtual Element* const clone ();
-    virtual bool const equals (const Element& other);
     virtual bool const isMissile ();
     void setCeiling (int p);
     int const getCeiling ();
     void setDistance (int d);
     int getDistance ();
+    TypeId const getTypeId ();
   };
 
 };

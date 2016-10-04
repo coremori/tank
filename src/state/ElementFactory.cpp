@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "State.h"
+#include "state.hpp"
 
 
-namespace State {
+namespace state {
 
   /// class ElementFactory - 
   class ElementFactory {
     // Associations
     // Attributes
   protected:
-    std map::<char ,AElementAlloc*> list;
+    st::map<char ,AElementAlloc*> list;
     // Operations
   public:
     ~ElementFactory ();

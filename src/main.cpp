@@ -9,14 +9,13 @@ void testSFML() {
 
 // Fin test SFML
 
-#include "state.hpp"
-
+#include <diagram1.hpp>
 using namespace std;
 
 int main(int argc,char* argv[]) 
 {
 
-    cout << "It works ! and it's eavevsy" << endl;
+    cout << "It works !" << endl;
 
     return 0;
 }
