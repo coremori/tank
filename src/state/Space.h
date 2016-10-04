@@ -17,8 +17,8 @@ namespace state {
     TypeId const getTypeId ();
     virtual Element* const clone ();
     virtual bool const equals (const Element& other);
-    void setSpaceTypeId (SpaceTypeId id);
-    SpaceTypeId const getSpaceTypeId ();
+    void setSpaceTypeId (state::SpaceTypeId id);
+    state::SpaceTypeId const getSpaceTypeId ();
   };
 
 };

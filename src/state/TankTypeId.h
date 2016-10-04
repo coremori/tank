@@ -5,10 +5,10 @@
 namespace state {
 
   enum TankTypeId {
-    Little tank  vert = 1,
-    Little tank  grey = 2,
-    Big tank vert = 3,
-    Big tank grey = 4
+    Little_tank_green = 1,
+    Little_tank_grey = 2,
+    Big_tank_green = 3,
+    Big_tank_grey = 4
   };
 
 };

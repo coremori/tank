@@ -20,8 +20,9 @@
 
 
 
-
-
+#include "TankTypeId.h"
+#include "SpaceTypeId.h"
+#include "OrientationMissile.h"
 
 #include "TypeId.h"
 #include "Element.h"
@@ -31,12 +32,11 @@
 
 
 #include "ObstacleTypeId.h"
-#include "Orientation.h"
+
 #include "PlayerType.h"
-#include "TankTypeId.h"
-#include "SpaceTypeId.h"
+
 #include "ElementAlloc.h"
-#include "OrientationMissile.h"
+
 #include "ListEven.h"
 #include "StaticElement.h"
 #include "Obstacle.h"
@@ -46,4 +46,5 @@
 #include "Missile.h"
 #include "Shell.h"
 #include "Tank.h"
+#include "Orientation.h"
 #endif

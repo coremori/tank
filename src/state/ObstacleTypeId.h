@@ -5,9 +5,8 @@
 namespace state {
 
   enum ObstacleTypeId {
-    sand = -,
-    greenery = |,
-    text = char
+    sand = '-',
+    greenery = '|'
   };
 
 };

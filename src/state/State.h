@@ -20,11 +20,8 @@ namespace state {
     State* const clone ();
     bool const equals (const State& other);
     const ElementGrid& const getGrid ();
-    ElementGrid& getGrid ();
     const ElementList& const getMobiles ();
-    ElementList& getMobiles ();
-    const MobileElement* const getMobile ( int idx);
-    MobileElement* getMobile ( int idx);
+    const Mobile* const getMobile ( int idx);
     void setGrid (const ElementGrid& grid);
     void setMobiles (const ElementList& list);
     void loadLevel (const char* file_name);

@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "State.h"
+#include "state.h"
 
 namespace State {
 
-  /// class ElementList - 
- 
-  
-    
-    
-    
+  /// class ElementList -  
+     
     ElementList::ElementList (State& s){
         this->*s = s;
        

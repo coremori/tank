@@ -25,8 +25,8 @@ namespace state {
     bool const isPlayer ();
     void setPv (int pv);
     int const getPv ();
-    Orientation const getOrientation ();
-    void setOrientation (Orientation o);
+    state::Orientation const getOrientation ();
+    void setOrientation (state::Orientation o);
     void setTankTypeId (TankTypeId id);
     TankTypeId getTankTypeId ();
   };

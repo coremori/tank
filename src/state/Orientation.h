@@ -5,10 +5,10 @@
 namespace state {
 
   enum Orientation {
-    left down =1,
-    left up = 2,
-    rigth down = 3,
-    right up = 4
+    left_down =1,
+    left_up = 2,
+    rigth_down = 3,
+    right_up = 4
   };
 
 };
