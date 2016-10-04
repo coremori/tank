@@ -9,7 +9,6 @@ namespace State {
   /// class Element - 
   class Element {
     // Associations
-    State::TypeId typeid;
     // Attributes
   protected:
     int x;
@@ -20,7 +19,7 @@ namespace State {
     virtual ~Element ();
     virtual TypeId const getTypeId () = 0;
     virtual bool const isStatic () = 0;
-    virtual Element const clone () = 0;
+    virtual Element* const clone () = 0;
     virtual bool const equals (const Element& other);
     int const getX ();
     int const getY ();

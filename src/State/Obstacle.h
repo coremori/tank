@@ -10,18 +10,15 @@ namespace State {
   class Obstacle : public State::StaticElement {
     // Associations
     State::ObstacleTypeId ObstacleType;
-    // Attributes
-  public:
-     ;
     // Operations
   public:
     Obstacle (ObstacleTypeId id);
-    bool const isSpace ();
+    virtual bool const isSpace ();
     TypeId const getTypeId ();
-    Element const clone ();
-    bool const equals (const Element& other);
+    virtual Element* const clone ();
+    virtual bool const equals (const Element& other);
     void setObstacleTypeId (ObstacleTypeId id);
-    ObstacleTypeId getObstacleTypeId ();
+    ObstacleTypeId const getObstacleTypeId ();
   };
 
 };

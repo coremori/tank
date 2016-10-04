@@ -15,15 +15,35 @@ namespace State {
     // Attributes
   public:
      ;
-    // Operations
-  public:
-    Obstacle (ObstacleTypeId id);
-    bool const isSpace ();
-    TypeId const getTypeId ();
-    Element const clone ();
-    bool const equals (const Element& other);
-    void setObstacleTypeId (ObstacleTypeId id);
-    ObstacleTypeId getObstacleTypeId ();
+     
+    Obstacle::Obstacle (ObstacleTypeId id){
+        this->ObstacleType = id;
+    };
+    
+    bool const Obstacle::isSpace (){
+        return false;
+    };
+    
+    TypeId const Obstacle::getTypeId (){
+        return obstacle;
+    };
+    
+    Element* const Obstacle::clone (){
+        Element clone = new Obstacle(this->ObstacleTypeId);
+        return *clone;
+    };
+    
+    bool const Obstacle::equals (const Element& other){
+        return
+    };
+    
+    void Obstacle::setObstacleTypeId (ObstacleTypeId id){
+        this->ObstacleType = id;
+    };
+    
+    ObstacleTypeId const Obstacle::getObstacleTypeId (){
+        return this->ObstacleType;
+    };
   };
 
 };

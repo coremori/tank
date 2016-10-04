@@ -9,14 +9,14 @@ namespace State {
   /// class Missile - 
   class Missile : public State::Projectile {
     // Attributes
-  public:
+  protected:
     int Ceiling;
     int DistanceActuel;
     // Operations
   public:
     Missile ();
-    Element const clone ();
-    bool const equals (const Element& other);
+    virtual Element* const clone ();
+    virtual bool const equals (const Element& other);
     virtual bool const isMissile ();
     void setCeiling (int p);
     int const getCeiling ();

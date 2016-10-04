@@ -18,15 +18,17 @@ namespace State {
     // Operations
   public:
     Tank ();
-    bool const equals (const Element& other);
-    Element const clone ();
-    bool const isTank ();
+    virtual bool const equals (const Element& other);
+    virtual Element* const clone ();
+    virtual bool const isTank ();
     TypeId const getTypeId ();
     bool const isPlayer ();
     void setPv (int pv);
     int const getPv ();
     Orientation const getOrientation ();
     void setOrientation (Orientation o);
+    void setTankTypeId (TankTypeId id);
+    TankTypeId getTankTypeId ();
   };
 
 };

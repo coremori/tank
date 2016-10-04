@@ -21,9 +21,9 @@ namespace State {
     int const getWidth ();
     int const getHeight ();
     Element* const getCell (int i, int j);
-    bool const isSpace ();
+    bool const isSpace (int i, int j);
     void setCell (int i, int j, Element* e);
-    hasCell (int i, int j);
+    bool const hasCell (int i, int j);
     void load (const char* file_name);
     void const notifyObservers (int i = -1, int j = -1);
   };

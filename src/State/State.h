@@ -26,7 +26,7 @@ grid -> surface
     const MobileElement* const getMobile ( int idx);
     MobileElement* getMobile ( int idx);
     void setGrid (const ElementGrid& grid);
-    void setMobiles (const ElementList list);
+    void setMobiles (const ElementList& list);
     void loadLevel (const char* file_name);
     void setElementFactory (ElementFactory* factory);
     void const notifyObservers (StateEventId id);

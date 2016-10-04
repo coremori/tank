@@ -9,18 +9,39 @@
 namespace State {
 
   /// class Space - 
-  class Space : public State::StaticElement {
+
     // Associations
     State::SpaceTypeId SpaceTypeId;
     // Operations
-  public:
-    Space ();
-    bool const isSpace ();
-    TypeId const getTypeId ();
-    Element const clone ();
-    bool const equals (const Element& other);
-    void setSpaceTypeId (SpacetypeId id);
-    SpaceTypeId getSpaceTypeId ();
+  
+    Space::Space (){
+        
+    };
+    
+    bool const Space::isSpace (){
+        return true;
+    };
+    
+    TypeId const Space::getTypeId (){
+        return Space;
+    };
+    
+    Element const Space::clone (){
+        Element clone = new Space();
+        clone.SpaceTypeId = this->SpaceTypeId;
+        return clone;
+    };
+    
+    bool const Space::equals (const Element& other){
+        return (Element::equals(other))&&(getSpaceTypeId(other)==this->SpaceTypeId);
+    };
+    
+    void Space::setSpaceTypeId (SpaceTypeId id){
+        this->SpaceTypeId = id;
+    };
+        
+    SpaceTypeId const Space::getSpaceTypeId (){
+        return this->SpaceTypeId;
+    };
   };
 
-};

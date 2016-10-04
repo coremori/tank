@@ -13,12 +13,12 @@ namespace State {
     // Operations
   public:
     Space ();
-    bool const isSpace ();
+    virtual bool const isSpace ();
     TypeId const getTypeId ();
-    Element const clone ();
-    bool const equals (const Element& other);
-    void setSpaceTypeId (SpacetypeId id);
-    SpaceTypeId getSpaceTypeId ();
+    virtual Element* const clone ();
+    virtual bool const equals (const Element& other);
+    void setSpaceTypeId (SpaceTypeId id);
+    SpaceTypeId const getSpaceTypeId ();
   };
 
 };
