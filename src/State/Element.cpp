@@ -9,41 +9,32 @@
 
 namespace State {
 
-  /// class Element - 
-  class Element {
-    // Associations
-    State::TypeId test;
-    // Attributes
-  protected:
-    int x; //position x
-    int y;
-    // Operations
-  public:
-    Element ();
-    virtual ~Element ();
-    virtual TypeId const getTypeId () = 0;
-    virtual bool const isStatic () = 0;
-    virtual Element const clone () = 0;
+    Element::Element (){};
+    virtual Element::~Element (){};
     
-    virtual bool const equals (const Element& other){
+    virtual TypeId const Element::getTypeId () = 0;
+    virtual bool const Element::isStatic () = 0;
+    virtual Element const Element::clone () = 0;
+    
+    virtual bool const Element::equals (const Element& other){
         return (this->x == other.x)&&(this->y == other.y);
     };
     
-    int const getX (){
+    int const Element::getX (){
         return x;
     };
     
-    int const getY (){
+    int const Element::getY (){
         return y;
     };
     
-    void setX (int x){
+    void Element::setX (int x){
         this->x = x;
     };
     
-    void setY (int y){
+    void Element::setY (int y){
         this->y = y;
     };
   };
 
-};
+

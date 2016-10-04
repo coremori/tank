@@ -7,13 +7,13 @@
 #include "State.h"
 
 namespace State {
-
+    
   /// class StaticElement - 
-  class StaticElement : public State::Element {
-    // Operations
-  public:
-    bool const isStatic ();
-    virtual bool const isSpace () = 0;
-  };
 
+
+    bool const  StaticElement::isStatic (){
+        return true;
+    };
+    virtual bool const  StaticElement::isSpace () = 0;
+    
 };
