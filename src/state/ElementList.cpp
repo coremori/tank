@@ -9,8 +9,8 @@ namespace state {
 
   /// class ElementList -  
      
-    ElementList::ElementList (){
-       
+    ElementList::ElementList (State& s){
+        this->s = s;
     };
     
     
@@ -20,27 +20,7 @@ namespace state {
         
     };
 }
-    ElementList* const ElementList::clone (){
-        ElementList* list = new ElementList();
-        setElementFactory(factory);
-        int i=0;
-        while(){
-            list.set(i,this->elements(i));
-        
-        };
-        
-        return list;
-    } ;
-    
-    bool const equals (const ElementList& other){//not implemented
-        
-    };
-    
-    void copy (const ElementList& list){
-        //not implemented
-    };
-    
-    
+   
     int const size ();
     
     
@@ -68,8 +48,6 @@ namespace state {
     
     
     
-    void const notifyObservers (int  i = -1){//not implemented
-    };
   };
 
 };

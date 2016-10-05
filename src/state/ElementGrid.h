@@ -14,10 +14,7 @@ namespace state {
     int height;
     // Operations
   public:
-    ElementGrid ();
-    ElementGrid* const clone ();
-    void copy (const ElementGrid& other);
-    bool const equals (const ElementGrid& other);
+    ElementGrid (State& s);
     int const getWidth ();
     int const getHeight ();
     Element* const getCell (int i, int j);
@@ -25,7 +22,6 @@ namespace state {
     void setCell (int i, int j, Element* e);
     bool const hasCell (int i, int j);
     void load (const char* file_name);
-    void const notifyObservers (int i = -1, int j = -1);
   };
 
 };

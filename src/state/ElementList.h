@@ -13,19 +13,16 @@ namespace state {
   protected:
     ElementFactory* factory;
     std::vector<Element*> elements;
+    State& s;
     // Operations
   public:
-    ElementList ();
+    ElementList (State& s);
     ~ElementList ();
-    ElementList* const clone ();
-    bool const equals (const ElementList& other);
-    void copy (const ElementList& list);
     int const size ();
     Element* const get ( int idx);
     void clear ();
     void setElementFactory (ElementFactory* f);
     void set ( int idx, Element* e);
-    void const notifyObservers (int  i = -1);
   };
 
 };

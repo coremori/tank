@@ -3,10 +3,17 @@
 
 #include <assert.h> 
 #include <vector>
-#include <memory>
+#include <map>
+#include <iostream>
+#include <fstream>
+
 
 class Element;
+class ElementList;
+class ElementGrid;
 class State;
+
+class Mobile;
 
 #include "state.h"
 

@@ -15,25 +15,11 @@ namespace state {
     int height;
     // Operations
   public:*/
-    ElementGrid::ElementGrid (){
+    ElementGrid::ElementGrid (State& s){
         this->width = 0;
         this->height =0;
     };
-    
-    ElementGrid* const ElementGrid::clone (){// not implemented
-        
-    };
-    
-    void ElementGrid::copy (const ElementGrid& other){// not implemented
-        
-    };
-    
-    bool const ElementGrid::equals (const ElementGrid& other){// not implemented
-        return false;
-    };
-    
-    
-    
+      
     int const ElementGrid::getWidth (){
         return width;
     };
@@ -65,8 +51,26 @@ namespace state {
     };
     
     
-    void ElementGrid::load (const char* file_name);
-    void const ElementGrid::notifyObservers (int i = -1, int j = -1);
+    void ElementGrid::load (const char* file_name){
+        ElementFactory* f = new ElementFactory();
+        //save the factory
+        ElementList::setElementFactory(f);
+        string line;
+        ifstream myfile (file_name);
+        if (myfile.is_open())
+        {
+            while ( getline (myfile,line) )
+        {
+            cout << line << '\n';
+        }
+        myfile.close();
+        }
+
+        else cout << "Unable to open file"; 
+        
+        
+    };
+    
   };
 
 

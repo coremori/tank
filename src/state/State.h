@@ -17,11 +17,9 @@ namespace state {
   public:
     State ();
     ~State ();
-    State* const clone ();
-    bool const equals (const State& other);
-    const ElementGrid& const getGrid ();
-    const ElementList& const getMobiles ();
-    const Mobile* const getMobile ( int idx);
+    const ElementGrid& getGrid ();
+    const ElementList&  getMobiles ();
+    const Mobile* getMobile (int idx);
     void setGrid (const ElementGrid& grid);
     void setMobiles (const ElementList& list);
     void loadLevel (const char* file_name);
