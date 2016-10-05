@@ -26,7 +26,7 @@ namespace state {
         return mobiles;
     };
     
-    const Mobile* State::getMobile(int idx){
+    const Mobile* State::getMobile (int idx){
         return this->mobiles.get(idx);
     };
     

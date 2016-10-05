@@ -55,15 +55,34 @@ namespace state {
         ElementFactory* f = new ElementFactory();
         //save the factory
         ElementList::setElementFactory(f);
-        string line;
+        char element;
+        int idx = 0;
+        int idxmobiles = 0;
+        ElementList mobiles = new ElementList(s);
+        s.setMobiles(mobiles);
+        
+        
         ifstream myfile (file_name);
         if (myfile.is_open())
         {
-            while ( getline (myfile,line) )
-        {
-            cout << line << '\n';
-        }
-        myfile.close();
+            myfile >> this->width >> this->heigth;            
+            while ( get(myfile,element) )
+            {
+                cout << element << '\n';
+                if ((element != '*')&&(element != '%')) //'*' pour le joueur humain et '%' pour l'IA
+                {
+                    Element::set(idx,factory.newInstance(element));
+                    idx++;
+                }
+                else
+                {
+                    Element::set(idx,factory.newInstance(' '));
+                    mobiles.set(idxmobiles, factory.newInstance(element);
+                    idxmobiles ++;
+                }
+            }
+            myfile.close();
+             
         }
 
         else cout << "Unable to open file"; 

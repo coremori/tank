@@ -21,7 +21,9 @@ namespace state {
     };
 }
    
-    int const size ();
+    int const size (){
+    return 1;
+    };
     
     
     
@@ -43,7 +45,7 @@ namespace state {
     
     
     void set ( int idx, Element* e){
-        elements[i*width+j] = e;
+        elements[idx] = e;
     };
     
     
