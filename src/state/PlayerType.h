@@ -2,6 +2,7 @@
 #ifndef STATE__PLAYERTYPE__H
 #define STATE__PLAYERTYPE__H
 
+
 namespace state {
 
   enum PlayerType {

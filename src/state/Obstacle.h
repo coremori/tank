@@ -2,7 +2,13 @@
 #ifndef STATE__OBSTACLE__H
 #define STATE__OBSTACLE__H
 
-#include "state.h"
+
+namespace state {
+  class StaticElement;
+}
+
+#include "ObstacleTypeId.h"
+#include "StaticElement.h"
 
 namespace state {
 

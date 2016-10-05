@@ -2,7 +2,13 @@
 #ifndef STATE__ELEMENTALLOC__H
 #define STATE__ELEMENTALLOC__H
 
-#include "state.h"
+
+namespace state {
+  class Element;
+  class AElementAlloc;
+}
+
+#include "AElementAlloc.h"
 
 namespace state {
 

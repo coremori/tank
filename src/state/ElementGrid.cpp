@@ -55,6 +55,7 @@ namespace state {
         ElementFactory* f = new ElementFactory();
         //save the factory
         ElementList::setElementFactory(f);
+        elements.clear();
         char element;
         int idx = 0;
         int idxmobiles = 0;
@@ -65,7 +66,8 @@ namespace state {
         ifstream myfile (file_name);
         if (myfile.is_open())
         {
-            myfile >> this->width >> this->heigth;            
+            myfile >> this->width >> this->heigth;
+                                                    // regler la hauteur de ciel
             while ( get(myfile,element) )
             {
                 cout << element << '\n';
@@ -76,7 +78,7 @@ namespace state {
                 }
                 else
                 {
-                    Element::set(idx,factory.newInstance(' '));
+                    Element::set(idx,factory.newInstance('.'));
                     mobiles.set(idxmobiles, factory.newInstance(element);
                     idxmobiles ++;
                 }

@@ -26,22 +26,12 @@ namespace state {
         return mobiles;
     };
     
-    const Mobile* State::getMobile (int idx){
+    const Element* State::getMobile (int idx){
         return this->mobiles.get(idx);
     };
-    
-    void State::setGrid (const ElementGrid& grid){
-        this->grid = grid;
-    };
-    
-    
-    void State::setMobiles (const ElementList& list){
-        this->mobiles = list;
-    };
-    
+      
     
     void State::loadLevel (const char* file_name){
-        this->grid = new ElementGrid (*this);
         grid.load(file_name);
     };
     

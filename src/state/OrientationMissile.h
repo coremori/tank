@@ -2,6 +2,7 @@
 #ifndef STATE__ORIENTATIONMISSILE__H
 #define STATE__ORIENTATIONMISSILE__H
 
+
 namespace state {
 
   enum OrientationMissile {

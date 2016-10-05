@@ -16,19 +16,13 @@ namespace state {
     
     ElementList::~ElementList (){
         factory.delete();
-        
-        
     };
 }
    
     int const size (){
-    return 1;
+        return elements.size();
     };
-    
-    
-    
-    
-    
+        
     Element* const get ( int idx){
         assert(size()>idx && idx>=0);
         return elements[idx];
@@ -41,9 +35,7 @@ namespace state {
     void setElementFactory (ElementFactory* f){
         this->factory = f;
     };
-    
-    
-    
+
     void set ( int idx, Element* e){
         elements[idx] = e;
     };

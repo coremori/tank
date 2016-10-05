@@ -2,7 +2,12 @@
 #ifndef STATE__SHELL__H
 #define STATE__SHELL__H
 
-#include "state.h"
+
+namespace state {
+  class Projectile;
+}
+
+#include "Projectile.h"
 
 namespace state {
 

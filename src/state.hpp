@@ -8,12 +8,6 @@
 #include <fstream>
 
 
-class Element;
-class ElementList;
-class ElementGrid;
-class State;
-
-class Mobile;
 
 #include "state.h"
 

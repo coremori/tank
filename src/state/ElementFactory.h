@@ -2,7 +2,13 @@
 #ifndef STATE__ELEMENTFACTORY__H
 #define STATE__ELEMENTFACTORY__H
 
-#include "state.h"
+#include <map>
+
+namespace state {
+  class AElementAlloc;
+}
+
+#include "AElementAlloc.h"
 
 namespace state {
 

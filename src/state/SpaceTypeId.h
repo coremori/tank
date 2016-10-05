@@ -2,6 +2,7 @@
 #ifndef STATE__SPACETYPEID__H
 #define STATE__SPACETYPEID__H
 
+
 namespace state {
 
   enum SpaceTypeId {

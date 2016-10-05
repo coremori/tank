@@ -2,7 +2,16 @@
 #ifndef STATE__STATE__H
 #define STATE__STATE__H
 
-#include "state.h"
+
+namespace state {
+  class ElementList;
+  class ElementGrid;
+  class Element;
+  class ElementFactory;
+}
+
+#include "ElementList.h"
+#include "ElementGrid.h"
 
 namespace state {
 
@@ -19,9 +28,7 @@ namespace state {
     ~State ();
     const ElementGrid& getGrid ();
     const ElementList&  getMobiles ();
-    const Mobile* getMobile (int idx);
-    void setGrid (const ElementGrid& grid);
-    void setMobiles (const ElementList& list);
+    const Element* getMobile (int idx);
     void loadLevel (const char* file_name);
     void setElementFactory (ElementFactory* factory);
   };

@@ -2,7 +2,13 @@
 #ifndef STATE__PROJECTILE__H
 #define STATE__PROJECTILE__H
 
-#include "state.h"
+
+namespace state {
+  class Mobile;
+}
+
+#include "OrientationMissile.h"
+#include "Mobile.h"
 
 namespace state {
 
