@@ -3,45 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#include "Element.h"
+#include "ElementFactory.h"
 #include "state.hpp"
 
 namespace state {
 
   /// class ElementList -  
      
-    ElementList::ElementList (State& s){
-        this->s = s;
+    ElementList::ElementList (State& s) : s(s) {
     };
     
     
     ElementList::~ElementList (){
-        factory.delete();
     };
-}
+
    
-    int const size (){
+    int const ElementList::size (){
         return elements.size();
     };
         
-    Element* const get ( int idx){
+    Element* const ElementList::get ( int idx){
         assert(size()>idx && idx>=0);
         return elements[idx];
     };
         
-    void clear (){//not implemented
+    void ElementList::clear (){//not implemented
         
     };
     
-    void setElementFactory (ElementFactory* f){
-        this->factory = f;
+    void ElementList::setElementFactory (ElementFactory* f){
+        factory = f;
     };
 
-    void set ( int idx, Element* e){
+    void ElementList::set ( int idx, Element* e){
         elements[idx] = e;
     };
     
     
-    
-  };
 
 };

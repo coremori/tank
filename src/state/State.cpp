@@ -12,7 +12,7 @@ namespace state {
     ElementGrid grid;
     */
     State::State() : mobiles(*this), grid(*this) {
-
+        
     };
     
     State::~State (){ // supprime tout pour l'instant
@@ -22,7 +22,7 @@ namespace state {
         return grid;
     };
     
-    const ElementList& State::getMobiles (){
+    ElementList& State::getMobiles (){
         return mobiles;
     };
     
@@ -34,10 +34,6 @@ namespace state {
     void State::loadLevel (const char* file_name){
         grid.load(file_name);
     };
-    
-    
-    
-    
     
     
     void State::setElementFactory (ElementFactory* factory){

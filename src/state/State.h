@@ -27,7 +27,7 @@ namespace state {
     State ();
     ~State ();
     const ElementGrid& getGrid ();
-    const ElementList&  getMobiles ();
+    ElementList&  getMobiles ();
     const Element* getMobile (int idx);
     void loadLevel (const char* file_name);
     void setElementFactory (ElementFactory* factory);

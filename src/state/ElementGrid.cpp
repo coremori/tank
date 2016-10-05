@@ -5,17 +5,11 @@
  */
 #include "state.hpp"
 
+
 namespace state {
 
-  /// class ElementGrid - 
-
-    // Attributes
-/*  protected:
-    int width;
-    int height;
-    // Operations
-  public:*/
-    ElementGrid::ElementGrid (State& s){
+    ElementGrid::ElementGrid (State& s) : ElementList(s){
+        new ElementList(s);
         this->width = 0;
         this->height =0;
     };
@@ -38,7 +32,7 @@ namespace state {
           
     bool const ElementGrid::isSpace (int i, int j){
            assert (this->hasCell(i,j)); 
-           return ElementList::elements[i*width+j].getTypeId==space;
+           return ElementList::elements[i*width+j]->getTypeId()==space;
     };
     
     void ElementGrid::setCell (int i, int j, Element* e){
@@ -52,34 +46,31 @@ namespace state {
     
     
     void ElementGrid::load (const char* file_name){
-        ElementFactory* f = new ElementFactory();
-        //save the factory
-        ElementList::setElementFactory(f);
         elements.clear();
         char element;
         int idx = 0;
         int idxmobiles = 0;
-        ElementList mobiles = new ElementList(s);
-        s.setMobiles(mobiles);
+        /*ElementList mobiles = new ElementList(s);
+        s.setMobiles(mobiles);*/
         
         
         ifstream myfile (file_name);
         if (myfile.is_open())
         {
-            myfile >> this->width >> this->heigth;
+            myfile >> this->width >> this->height;
                                                     // regler la hauteur de ciel
-            while ( get(myfile,element) )
+            while ( myfile.get(element) )
             {
-                cout << element << '\n';
                 if ((element != '*')&&(element != '%')) //'*' pour le joueur humain et '%' pour l'IA
                 {
-                    Element::set(idx,factory.newInstance(element));
+                    ElementList::set(idx,factory->newInstance(element));
                     idx++;
                 }
                 else
                 {
-                    Element::set(idx,factory.newInstance('.'));
-                    mobiles.set(idxmobiles, factory.newInstance(element);
+                    ElementList::set(idx,factory->newInstance('.'));
+                    ElementList e = s.getMobiles();
+                    e.set(idxmobiles, factory->newInstance(element));
                     idxmobiles ++;
                 }
             }
