@@ -18,7 +18,7 @@ namespace state {
     state::SpaceTypeId SpaceType;
     // Operations
   public:
-    Space ();
+    Space (SpaceTypeId id);
     virtual bool const isSpace ();
     TypeId const getTypeId ();
     void setSpaceTypeId (SpaceTypeId id);

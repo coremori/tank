@@ -15,8 +15,8 @@ namespace state {
     state::SpaceTypeId SpaceType;
     // Operations
   
-    Space::Space (){
-        
+    Space::Space (SpaceTypeId id){
+        this->SpaceType = id;
     };
     
     bool const Space::isSpace (){
