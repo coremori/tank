@@ -5,35 +5,15 @@
  */
 #include "state.hpp"
 
+
 namespace state {
 
-  /// class ElementGrid - 
-
-    // Attributes
-/*  protected:
-    int width;
-    int height;
-    // Operations
-  public:*/
-    ElementGrid::ElementGrid (){
+    ElementGrid::ElementGrid (State& s) : ElementList(s){
+        new ElementList(s);
         this->width = 0;
         this->height =0;
     };
-    
-    ElementGrid* const ElementGrid::clone (){// not implemented
-        
-    };
-    
-    void ElementGrid::copy (const ElementGrid& other){// not implemented
-        
-    };
-    
-    bool const ElementGrid::equals (const ElementGrid& other){// not implemented
-        return false;
-    };
-    
-    
-    
+      
     int const ElementGrid::getWidth (){
         return width;
     };
@@ -52,7 +32,7 @@ namespace state {
           
     bool const ElementGrid::isSpace (int i, int j){
            assert (this->hasCell(i,j)); 
-           return ElementList::elements[i*width+j].getTypeId==space;
+           return ElementList::elements[i*width+j]->getTypeId()==space;
     };
     
     void ElementGrid::setCell (int i, int j, Element* e){
@@ -65,8 +45,44 @@ namespace state {
     };
     
     
-    void ElementGrid::load (const char* file_name);
-    void const ElementGrid::notifyObservers (int i = -1, int j = -1);
+    void ElementGrid::load (const char* file_name){
+        elements.clear();
+        char element;
+        int idx = 0;
+        int idxmobiles = 0;
+        /*ElementList mobiles = new ElementList(s);
+        s.setMobiles(mobiles);*/
+        
+        
+        ifstream myfile (file_name);
+        if (myfile.is_open())
+        {
+            myfile >> this->width >> this->height;
+                                                    // regler la hauteur de ciel
+            while ( myfile.get(element) )
+            {
+                if ((element != '*')&&(element != '%')) //'*' pour le joueur humain et '%' pour l'IA
+                {
+                    ElementList::set(idx,factory->newInstance(element));
+                    idx++;
+                }
+                else
+                {
+                    ElementList::set(idx,factory->newInstance('.'));
+                    ElementList e = s.getMobiles();
+                    e.set(idxmobiles, factory->newInstance(element));
+                    idxmobiles ++;
+                }
+            }
+            myfile.close();
+             
+        }
+
+        else cout << "Unable to open file"; 
+        
+        
+    };
+    
   };
 
 

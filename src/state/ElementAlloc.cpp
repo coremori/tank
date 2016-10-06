@@ -8,13 +8,7 @@
 namespace state {
 
   /// class ElementAlloc - 
-  template <  class E,   typename ID>
-  class ElementAlloc : public State::AElementAlloc {
-    // Attributes
-  protected:
-    ID id;
- 
-      
+       
       
     template <  class E,   typename ID>  ElementAlloc::ElementAlloc(ID id){
         
@@ -31,4 +25,3 @@ namespace state {
     };
   };
 
-};

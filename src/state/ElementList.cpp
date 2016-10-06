@@ -3,73 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#include "Element.h"
+#include "ElementFactory.h"
 #include "state.hpp"
 
 namespace state {
 
   /// class ElementList -  
      
-    ElementList::ElementList (){
-       
+    ElementList::ElementList (State& s) : s(s) {
     };
     
     
     ElementList::~ElementList (){
-        factory.delete();
-        
-        
     };
-}
-    ElementList* const ElementList::clone (){
-        ElementList* list = new ElementList();
-        setElementFactory(factory);
-        int i=0;
-        while(){
-            list.set(i,this->elements(i));
-        
-        };
-        
-        return list;
-    } ;
-    
-    bool const equals (const ElementList& other){//not implemented
-        
+
+   
+    int const ElementList::size (){
+        return elements.size();
     };
-    
-    void copy (const ElementList& list){
-        //not implemented
-    };
-    
-    
-    int const size ();
-    
-    
-    
-    
-    
-    Element* const get ( int idx){
+        
+    Element* const ElementList::get ( int idx){
         assert(size()>idx && idx>=0);
         return elements[idx];
     };
         
-    void clear (){//not implemented
+    void ElementList::clear (){//not implemented
         
     };
     
-    void setElementFactory (ElementFactory* f){
-        this->factory = f;
+    void ElementList::setElementFactory (ElementFactory* f){
+        factory = f;
+    };
+
+    void ElementList::set ( int idx, Element* e){
+        elements[idx] = e;
     };
     
     
-    
-    void set ( int idx, Element* e){
-        elements[i*width+j] = e;
-    };
-    
-    
-    
-    void const notifyObservers (int  i = -1){//not implemented
-    };
-  };
 
 };

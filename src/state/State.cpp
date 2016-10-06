@@ -11,70 +11,37 @@ namespace state {
   /* ElementList mobiles;
     ElementGrid grid;
     */
-    State::State (){
+    State::State() : mobiles(*this), grid(*this) {
         
     };
+    
     State::~State (){ // supprime tout pour l'instant
-        delete mobiles;
-        delete grid;
     };
     
-    State* const State::clone (){
-        //not implemented
-    };
-    bool const State::equals (const State& other){
-        //not implemented
-    };
-    
-    const ElementGrid& const State::getGrid (){
+    const ElementGrid& State::getGrid (){
         return grid;
     };
     
-    const ElementList& const State::getMobiles (){
+    ElementList& State::getMobiles (){
         return mobiles;
     };
     
-    const Mobile* const State::getMobile ( int idx){
-        return mobiles.get(idx);
+    const Element* State::getMobile (int idx){
+        return this->mobiles.get(idx);
     };
-    
-    
-    
-    
-    
-    void State::setGrid (const ElementGrid& grid){
-        this->*grid = grid;
-    };
-    
-    
-    void State::setMobiles (const ElementList list){
-        this->*mobiles = list;
-    };
-    
+      
     
     void State::loadLevel (const char* file_name){
-        delete grid;
-        delete mobiles;
-        grid = new ElementGrid();
         grid.load(file_name);
     };
     
     
-    
-    
-    
-    
     void State::setElementFactory (ElementFactory* factory){
-        mobiles.setElementFactory (ElementFactory* factory);
-        grid.setElementFactory (ElementFactory* factory);
+        mobiles.setElementFactory (factory);
+        grid.setElementFactory (factory);
     };
     
-    void const State::notifyObservers (StateEventId id){
-        //not implemented
-    };
-    void const State::notifyObservers (const StateEvent& e){
-        //not implemented
-    };
+   
   };
 
 

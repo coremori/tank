@@ -3,10 +3,11 @@
 
 #include <assert.h> 
 #include <vector>
-#include <memory>
+#include <map>
+#include <iostream>
+#include <fstream>
 
-class Element;
-class State;
+
 
 #include "state.h"
 

@@ -8,7 +8,11 @@
 
 namespace state {
 
-    Tank::Tank (){};
+    Tank::Tank (){
+    this->pv = 100;
+    this->orientation = rigth_down;
+    this->Player = AIPlayer;
+    };
     
     
     bool const Tank::isTank () {

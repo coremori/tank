@@ -8,17 +8,18 @@
 
 namespace state {
 
-  /// class ElementFactory - 
-  class ElementFactory {
-    // Associations
-    // Attributes
-  protected:
-    st::map<char ,AElementAlloc*> list;
+    //st::map<char ,AElementAlloc*> list;
     // Operations
-  public:
-    ~ElementFactory ();
-    Element* const newInstance (char id);
-    void registerType (char id, AElementAlloc* a);
-  };
+  
+    ElementFactory::~ElementFactory (){
+    
+    };
+    Element* const ElementFactory::newInstance (char id){
+        
+    };
+    void ElementFactory::registerType (char id, AElementAlloc* a){
+        
+    };
+
 
 };
