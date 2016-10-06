@@ -28,7 +28,6 @@ namespace state {
     bool const isSpace (int i, int j);
     void setCell (int i, int j, Element* e);
     bool const hasCell (int i, int j);
-    void load (const char* file_name);
   };
 
 };

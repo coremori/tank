@@ -7,7 +7,6 @@ namespace state {
   class ElementList;
   class ElementGrid;
   class Element;
-  class ElementFactory;
 }
 
 #include "ElementList.h"
@@ -29,8 +28,6 @@ namespace state {
     const ElementGrid& getGrid ();
     ElementList&  getMobiles ();
     const Element* getMobile (int idx);
-    void loadLevel (const char* file_name);
-    void setElementFactory (ElementFactory* factory);
   };
 
 };

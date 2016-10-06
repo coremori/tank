@@ -5,13 +5,11 @@
 #include <vector>
 
 namespace state {
-  class ElementFactory;
   class Element;
   class State;
 }
 
 #include "Element.h"
-#include "ElementFactory.h"
 
 namespace state {
 
@@ -20,7 +18,6 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    ElementFactory* factory;
     std::vector<Element*> elements;
     State& s;
     // Operations
@@ -30,7 +27,6 @@ namespace state {
     int const size ();
     Element* const get ( int idx);
     void clear ();
-    void setElementFactory (ElementFactory* f);
     void set ( int idx, Element* e);
   };
 

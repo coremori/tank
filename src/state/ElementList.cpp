@@ -32,10 +32,7 @@ namespace state {
         
     };
     
-    void ElementList::setElementFactory (ElementFactory* f){
-        factory = f;
-    };
-
+  
     void ElementList::set ( int idx, Element* e){
         elements[idx] = e;
     };
