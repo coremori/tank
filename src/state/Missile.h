@@ -2,7 +2,12 @@
 #ifndef STATE__MISSILE__H
 #define STATE__MISSILE__H
 
-#include "state.h"
+
+namespace state {
+  class Projectile;
+}
+
+#include "Projectile.h"
 
 namespace state {
 

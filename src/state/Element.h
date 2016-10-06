@@ -2,7 +2,8 @@
 #ifndef STATE__ELEMENT__H
 #define STATE__ELEMENT__H
 
-#include "state.h"
+
+#include "TypeId.h"
 
 namespace state {
 

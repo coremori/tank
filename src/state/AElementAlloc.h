@@ -2,6 +2,11 @@
 #ifndef STATE__AELEMENTALLOC__H
 #define STATE__AELEMENTALLOC__H
 
+
+namespace state {
+  class Element;
+}
+
 namespace state {
 
   /// class AElementAlloc - 

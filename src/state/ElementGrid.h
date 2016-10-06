@@ -2,7 +2,14 @@
 #ifndef STATE__ELEMENTGRID__H
 #define STATE__ELEMENTGRID__H
 
-#include "state.h"
+
+namespace state {
+  class ElementGrid;
+  class Element;
+  class ElementList;
+}
+
+#include "ElementList.h"
 
 namespace state {
 

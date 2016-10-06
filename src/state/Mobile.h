@@ -2,7 +2,12 @@
 #ifndef STATE__MOBILE__H
 #define STATE__MOBILE__H
 
-#include "state.h"
+
+namespace state {
+  class Element;
+}
+
+#include "Element.h"
 
 namespace state {
 

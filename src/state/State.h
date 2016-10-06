@@ -2,7 +2,16 @@
 #ifndef STATE__STATE__H
 #define STATE__STATE__H
 
-#include "state.h"
+
+namespace state {
+  class ElementList;
+  class ElementGrid;
+  class State;
+  class ElementFactory;
+}
+
+#include "ElementList.h"
+#include "ElementGrid.h"
 
 namespace state {
 

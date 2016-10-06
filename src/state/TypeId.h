@@ -2,6 +2,7 @@
 #ifndef STATE__TYPEID__H
 #define STATE__TYPEID__H
 
+
 namespace state {
 
   enum TypeId {

@@ -2,6 +2,7 @@
 #ifndef STATE__OBSTACLETYPEID__H
 #define STATE__OBSTACLETYPEID__H
 
+
 namespace state {
 
   enum ObstacleTypeId {

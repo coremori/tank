@@ -2,6 +2,7 @@
 #ifndef STATE__ORIENTATION__H
 #define STATE__ORIENTATION__H
 
+
 namespace state {
 
   enum Orientation {

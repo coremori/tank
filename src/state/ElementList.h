@@ -2,7 +2,16 @@
 #ifndef STATE__ELEMENTLIST__H
 #define STATE__ELEMENTLIST__H
 
-#include "state.h"
+#include <vector>
+
+namespace state {
+  class ElementFactory;
+  class Element;
+  class ElementList;
+}
+
+#include "Element.h"
+#include "ElementFactory.h"
 
 namespace state {
 

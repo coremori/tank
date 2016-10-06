@@ -2,6 +2,7 @@
 #ifndef STATE__TANKTYPEID__H
 #define STATE__TANKTYPEID__H
 
+
 namespace state {
 
   enum TankTypeId {

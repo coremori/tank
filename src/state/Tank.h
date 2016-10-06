@@ -2,7 +2,15 @@
 #ifndef STATE__TANK__H
 #define STATE__TANK__H
 
-#include "state.h"
+
+namespace state {
+  class Mobile;
+}
+
+#include "Orientation.h"
+#include "TankTypeId.h"
+#include "Mobile.h"
+#include "PlayerType.h"
 
 namespace state {
 

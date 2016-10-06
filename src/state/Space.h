@@ -2,7 +2,13 @@
 #ifndef STATE__SPACE__H
 #define STATE__SPACE__H
 
-#include "state.h"
+
+namespace state {
+  class StaticElement;
+}
+
+#include "SpaceTypeId.h"
+#include "StaticElement.h"
 
 namespace state {
 
