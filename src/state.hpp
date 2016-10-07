@@ -8,7 +8,13 @@
 #include <fstream>
 
 
+<<<<<<< HEAD
 #include "state.h"
+=======
+
+#include "state.h"
+
+>>>>>>> parent of 7163334... Merge branch 'newbranch'
 #endif
 
 
