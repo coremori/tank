@@ -45,43 +45,8 @@ namespace state {
     };
     
     
-    void ElementGrid::load (const char* file_name){
-        elements.clear();
-        char element;
-        int idx = 0;
-        int idxmobiles = 0;
-        /*ElementList mobiles = new ElementList(s);
-        s.setMobiles(mobiles);*/
-        
-        
-        ifstream myfile (file_name);
-        if (myfile.is_open())
-        {
-            myfile >> this->width >> this->height;
-                                                    // regler la hauteur de ciel
-            while ( myfile.get(element) )
-            {
-                if ((element != '*')&&(element != '%')) //'*' pour le joueur humain et '%' pour l'IA
-                {
-                    ElementList::set(idx,factory->newInstance(element));
-                    idx++;
-                }
-                else
-                {
-                    ElementList::set(idx,factory->newInstance('.'));
-                    ElementList e = s.getMobiles();
-                    e.set(idxmobiles, factory->newInstance(element));
-                    idxmobiles ++;
-                }
-            }
-            myfile.close();
-             
-        }
-
-        else cout << "Unable to open file"; 
-        
-        
-    };
+    
+    
     
   };
 

@@ -31,15 +31,7 @@ namespace state {
     };
       
     
-    void State::loadLevel (const char* file_name){
-        grid.load(file_name);
-    };
-    
-    
-    void State::setElementFactory (ElementFactory* factory){
-        mobiles.setElementFactory (factory);
-        grid.setElementFactory (factory);
-    };
+   
     
    
   };
