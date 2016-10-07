@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 #include "Element.h"
+#include "ElementFactory.h"
 #include "state.hpp"
 
 namespace state {
