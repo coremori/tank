@@ -8,9 +8,7 @@
 #include <fstream>
 
 
-
 #include "state.h"
-
 #endif
 
 
