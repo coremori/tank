@@ -28,8 +28,8 @@ namespace state {
         return elements[idx];
     };
         
-    void ElementList::clear (){//not implemented
-        
+    void ElementList::clear (){
+        elements.clear();
     };
     
   
