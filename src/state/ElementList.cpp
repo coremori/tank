@@ -9,7 +9,7 @@
 
 namespace state {
 
-  /// class ElementList -  
+  /// class ElementList -  c
      
     ElementList::ElementList (State& s) : s(s) {
     };
