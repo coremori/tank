@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 #include "Element.h"
-<<<<<<< HEAD
-=======
-#include "ElementFactory.h"
->>>>>>> parent of 7163334... Merge branch 'newbranch'
+
 #include "state.hpp"
 
 namespace state {
