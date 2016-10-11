@@ -4,35 +4,48 @@
  * and open the template in the editor.
  */
 
-namespace render {
+#include "Tile.h"
 
-  /// class Tile - 
-  class Tile {
-    // Attributes
-  protected:
-    int x;
-    int y;
-    int height;
-    int width;
-    // Operations
-  public:
+namespace render {
       
-      
-    Tile::Tile (int x = 0, int y = 0, int w = 8, int h = 8){
+    Tile::Tile (int x, int y, int w, int h){
         this->x = x;
         this->y = y;
         this->height = h;
         this->width = w;
     };
     
-    int const Tile::getX ();
-    int const Tile::getY ();
-    int const Tile::getWidth ();
-    int const Tile::getHeight ();
-    void Tile::setX (int x);
-    void Tile::setY (int y);
-    void Tile::setWidth (int w);
-    void Tile::setHeight (int h);
-  };
+    int const Tile::getX (){
+        return x;
+    };
+    
+    int const Tile::getY (){
+        return y;
+    };
+    
+    int const Tile::getWidth (){
+        return width;
+    };
+    
+    int const Tile::getHeight (){
+        return height;
+    };
+    
+    void Tile::setX (int x){
+        this->x = x;
+    };
+    
+    void Tile::setY (int y){
+        this->y = y;
+    };
+    
+    void Tile::setWidth (int w){
+        width = w;
+    };
+    
+    void Tile::setHeight (int h){
+        height = h;
+    };
+  
 
 };
