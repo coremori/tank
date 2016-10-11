@@ -2,6 +2,7 @@
 #ifndef RENDER__SURFACE__H
 #define RENDER__SURFACE__H
 
+#include <vector>
 
 namespace render {
   class Tile;
@@ -14,10 +15,10 @@ namespace render {
     // Operations
   public:
     Surface ();
-    virtual void loadTexture (const char* image_file, int x, int y, int height = 8, int width = 8) = 0;
+    virtual void loadTexture (const char* image_file) = 0;
     virtual void clear () = 0;
     virtual void setSpriteCount (int n) = 0;
-    virtual void setSpriteTexture (int i, const Tile* tile) = 0;
+    virtual void setSprite (const std::vector<Tile*> tile) = 0;
   };
 
 };

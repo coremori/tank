@@ -28,6 +28,7 @@ namespace render {
     void setSurface (Surface* surface);
     void setTile (Tile* tile);
     Tile getTile (int i);
+    void update ();
   };
 
 };

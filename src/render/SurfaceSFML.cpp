@@ -8,15 +8,16 @@
 #include <assert.h> 
 
 #include "Tile.h"
+#include <SFML/Graphics.hpp>
 #include "SurfaceSFML.h"
 
 namespace render {
 
     
-    void SurfaceSFML::loadTexture (const char* image_file, int x, int y, int height, int width)
+    void SurfaceSFML::loadTexture (const char* image_file)
     {   //basicque : "res/Textures/textures.png"
         //Vérifier l'ordre h/w
-        if (!texture.loadFromFile(image_file, sf::IntRect(x,y,width, height))) 
+        if (!texture.loadFromFile(image_file)) 
         {
             //error
         }
@@ -31,36 +32,20 @@ namespace render {
         nSprite = n;
     };
     
-    void SurfaceSFML::setSpriteTexture (int i, const Tile* tile){//NOT DONE!!
-        assert(i<tiles.size());
-        sprites[i] = new sf::Sprite;
-        sprites[i]->setTexture(texture);
-        sprites[i]->setTextureRect(sf::IntRect(0, 0, tile->getWidth(), tile->getHeight()));
-        sprites[i]->setPosition(sf::Vector2f(tile->getX(),tile->getY()));
+    void SurfaceSFML::setSprite (const std::vector<Tile*> tile){//NOT DONE!!
+        for(unsigned int i=0; i<tile.size(); i++)
+        {
+            sprites[i] = new sf::Sprite;
+            sprites[i]->setTexture(texture);
+            sprites[i]->setTextureRect(sf::IntRect(0, 0, tile[i]->getWidth(), tile[i]->getHeight()));
+            sprites[i]->setPosition(sf::Vector2f(tile[i]->getX(),tile[i]->getY()));
+        }
+        
         
     };
   
-    void SurfaceSFML::affiche () const{
-        
-    sf::RenderWindow window(sf::VideoMode(200, 200), L"Peut-tu seulement dépasser la médiocrité ?");// fenetre d'affichage
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        
-        window.draw(*sprites[0]);
-        window.draw(*sprites[1]);
-        window.draw(*sprites[2]);//on les traces dans cette ordre là (le dernier tracer est au dessus (notamment pour le char))
-        
-        window.display();
-    }
+    std::vector<sf::Sprite*> SurfaceSFML::getSprites () const{
+        return sprites;
     };
 
 };

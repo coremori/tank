@@ -29,13 +29,17 @@ namespace render {
         return layers.size();
     };
     
-    void Scene::setLayer (int idx, Surface* surface){
+    void Scene::setSurface (int idx, Surface* surface){
         layers[idx]->setSurface(surface);
     };
     
-    void Scene::setLevel (){//state::State* s
         
-        //
+    void Scene::setLayer (int idx, Layer* layer){
+        layers[idx] = layer;
+    };
+    
+    void Scene::update (){
+        layers[0]->update();
     };
   
 

@@ -3,6 +3,7 @@
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
 #include "render.h"
+#include "state/Element.h"
 
 void testSFML() {
     sf::Texture texture;
@@ -15,7 +16,7 @@ using namespace std;
 
 int main(int argc,char* argv[]) 
 {
-    render::Scene* s = new render::Scene();
+    /*render::Scene* s = new render::Scene();
     
         render::Surface* surface = new render::SurfaceSFML();
         surface->loadTexture("res/Textures/textures.png",0,88);//sand
@@ -36,10 +37,40 @@ int main(int argc,char* argv[])
         s->layers[0]->surface->setSpriteTexture(0,layers[0]->getTile(2));
         
         s->layers[0]->surface->affiche();
+       */ 
         
-        
-        
-        
+    render::Surface* terrain = new render::SurfaceSFML();
+    terrain->loadTexture("res/Textures/textures.png");
+    
+    render::Layer* test = new render::Layer();
+    test->setSurface(terrain);
+    state::ElementList* list;
+    for(int i=0; i<list->size(); i++)
+        {   
+            state::Element* e = list->get(i);
+            render::Tile* t = new render::Tile(e->getX(),e->getY());
+            switch(e->getTypeId()){
+                    case 1: //obstacle
+                        switch(e->getObstacleType()){//if a la place
+                                case state::sand:
+                                    break;
+                                case state::ObstacleTypeId::greenery:
+                                    break;
+                        }
+                        case 2://space
+                            break;
+                            case 3://tank
+                                break;
+                                case 4://missile
+                                    break;
+                                    case 5://shell
+                                        break;
+            }
+                                            
+        }
+    render::Scene* s = new render::Scene();
+    s->setLayer(0, test);
+    
         
         
         

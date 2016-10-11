@@ -47,5 +47,17 @@ namespace render {
         height = h;
     };
   
-
+    int Tile::getXTex () const{
+        return xTex;
+    };
+    
+    int Tile::getYTex () const{
+        return yTex;
+    };
+    void Tile::setXTex (int xtex){
+        xTex = xtex;
+    };
+    void Tile::setYTex (int ytex){
+        yTex = ytex;
+    };
 };

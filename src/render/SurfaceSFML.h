@@ -22,11 +22,11 @@ namespace render {
     int nSprite;
     // Operations
   public:
-    virtual void loadTexture (const char* image_file, int x, int y, int height = 8, int width = 8);
+    virtual void loadTexture (const char* image_file);
     virtual void clear ();
     virtual void setSpriteCount (int n);
-    virtual void setSpriteTexture (int i, const Tile* tile);
-    void affiche () const;
+    virtual void setSprite (const std::vector<Tile*> tile);
+    std::vector<sf::Sprite*> getSprites () const;
   };
 
 };

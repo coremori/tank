@@ -17,11 +17,10 @@ namespace render {
   class Scene {
     // Associations
     // Attributes
-  public:
-    std::vector<Layer*> layers;
   protected:
     int width;
     int height;
+    std::vector<Layer*> layers;
     // Operations
   public:
     Scene ();
@@ -29,8 +28,9 @@ namespace render {
     int getWidth () const;
     int getHeight () const;
     int getLayerCount () const;
-    void setLayer (int idx, Surface* surface);
-    void setLevel ();
+    void setSurface (int idx, Surface* surface);
+    void setLayer (int idx, Layer* layer);
+    void update ();
   };
 
 };
