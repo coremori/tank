@@ -1,0 +1,3 @@
+/home/gosselin/archives/cours/Cours/Projet Logiciel Transversal/plt.git/dia2code/build/CMakeFiles/edit_cache.dir
+/home/gosselin/archives/cours/Cours/Projet Logiciel Transversal/plt.git/dia2code/build/CMakeFiles/rebuild_cache.dir
+/home/gosselin/archives/cours/Cours/Projet Logiciel Transversal/plt.git/dia2code/build/CMakeFiles/dia2code.dir
