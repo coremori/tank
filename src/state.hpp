@@ -9,7 +9,7 @@
 
 #include "state.h"
 
-//testo
+class State;
 #endif
 
 
