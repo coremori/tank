@@ -2,7 +2,14 @@
 #ifndef RENDER__SCENE__H
 #define RENDER__SCENE__H
 
-#include "render.h"
+#include <vector>
+
+namespace render {
+  class Layer;
+  class Surface;
+}
+
+#include "Layer.h"
 
 namespace render {
 
@@ -18,11 +25,11 @@ namespace render {
   public:
     Scene ();
     ~Scene ();
-    int const getWidth ();
-    int const getHeight ();
-    int const getLayerCount ();
+    int getWidth () const;
+    int getHeight () const;
+    int getLayerCount () const;
     void setLayer (int idx, Surface* surface);
-    void setLevel (const state* s);
+    void setLevel ();
   };
 
 };

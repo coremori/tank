@@ -2,7 +2,15 @@
 #ifndef RENDER__LAYER__H
 #define RENDER__LAYER__H
 
-#include "render.h"
+#include <vector>
+
+namespace render {
+  class Surface;
+  class Tile;
+}
+
+#include "Tile.h"
+#include "Surface.h"
 
 namespace render {
 

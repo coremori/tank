@@ -18,11 +18,11 @@ namespace state {
         return width;
     };
     
-    int const ElementGrid::getHeight (){
+    int ElementGrid::getHeight () const{
         return height;
     };
         
-    Element* const ElementGrid::getCell (int i, int j){ 
+    Element* ElementGrid::getCell (int i, int j) const{ 
         // retourne l'element à la place ligne i, colonne j du tableau
         // error s'il n'existe pas
         assert (this->hasCell(i,j)); 
@@ -30,7 +30,7 @@ namespace state {
 
     };
           
-    bool const ElementGrid::isSpace (int i, int j){
+    bool ElementGrid::isSpace (int i, int j)  const{
            assert (this->hasCell(i,j)); 
            return ElementList::elements[i*width+j]->getTypeId()==space;
     };
@@ -40,7 +40,7 @@ namespace state {
         ElementList::set(i*width+j, e);
     };
     
-    bool const ElementGrid::hasCell (int i, int j){
+    bool ElementGrid::hasCell (int i, int j) const{
         return (i<width)&&(j<height)&&(0<=i)&&(0<=j);
     };
     

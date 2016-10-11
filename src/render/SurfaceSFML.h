@@ -2,7 +2,14 @@
 #ifndef RENDER__SURFACESFML__H
 #define RENDER__SURFACESFML__H
 
-#include "render.h"
+#include <vector>
+
+namespace render {
+  class Tile;
+  class Surface;
+}
+
+#include "Surface.h"
 
 namespace render {
 
@@ -11,14 +18,15 @@ namespace render {
     // Attributes
   protected:
     sf::Texture texture;
-    std::vector<Tile*> tiles;
+    std::vector<sf::Sprite*> sprites;
     int nSprite;
     // Operations
   public:
-    virtual void loadTexture (const char* image_file, int x, int y);
+    virtual void loadTexture (const char* image_file, int x, int y, int height = 8, int width = 8);
     virtual void clear ();
     virtual void setSpriteCount (int n);
     virtual void setSpriteTexture (int i, const Tile* tile);
+    void affiche () const;
   };
 
 };

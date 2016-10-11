@@ -2,6 +2,7 @@
 #ifndef RENDER__TILE__H
 #define RENDER__TILE__H
 
+
 namespace render {
 
   /// class Tile - 
@@ -15,10 +16,10 @@ namespace render {
     // Operations
   public:
     Tile (int x = 0, int y = 0, int w = 8, int h = 8);
-    int const getX ();
-    int const getY ();
-    int const getWidth ();
-    int const getHeight ();
+    int getX () const;
+    int getY () const;
+    int getWidth () const;
+    int getHeight () const;
     void setX (int x);
     void setY (int y);
     void setWidth (int w);

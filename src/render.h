@@ -2,7 +2,6 @@
 #ifndef __RENDER__H
 #define __RENDER__H
 
-
 #include "render/Surface.h"
 #include "render/SurfaceSFML.h"
 #include "render/Tile.h"

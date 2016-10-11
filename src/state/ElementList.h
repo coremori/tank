@@ -24,8 +24,8 @@ namespace state {
   public:
     ElementList (State& s);
     ~ElementList ();
-    int const size ();
-    Element* const get ( int idx);
+    int size () const;
+    Element* get ( int idx) const;
     void clear ();
     void set ( int idx, Element* e);
   };

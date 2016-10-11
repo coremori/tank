@@ -19,11 +19,11 @@ namespace state {
     };
 
    
-    int const ElementList::size (){
+    int ElementList::size () const{
         return elements.size();
     };
         
-    Element* const ElementList::get ( int idx){
+    Element* ElementList::get ( int idx)  const{
         assert(size()>idx && idx>=0);
         return elements[idx];
     };

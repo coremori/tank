@@ -23,11 +23,11 @@ namespace state {
   public:
     ElementGrid (State& s);
     int const getWidth ();
-    int const getHeight ();
-    Element* const getCell (int i, int j);
-    bool const isSpace (int i, int j);
+    int getHeight () const;
+    Element* getCell (int i, int j) const;
+    bool isSpace (int i, int j) const;
     void setCell (int i, int j, Element* e);
-    bool const hasCell (int i, int j);
+    bool hasCell (int i, int j) const;
   };
 
 };

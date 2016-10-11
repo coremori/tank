@@ -15,19 +15,19 @@ namespace render {
         this->width = w;
     };
     
-    int const Tile::getX (){
+    int Tile::getX () const{
         return x;
     };
     
-    int const Tile::getY (){
+    int Tile::getY () const{
         return y;
     };
     
-    int const Tile::getWidth (){
+    int Tile::getWidth () const{
         return width;
     };
     
-    int const Tile::getHeight (){
+    int Tile::getHeight () const{
         return height;
     };
     
