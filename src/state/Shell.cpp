@@ -11,12 +11,12 @@ namespace state {
   
     Shell::Shell(){};
   
-    bool const Shell::isMissile (){
+    bool Shell::isMissile () const {
         return false;
         
     };
     
-    TypeId const Shell::getTypeId (){
+    TypeId Shell::getTypeId () const {
         return shell;
     };
 };

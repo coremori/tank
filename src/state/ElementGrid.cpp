@@ -14,7 +14,7 @@ namespace state {
         this->height =0;
     };
       
-    int const ElementGrid::getWidth (){
+    int ElementGrid::getWidth () const {
         return width;
     };
     

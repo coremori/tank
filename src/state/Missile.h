@@ -7,6 +7,7 @@ namespace state {
   class Projectile;
 }
 
+#include "TypeId.h"
 #include "Projectile.h"
 
 namespace state {
@@ -20,12 +21,12 @@ namespace state {
     // Operations
   public:
     Missile ();
-    virtual bool const isMissile ();
+    virtual bool isMissile () const;
     void setCeiling (int p);
-    int const getCeiling ();
+    int getCeiling () const;
     void setDistance (int d);
-    int getDistance ();
-    TypeId const getTypeId ();
+    int getDistance () const;
+    TypeId getTypeId () const;
   };
 
 };

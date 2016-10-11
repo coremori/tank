@@ -7,6 +7,7 @@ namespace state {
   class Mobile;
 }
 
+#include "TypeId.h"
 #include "Orientation.h"
 #include "TankTypeId.h"
 #include "Mobile.h"
@@ -26,15 +27,15 @@ namespace state {
     // Operations
   public:
     Tank ();
-    virtual bool const isTank ();
-    virtual TypeId const getTypeId ();
-    bool const isPlayer ();
+    virtual bool isTank () const;
+    virtual TypeId getTypeId () const;
+    bool isPlayer () const;
     void setPv (int pv);
-    int const getPv ();
-    Orientation const getOrientation ();
+    int getPv () const;
+    Orientation getOrientation () const;
     void setOrientation (Orientation o);
     void setTankTypeId (TankTypeId id);
-    TankTypeId getTankTypeId ();
+    TankTypeId getTankTypeId () const;
   };
 
 };

@@ -7,7 +7,7 @@
 
 namespace state {
 
-    bool const Mobile::isStatic (){
+    bool  Mobile::isStatic () const{
         return false;
     };
     

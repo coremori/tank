@@ -12,7 +12,7 @@ namespace state {
    this->DistanceActuel = 0;
    }
    
-   bool const Missile::isMissile(){
+   bool Missile::isMissile() const {
        return true;
    };
     
@@ -20,7 +20,7 @@ namespace state {
         this->Ceiling = p;
     };
     
-    int const Missile::getCeiling (){
+    int Missile::getCeiling () const {
         return this->Ceiling;
     };
     
@@ -28,11 +28,11 @@ namespace state {
         this->DistanceActuel = d;
     };
     
-    int Missile::getDistance (){
+    int Missile::getDistance () const {
         return this->DistanceActuel;
     };
     
-    TypeId const Missile::getTypeId (){
+    TypeId Missile::getTypeId () const {
         return missile;
     };
 };

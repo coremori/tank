@@ -13,11 +13,11 @@ namespace state{
         this->ObstacleType = id;
     };
     
-    bool const Obstacle::isSpace (){
+    bool Obstacle::isSpace () const {
         return false;
     };
     
-    TypeId const Obstacle::getTypeId (){
+    TypeId Obstacle::getTypeId () const {
         return obstacle;
     };
     
@@ -27,7 +27,7 @@ namespace state{
         this->ObstacleType = id;
     };
     
-    ObstacleTypeId const Obstacle::getObstacleTypeId (){
+    ObstacleTypeId Obstacle::getObstacleTypeId () const {
         return this->ObstacleType;
     };
   

@@ -8,6 +8,7 @@ namespace state {
 }
 
 #include "ObstacleTypeId.h"
+#include "TypeId.h"
 #include "StaticElement.h"
 
 namespace state {
@@ -19,10 +20,10 @@ namespace state {
     // Operations
   public:
     Obstacle (ObstacleTypeId id);
-    virtual bool const isSpace ();
-    TypeId const getTypeId ();
+    virtual bool isSpace () const;
+    TypeId getTypeId () const;
     void setObstacleTypeId (ObstacleTypeId id);
-    ObstacleTypeId const getObstacleTypeId ();
+    ObstacleTypeId getObstacleTypeId () const;
   };
 
 };

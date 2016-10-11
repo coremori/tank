@@ -17,10 +17,11 @@ namespace render {
   class Scene {
     // Associations
     // Attributes
+  public:
+    std::vector<Layer*> layers;
   protected:
     int width;
     int height;
-    std::vector<Layer*> layers;
     // Operations
   public:
     Scene ();

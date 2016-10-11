@@ -2,6 +2,7 @@
 
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
+#include "render.h"
 
 void testSFML() {
     sf::Texture texture;
@@ -14,6 +15,34 @@ using namespace std;
 
 int main(int argc,char* argv[]) 
 {
+    render::Scene* s = new render::Scene();
+    
+        render::Surface* surface = new render::SurfaceSFML();
+        surface->loadTexture("res/Textures/textures.png",0,88);//sand
+        render::Layer* l = new render::Layer();
+        surface->setSpriteTexture(0,layers[0]->getTile(0))
+        l->setSurface(surface);
+        
+        l->setTile(new render::Tile());
+        l->setTile(new render::Tile(0,8));
+        l->setTile(new render::Tile(0,16));
+        
+        
+        s->layers.push_back(l);
+        
+        
+        s->layers[0]->surface;
+        s->layers[0]->surface->setSpriteTexture(0,layers[0]->getTile(1));
+        s->layers[0]->surface->setSpriteTexture(0,layers[0]->getTile(2));
+        
+        s->layers[0]->surface->affiche();
+        
+        
+        
+        
+        
+        
+        
     sf::Texture texture;  //WARNING : texture ne doit pas être supprimer après être affecter à sprite (carré blanc sinon)
     if (!texture.loadFromFile("res/Textures/textures.png", sf::IntRect(0, 0,24, 24))) //rectangle de point (0,0) et de taille 24*24
     {

@@ -22,7 +22,7 @@ namespace state {
     // Operations
   public:
     ElementGrid (State& s);
-    int const getWidth ();
+    int getWidth () const;
     int getHeight () const;
     Element* getCell (int i, int j) const;
     bool isSpace (int i, int j) const;

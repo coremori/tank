@@ -18,10 +18,10 @@ namespace state {
   public:
     Element ();
     virtual ~Element ();
-    virtual TypeId const getTypeId () = 0;
-    virtual bool const isStatic () = 0;
-    int const getX ();
-    int const getY ();
+    virtual TypeId getTypeId () const = 0;
+    virtual bool isStatic () const = 0;
+    int getX () const;
+    int getY () const;
     void setX (int x);
     void setY (int y);
   };

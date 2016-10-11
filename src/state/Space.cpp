@@ -19,11 +19,11 @@ namespace state {
         this->SpaceType = id;
     };
     
-    bool const Space::isSpace (){
+    bool Space::isSpace () const {
         return true;
     };
     
-    TypeId const Space::getTypeId (){
+    TypeId Space::getTypeId () const {
         return space;
     };
     
@@ -32,7 +32,7 @@ namespace state {
         this->SpaceType = id;
     };
         
-    state::SpaceTypeId const Space::getSpaceTypeId (){
+    state::SpaceTypeId Space::getSpaceTypeId () const {
         return this->SpaceType;
     };
   };

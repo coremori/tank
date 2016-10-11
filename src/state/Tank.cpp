@@ -15,16 +15,16 @@ namespace state {
     };
     
     
-    bool const Tank::isTank () {
+    bool Tank::isTank () const  {
         return true;
     };
     
-    TypeId const Tank::getTypeId (){
+    TypeId Tank::getTypeId () const {
         return tank;
     };
     
     
-    bool const Tank::isPlayer (){
+    bool Tank::isPlayer () const {
         return Player;
     };
     
@@ -38,11 +38,11 @@ namespace state {
         }
     };
     
-    int const Tank::getPv (){
+    int Tank::getPv () const {
         return this->pv;
     };
     
-    state::Orientation const Tank::getOrientation (){
+    state::Orientation Tank::getOrientation () const {
         return orientation;
     };
     
@@ -54,7 +54,7 @@ namespace state {
         TankType = id;
     };
     
-    TankTypeId Tank::getTankTypeId (){
+    TankTypeId Tank::getTankTypeId () const {
         return TankType;
     };
     

@@ -14,11 +14,11 @@ namespace state {
     Element::~Element (){};
     
     
-    int const Element::getX (){
+    int Element::getX () const {
         return x;
     };
     
-    int const Element::getY (){
+    int Element::getY () const {
         return y;
     };
     

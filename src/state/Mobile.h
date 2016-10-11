@@ -15,8 +15,8 @@ namespace state {
   class Mobile : public state::Element {
     // Operations
   public:
-    virtual bool const isStatic ();
-    virtual bool const isTank () = 0;
+    virtual bool isStatic () const;
+    virtual bool isTank () const = 0;
   };
 
 };

@@ -11,13 +11,13 @@ namespace state {
     // state::OrientationMissile Orientation
 
   
-    bool const Projectile::isTank (){
+    bool Projectile::isTank () const {
         return false;
     };
     
   
     
-    OrientationMissile const Projectile::getOrientation (){
+    OrientationMissile Projectile::getOrientation () const {
         return Orientation;
     };
     void Projectile::setOrientation (OrientationMissile o){

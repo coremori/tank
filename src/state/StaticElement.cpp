@@ -10,7 +10,7 @@ namespace state {
     
   /// class StaticElement - 
 
-    bool const  StaticElement::isStatic (){
+    bool StaticElement::isStatic () const {
         return true;
     };
     

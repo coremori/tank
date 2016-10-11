@@ -6,7 +6,7 @@
 
 #include <vector>
 #include <assert.h> 
-#include <SFML/Graphics.hpp>
+
 #include "Tile.h"
 #include "SurfaceSFML.h"
 
