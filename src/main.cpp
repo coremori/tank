@@ -21,9 +21,10 @@ using namespace render;
 
 int main(int argc,char* argv[]) 
 {
-    
-       
-    /*
+   
+           sf::RenderWindow window(sf::VideoMode(512, 256), "Tilemap");// fenetre d'affichage
+           
+    /*  
     render::Surface* terrain = new render::SurfaceSFML();
     terrain->loadTexture("res/Textures/textures.png");
         
@@ -70,12 +71,11 @@ int main(int argc,char* argv[])
    s->loadTexture("res/Textures/textures.png");
    
    std::vector<Tile*> tile;
-   tile.push_back( new Tile(0,0,8,8));
+   tile.push_back( new Tile(16,16,8,8));
    tile[0]->setXTex(0);
    tile[0]->setYTex(88);
    s->setSprite(tile);
-          
-    sf::RenderWindow window(sf::VideoMode(200, 200), L"Peut-tu seulement dépasser la médiocrité ?");// fenetre d'affichage
+   s->load(tile);       
 
     while (window.isOpen())
     {
@@ -87,13 +87,11 @@ int main(int argc,char* argv[])
         }
 
         window.clear();
-        for(int i=0; i<1; i++)
-        {
-            std::vector<sf::Sprite*> li = s->getSprites();
-            sf::Sprite sprite = *li[i];
+        window.draw(*s);
+        /*std::vector<sf::Sprite*> li = s->getSprites();
+            sf::Sprite sprite = *li[0];
             window.draw(sprite);
-        }
-        
+        */
         
         window.display();
     }

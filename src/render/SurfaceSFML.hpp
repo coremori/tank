@@ -21,14 +21,20 @@
 #include <SFML/Graphics.hpp>
 
   /// class SurfaceSFML - 
-  class SurfaceSFML : public render::Surface {
+  class SurfaceSFML : public render::Surface, public sf::Drawable, public sf::Transformable{
     // Attributes
   protected:
-    sf::Texture texture;
     std::vector<sf::Sprite*> sprites;
+    
+    sf::VertexArray m_vertices;
+    sf::Texture m_tileset;
+    
     int nSprite;
     // Operations
   public:
+    void load(const std::vector<render::Tile*> tiles);
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    
     virtual void loadTexture (const char* image_file);
     virtual void clear ();
     virtual void setSpriteCount (int n);

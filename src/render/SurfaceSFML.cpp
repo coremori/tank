@@ -9,6 +9,7 @@
 
 #include "Tile.h"
 #include <SFML/Graphics.hpp>
+#include <bits/stl_vector.h>
 #include "SurfaceSFML.hpp"
 
 
@@ -17,12 +18,70 @@
     {   //basicque : "res/Textures/textures.png"
         //Vérifier l'ordre h/w
         
-        if (!texture.loadFromFile(image_file)) 
+        if (!m_tileset.loadFromFile(image_file)) 
         {
             //error
         }
         
     };
+    
+    void SurfaceSFML::load(const std::vector<render::Tile*> tiles)//size = nombre tile 
+    {
+        // on charge la texture du tileset
+        
+        
+        // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
+        m_vertices.setPrimitiveType(sf::Quads);
+        m_vertices.resize(tiles.size()*4);
+        
+        
+        // on remplit le tableau de vertex, avec un quad par tuile
+            for (unsigned int j = 0; j < tiles.size(); ++j)
+            {
+                // on récupère le numéro de tuile courant
+
+                // on en déduit sa position dans la texture du tileset
+                int tu = tiles[j]->getXTex();//position dans la texture
+                int tv = tiles[j]->getYTex();
+                
+                unsigned int w = tiles[j]->getWidth();//width d'un affichage
+                unsigned int h = tiles[j]->getHeight();
+                
+                unsigned int x = tiles[j]->getX();//position dans l'image
+                unsigned int y = tiles[j]->getY();
+                
+                sf::Vector2u truc = sf::Vector2u(x,y);
+
+                // on récupère un pointeur vers le quad à définir dans le tableau de vertex
+                sf::Vertex* quad = &m_vertices[j * 4];
+                unsigned int a = 8;
+                // on définit ses quatre coins
+                quad[0].position = sf::Vector2f(x, y);
+                quad[1].position = sf::Vector2f(a+a, a);
+                quad[2].position = sf::Vector2f(a+a, a+a);
+                quad[3].position = sf::Vector2f(a, a+a);
+
+                // on définit ses quatre coordonnées de texture
+                quad[0].texCoords = sf::Vector2f(tu, tv);
+                quad[1].texCoords = sf::Vector2f(tu + w, tv);
+                quad[2].texCoords = sf::Vector2f(tu + w, tv +h);
+                quad[3].texCoords = sf::Vector2f(tu, tv +h);
+            }
+
+       
+    }
+    
+    void SurfaceSFML::draw(sf::RenderTarget& target, sf::RenderStates states) const
+    {
+        // on applique la transformation
+        states.transform *= getTransform();
+
+        // on applique la texture du tileset
+        states.texture = &m_tileset;
+
+        // et on dessine enfin le tableau de vertex
+        target.draw(m_vertices, states);
+    }
     
     void SurfaceSFML::clear (){
         sprites.clear();
@@ -37,7 +96,7 @@
         {
             
             sprites.push_back( new sf::Sprite);
-            sprites[i]->setTexture(texture);
+            sprites[i]->setTexture(m_tileset);
             sprites[i]->setTextureRect(sf::IntRect(tile[i]->getXTex(),tile[i]->getYTex(), tile[i]->getWidth(), tile[i]->getHeight()));
             sprites[i]->setPosition(sf::Vector2f(tile[i]->getX(),tile[i]->getY()));
         }

@@ -12,6 +12,7 @@ namespace state {
   /// class ElementList -  c
      
     ElementList::ElementList (State& s) : s(s) {
+        
     };
     
     
@@ -20,6 +21,7 @@ namespace state {
 
    
     int ElementList::size () const{
+        //elements[0]->getObstacleType();
         return elements.size();
     };
         
