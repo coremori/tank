@@ -7,7 +7,6 @@
 #include "Layer.h"
 #include "state.h"
 #include "Scene.h"
-#include "SurfaceSFML.h"
 
 namespace render {
 

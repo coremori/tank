@@ -6,6 +6,7 @@
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
+#include "render/SurfaceSFML.hpp"
 
 void testSFML() {
     sf::Texture texture;
@@ -65,13 +66,13 @@ int main(int argc,char* argv[])
     render::Scene* s = new render::Scene();
     s->setLayer(0, test);*/
     
-   render::SurfaceSFML* s = new SurfaceSFML();
+   SurfaceSFML* s = new SurfaceSFML();
    s->loadTexture("res/Textures/textures.png");
    
    std::vector<Tile*> tile;
-   tile[0] = new Tile(0,0,8,8);
+   tile.push_back( new Tile(0,0,8,8));
    tile[0]->setXTex(0);
-   tile[0]->setXTex(88);
+   tile[0]->setYTex(88);
    s->setSprite(tile);
           
     sf::RenderWindow window(sf::VideoMode(200, 200), L"Peut-tu seulement dépasser la médiocrité ?");// fenetre d'affichage
@@ -89,7 +90,7 @@ int main(int argc,char* argv[])
         for(int i=0; i<1; i++)
         {
             std::vector<sf::Sprite*> li = s->getSprites();
-            sf::Sprite sprite = *li[0];
+            sf::Sprite sprite = *li[i];
             window.draw(sprite);
         }
         
