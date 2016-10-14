@@ -49,17 +49,15 @@
                 
                 unsigned int x = tiles[j]->getX();//position dans l'image
                 unsigned int y = tiles[j]->getY();
-                
-                sf::Vector2u truc = sf::Vector2u(x,y);
 
                 // on récupère un pointeur vers le quad à définir dans le tableau de vertex
                 sf::Vertex* quad = &m_vertices[j * 4];
-                unsigned int a = 8;
+                
                 // on définit ses quatre coins
-                quad[0].position = sf::Vector2f(x, y);
-                quad[1].position = sf::Vector2f(a+a, a);
-                quad[2].position = sf::Vector2f(a+a, a+a);
-                quad[3].position = sf::Vector2f(a, a+a);
+                quad[0].position = sf::Vector2f(x,y);
+                quad[1].position = sf::Vector2f(x+w, y);
+                quad[2].position = sf::Vector2f(x+w, y+h);
+                quad[3].position = sf::Vector2f(x, y+h);
 
                 // on définit ses quatre coordonnées de texture
                 quad[0].texCoords = sf::Vector2f(tu, tv);
