@@ -7,6 +7,10 @@
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
 #include "render/SurfaceSFML.hpp"
+#include <cstdlib>
+#include <pthread.h>
+
+#define NUM_THREADS     5
 
 void testSFML() {
     sf::Texture texture;
@@ -19,10 +23,9 @@ using namespace std;
 using namespace state;
 using namespace render;
 
-int main(int argc,char* argv[]) 
+    void *PrintWindows(void *)
 {
-   
-           sf::RenderWindow window(sf::VideoMode(512, 256), "Tilemap");// fenetre d'affichage
+    sf::RenderWindow window(sf::VideoMode(512, 256), "Tilemap");// fenetre d'affichage
            
     /*  
     render::Surface* terrain = new render::SurfaceSFML();
@@ -87,16 +90,50 @@ int main(int argc,char* argv[])
         }
 
         window.clear();
-        window.draw(*s);
-        /*std::vector<sf::Sprite*> li = s->getSprites();
-            sf::Sprite sprite = *li[0];
-            window.draw(sprite);
-        */
-        
+        window.draw(*s);        
         window.display();
     }
+   pthread_exit(NULL);
+}
+    
+void *Flemme(void *){
+        cout << "I do nothing (the others works for me)" << endl;
+        
+        pthread_exit(NULL);
+    }
+
+
+
+int main ()
+{
+   pthread_t threads[NUM_THREADS];
+   int rc;
+   void *status;
+   
+      cout << "main() : creating thread for the render " << endl;
+      rc = pthread_create(&threads[0], NULL, 
+                          PrintWindows, NULL);
+      
+      if (rc){
+         cout << "Error:unable to create thread," << rc << endl;
+         exit(-1);
+      }
+      
+      rc = pthread_create(&threads[1], NULL, 
+                          Flemme, NULL);
+      
+      if (rc){
+         cout << "Error:unable to create thread," << rc << endl;
+         exit(-1);
+      }
+      
+    pthread_join(threads[0], &status);
+    pthread_join(threads[1], &status);
     
     
-    
-    return 0;
+    cout << "I was tired of waiting" << endl;
+   
+   
+    pthread_exit(0);
+   
 }
