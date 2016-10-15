@@ -29,6 +29,7 @@ namespace render {
     void setTile (Tile* tile);
     Tile getTile (int i);
     void update ();
+    void elementToTiles (const state::ElementList* list);
   };
 
 };

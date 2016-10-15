@@ -23,5 +23,12 @@ namespace state {
     void Projectile::setOrientation (OrientationMissile o){
         Orientation = o;
     };
-  
+    
+    Status Projectile::getStatus () const{
+        return status;
+    };
+    
+    void Projectile::setStatus (Status status){
+        this->status = status;
+    };
 };

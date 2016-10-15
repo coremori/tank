@@ -7,6 +7,11 @@
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
 #include "render/SurfaceSFML.hpp"
+#include "state/SpaceTypeId.h"
+#include "state/Space.h"
+#include "state/Tank.h"
+#include "state/Missile.h"
+#include "state/Shell.h"
 #include <cstdlib>
 #include <pthread.h>
 
@@ -37,36 +42,20 @@ using namespace render;
     test->setSurface(terrain);
     
     std::vector<state::Element*> list;
-    list[1] = new state::Obstacle(1);
+    list.push_back( new state::Obstacle(state::ObstacleTypeId::sand));
     
-    list[2] = new state::Obstacle(2);
+    list.push_back(new state::Obstacle(state::ObstacleTypeId::greenery));
     
-    list[3] = new state::Obstacle(1);
+    list.push_back(new state::Space(state::SpaceTypeId::startPlayer1));
+    
+    state::Obstacle* o = dynamic_cast<state::Obstacle*>(list[0]);
+    if(o->getObstacleTypeId() == state::sand)
+        cout << "sand" <<endl;
+    
+   
     
     
-    for(int i=0; i<list->size(); i++)
-        {   
-            state::Element* e = list->get(i);
-            render::Tile* t = new render::Tile(e->getX(),e->getY());
-            switch(e->getTypeId()){
-                    case 1: //obstacle
-                        switch(e->getObstacleType()){//if a la place
-                                case sand
-                                    break;
-                                case state::ObstacleTypeId::greenery:
-                                    break;
-                        }
-                        case 2://space
-                            break;
-                            case 3://tank
-                                break;
-                                case 4://missile
-                                    break;
-                                    case 5://shell
-                                        break;
-            }
-                                            
-        }
+    
     render::Scene* s = new render::Scene();
     s->setLayer(0, test);*/
     
@@ -78,7 +67,7 @@ using namespace render;
    tile[0]->setXTex(0);
    tile[0]->setYTex(88);
    s->setSprite(tile);
-   s->load(tile);       
+   s->load(tile);      
 
     while (window.isOpen())
     {

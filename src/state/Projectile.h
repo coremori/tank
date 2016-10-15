@@ -8,6 +8,7 @@ namespace state {
 }
 
 #include "OrientationMissile.h"
+#include "Status.h"
 #include "Mobile.h"
 
 namespace state {
@@ -15,6 +16,7 @@ namespace state {
   /// class Projectile - 
   class Projectile : public state::Mobile {
     // Associations
+    state::Status status;
     state::OrientationMissile Orientation;
     // Operations
   public:
@@ -22,6 +24,8 @@ namespace state {
     virtual bool isMissile () const = 0;
     OrientationMissile getOrientation () const;
     void setOrientation (OrientationMissile o);
+    Status getStatus () const;
+    void setStatus (Status status);
   };
 
 };
