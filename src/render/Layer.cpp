@@ -47,7 +47,7 @@ namespace render {
         for(int i=0; i<e->size(); i++)
         {   
             element = e->get(i);
-            tiles.push_back(new Tile(element->getX(),element->getY()));
+            setTile(new Tile(element->getX(),element->getY()));
             switch(element->getTypeId()){
                 case state::obstacle : //obstacle
                         obstacle = dynamic_cast<state::Obstacle*>(element);

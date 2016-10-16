@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 #include "Element.h"
-
+#include <iostream>
+#include <fstream>
 #include "state.hpp"
+#include <stdio.h>
+#include <string.h>
+using namespace std;
 
 namespace state {
 
@@ -36,6 +40,8 @@ namespace state {
     
   
     void ElementList::set ( int idx, Element* e){
+        if(idx==size())
+            elements.push_back(e);
         elements[idx] = e;
     };
     

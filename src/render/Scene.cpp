@@ -34,6 +34,8 @@ namespace render {
     
         
     void Scene::setLayer (int idx, Layer* layer){
+        if(idx==getLayerCount())
+            layers.push_back(layer);
         layers[idx] = layer;
     };
     
@@ -41,5 +43,9 @@ namespace render {
         layers[0]->update();
     };
   
+    void Scene::stateChanged(const state::ElementList* e){
+        layers[0]->elementToTiles(e);
+        update();
+    };
 
 };

@@ -38,7 +38,7 @@
     virtual void loadTexture (const char* image_file);
     virtual void clear ();
     virtual void setSpriteCount (int n);
-    virtual void setSprite (const std::vector<render::Tile*> tile);
+    virtual void setSprite (const std::vector<render::Tile*> tiles);
     std::vector<sf::Sprite*> getSprites () const;
   };
 

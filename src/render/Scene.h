@@ -18,19 +18,16 @@ namespace render {
     // Associations
     // Attributes
   protected:
-    int width;
-    int height;
     std::vector<Layer*> layers;
     // Operations
   public:
     Scene ();
     ~Scene ();
-    int getWidth () const;
-    int getHeight () const;
     int getLayerCount () const;
     void setSurface (int idx, Surface* surface);
     void setLayer (int idx, Layer* layer);
     void update ();
+    void stateChanged (const state::ElementList* e);
   };
 
 };

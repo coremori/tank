@@ -51,23 +51,34 @@ using namespace render;
     state::Obstacle* o = dynamic_cast<state::Obstacle*>(list[0]);
     if(o->getObstacleTypeId() == state::sand)
         cout << "sand" <<endl;
-    
-   
-    
-    
-    
     render::Scene* s = new render::Scene();
     s->setLayer(0, test);*/
-    
-   SurfaceSFML* s = new SurfaceSFML();
-   s->loadTexture("res/Textures/textures.png");
+    SurfaceSFML* s = new SurfaceSFML();
+    s->loadTexture("res/Textures/textures.png");
    
-   std::vector<Tile*> tile;
+   
+    State* state = new State();    
+    ElementList elist = state->getMobiles();
+    elist.set(0,new Obstacle(state::ObstacleTypeId::sand));
+    
+    
+    
+    Layer* layer = new Layer();
+    layer->setSurface(s);
+    
+    Scene* scene = new Scene();
+    scene->setLayer(0,layer);
+    scene->stateChanged(&elist);
+    scene->update();
+    
+   
+   
+  /* std::vector<Tile*> tile;
    tile.push_back( new Tile(16,16,8,8));
    tile[0]->setXTex(0);
    tile[0]->setYTex(88);
    s->setSprite(tile);
-   s->load(tile);      
+   s->load(tile);     */ 
 
     while (window.isOpen())
     {
