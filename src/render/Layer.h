@@ -3,7 +3,7 @@
 #define RENDER__LAYER__H
 
 #include <vector>
-
+#include "../state.h"
 namespace render {
   class Surface;
   class Tile;

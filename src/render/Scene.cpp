@@ -16,13 +16,6 @@ namespace render {
     };
     Scene::~Scene (){};
     
-    int Scene::getWidth () const{
-        return width;
-    };
-    
-    int Scene::getHeight () const{
-        return height;
-    };
     
     int Scene::getLayerCount () const{
         return layers.size();

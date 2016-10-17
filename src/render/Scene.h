@@ -3,7 +3,7 @@
 #define RENDER__SCENE__H
 
 #include <vector>
-
+#include "../state.h"
 namespace render {
   class Layer;
   class Surface;
