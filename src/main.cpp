@@ -2,21 +2,21 @@
 
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-#include "render.h"
+
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
-#include "render/SurfaceSFML.hpp"
 #include "state/SpaceTypeId.h"
 #include "state/Space.h"
 #include "state/Tank.h"
 #include "state/Missile.h"
 #include "state/Shell.h"
-#include "piloteSFML.hpp"
-#include <cstdlib>
-#include <pthread.h>
 
-#define NUM_THREADS     5
+#include "piloteSFML.hpp"
+/*#include <cstdlib>
+#include <pthread.h>*/
+
+/* #define NUM_THREADS     5*/
 
 void testSFML() {
     sf::Texture texture;
@@ -30,35 +30,35 @@ using namespace state;
 using namespace render;
 
     
-void *Flemme(void *){
-        cout << "I do nothing (the others works for me)" << endl;
+void Flemme(void *){
+       /* cout << "I do nothing (the others works for me)" << endl;
         
-        pthread_exit(NULL);
+        pthread_exit(NULL);*/
     }
 
 
 
 int main ()
 {
-   pthread_t threads[NUM_THREADS];
+   /*pthread_t threads[NUM_THREADS];
    int rc;
    void *status;
    
-      cout << "main() : creating thread for the render " << endl;
+      cout << "main() : creating thread for the render " << endl;*/
       
     
       
     State* state = new State();    
     state->getGrid().set(0,new Obstacle(state::ObstacleTypeId::sand));
-    state->getGrid().setHeight(1200);
-    state->getGrid().setWidth(240);
+    state->getGrid().setHeight(240);
+    state->getGrid().setWidth(1200);
     
     
     Layer* layer = new Layer();    
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
     scene->stateChanged(*state);
-    piloteSFML* rendu = new piloteSFML(scene);
+    piloteSFML* rendu = new piloteSFML(scene);/* s'occupe de l'affichage de la fenetre*/
     rendu->affiche();
     
      /*

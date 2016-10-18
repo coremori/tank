@@ -13,7 +13,7 @@ namespace render {
 
 namespace render {
 
-  /// class Scene - 
+  /// class Scene - height and width is for the window
   class Scene {
     // Associations
     // Attributes
