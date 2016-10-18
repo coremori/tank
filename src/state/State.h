@@ -25,9 +25,9 @@ namespace state {
   public:
     State ();
     ~State ();
-    const ElementGrid& getGrid ();
-    ElementList&  getMobiles ();
-    const Element* getMobile (int idx);
+    ElementGrid& getGrid ();
+    ElementList& getMobiles ();
+    const Element* getMobile (int idx) const;
   };
 
 };

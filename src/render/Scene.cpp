@@ -8,6 +8,8 @@
 #include "state.h"
 #include "Scene.h"
 
+
+
 namespace render {
 
   
@@ -36,9 +38,19 @@ namespace render {
         layers[0]->update();
     };
   
-    void Scene::stateChanged(const state::ElementList* e){
-        layers[0]->elementToTiles(e);
-        update();
+    void Scene::stateChanged(state::State& s){
+        height = s.getGrid().getHeight();
+        width = s.getGrid().getWidth();
+        state::ElementGrid g = s.getGrid();
+        layers[0]->elementToTiles(&g);
+    };
+    
+    int Scene::getHeight () const{
+        return height;
+    };
+    
+    int Scene::getWidth () const{
+        return width;
     };
 
 };

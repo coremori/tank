@@ -18,15 +18,15 @@ namespace state {
     State::~State (){ // supprime tout pour l'instant
     };
     
-    const ElementGrid& State::getGrid (){
+    ElementGrid& State::getGrid () {
         return grid;
     };
     
-    ElementList& State::getMobiles (){
+    ElementList& State::getMobiles () {
         return mobiles;
     };
     
-    const Element* State::getMobile (int idx){
+    const Element* State::getMobile (int idx) const{
         return this->mobiles.get(idx);
     };
       

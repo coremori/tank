@@ -44,7 +44,13 @@ namespace state {
         return (i<width)&&(j<height)&&(0<=i)&&(0<=j);
     };
     
+    void ElementGrid::setHeight (int h){
+        height = h;
+    };
     
+    void ElementGrid::setWidth (int w){
+        width = w;
+    };
     
     
     

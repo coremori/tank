@@ -19,6 +19,8 @@ namespace render {
     // Attributes
   protected:
     std::vector<Layer*> layers;
+    int height;
+    int width;
     // Operations
   public:
     Scene ();
@@ -27,7 +29,9 @@ namespace render {
     void setSurface (int idx, Surface* surface);
     void setLayer (int idx, Layer* layer);
     void update ();
-    void stateChanged (const state::ElementList* e);
+    void stateChanged (state::State& s);
+    int getHeight () const;
+    int getWidth () const;
   };
 
 };
