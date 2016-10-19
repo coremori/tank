@@ -17,6 +17,7 @@
 #include <bits/stl_vector.h>
 #include "render/SurfaceSFML.hpp"
 #include <vector>
+#include <iostream>
 
 piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue au layer les surfaces
     this->scene = s;
@@ -46,8 +47,22 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    std::cout << "the escape key was pressed" << std::endl;                    
+                    std::cout << "control:" << event.key.control << std::endl;
+                    std::cout << "alt:" << event.key.alt << std::endl;
+                    std::cout << "shift:" << event.key.shift << std::endl;
+                    std::cout << "system:" << event.key.system << std::endl;
+                }
+            }
         }
-
+        
+            
+        
+        
         window.clear();
         for(unsigned int i=0; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);        
