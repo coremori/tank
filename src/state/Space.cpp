@@ -1,16 +1,14 @@
 #include "state.hpp"
-#include "SpaceTypeId.h"
 
 namespace state {
 
   /// class Space - 
-
     // Associations
-    state::SpaceTypeId SpaceType;
     // Operations
   
     Space::Space (int x,int y){
-
+        this->x=x;
+        this->y=y;
     };
     
     bool Space::isSpace () const {

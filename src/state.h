@@ -18,7 +18,6 @@
 #include "state/Tank.h"
 #include "state/Shell.h"
 #include "state/Missile.h"
-#include "state/SpaceTypeId.h"
 #include "state/Space.h"
 #include "state/ObstacleTypeId.h"
 #include "state/Obstacle.h"

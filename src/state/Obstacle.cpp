@@ -9,8 +9,10 @@
 namespace state{
 
   
-    Obstacle::Obstacle (ObstacleTypeId id){
+    Obstacle::Obstacle (ObstacleTypeId id,int x,int y){
         this->ObstacleType = id;
+        this->x=x;
+        this->y=y;
     };
     
     bool Obstacle::isSpace () const {

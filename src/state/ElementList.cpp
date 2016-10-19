@@ -4,6 +4,8 @@
 #include "state.hpp"
 #include <stdio.h>
 #include <string.h>
+
+
 using namespace std;
 
 namespace state {
@@ -40,7 +42,7 @@ namespace state {
         elements[idx] = e;
     };
     
-    void ElementList::load(const char* path){
+    void ElementList::load(char* path){
         string line;
         ifstream myfile(path);
         int x=0,y=0;
@@ -48,24 +50,30 @@ namespace state {
         {
             while (getline(myfile,line))
             {
+                ++y;
+                
                 cout << line << '\n';
                 for(std::string::size_type i = 0; i < line.length(); ++i){
-                    char c = line[i];
-                    
+                    char* c = &line[i];
+                    ++x;
                     if(strcmp(c,".")==0){
-                        this->elements.push_back(new Space());
+                        this->elements.push_back(new Space(x,y));
                     }
                     else if(strcmp(c,"|")==0){
-                        this->elements.push_back(new Obstacle(greenery));
+                        this->elements.push_back(new Obstacle(greenery,x,y));
                     }
                     else if(strcmp(c,"-")==0){
-                        this->elements.push_back(new Obstacle(sand));
+                        this->elements.push_back(new Obstacle(sand,x,y));
                     }
                     else if(strcmp(c,"&")==0){
-                        this->elements.push_back(new Tank(Little_tank_green,realPlayer,right_down));
+                        s.getMobiles().elements.push_back(new Tank(Little_tank_green,realPlayer,right_down,x,y));
                     }
                     else if(strcmp(c,"%")==0){
-                        this->elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down));
+                        s.getMobiles().elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down,x,y));
+                    }
+                    
+                    if(i==(line.length()-1)){
+                        x=0;
                     }
                 }
                  

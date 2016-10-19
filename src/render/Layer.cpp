@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 #include "../state.h"
 #include "Tile.h"
 #include "Surface.h"
@@ -86,7 +81,7 @@ namespace render {
                                 break;
                         }
                         switch(tank->getOrientation()){
-                            case state::rigth_down :
+                            case state::right_down :
                                 break;
                             case state::left_down :
                                 tiles[i]->setXTex(tiles[i]->getXTex()+24);

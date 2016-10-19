@@ -28,7 +28,7 @@ namespace state {
     Element* get ( int idx) const;
     void clear ();
     void set ( int idx, Element* e);
-    void load (const char* path);
+    void load (char* path);
   };
 
 };

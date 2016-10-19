@@ -6,7 +6,6 @@
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
-#include "state/SpaceTypeId.h"
 #include "state/Space.h"
 #include "state/Tank.h"
 #include "state/Missile.h"
@@ -44,7 +43,7 @@ int main ()
    int rc;
    void *status;
    
-      cout << "main() : creating thread for the render " << endl;*/
+      cout << "main() : creating thread for the render " << endl;
       
     
       
@@ -58,10 +57,10 @@ int main ()
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
     scene->stateChanged(*state);
-    piloteSFML* rendu = new piloteSFML(scene);/* s'occupe de l'affichage de la fenetre*/
+    piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
     rendu->affiche();
     
-     /*
+     
       rc = pthread_create(&threads[0], NULL, 
                           PrintWindows, NULL);
       
@@ -85,21 +84,8 @@ int main ()
     cout << "I was tired of waiting" << endl;
    
    
-    pthread_exit(0);
-   */
-
-        string line;
-        ifstream myfile("res/Levels/level.txt");
-            if(myfile.is_open())
-            {
-                while (getline(myfile,line))
-                {
-                    cout << line << '\n';
-                }
-                myfile.close();
-            }
-            else cout << "Unable to open file"; 
-
+    pthread_exit(0); 
+*/
    
 
     return 0;

@@ -8,7 +8,7 @@ namespace state {
   enum Orientation {
     left_down =1,
     left_up = 2,
-    rigth_down = 3,
+    right_down = 3,
     right_up = 4
   };
 
