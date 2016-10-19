@@ -30,7 +30,9 @@ namespace state {
         return this->mobiles.get(idx);
     };
       
-    
+    void State::load (const char* file_name){
+        grid.load(file_name);
+    };
    
     
    

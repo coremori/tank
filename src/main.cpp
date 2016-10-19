@@ -45,22 +45,27 @@ int main ()
    
       cout << "main() : creating thread for the render " << endl;
       
-    
+*/    
       
     State* state = new State();    
-    state->getGrid().set(0,new Obstacle(state::ObstacleTypeId::sand));
+    state->load("res/Levels/level.txt");
+    
+    
+    /*
     state->getGrid().setHeight(240);
     state->getGrid().setWidth(1200);
+    */
     
-    
-    Layer* layer = new Layer();    
+    Layer* layer = new Layer();
+    Layer* layerchar = new Layer();
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
+    scene->setLayer(1,layerchar);
     scene->stateChanged(*state);
     piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
     rendu->affiche();
     
-     
+    /*
       rc = pthread_create(&threads[0], NULL, 
                           PrintWindows, NULL);
       

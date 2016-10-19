@@ -36,13 +36,16 @@ namespace render {
     
     void Scene::update (){
         layers[0]->update();
+        layers[1]->update();
     };
   
     void Scene::stateChanged(state::State& s){
         height = s.getGrid().getHeight();
         width = s.getGrid().getWidth();
         state::ElementGrid g = s.getGrid();
+        state::ElementList l = s.getMobiles();
         layers[0]->elementToTiles(&g);
+        layers[1]->elementToTiles(&l);
     };
     
     int Scene::getHeight () const{

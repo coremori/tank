@@ -38,7 +38,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     scene->update();
     
-    sf::RenderWindow window(sf::VideoMode(scene->getWidth(), scene->getHeight()), "Rendu");// fenetre d'affichage
+    sf::RenderWindow window(sf::VideoMode(scene->getWidth()*8, scene->getHeight()*8), "Rendu");// fenetre d'affichage
     
     while (window.isOpen())
     {

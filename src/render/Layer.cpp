@@ -62,6 +62,8 @@ namespace render {
                         tank = dynamic_cast<state::Tank*>(element);
                         tiles[i]->setHeight(24);
                         tiles[i]->setWidth(24);
+                        tiles[i]->setX(tiles[i]->getX()-8);
+                        tiles[i]->setY(tiles[i]->getY()-2*8);
                         switch(tank->getTankTypeId()){
                             case state::Little_tank_green :
                                 tiles[i]->setXTex(0);

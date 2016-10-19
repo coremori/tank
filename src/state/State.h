@@ -28,6 +28,7 @@ namespace state {
     ElementGrid& getGrid ();
     ElementList& getMobiles ();
     const Element* getMobile (int idx) const;
+    void load (const char* file_name);
   };
 
 };
