@@ -19,7 +19,7 @@ namespace state {
     state::ObstacleTypeId ObstacleType;
     // Operations
   public:
-    Obstacle (ObstacleTypeId id);
+    Obstacle (ObstacleTypeId id, int x, int y);
     virtual bool isSpace () const;
     TypeId getTypeId () const;
     void setObstacleTypeId (ObstacleTypeId id);

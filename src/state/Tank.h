@@ -10,8 +10,8 @@ namespace state {
 #include "TypeId.h"
 #include "Orientation.h"
 #include "TankTypeId.h"
-#include "Mobile.h"
 #include "PlayerType.h"
+#include "Mobile.h"
 
 namespace state {
 
@@ -26,7 +26,6 @@ namespace state {
     int pv;
     // Operations
   public:
-    Tank ();
     virtual bool isTank () const;
     virtual TypeId getTypeId () const;
     bool isPlayer () const;
@@ -36,6 +35,7 @@ namespace state {
     void setOrientation (Orientation o);
     void setTankTypeId (TankTypeId id);
     TankTypeId getTankTypeId () const;
+    Tank (TankTypeId tanktypeid, PlayerType playertype, Orientation orientation, int x, int y);
   };
 
 };

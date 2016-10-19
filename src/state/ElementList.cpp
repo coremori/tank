@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 #include "Element.h"
 #include <iostream>
 #include <fstream>
@@ -45,6 +40,41 @@ namespace state {
         elements[idx] = e;
     };
     
+    void ElementList::load(const char* path){
+        string line;
+        ifstream myfile(path);
+        int x=0,y=0;
+        if(myfile.is_open())
+        {
+            while (getline(myfile,line))
+            {
+                cout << line << '\n';
+                for(std::string::size_type i = 0; i < line.length(); ++i){
+                    char c = line[i];
+                    
+                    if(strcmp(c,".")==0){
+                        this->elements.push_back(new Space());
+                    }
+                    else if(strcmp(c,"|")==0){
+                        this->elements.push_back(new Obstacle(greenery));
+                    }
+                    else if(strcmp(c,"-")==0){
+                        this->elements.push_back(new Obstacle(sand));
+                    }
+                    else if(strcmp(c,"&")==0){
+                        this->elements.push_back(new Tank(Little_tank_green,realPlayer,right_down));
+                    }
+                    else if(strcmp(c,"%")==0){
+                        this->elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down));
+                    }
+                }
+                 
+            }
+            myfile.close();
+        }
+        else cout << "Unable to open file"; 
+
+    }
     
 
 };

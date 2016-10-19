@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include "state.hpp"
 #include "SpaceTypeId.h"
 
@@ -15,8 +9,8 @@ namespace state {
     state::SpaceTypeId SpaceType;
     // Operations
   
-    Space::Space (SpaceTypeId id){
-        this->SpaceType = id;
+    Space::Space (int x,int y){
+
     };
     
     bool Space::isSpace () const {
@@ -27,13 +21,5 @@ namespace state {
         return space;
     };
     
-    
-    void Space::setSpaceTypeId (SpaceTypeId id){
-        this->SpaceType = id;
-    };
-        
-    state::SpaceTypeId Space::getSpaceTypeId () const {
-        return this->SpaceType;
-    };
   };
 

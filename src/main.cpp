@@ -1,8 +1,8 @@
-#include <iostream>
-
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
+#include <fstream>
+#include <string.h>
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/Obstacle.h"
@@ -87,5 +87,20 @@ int main ()
    
     pthread_exit(0);
    */
+
+        string line;
+        ifstream myfile("res/Levels/level.txt");
+            if(myfile.is_open())
+            {
+                while (getline(myfile,line))
+                {
+                    cout << line << '\n';
+                }
+                myfile.close();
+            }
+            else cout << "Unable to open file"; 
+
+   
+
     return 0;
 }

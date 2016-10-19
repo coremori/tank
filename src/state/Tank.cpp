@@ -8,10 +8,11 @@
 
 namespace state {
 
-    Tank::Tank (){
+    Tank::Tank(TankTypeId tanktypeid, PlayerType playertype, Orientation orientation){
+    this->TankType = tanktypeid;
+    this->orientation = orientation;
+    this->Player = playertype;
     this->pv = 100;
-    this->orientation = rigth_down;
-    this->Player = AIPlayer;
     };
     
     
