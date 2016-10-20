@@ -62,11 +62,11 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         
             
         
-        
         window.clear();
         for(unsigned int i=0; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);        
         window.display();
+        
     }
 }
 
