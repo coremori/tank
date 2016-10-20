@@ -43,9 +43,11 @@ namespace state {
     };
     
     void ElementList::load(const char* path){
+        int NB_STD_HEIGHT_SPRITE = 8;
+
         string line;
         ifstream myfile(path);
-        int x=0,y=-8;
+        int x=0,y=-NB_STD_HEIGHT_SPRITE;
         int w,h;
         if(myfile.is_open())
         {
@@ -78,9 +80,9 @@ namespace state {
                         this->elements.push_back(new Space(x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down,x,y));
                     }
-                    x = x+8;
+                    x = x+NB_STD_HEIGHT_SPRITE;
                 }
-                y=y+8;
+                y=y+NB_STD_HEIGHT_SPRITE;
                  
             }
             myfile.close();

@@ -5,7 +5,6 @@
 #include <cstddef>
 
 
-
 namespace render {
 
   
