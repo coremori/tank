@@ -9,7 +9,6 @@
 namespace state {
 
     ElementGrid::ElementGrid (State& s) : ElementList(s){
-        new ElementList(s);
         this->width = 0;
         this->height =0;
     };

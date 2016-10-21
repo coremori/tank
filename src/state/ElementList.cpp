@@ -18,6 +18,7 @@ namespace state {
     
     
     ElementList::~ElementList (){
+        clear();
     };
 
    

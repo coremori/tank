@@ -51,10 +51,6 @@ int main ()
     state->load("res/Levels/level.txt");
     
     
-    /*
-    state->getGrid().setHeight(240);
-    state->getGrid().setWidth(1200);
-    */
     
     Layer* layer = new Layer();
     Layer* layerchar = new Layer();
@@ -62,7 +58,11 @@ int main ()
     scene->setLayer(0,layer);
     scene->setLayer(1,layerchar);
     scene->stateChanged(*state);
+    
+    
+    
     piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
+    
     rendu->affiche();
     
     /*

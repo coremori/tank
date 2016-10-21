@@ -67,6 +67,8 @@ namespace render {
                             case state::Little_tank_green :
                                 tiles[i]->setXTex(0);
                                 tiles[i]->setYTex(0);
+                                
+                                
                                 break;
                             case state::Little_tank_grey :
                                 tiles[i]->setXTex(96);
@@ -134,7 +136,7 @@ namespace render {
                                 break;
 
                         }
-
+                        
                     break;
 
                 case state::shell :
