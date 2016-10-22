@@ -27,7 +27,7 @@ namespace state {
     ~State ();
     ElementGrid& getGrid ();
     ElementList& getMobiles ();
-    const Element* getMobile (int idx) const;
+    Element* getMobile (int idx) const;
     void load (const char* file_name);
   };
 

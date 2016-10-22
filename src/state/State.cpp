@@ -26,7 +26,7 @@ namespace state {
         return mobiles;
     };
     
-    const Element* State::getMobile (int idx) const{
+    Element* State::getMobile (int idx) const{
         return this->mobiles.get(idx);
     };
       
@@ -34,7 +34,7 @@ namespace state {
         grid.load(file_name);
     };
    
-    
+   
    
   };
 

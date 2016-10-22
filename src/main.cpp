@@ -50,8 +50,6 @@ int main ()
     State* state = new State();    
     state->load("res/Levels/level.txt");
     
-    
-    
     Layer* layer = new Layer();
     Layer* layerchar = new Layer();
     Scene* scene = new Scene();
