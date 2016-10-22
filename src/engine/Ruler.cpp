@@ -9,6 +9,7 @@
 #include "CommandSet.h"
 #include "MoveCommand.h"
 #include "ActionMove.h"
+#include <cstddef>
 
 namespace engine{
 
@@ -20,16 +21,31 @@ namespace engine{
         actions->apply();
     };
         
-    void Ruler::impleRule() {
+    void Ruler::impleRule(EngineMode mode) {
         
-        MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(301));
+        //gere seulement le move command pour commencer et tester
+        MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(300));
         
         actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),1 ));
         /*for(unsigned int i=0; i<cmd->size(); i++)
         {
             c cmd->get()
         }*/
+        
+        /*shot :
+         while(Nocolision){
+         * calcule impact
+         * action boum :
+         }*/
     };
+
+    void Ruler::setActions(ActionListTurn * const actions) {
+        this->actions = actions;
+    };
+
+    void Ruler::setCommandSet(CommandSet * const cmd) {
+        this->cmd =  cmd;
+    }
 
 
 }

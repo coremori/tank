@@ -1,6 +1,7 @@
 
 
 #include "engine.h"
+#include <string>
 
 
 namespace engine {
@@ -16,7 +17,7 @@ namespace engine {
     };
     
     const char* LoadCommand::getFileName () const{
-        return file_name;
+        return file_name.c_str();
     };
 
 

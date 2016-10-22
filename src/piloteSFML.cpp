@@ -14,6 +14,7 @@
 #include "piloteSFML.hpp"
 #include "render/Tile.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <bits/stl_vector.h>
 #include "render/SurfaceSFML.hpp"
 #include <vector>

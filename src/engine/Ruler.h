@@ -8,6 +8,7 @@ namespace engine {
   class CommandSet;
 }
 
+#include "EngineMode.h"
 #include "ActionListTurn.h"
 
 namespace engine {
@@ -26,7 +27,7 @@ namespace engine {
     void setCommandSet (CommandSet* const cmd);
     void setActions (ActionListTurn* const actions);
     void apply ();
-    void impleRule ();
+    void impleRule (EngineMode mode);
   };
 
 };

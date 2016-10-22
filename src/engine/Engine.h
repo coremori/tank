@@ -2,7 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
-
+#include "../state.h"
 namespace engine {
   class CommandSet;
   class Command;
@@ -21,12 +21,16 @@ namespace engine {
     // Attributes
   protected:
     CommandSet* commands;
+    int charTurn;
+    state::State* state;
     // Operations
   public:
     Engine ();
     ~Engine ();
     void addCommand (Command* cmd);
     void displayTest () const;
+    void setcharTurn (int c);
+    int getcharTurn () const;
   };
 
 };

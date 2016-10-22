@@ -13,9 +13,6 @@ namespace engine {
         return MAIN_CATEGORY;
     };
     
-    CommandTypeId DirectionCommand::getTypeId () const{
-        return DIRECTION;
-    };
     
     int DirectionCommand::getCharacter () const{
         return character;

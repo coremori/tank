@@ -19,6 +19,13 @@ namespace engine{
     void CommandSet::add(Command* command) {
         commands.insert(std::make_pair(command->getCategory(),command));
     };
-
+    
+    int CommandSet::size() const {
+        return commands.size();
+    };
+    
+    void CommandSet::clear() {
+        commands.clear();
+    };
 
 }

@@ -24,9 +24,9 @@ namespace engine {
   public:
     ~CommandSet ();
     int size () const;
-    void set (Command* cmd);
     void add (Command* command);
     Command* get (int category) const;
+    void clear ();
   };
 
 };

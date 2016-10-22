@@ -2,7 +2,7 @@
 #ifndef ENGINE__MOVECOMMAND__H
 #define ENGINE__MOVECOMMAND__H
 
-#include "../state.h"
+
 namespace engine {
   class Command;
 }
@@ -20,7 +20,7 @@ namespace engine {
     int Ymove;
     // Operations
   public:
-    MoveCommand (int c, state::Orientation d);
+    MoveCommand (int c, int xmove, int ymove);
     int getCharacter () const;
     int getCategory () const;
     int getXmove () const;
