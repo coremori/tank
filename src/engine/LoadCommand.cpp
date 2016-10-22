@@ -15,9 +15,6 @@ namespace engine {
         return MAIN_CATEGORY;
     };
     
-    CommandTypeId LoadCommand::getTypeId () const{
-        return LOAD;
-    };
     const char* LoadCommand::getFileName () const{
         return file_name;
     };

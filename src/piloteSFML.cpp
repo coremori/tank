@@ -39,14 +39,20 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     scene->update();
     
     sf::RenderWindow window(sf::VideoMode(scene->getWidth()*8, scene->getHeight()*8), "Rendu");// fenetre d'affichage
-    
+    sf::Music music;
+    if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
+        std::cout << "file not found "<<std::endl;
+    music.play();
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
+                music.stop();
                 window.close();
+            }
             if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Escape)
