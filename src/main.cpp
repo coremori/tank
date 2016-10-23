@@ -53,9 +53,11 @@ int main ()
     
     Layer* layer = new Layer();
     Layer* layerchar = new Layer();
+    Layer* layertext = new Layer();
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
     scene->setLayer(1,layerchar);
+    scene->setLayer(2,layertext);
     //scene->stateChanged(*state);
     
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    

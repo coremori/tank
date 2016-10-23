@@ -9,7 +9,9 @@
 #include "MoveCommand.h"
 
 namespace engine{
-    MoveCommand::MoveCommand(int c, int xmove, int ymove) {
+    MoveCommand::MoveCommand(int c, int xmove, int ymove) {//(num character, X, Y))
+        //xmove and ymove are in pixels
+        //c est le numero du perso
         character = c;
         Xmove = xmove;
         Ymove = ymove;

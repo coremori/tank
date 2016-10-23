@@ -28,16 +28,20 @@ namespace render {
     void Layer::update (){
         surface->setSprite(tiles);
     }
-    
-    void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
+        
+    void Layer::clear() {
         tiles.clear();
+    }
+
+    void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
+        
         // std::vector<state::Element*> list;
         state::Obstacle* obstacle = NULL;
         state::Tank* tank = NULL;
         state::Missile* missile = NULL;
         state::Shell* shell = NULL;
         state::Element* element = NULL;
-
+        unsigned prevSize = tiles.size();
         for(int i=0; i<e->size(); i++)
         {   
             element = e->get(i);
@@ -47,53 +51,53 @@ namespace render {
                         obstacle = dynamic_cast<state::Obstacle*>(element);
                         switch(obstacle->getObstacleTypeId()){//if a la place
                             case state::sand :
-                                tiles[i]->setXTex(0);
-                                tiles[i]->setYTex(88);
+                                tiles[i+prevSize]->setXTex(0);
+                                tiles[i+prevSize]->setYTex(88);
                                 break;
                             case state::greenery:
-                                tiles[i]->setXTex(16);
-                                tiles[i]->setYTex(88);
+                                tiles[i+prevSize]->setXTex(16);
+                                tiles[i+prevSize]->setYTex(88);
                                 break;
                         }
                     break;
 
                 case state::tank :
                         tank = dynamic_cast<state::Tank*>(element);
-                        tiles[i]->setHeight(24);
-                        tiles[i]->setWidth(24);
-                        tiles[i]->setX(tiles[i]->getX()-8);
-                        tiles[i]->setY(tiles[i]->getY()-2*8);
+                        tiles[i+prevSize]->setHeight(24);
+                        tiles[i+prevSize]->setWidth(24);
+                        tiles[i+prevSize]->setX(tiles[i+prevSize]->getX()-8);
+                        tiles[i+prevSize]->setY(tiles[i+prevSize]->getY()-2*8);
                         switch(tank->getTankTypeId()){
                             case state::Little_tank_green :
-                                tiles[i]->setXTex(0);
-                                tiles[i]->setYTex(0);
+                                tiles[i+prevSize]->setXTex(0);
+                                tiles[i+prevSize]->setYTex(0);
                                 
                                 
                                 break;
                             case state::Little_tank_grey :
-                                tiles[i]->setXTex(96);
-                                tiles[i]->setYTex(0);
+                                tiles[i+prevSize]->setXTex(96);
+                                tiles[i+prevSize]->setYTex(0);
                                 break;
                             case state::Big_tank_green :
-                                tiles[i]->setXTex(0);
-                                tiles[i]->setYTex(24);
+                                tiles[i+prevSize]->setXTex(0);
+                                tiles[i+prevSize]->setYTex(24);
                                 break;
                             case state::Big_tank_grey :
-                                tiles[i]->setXTex(96);
-                                tiles[i]->setYTex(24);
+                                tiles[i+prevSize]->setXTex(96);
+                                tiles[i+prevSize]->setYTex(24);
                                 break;
                         }
                         switch(tank->getOrientation()){
                             case state::right_down :
                                 break;
                             case state::left_down :
-                                tiles[i]->setXTex(tiles[i]->getXTex()+24);
+                                tiles[i+prevSize]->setXTex(tiles[i+prevSize]->getXTex()+24);
                                 break;
                             case state::right_up:
-                                tiles[i]->setXTex(tiles[i]->getXTex()+48);
+                                tiles[i+prevSize]->setXTex(tiles[i+prevSize]->getXTex()+48);
                                 break;
                             case state::left_up :
-                                tiles[i]->setXTex(tiles[i]->getXTex()+72);
+                                tiles[i+prevSize]->setXTex(tiles[i+prevSize]->getXTex()+72);
                                 break;
                         }
                     break;
@@ -104,35 +108,35 @@ namespace render {
                             case state::normal :
                                 switch(missile->getOrientation()){
                                 case state::left :
-                                    tiles[i]->setHeight(8);
-                                    tiles[i]->setWidth(16);
-                                    tiles[i]->setXTex(8);
-                                    tiles[i]->setYTex(96);
+                                    tiles[i+prevSize]->setHeight(8);
+                                    tiles[i+prevSize]->setWidth(16);
+                                    tiles[i+prevSize]->setXTex(8);
+                                    tiles[i+prevSize]->setYTex(96);
                                     break;
                                 case state::rigth :
-                                    tiles[i]->setHeight(8);
-                                    tiles[i]->setWidth(16);
-                                    tiles[i]->setXTex(8);
-                                    tiles[i]->setYTex(104);
+                                    tiles[i+prevSize]->setHeight(8);
+                                    tiles[i+prevSize]->setWidth(16);
+                                    tiles[i+prevSize]->setXTex(8);
+                                    tiles[i+prevSize]->setYTex(104);
                                     break;
                                 case state::up :
-                                    tiles[i]->setHeight(16);
-                                    tiles[i]->setWidth(8);
-                                    tiles[i]->setXTex(0);
-                                    tiles[i]->setYTex(96);
+                                    tiles[i+prevSize]->setHeight(16);
+                                    tiles[i+prevSize]->setWidth(8);
+                                    tiles[i+prevSize]->setXTex(0);
+                                    tiles[i+prevSize]->setYTex(96);
                                     break;
                                 case state::down :
-                                    tiles[i]->setHeight(16);
-                                    tiles[i]->setWidth(8);
-                                    tiles[i]->setXTex(24);
-                                    tiles[i]->setYTex(96);
+                                    tiles[i+prevSize]->setHeight(16);
+                                    tiles[i+prevSize]->setWidth(8);
+                                    tiles[i+prevSize]->setXTex(24);
+                                    tiles[i+prevSize]->setYTex(96);
                                     break;
                                 }
                                 break;
 
                             case state::explosion :
-                                tiles[i]->setXTex(16);
-                                tiles[i]->setYTex(112);
+                                tiles[i+prevSize]->setXTex(16);
+                                tiles[i+prevSize]->setYTex(112);
                                 break;
 
                         }
@@ -145,31 +149,52 @@ namespace render {
                             case state::normal :
                                 switch(shell->getOrientation()){
                                     case state::left :
-                                        tiles[i]->setXTex(0);
-                                        tiles[i]->setYTex(112);
+                                        tiles[i+prevSize]->setXTex(0);
+                                        tiles[i+prevSize]->setYTex(112);
                                         break;
                                     case state::rigth :
-                                        tiles[i]->setXTex(0);
-                                        tiles[i]->setYTex(112);
+                                        tiles[i+prevSize]->setXTex(0);
+                                        tiles[i+prevSize]->setYTex(112);
                                         break;
                                     default :
                                         break;
                                 }
                                 break;
                             case state::explosion :
-                                tiles[i]->setXTex(8);
-                                tiles[i]->setYTex(112);
+                                tiles[i+prevSize]->setXTex(8);
+                                tiles[i+prevSize]->setYTex(112);
                                 break;        
                         }
                     break;
 
                 default ://space
-                    tiles[i]->setXTex(24);
-                    tiles[i]->setYTex(88);
+                    tiles[i+prevSize]->setXTex(24);
+                    tiles[i+prevSize]->setYTex(88);
                     break;                            
             }
         }
         
     };
+        
+    void Layer::charToTiles(char c, int Ypos) {//on choisi d'alligner les truc en bas gauche avec un écart de 160 pixels (toujours modifiables après hein :P)
+        unsigned prevSize = tiles.size();  
+        if (c==' '){
+            setTile(new Tile(160+prevSize*8,Ypos));
+            tiles[prevSize]->setXTex(0);
+            tiles[prevSize]->setYTex(48);//rien
+        }
+        else if ((c>47)&(c<57)){//nombre
+            setTile(new Tile(160+prevSize*8,Ypos));
+            tiles[prevSize]->setXTex((c-48)*8);
+            tiles[prevSize]->setYTex(64);
+        }
+        else{//alphabet
+            setTile(new Tile(160+prevSize*8,Ypos+1));
+            tiles[prevSize]->setXTex((c-97)*8);
+            tiles[prevSize]->setYTex(56);
+        }    
+          
+    };
+
 
 };

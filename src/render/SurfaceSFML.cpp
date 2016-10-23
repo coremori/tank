@@ -51,6 +51,7 @@
         
         
         // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
+        m_vertices.clear();
         m_vertices.setPrimitiveType(sf::Quads);
         m_vertices.resize(tiles.size()*4);
         

@@ -30,6 +30,8 @@ namespace render {
     Tile getTile (int i);
     void update ();
     void elementToTiles (const state::ElementList* list);
+    void charToTiles (char c, int Ypos);
+    void clear ();
   };
 
 };

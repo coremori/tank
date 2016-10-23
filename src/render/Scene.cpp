@@ -37,6 +37,7 @@ namespace render {
     void Scene::update (){
         layers[0]->update();
         layers[1]->update();
+        layers[2]->update();
     };
   
     void Scene::stateChanged(state::State& s){
@@ -44,8 +45,19 @@ namespace render {
         width = s.getGrid().getWidth();
         state::ElementGrid g = s.getGrid();
         state::ElementList l = s.getMobiles();
+        layers[0]->clear();
+        layers[1]->clear();
         layers[0]->elementToTiles(&g);
         layers[1]->elementToTiles(&l);
+        layers[2]->charToTiles('t',height*8);
+        layers[2]->charToTiles('e',height*8);
+        layers[2]->charToTiles('x',height*8);
+        layers[2]->charToTiles('t',height*8);
+        layers[2]->charToTiles(' ',height*8);
+        layers[2]->charToTiles('1',height*8);
+        layers[2]->charToTiles('0',height*8);
+        
+
     };
     
     int Scene::getHeight () const{

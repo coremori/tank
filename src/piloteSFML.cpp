@@ -41,7 +41,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     scene->update();
     
-    sf::RenderWindow window(sf::VideoMode(scene->getWidth()*8, scene->getHeight()*8), "Rendu");// fenetre d'affichage
+    sf::RenderWindow window(sf::VideoMode(scene->getWidth()*8, scene->getHeight()*8 + 16), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
     sf::Music music;
     if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
         std::cout << "file not found "<<std::endl;
