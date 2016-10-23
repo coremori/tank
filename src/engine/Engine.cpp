@@ -9,10 +9,14 @@
 #include "Ruler.h"
 #include "CommandSet.h"
 #include "../state/State.h"
+
 namespace engine{
 
-    Engine::Engine() : ruler(this->state){
-        
+    Engine::Engine(state::State* s) {
+
+        commands = new CommandSet();
+        state = s;
+
     };
     
     void Engine::addCommand(Command* cmd) {
@@ -27,6 +31,14 @@ namespace engine{
         charTurn = c;
     }
 
+    Ruler* Engine::getRuler() {
+        return &ruler;
+    }
+    
+    void Engine::setRuler() {
+        ruler.setCommandSet(commands);
+        ruler.setState(state);
+    }
 
 }
 

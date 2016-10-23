@@ -28,7 +28,6 @@ namespace state {
     };
         
     Element* ElementList::get ( int idx)  const{
-        assert(size()>idx && idx>=0);
         return elements[idx];
     };
         

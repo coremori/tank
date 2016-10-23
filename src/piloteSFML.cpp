@@ -20,6 +20,8 @@
 #include <vector>
 #include <iostream>
 
+#include "engine.h"
+
 piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue au layer les surfaces
     this->scene = s;
     for(int i=0; i<scene->getLayerCount(); i++)
@@ -44,6 +46,12 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
         std::cout << "file not found "<<std::endl;
     music.play();
+    
+    
+        
+
+    
+    
     while (window.isOpen())
     {
         sf::Event event;

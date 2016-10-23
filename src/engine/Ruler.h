@@ -23,11 +23,12 @@ namespace engine {
     CommandSet* cmd;
     // Operations
   public:
-    Ruler (state::State* const state);
+    Ruler ();
     void setCommandSet (CommandSet* const cmd);
     void setActions (ActionListTurn* const actions);
     void apply ();
     void impleRule (EngineMode mode);
+    void setState (state::State* s);
   };
 
 };

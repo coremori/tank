@@ -10,6 +10,7 @@
 #include "state/Tank.h"
 #include "state/Missile.h"
 #include "state/Shell.h"
+#include "engine.h"
 
 #include "piloteSFML.hpp"
 /*#include <cstdlib>
@@ -55,14 +56,25 @@ int main ()
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
     scene->setLayer(1,layerchar);
+    //scene->stateChanged(*state);
+    
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
+   
+    engine::Engine* engine = new engine::Engine(state);
+    engine::MoveCommand* mcmd = new engine::MoveCommand(0,24,1);
+    engine::ActionListTurn* actions = new engine::ActionListTurn(state);
+    engine->addCommand(mcmd);
+    engine->setRuler();
+    engine->getRuler()->setActions(actions);
+    engine->getRuler()->impleRule(engine::play);
+    engine->getRuler()->apply();
     scene->stateChanged(*state);
-    
-    
-    
+
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
     
-    rendu->affiche();
-    
+    rendu->affiche();   
     /*
       rc = pthread_create(&threads[0], NULL, 
                           PrintWindows, NULL);

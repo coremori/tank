@@ -25,12 +25,14 @@ namespace engine {
     state::State* state;
     // Operations
   public:
-    Engine ();
+    Engine (state::State* s);
     ~Engine ();
     void addCommand (Command* cmd);
     void displayTest () const;
     void setcharTurn (int c);
     int getcharTurn () const;
+    Ruler* getRuler ();
+    void setRuler ();
   };
 
 };

@@ -10,11 +10,13 @@
 #include "MoveCommand.h"
 #include "ActionMove.h"
 #include <cstddef>
+#include <iostream>
 
 namespace engine{
 
-    Ruler::Ruler(state::State* state) {
-        this->state = state;
+    Ruler::Ruler() {
+
+        
     };
     
     void Ruler::apply() {
@@ -26,7 +28,7 @@ namespace engine{
         //gere seulement le move command pour commencer et tester
         MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(300));
         
-        actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),1 ));
+        actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter() ));
         /*for(unsigned int i=0; i<cmd->size(); i++)
         {
             c cmd->get()
@@ -46,6 +48,11 @@ namespace engine{
     void Ruler::setCommandSet(CommandSet * const cmd) {
         this->cmd =  cmd;
     }
+        void Ruler::setState(state::State* s) {
+            this->state = s;
+    }
+
+    
 
 
 }

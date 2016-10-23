@@ -30,7 +30,7 @@ namespace render {
     }
     
     void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
-        
+        tiles.clear();
         // std::vector<state::Element*> list;
         state::Obstacle* obstacle = NULL;
         state::Tank* tank = NULL;
@@ -169,14 +169,7 @@ namespace render {
                     break;                            
             }
         }
-        if (obstacle)
-            delete(obstacle);
-        if (tank)
-            delete(tank);
-        if (shell)
-            delete(shell);
-        if (missile)
-            delete(missile);
+        
     };
 
 };
