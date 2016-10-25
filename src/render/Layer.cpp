@@ -32,7 +32,7 @@ namespace render {
     void Layer::clear() {
         tiles.clear();
     }
-
+    
     void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
         
         // std::vector<state::Element*> list;

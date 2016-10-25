@@ -8,7 +8,6 @@
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/ElementGrid.h"
-#include "state/State.h"
 #include "state/Mobile.h"
 #include "state/OrientationMissile.h"
 #include "state/Status.h"
@@ -26,4 +25,5 @@
 #include "state/StateEventId.h"
 #include "state/StateEvent.h"
 #include "state/ElementEvent.h"
+#include "state/State.h"
 #endif

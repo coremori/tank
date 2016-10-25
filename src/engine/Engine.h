@@ -3,6 +3,7 @@
 #define ENGINE__ENGINE__H
 
 #include "../state.h"
+
 namespace engine {
   class CommandSet;
   class Command;

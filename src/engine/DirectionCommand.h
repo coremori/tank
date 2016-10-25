@@ -3,6 +3,7 @@
 #define ENGINE__DIRECTIONCOMMAND__H
 
 #include "../state.h"
+
 namespace engine {
   class Command;
 }

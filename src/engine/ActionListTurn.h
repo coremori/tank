@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "../state.h"
+
 namespace engine {
   class Action;
 }

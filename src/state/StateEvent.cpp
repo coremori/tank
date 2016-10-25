@@ -14,11 +14,11 @@ namespace state{
         this->id = id;
     }
     
-    bool StateEvent::operator!=(StateEventId id) const {
+    bool StateEvent::operator==(StateEventId id) const {
         return (this->id==id);
     }
     
-    bool StateEvent::operator==(StateEventId id) const {
+    bool StateEvent::operator!=(StateEventId id) const {
         return (this->id!=id);
     }
 

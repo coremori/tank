@@ -4,17 +4,24 @@
 
 #include <vector>
 #include "../state.h"
+#include "state/StateEvent.h"
+
 namespace render {
   class Layer;
   class Surface;
+};
+namespace state {
+  class StateEvent;
+  class StateObserver;
 }
 
+#include "state/StateObserver.h"
 #include "Layer.h"
 
 namespace render {
 
   /// class Scene - height and width is for the window
-  class Scene {
+  class Scene : public state::StateObserver {
     // Associations
     // Attributes
   protected:
@@ -29,9 +36,9 @@ namespace render {
     void setSurface (int idx, Surface* surface);
     void setLayer (int idx, Layer* layer);
     void update ();
-    void stateChanged (state::State& s);
     int getHeight () const;
     int getWidth () const;
+    void stateChanged (const state::StateEvent& e);
   };
 
 };

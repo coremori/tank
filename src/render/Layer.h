@@ -4,18 +4,24 @@
 
 #include <vector>
 #include "../state.h"
+
 namespace render {
   class Surface;
   class Tile;
+};
+namespace state {
+  class ElementList;
+  class StateObserver;
 }
 
 #include "Tile.h"
+#include "state/StateObserver.h"
 #include "Surface.h"
 
 namespace render {
 
   /// class Layer - 
-  class Layer {
+  class Layer : public state::StateObserver {
     // Associations
     // Attributes
   protected:

@@ -3,6 +3,7 @@
 #define ENGINE__RULER__H
 
 #include "../state.h"
+
 namespace engine {
   class ActionListTurn;
   class CommandSet;

@@ -3,6 +3,7 @@
 #define STATE__OBSERVABLE__H
 
 #include <vector>
+#include "state/StateEvent.h"
 
 namespace state {
   class StateObserver;
@@ -17,7 +18,7 @@ namespace state {
   class Observable {
     // Associations
     // Attributes
-  public:
+  protected:
     mutable std::vector<StateObserver*> observers;
     // Operations
   public:

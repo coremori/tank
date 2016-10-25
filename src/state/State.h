@@ -2,6 +2,7 @@
 #ifndef STATE__STATE__H
 #define STATE__STATE__H
 
+#include "state/StateEvent.h"
 
 namespace state {
   class ElementList;
@@ -29,8 +30,11 @@ namespace state {
     State ();
     ~State ();
     ElementGrid& getGrid ();
+    const ElementGrid& getGrid () const;
     ElementList& getMobiles ();
+    const ElementList& getMobiles () const;
     Element* getMobile (int idx);
+    const Element* getMobile (int idx) const;
     void load (const char* file_name);
     void notifyObserver (const StateEvent& event) const;
   };
