@@ -76,6 +76,7 @@ int main ()
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
     engine->addCommand(mcmd);
     engine->setRuler();
+    
     engine->getRuler()->setActions(actions);
     engine->getRuler()->impleRule(engine::play);
     engine->getRuler()->apply();

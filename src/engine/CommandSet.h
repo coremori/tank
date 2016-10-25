@@ -8,7 +8,6 @@ namespace engine {
   class Command;
 }
 
-#include "EngineMode.h"
 #include "Command.h"
 
 namespace engine {
@@ -16,7 +15,6 @@ namespace engine {
   /// class CommandSet - 
   class CommandSet {
     // Associations
-    engine::EngineMode mode;
     // Attributes
   protected:
     std::map<int,Command*> commands;

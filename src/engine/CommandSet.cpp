@@ -8,12 +8,17 @@
 #include "CommandSet.h"
 #include "Command.h"
 #include <utility> 
+#include <map>
+
 
 namespace engine{
     
 
     Command* CommandSet::get(int category) const {
-        return commands.at(category);
+        auto search = commands.find(category);
+        if (search != commands.end())
+            return commands.at(category);
+        return nullptr;
     };
         
     void CommandSet::add(Command* command) {

@@ -53,6 +53,7 @@ namespace render {
             
             layers[0]->elementToTiles(&g);
             layers[1]->elementToTiles(&l);
+            
             layers[2]->charToTiles('s',height*8);
             layers[2]->charToTiles('c',height*8);
             layers[2]->charToTiles('o',height*8);
