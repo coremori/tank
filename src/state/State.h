@@ -7,15 +7,18 @@ namespace state {
   class ElementList;
   class ElementGrid;
   class Element;
+  class StateEvent;
+  class Observable;
 }
 
 #include "ElementList.h"
 #include "ElementGrid.h"
+#include "Observable.h"
 
 namespace state {
 
   /// class State - mobiles-> liste des truc mobile (tank, misile)
-  class State {
+  class State : public state::Observable {
     // Associations
     // Attributes
   protected:
@@ -29,6 +32,7 @@ namespace state {
     ElementList& getMobiles ();
     Element* getMobile (int idx);
     void load (const char* file_name);
+    void notifyObserver (const StateEvent& event) const;
   };
 
 };
