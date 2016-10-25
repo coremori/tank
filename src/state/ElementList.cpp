@@ -90,6 +90,9 @@ namespace state {
         else cout << "Unable to open file"; 
 
     }
-    
+
+    void ElementList::notifyObserver(int idx) const {
+        Observable::notifyObserver(ElementEvent(this, idx));
+    }
 
 };

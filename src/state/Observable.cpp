@@ -9,7 +9,7 @@
 
 namespace state {
 
-    void Observable::notifyObserver(const StateEvent& event) {
+    void Observable::notifyObserver(const StateEvent& event) const {
         for(unsigned int i=0; i<observers.size(); i++)
             observers[i]->stateChanged(event);
     };

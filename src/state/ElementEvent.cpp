@@ -6,11 +6,12 @@
 
 
 #include "ElementEvent.h"
+#include "StateEventId.h"
 #include <cstddef>
 
 namespace state {
 
-    ElementEvent::ElementEvent(const ElementList* list, int idx) : StateEvent(NULL) {
+    ElementEvent::ElementEvent(const ElementList* list, int idx) : StateEvent(NULL, Element_Changed) {
         this->list = list;
         this->idx = idx;
     }

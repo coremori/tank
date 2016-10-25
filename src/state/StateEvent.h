@@ -22,7 +22,7 @@ namespace state {
     const State* s;
     // Operations
   public:
-    StateEvent (const State* s);
+    StateEvent (const State* s, StateEventId id);
     bool operator== (StateEventId id) const;
     bool operator!= (StateEventId id) const;
   };

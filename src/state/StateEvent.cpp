@@ -9,8 +9,9 @@
 
 namespace state{
 
-    StateEvent::StateEvent(const State* s) {
+    StateEvent::StateEvent(const State* s, StateEventId id) {
         this->s = s;
+        this->id = id;
     }
     
     bool StateEvent::operator!=(StateEventId id) const {
