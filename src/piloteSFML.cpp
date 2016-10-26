@@ -39,7 +39,7 @@ piloteSFML::~piloteSFML() {
 void piloteSFML::button() {
     int h = scene->getHeight();
     int w = scene->getWidth();
-    
+    int nbButton = 2;
 m_button.clear();
     m_button.setPrimitiveType(sf::Quads);
     m_button.resize(nbButton*4);
