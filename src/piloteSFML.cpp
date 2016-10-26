@@ -59,30 +59,37 @@ m_button.clear();
     quad[2].color = sf::Color(73,135,229);
     quad[3].color = sf::Color(73,135,229);
     
-    sf::Font font;
     if (!font.loadFromFile("res/Font/arial.ttf"))
     {
-        // erreur...
+        
     }
     
+    text.push_back(new sf::Text());
     
-    sf::Text text;   
-    text.setFont(font); // font est un sf::Font
+    text[0]->setFont(font); // font est un sf::Font
     // choix de la chaîne de caractères à afficher
-    text.setString("Play/Pause");
+    text[0]->setString("Play/Pause");
     // choix de la taille des caractères
-    text.setCharacterSize(12); // exprimée en pixels, pas en points !
+    text[0]->setCharacterSize(12); // exprimée en pixels, pas en points !
     // choix de la couleur du texte
-    text.setColor(sf::Color::Black);
-    text.setPosition(sf::Vector2f(16,h*8));
+    text[0]->setColor(sf::Color::Black);
+    text[0]->setPosition(sf::Vector2f(16,h*8));
     // choix du style du texte
-    //text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    //text[0]->setStyle(sf::Text::Bold | sf::Text::Underlined);
+    
+   
+    
+    
+    
+    
+    
+    
+    
 }
 
 
 void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
     //! mutex non mis !
-    int nbButton = 2;
     scene->update();
     int h = scene->getHeight();
     int w = scene->getWidth();
@@ -93,6 +100,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         std::cout << "file not found "<<std::endl;
     music.play();
     
+    button();
     
     
     
@@ -134,7 +142,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         
         
         window.draw(m_button);
-        window.draw(text);
+        window.draw(*text[0]);
         window.display();
         
     }

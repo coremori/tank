@@ -21,6 +21,9 @@
 
 class piloteSFML {
 public:
+    
+    
+    
     piloteSFML(render::Scene* s);
     virtual ~piloteSFML();
     void affiche();
@@ -29,7 +32,8 @@ private:
     render::Scene* scene;
     std::vector<SurfaceSFML*> surfaces;
     sf::VertexArray m_button;
-    sf::Text text;
+    sf::Font font;
+    std::vector<sf::Text*> text;
     
     void button();
 };

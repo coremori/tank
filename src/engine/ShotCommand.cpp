@@ -3,16 +3,16 @@
 
 namespace engine{
     
-    ShotCommand (int c, int p){
+    ShotCommand::ShotCommand (int c, int p){
         
     }
-    int getCharacter () const{
+    int ShotCommand::getCharacter () const{
         
     }
-    int getPower () const{
+    int ShotCommand::getPower () const{
         
     }
-    int getCategory () const{
+    int ShotCommand::getCategory () const{
         
     }
 }
