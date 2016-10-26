@@ -22,11 +22,7 @@ namespace engine{
     void Engine::addCommand(Command* cmd) {
         commands->add(cmd);
     };
-    
-    void displayTest() const{
-        
-    }
-    
+       
     
     void Engine::setcharTurn(int c) {
         charTurn = c;
