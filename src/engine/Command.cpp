@@ -14,5 +14,9 @@ namespace engine{
     Command::~Command() {
 
     }
+    
+    int getCategory() const{
+        
+    }
 
 }

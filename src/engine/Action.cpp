@@ -12,6 +12,13 @@ namespace engine{
     Action::Action() {
 
     }
+    
+    void Action::apply(state::State* s){
+        
+    }
 
+    void undo(state::State* s){
+        
+    }
 }
 /*press ctrl+space for create function define in .h*/

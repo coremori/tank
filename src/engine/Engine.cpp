@@ -23,13 +23,18 @@ namespace engine{
         commands->add(cmd);
     };
     
-    int Engine::getcharTurn() const {
-        return charTurn;
-    };
+    void displayTest() const{
+        
+    }
+    
     
     void Engine::setcharTurn(int c) {
         charTurn = c;
     }
+    
+    int Engine::getcharTurn() const {
+        return charTurn;
+    };
 
     Ruler* Engine::getRuler() {
         return &ruler;
