@@ -18,6 +18,8 @@
 #include <vector>
 #include "render/SurfaceSFML.hpp"
 #include <SFML/Graphics.hpp>
+#include <string.h>
+#include "engine/Engine.h"
 
 class piloteSFML {
 public:
@@ -27,6 +29,7 @@ public:
     piloteSFML(render::Scene* s);
     virtual ~piloteSFML();
     void affiche();
+    void setEngine(engine::Engine* e);
     
 private:
     render::Scene* scene;
@@ -34,8 +37,8 @@ private:
     sf::VertexArray m_button;
     sf::Font font;
     std::vector<sf::Text*> text;
-    
-    void button();
+    engine::Engine* engine;
+    void button(unsigned int x1, unsigned int x2, sf::Color color, std::string textButton);
 };
 
 #endif /* PILOTESFML_HPP */

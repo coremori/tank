@@ -85,7 +85,7 @@ int main ()
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
-    
+    rendu->setEngine(engine);
     rendu->affiche();   
     /*
       rc = pthread_create(&threads[0], NULL, 

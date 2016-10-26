@@ -30,62 +30,62 @@ piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue
         surfaces[i]->loadTexture("res/Textures/textures.png");
         scene->setSurface(i,surfaces[i]);
     }
-    
-}
-
-piloteSFML::~piloteSFML() {
-}
-
-void piloteSFML::button() {
-    int h = scene->getHeight();
-    int w = scene->getWidth();
-    int nbButton = 2;
-m_button.clear();
+    m_button.clear();
     m_button.setPrimitiveType(sf::Quads);
-    m_button.resize(nbButton*4);
-    
-    // on récupère un pointeur vers le quad à définir dans le tableau de vertex
-    sf::Vertex* quad = &m_button[1 * 4];
-                
-    // on définit ses quatre coins
-    quad[0].position = sf::Vector2f(0, h*8);
-    quad[1].position = sf::Vector2f(96, h*8);
-    quad[2].position = sf::Vector2f(96, h*8+16);
-    quad[3].position = sf::Vector2f(0, h*8+16);
-
-    // on définit ses quatre coordonnées de texture
-    quad[0].color = sf::Color(73,135,229);
-    quad[1].color = sf::Color(73,135,229);
-    quad[2].color = sf::Color(73,135,229);
-    quad[3].color = sf::Color(73,135,229);
     
     if (!font.loadFromFile("res/Font/arial.ttf"))
     {
         
     }
+    engine = nullptr;
+}
+
+piloteSFML::~piloteSFML() {
+}
+
+void piloteSFML::setEngine(engine::Engine* e) {
+    this->engine = e;
+}
+
+
+void piloteSFML::button(unsigned int x1, unsigned int x2, sf::Color color, std::string textButton) {
+    //Draw the button (doesn't implemante)
+    int h = scene->getHeight();
+    //int w = scene->getWidth();
+    int size = m_button.getVertexCount();
+    m_button.setPrimitiveType(sf::Quads);
+    m_button.resize(size+4);
     
+    // on récupère un pointeur vers le quad à définir dans le tableau de vertex
+    sf::Vertex* quad = &m_button[size];
+                
+    // on définit ses quatre coins
+    quad[0].position = sf::Vector2f(x1, h*8);
+    quad[1].position = sf::Vector2f(x2, h*8);
+    quad[2].position = sf::Vector2f(x2, h*8+16);
+    quad[3].position = sf::Vector2f(x1, h*8+16);
+
+    // on définit ses quatre coordonnées de texture
+    quad[0].color = color;
+    quad[1].color = color;
+    quad[2].color = color;
+    quad[3].color = color;
+    
+    int centre = (x2-x1-textButton.size()*6)/2;//on centre le texte
+    int ts = text.size();
     text.push_back(new sf::Text());
-    
-    text[0]->setFont(font); // font est un sf::Font
+    text[ts]->setFont(font); // font est un sf::Font
     // choix de la chaîne de caractères à afficher
-    text[0]->setString("Play/Pause");
+    text[ts]->setString(textButton);
     // choix de la taille des caractères
-    text[0]->setCharacterSize(12); // exprimée en pixels, pas en points !
+    text[ts]->setCharacterSize(12); // exprimée en pixels, pas en points !
     // choix de la couleur du texte
-    text[0]->setColor(sf::Color::Black);
-    text[0]->setPosition(sf::Vector2f(16,h*8));
+    text[ts]->setColor(sf::Color::Black);
+    text[ts]->setPosition(sf::Vector2f(x1+centre,h*8));
     // choix du style du texte
     //text[0]->setStyle(sf::Text::Bold | sf::Text::Underlined);
-    
-   
-    
-    
-    
-    
-    
-    
-    
 }
+
 
 
 void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
@@ -100,8 +100,9 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         std::cout << "file not found "<<std::endl;
     music.play();
     
-    button();
-    
+    button(0,96,sf::Color(73,135,229),"Play/Pause");
+    button(w*8-100,w*8-4,sf::Color(73,135,229),"Level 1");
+
     
     
     while (window.isOpen())
@@ -130,7 +131,9 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 // le bouton gauche est enfoncé : on tire
                 sf::Vector2i localPosition = sf::Mouse::getPosition(window);
                 if((localPosition.x<96) && (localPosition.y>h*8)&&(localPosition.y<(h*8+16)))
-                        std::cout << "Button pressed" << std::endl;     
+                    engine->addCommand(new engine::ModeCommand(engine::pause));
+                        std::cout << "Button mode pressed" << std::endl;    
+                std::cout << localPosition.x << std::endl;     
             }
         }
         
@@ -143,6 +146,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         
         window.draw(m_button);
         window.draw(*text[0]);
+        window.draw(*text[1]);
         window.display();
         
     }
