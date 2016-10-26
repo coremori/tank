@@ -9,6 +9,7 @@
 #include "MoveCommand.h"
 
 namespace engine{
+    
     MoveCommand::MoveCommand(int c, int xmove, int ymove) {//(num character, X, Y))
         //xmove and ymove are in pixels
         //c est le numero du perso
@@ -17,14 +18,13 @@ namespace engine{
         Ymove = ymove;
     };
     
+    int MoveCommand::getCharacter() const {
+        return character;
+    }
     
     int MoveCommand::getCategory() const {
         return MOVE_CATEGORY;
     };
-    
-    int MoveCommand::getCharacter() const {
-        return character;
-    }
 
     int MoveCommand::getXmove() const {
         return Xmove;

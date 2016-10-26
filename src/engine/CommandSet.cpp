@@ -4,26 +4,24 @@
  *
  * Part of tank */
 
-
 #include "CommandSet.h"
 #include "Command.h"
 #include <utility> 
 
 namespace engine{
     
-
-    Command* CommandSet::get(int category) const {
-        return commands.at(category);
+    int CommandSet::size() const {
+        return commands.size();
     };
-        
+
     void CommandSet::add(Command* command) {
         commands.insert(std::make_pair(command->getCategory(),command));
     };
     
-    int CommandSet::size() const {
-        return commands.size();
+    Command* CommandSet::get(int category) const {
+        return commands.at(category);
     };
-    
+          
     void CommandSet::clear() {
         commands.clear();
     };

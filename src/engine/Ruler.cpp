@@ -18,11 +18,20 @@ namespace engine{
 
         
     };
+
+    void Ruler::setCommandSet(CommandSet * const cmd) {
+        this->cmd =  cmd;
+    }
+    
+
+    void Ruler::setActions(ActionListTurn * const actions) {
+        this->actions = actions;
+    };
     
     void Ruler::apply() {
         actions->apply();
     };
-        
+    
     void Ruler::impleRule(EngineMode mode) {
         
         //gere seulement le move command pour commencer et tester
@@ -40,15 +49,9 @@ namespace engine{
          * action boum :
          }*/
     };
-
-    void Ruler::setActions(ActionListTurn * const actions) {
-        this->actions = actions;
-    };
-
-    void Ruler::setCommandSet(CommandSet * const cmd) {
-        this->cmd =  cmd;
-    }
-        void Ruler::setState(state::State* s) {
+    
+    
+    void Ruler::setState(state::State* s) {
             this->state = s;
     }
 

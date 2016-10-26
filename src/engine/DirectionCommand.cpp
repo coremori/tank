@@ -9,17 +9,16 @@ namespace engine {
         direction = d;
     };
     
-    int DirectionCommand::getCategory () const{
-        return MAIN_CATEGORY;
-    };
-    
-    
     int DirectionCommand::getCharacter () const{
         return character;
     };
     
     state::Orientation DirectionCommand::getDirection () const{
         return direction;
+    };
+    
+    int DirectionCommand::getCategory () const{
+        return MAIN_CATEGORY;
     };
   
 
