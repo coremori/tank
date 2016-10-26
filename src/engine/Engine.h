@@ -3,12 +3,14 @@
 #define ENGINE__ENGINE__H
 
 #include "../state.h"
+
 namespace engine {
   class CommandSet;
   class Command;
   class Ruler;
 }
 
+#include "EngineMode.h"
 #include "Ruler.h"
 #include "CommandSet.h"
 
@@ -17,6 +19,7 @@ namespace engine {
   /// class Engine - 
   class Engine {
     // Associations
+    engine::EngineMode mode;
     engine::Ruler ruler;
     // Attributes
   protected:
@@ -28,7 +31,7 @@ namespace engine {
     Engine (state::State* s);
     ~Engine ();
     void addCommand (Command* cmd);
-    void displayTest () const;
+    void setMode (EngineMode m);
     void setcharTurn (int c);
     int getcharTurn () const;
     Ruler* getRuler ();

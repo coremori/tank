@@ -9,7 +9,6 @@
 #include "Scene.h"
 
 
-
 namespace render {
 
   
@@ -40,23 +39,30 @@ namespace render {
         layers[2]->update();
     };
   
-    void Scene::stateChanged(state::State& s){
-        height = s.getGrid().getHeight();
-        width = s.getGrid().getWidth();
-        state::ElementGrid g = s.getGrid();
-        state::ElementList l = s.getMobiles();
-        layers[0]->clear();
-        layers[1]->clear();
-        layers[0]->elementToTiles(&g);
-        layers[1]->elementToTiles(&l);
-        layers[2]->charToTiles('t',height*8);
-        layers[2]->charToTiles('e',height*8);
-        layers[2]->charToTiles('x',height*8);
-        layers[2]->charToTiles('t',height*8);
-        layers[2]->charToTiles(' ',height*8);
-        layers[2]->charToTiles('1',height*8);
-        layers[2]->charToTiles('0',height*8);
-        
+  
+    
+    void Scene::stateChanged(const state::StateEvent& e){
+        //notifié par son observateur
+        if(e==state::Level_Changed){//on charge tout le level
+            height = e.s->getGrid().getHeight();
+            width = e.s->getGrid().getWidth();
+            state::ElementGrid g = e.s->getGrid();
+            state::ElementList l = e.s->getMobiles();
+            layers[0]->clear();
+            layers[1]->clear();
+            
+            layers[0]->elementToTiles(&g);
+            layers[1]->elementToTiles(&l);
+            
+            layers[2]->charToTiles('s',height*8);
+            layers[2]->charToTiles('c',height*8);
+            layers[2]->charToTiles('o',height*8);
+            layers[2]->charToTiles('r',height*8);
+            layers[2]->charToTiles('e',height*8);
+            layers[2]->charToTiles(' ',height*8);
+            layers[2]->charToTiles('0',height*8);
+            layers[2]->charToTiles('0',height*8);
+        }
 
     };
     

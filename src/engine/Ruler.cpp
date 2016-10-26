@@ -8,14 +8,17 @@
 #include "Ruler.h"
 #include "CommandSet.h"
 #include "MoveCommand.h"
+#include "ModeCommand.h"
+#include "CommandCategory.h"
 #include "ActionMove.h"
 #include <cstddef>
 #include <iostream>
+#include "Engine.h"
 
 namespace engine{
 
-    Ruler::Ruler() {
-
+    Ruler::Ruler(Engine* engine) {
+        this->engine = engine;
         
     };
 
@@ -34,10 +37,22 @@ namespace engine{
     
     void Ruler::impleRule(EngineMode mode) {
         
-        //gere seulement le move command pour commencer et tester
-        MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(300));
+        if(cmd->get(200))//On le mettra dans l'apply(time)
+        {
+            ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(cmd->get(200));//mode category
+            engine->setMode(modeCmd->getMode());
+        }
         
-        actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter() ));
+        if(cmd->get(300))
+        {
+            //gere seulement le move command pour commencer et tester
+            MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(300));
+            actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter() ));
+        }
+        
+        
+        
+        
         /*for(unsigned int i=0; i<cmd->size(); i++)
         {
             c cmd->get()

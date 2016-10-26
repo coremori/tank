@@ -6,4 +6,7 @@
 #include "render/Tile.h"
 #include "render/Layer.h"
 #include "render/Scene.h"
+#include "render/LandscapeLayer.h"
+#include "render/MobileLayer.h"
+#include "render/CharLayer.h"
 #endif

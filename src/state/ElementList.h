@@ -7,14 +7,16 @@
 namespace state {
   class Element;
   class State;
+  class Observable;
 }
 
+#include "Observable.h"
 #include "Element.h"
 
 namespace state {
 
   /// class ElementList - 
-  class ElementList {
+  class ElementList : public state::Observable {
     // Associations
     // Attributes
   protected:
@@ -29,6 +31,7 @@ namespace state {
     void clear ();
     void set ( int idx, Element* e);
     void load (const char* path);
+    void notifyObserver (int idx = -1) const;
   };
 
 };

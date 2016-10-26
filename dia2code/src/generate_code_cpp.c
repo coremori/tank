@@ -648,6 +648,7 @@ void print_include_sfmllib(struct sfmllib_includes* si,char* name) {
 
 struct statelib_includes{
    int state;
+   int stateEvent;
 };
 
 void print_include_statelib(struct statelib_includes* si,char* name) {
@@ -671,10 +672,19 @@ void print_include_statelib(struct statelib_includes* si,char* name) {
 	|| strstr(name,"state::SpaceTypeId")
 	|| strstr(name,"state::Space")
 	|| strstr(name,"state::ObstacleTypeId")
+	|| strstr(name,"state::ElementEvent")
+	|| strstr(name,"state::StateEventId")
+	|| strstr(name,"state::Observable")
+	|| strstr(name,"state::StateObserver")
 	|| strstr(name,"state::Obstacle"))){
-		print("#include \"../state.h\"");
+		print("#include \"../state.h\"\n");
 		si->state = 1;
 	}
+	if(!si->stateEvent && (strstr(name,"StateEvent"))) {
+		print("#include \"state/StateEvent.h\"\n");
+		si->stateEvent = 1;
+	}
+
     }
 }
 

@@ -3,6 +3,7 @@
 #define ENGINE__ACTIONMOVE__H
 
 #include "../state.h"
+
 namespace engine {
   class Action;
 };

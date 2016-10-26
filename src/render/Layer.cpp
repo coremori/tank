@@ -32,7 +32,7 @@ namespace render {
     void Layer::clear() {
         tiles.clear();
     }
-
+    
     void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
         
         // std::vector<state::Element*> list;
@@ -51,11 +51,15 @@ namespace render {
                         obstacle = dynamic_cast<state::Obstacle*>(element);
                         switch(obstacle->getObstacleTypeId()){//if a la place
                             case state::sand :
-                                tiles[i+prevSize]->setXTex(0);
+                                tiles[i+prevSize]->setXTex(40);
                                 tiles[i+prevSize]->setYTex(88);
                                 break;
                             case state::greenery:
-                                tiles[i+prevSize]->setXTex(16);
+                                tiles[i+prevSize]->setXTex(56);
+                                tiles[i+prevSize]->setYTex(88);
+                                break;
+                            case  state::border:
+                                tiles[i+prevSize]->setXTex(48);
                                 tiles[i+prevSize]->setYTex(88);
                                 break;
                         }
@@ -168,7 +172,7 @@ namespace render {
                     break;
 
                 default ://space
-                    tiles[i+prevSize]->setXTex(24);
+                    tiles[i+prevSize]->setXTex(32);
                     tiles[i+prevSize]->setYTex(88);
                     break;                            
             }

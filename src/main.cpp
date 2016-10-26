@@ -13,6 +13,7 @@
 #include "engine.h"
 
 #include "piloteSFML.hpp"
+#include "render.h"
 /*#include <cstdlib>
 #include <pthread.h>*/
 
@@ -49,17 +50,25 @@ int main ()
 */    
       
     State* state = new State();    
-    state->load("res/Levels/level.txt");
     
-    Layer* layer = new Layer();
-    Layer* layerchar = new Layer();
-    Layer* layertext = new Layer();
+    
+    LandscapeLayer* layer = new LandscapeLayer();
+    MobileLayer* layerchar = new MobileLayer();
+    CharLayer* layertext = new CharLayer();
+    
+    layertext->setXChar(120);
+    state->getGrid().registerObserver(layer);
+    state->getMobiles().registerObserver(layerchar);
+    state->getMobiles().registerObserver(layertext);
+    
+    
     Scene* scene = new Scene();
     scene->setLayer(0,layer);
     scene->setLayer(1,layerchar);
     scene->setLayer(2,layertext);
     //scene->stateChanged(*state);
-    
+    state->registerObserver(scene);
+    state->load("res/Levels/level.txt");
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
     engine::Engine* engine = new engine::Engine(state);
@@ -67,10 +76,11 @@ int main ()
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
     engine->addCommand(mcmd);
     engine->setRuler();
+    
     engine->getRuler()->setActions(actions);
     engine->getRuler()->impleRule(engine::play);
     engine->getRuler()->apply();
-    scene->stateChanged(*state);
+    //scene->stateChanged(*state);
 
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -72,6 +72,9 @@ namespace state {
                     else if(line.at(i)=='-'){
                         this->elements.push_back(new Obstacle(sand,x,y));
                     }
+                    else if(line.at(i)=='~'){
+                        this->elements.push_back(new Obstacle(border,x,y));
+                    }
                     else if(line.at(i)=='&'){
                         this->elements.push_back(new Space(x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_green,realPlayer,right_down,x,y));
@@ -90,6 +93,9 @@ namespace state {
         else cout << "Unable to open file"; 
 
     }
-    
+
+    void ElementList::notifyObserver(int idx) const {
+        Observable::notifyObserver(ElementEvent(this, idx));
+    }
 
 };

@@ -3,9 +3,11 @@
 #define ENGINE__RULER__H
 
 #include "../state.h"
+
 namespace engine {
   class ActionListTurn;
   class CommandSet;
+  class Engine;
 }
 
 #include "EngineMode.h"
@@ -21,9 +23,10 @@ namespace engine {
     ActionListTurn* actions;
     state::State* state;
     CommandSet* cmd;
+    Engine* engine;
     // Operations
   public:
-    Ruler ();
+    Ruler (Engine* engine);
     void setCommandSet (CommandSet* const cmd);
     void setActions (ActionListTurn* const actions);
     void apply ();

@@ -2,11 +2,12 @@
 #ifndef __STATE__H
 #define __STATE__H
 
+#include "state/StateObserver.h"
+#include "state/Observable.h"
 #include "state/TypeId.h"
 #include "state/Element.h"
 #include "state/ElementList.h"
 #include "state/ElementGrid.h"
-#include "state/State.h"
 #include "state/Mobile.h"
 #include "state/OrientationMissile.h"
 #include "state/Status.h"
@@ -21,4 +22,8 @@
 #include "state/Space.h"
 #include "state/ObstacleTypeId.h"
 #include "state/Obstacle.h"
+#include "state/StateEventId.h"
+#include "state/StateEvent.h"
+#include "state/ElementEvent.h"
+#include "state/State.h"
 #endif

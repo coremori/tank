@@ -12,7 +12,7 @@
 
 namespace engine{
 
-    Engine::Engine(state::State* s) {
+    Engine::Engine(state::State* s) : ruler(this) {
 
         commands = new CommandSet();
         state = s;
@@ -43,6 +43,10 @@ namespace engine{
     void Engine::setRuler() {
         ruler.setCommandSet(commands);
         ruler.setState(state);
+    }
+    
+    void Engine::setMode(EngineMode m) {
+        mode = m;
     }
 
 }

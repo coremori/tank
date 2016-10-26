@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 #include "state.hpp"
+#include "StateEventId.h"
 
 namespace state {
 
@@ -22,18 +23,40 @@ namespace state {
         return grid;
     };
     
+   
+    const ElementGrid& State::getGrid () const{
+        return grid;
+    };
+    
+    
     ElementList& State::getMobiles () {
         return mobiles;
     };
     
+    const ElementList& State::getMobiles () const{
+        return mobiles;
+    };
+    
+    
+    
     Element* State::getMobile (int idx){
         return this->mobiles.get(idx);
     };
+    
+    const Element* State::getMobile(int idx) const{
+        return this->mobiles.get(idx);
+    };
+    
       
     void State::load (const char* file_name){
         grid.load(file_name);
+        notifyObserver(*(new StateEvent(this, Level_Changed )));
     };
-   
+       
+    void State::notifyObserver(const StateEvent& event) const {
+        Observable::notifyObserver(event);
+    }
+
    
    
   };
