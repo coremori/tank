@@ -6,7 +6,7 @@
 
 namespace engine {
   class Action;
-};
+}
 
 #include "Action.h"
 

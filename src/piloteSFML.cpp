@@ -36,26 +36,16 @@ piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue
 piloteSFML::~piloteSFML() {
 }
 
-void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
-    //! mutex non mis !
-    int nbButton = 2;
-    scene->update();
-    
-    sf::RenderWindow window(sf::VideoMode(scene->getWidth()*8, scene->getHeight()*8 + 32), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
-    sf::Music music;
-    if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
-        std::cout << "file not found "<<std::endl;
-    music.play();
-    
+void piloteSFML::button() {
     int h = scene->getHeight();
     int w = scene->getWidth();
     
-    m_vertices.clear();
-    m_vertices.setPrimitiveType(sf::Quads);
-    m_vertices.resize(nbButton*4);
+m_button.clear();
+    m_button.setPrimitiveType(sf::Quads);
+    m_button.resize(nbButton*4);
     
     // on récupère un pointeur vers le quad à définir dans le tableau de vertex
-    sf::Vertex* quad = &m_vertices[1 * 4];
+    sf::Vertex* quad = &m_button[1 * 4];
                 
     // on définit ses quatre coins
     quad[0].position = sf::Vector2f(0, h*8);
@@ -87,6 +77,24 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     text.setPosition(sf::Vector2f(16,h*8));
     // choix du style du texte
     //text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+}
+
+
+void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
+    //! mutex non mis !
+    int nbButton = 2;
+    scene->update();
+    int h = scene->getHeight();
+    int w = scene->getWidth();
+    
+    sf::RenderWindow window(sf::VideoMode(w*8, h*8 + 32), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
+    sf::Music music;
+    if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
+        std::cout << "file not found "<<std::endl;
+    music.play();
+    
+    
+    
     
     while (window.isOpen())
     {
@@ -125,7 +133,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
             window.draw(*surfaces[i]);
         
         
-        window.draw(m_vertices);
+        window.draw(m_button);
         window.draw(text);
         window.display();
         
