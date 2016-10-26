@@ -76,16 +76,12 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     }
     
     
-    sf::Text text;
-   
+    sf::Text text;   
     text.setFont(font); // font est un sf::Font
-
     // choix de la chaîne de caractères à afficher
     text.setString("Play/Pause");
-
     // choix de la taille des caractères
     text.setCharacterSize(12); // exprimée en pixels, pas en points !
-
     // choix de la couleur du texte
     text.setColor(sf::Color::Black);
     text.setPosition(sf::Vector2f(16,h*8));

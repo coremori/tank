@@ -27,7 +27,7 @@ public:
 private:
     render::Scene* scene;
     std::vector<SurfaceSFML*> surfaces;
-    sf::VertexArray m_vertices;
+    sf::VertexArray m_button;
 };
 
 #endif /* PILOTESFML_HPP */
