@@ -10,16 +10,16 @@
 
 namespace engine {
 
+    EngineMode ModeCommand::getMode() const {
+        return mode;
+    }
+    
     ModeCommand::ModeCommand(EngineMode mode) {
         this->mode = mode;
     }
     
     int ModeCommand::getCategory() const {
         return MODE_CATEGORY;
-    }
-
-    EngineMode ModeCommand::getMode() const {
-        return mode;
     }
 
 }
