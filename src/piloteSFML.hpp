@@ -17,6 +17,7 @@
 #include "render/Scene.h"
 #include <vector>
 #include "render/SurfaceSFML.hpp"
+#include <SFML/Graphics.hpp>
 
 class piloteSFML {
 public:
@@ -26,6 +27,7 @@ public:
 private:
     render::Scene* scene;
     std::vector<SurfaceSFML*> surfaces;
+    sf::VertexArray m_vertices;
 };
 
 #endif /* PILOTESFML_HPP */
