@@ -60,10 +60,10 @@ void piloteSFML::button(unsigned int x1, unsigned int x2, sf::Color color, std::
     sf::Vertex* quad = &m_button[size];
                 
     // on définit ses quatre coins
-    quad[0].position = sf::Vector2f(x1, h*8);
-    quad[1].position = sf::Vector2f(x2, h*8);
-    quad[2].position = sf::Vector2f(x2, h*8+16);
-    quad[3].position = sf::Vector2f(x1, h*8+16);
+    quad[0].position = sf::Vector2f(x1, h*8+8);
+    quad[1].position = sf::Vector2f(x2, h*8+8);
+    quad[2].position = sf::Vector2f(x2, h*8+32);
+    quad[3].position = sf::Vector2f(x1, h*8+32);
 
     // on définit ses quatre coordonnées de texture
     quad[0].color = color;
@@ -81,7 +81,7 @@ void piloteSFML::button(unsigned int x1, unsigned int x2, sf::Color color, std::
     text[ts]->setCharacterSize(12); // exprimée en pixels, pas en points !
     // choix de la couleur du texte
     text[ts]->setColor(sf::Color::Black);
-    text[ts]->setPosition(sf::Vector2f(x1+centre,h*8));
+    text[ts]->setPosition(sf::Vector2f(x1+centre,h*8+12));
     // choix du style du texte
     //text[0]->setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
@@ -94,7 +94,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     int h = scene->getHeight();
     int w = scene->getWidth();
     
-    sf::RenderWindow window(sf::VideoMode(w*8, h*8 + 32), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
+    sf::RenderWindow window(sf::VideoMode(w*8, h*8 + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
     sf::Music music;
     if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
         std::cout << "file not found "<<std::endl;
@@ -102,6 +102,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     button(0,96,sf::Color(73,135,229),"Play/Pause");
     button(w*8-100,w*8-4,sf::Color(73,135,229),"Level 1");
+    button((w*8-120)/2,(w*8+120)/2,sf::Color(212,135,0),"End the turn");
 
     
     
@@ -145,8 +146,8 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         
         
         window.draw(m_button);
-        window.draw(*text[0]);
-        window.draw(*text[1]);
+        for(unsigned int j=0; j<text.size(); j++)
+            window.draw(*text[j]);
         window.display();
         
     }

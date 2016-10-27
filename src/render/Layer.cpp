@@ -55,7 +55,7 @@ namespace render {
                                 tiles[i+prevSize]->setYTex(88);
                                 break;
                             case state::greenery:
-                                tiles[i+prevSize]->setXTex(56);
+                                tiles[i+prevSize]->setXTex(64);
                                 tiles[i+prevSize]->setYTex(88);
                                 break;
                             case  state::border:
