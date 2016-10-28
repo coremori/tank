@@ -34,11 +34,12 @@ public:
 private:
     render::Scene* scene;
     std::vector<SurfaceSFML*> surfaces;
-    sf::VertexArray m_button;
-    sf::Font font;
-    std::vector<sf::Text*> text;
+    std::vector<sf::Sprite*> s_button;
     engine::Engine* engine;
-    void button(unsigned int x1, unsigned int x2, sf::Color color, std::string textButton);
+    sf::Texture m_tilesetButton;
+    
+
+    void button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
 };
 
 #endif /* PILOTESFML_HPP */

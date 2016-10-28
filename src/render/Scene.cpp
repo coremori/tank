@@ -35,6 +35,7 @@ namespace render {
     
     void Scene::update (){
         layers[0]->update();
+        layers[0]->clear();
         layers[1]->update();
         layers[2]->update();
     };

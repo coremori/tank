@@ -36,6 +36,8 @@
     virtual void clear ();
     virtual void setSpriteCount (int n);
     virtual void setSprite (const std::vector<render::Tile*> tiles);
+    void setSpriteButton (unsigned int x1, unsigned int y1, unsigned int xTex, unsigned int width);
+
   };
 
 

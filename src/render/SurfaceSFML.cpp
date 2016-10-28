@@ -89,5 +89,34 @@
         
     
     };
+    
+    void SurfaceSFML::setSpriteButton (unsigned int x1, unsigned int y1, unsigned int xTex, unsigned int width){
+        
+        // on redimensionne le tableau de vertex pour qu'il puisse contenir tout le niveau
+        unsigned int size = m_vertices.getVertexCount();
+        m_vertices.setPrimitiveType(sf::Quads);
+        m_vertices.resize(size+4);
+        
+        int tu = xTex;//position dans la texture
+
+        unsigned int w = width;//width d'un affichage
+        unsigned int h = 23;
+
+        // on récupère un pointeur vers le quad à définir dans le tableau de vertex
+        sf::Vertex* quad = &m_vertices[size];
+
+        // on définit ses quatre coins
+        quad[0].position = sf::Vector2f(x1,y1);
+        quad[1].position = sf::Vector2f(x1+w, y1);
+        quad[2].position = sf::Vector2f(x1+w, y1+h);
+        quad[3].position = sf::Vector2f(x1, y1+h);
+
+        // on définit ses quatre coordonnées de texture
+        quad[0].texCoords = sf::Vector2f(tu, 0);
+        quad[1].texCoords = sf::Vector2f(tu + w,0);
+        quad[2].texCoords = sf::Vector2f(tu + w, h);
+        quad[3].texCoords = sf::Vector2f(tu, h);
+            
+    }
   
     
