@@ -37,7 +37,7 @@ private:
     std::vector<sf::Sprite*> s_button;
     engine::Engine* engine;
     sf::Texture m_tilesetButton;
-    
+    int character = 0;
 
     void button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
 };

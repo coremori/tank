@@ -22,6 +22,7 @@ namespace engine {
     LoadCommand (const char* f);
     const char* getFileName () const;
     int getCategory () const;
+    int getCharacter () const;
   };
 
 };

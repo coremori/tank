@@ -22,6 +22,7 @@ namespace engine {
     EngineMode getMode () const;
     int getCategory () const;
     ModeCommand (EngineMode mode);
+    int getCharacter () const;
   };
 
 };

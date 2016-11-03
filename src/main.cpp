@@ -68,17 +68,15 @@ int main ()
     scene->setLayer(2,layertext);
     //scene->stateChanged(*state);
     state->registerObserver(scene);
-    state->load("res/Levels/level.txt");
+    state->load("res/Levels/level1.txt");
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
     engine::Engine* engine = new engine::Engine(state);
-    engine::MoveCommand* mcmd = new engine::MoveCommand(0,24,1);
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
-    engine->addCommand(mcmd);
     engine->setRuler();
     
     engine->getRuler()->setActions(actions);
-    engine->getRuler()->impleRule(engine::play);
+    //engine->getRuler()->impleRule(engine::play);
     engine->getRuler()->apply();
     //scene->stateChanged(*state);
 

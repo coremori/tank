@@ -14,6 +14,8 @@
 #include <cstddef>
 #include <iostream>
 #include "Engine.h"
+#include "ActionDirection.h"
+#include "DirectionCommand.h"
 
 namespace engine{
 
@@ -32,17 +34,16 @@ namespace engine{
     };
     
     void Ruler::apply() {
-        actions->apply();
-    };
-    
-    void Ruler::impleRule(EngineMode mode) {
-        
         if(cmd->get(200))//On le mettra dans l'apply(time)
         {
             ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(cmd->get(200));//mode category
             engine->setMode(modeCmd->getMode());
         }
-        
+        if(cmd->get(VIEW_CATEGORY))
+        {
+            DirectionCommand* dcmd = dynamic_cast<DirectionCommand*>(cmd->get(VIEW_CATEGORY));
+            actions->addAction(new ActionDirection(dcmd->getDirection(),dcmd->getCharacter()));
+        }
         if(cmd->get(300))
         {
             //gere seulement le move command pour commencer et tester
@@ -63,7 +64,11 @@ namespace engine{
          * calcule impact
          * action boum :
          }*/
+        actions->apply();
+        actions->clear();//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< enlever pour l'enregistrement
     };
+    
+    
     
     
     void Ruler::setState(state::State* s) {

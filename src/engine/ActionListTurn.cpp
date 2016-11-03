@@ -26,6 +26,10 @@ namespace engine{
     void ActionListTurn::undo() {
         for(unsigned int i=0; i<actions.size(); i++)
             actions.at(i)->undo(state);
+    };
+    
+    void ActionListTurn::clear() {
+        actions.clear();
     }
 
 }

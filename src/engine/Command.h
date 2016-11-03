@@ -11,6 +11,7 @@ namespace engine {
   public:
     virtual ~Command ();
     virtual int getCategory () const = 0;
+    virtual int getCharacter () const = 0;
   };
 
 };

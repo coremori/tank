@@ -26,6 +26,7 @@ namespace engine {
     void undo ();
     void addAction (Action* a);
     ActionListTurn (state::State* s);
+    void clear ();
   };
 
 };

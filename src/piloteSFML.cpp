@@ -128,28 +128,62 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
             }
             else if (event.type == sf::Event::KeyPressed)
             {
-                if (event.key.code == sf::Keyboard::Escape)
-                {
-                    std::cout << "the escape key was pressed" << std::endl;                    
-                    std::cout << "control:" << event.key.control << std::endl;
-                    std::cout << "alt:" << event.key.alt << std::endl;
-                    std::cout << "shift:" << event.key.shift << std::endl;
-                    std::cout << "system:" << event.key.system << std::endl;
+                switch(event.key.code){
+                    case sf::Keyboard::Escape :
+                        std::cout << "the escape key was pressed" << std::endl; 
+                        engine->setMode(engine::pause);
+                        break;
+                    case sf::Keyboard::Right :
+                        std::cout << "right move" << std::endl;
+                        engine->addCommand(new engine::MoveCommand(character,8,0));
+                        break;
+                    case sf::Keyboard::Left :
+                        std::cout << "left move" << std::endl;
+                        engine->addCommand(new engine::MoveCommand(character,-8,0));
+                        break;
+                    case sf::Keyboard::E :
+                        std::cout << "direction rigth up " << std::endl;
+                        engine->addCommand(new engine::DirectionCommand(character,state::right_up));
+                        break;
+                    case sf::Keyboard::Z :
+                        std::cout << "direction left up" << std::endl;
+                        engine->addCommand(new engine::DirectionCommand(character,state::left_up));
+                        break;
+                    case sf::Keyboard::Q :
+                        std::cout << "direction left down" << std::endl;
+                        engine->addCommand(new engine::DirectionCommand(character,state::left_down));
+                        break;
+                    case sf::Keyboard::D :
+                        std::cout << "direction right down" << std::endl;
+                        engine->addCommand(new engine::DirectionCommand(character,state::right_down));
+                        break;
+                    case sf::Keyboard::Space :
+                        std::cout << "shot" << std::endl;
+                        engine->addCommand(new engine::ShotCommand(character,10));
+                        break;
+                    default : break;
                 }
+                
             }
             else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 if(rectEnd->contains(localPosition))
                 {
                     std::cout << "Button End turn pressed" << std::endl;
+                    engine->endTurn();
+                    scene->update();
                 }
                 else if (rectLevel1->contains(localPosition))
                 {
                     std::cout << "Button level1 pressed" << std::endl;
+                    engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
+                    scene->update();
                 }
                 else if (rectLevel2->contains(localPosition))
                 {
                     std::cout << "Button level2 pressed" << std::endl;
+                    engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
+                    scene->update();
                 }
                 // le bouton gauche est enfoncé : on tire
                     //engine->addCommand(new engine::ModeCommand(engine::pause));

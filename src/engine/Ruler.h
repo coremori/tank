@@ -10,7 +10,6 @@ namespace engine {
   class Engine;
 }
 
-#include "EngineMode.h"
 #include "ActionListTurn.h"
 
 namespace engine {
@@ -30,7 +29,6 @@ namespace engine {
     void setCommandSet (CommandSet* const cmd);
     void setActions (ActionListTurn* const actions);
     void apply ();
-    void impleRule (EngineMode mode);
     void setState (state::State* s);
   };
 

@@ -36,6 +36,7 @@ namespace engine {
     int getcharTurn () const;
     Ruler* getRuler ();
     void setRuler ();
+    void endTurn ();
   };
 
 };

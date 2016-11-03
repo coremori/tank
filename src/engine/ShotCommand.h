@@ -4,9 +4,15 @@
 
 
 namespace engine {
+  class Command;
+}
+
+#include "Command.h"
+
+namespace engine {
 
   /// class ShotCommand - 
-  class ShotCommand {
+  class ShotCommand : public engine::Command {
     // Attributes
   protected:
     int character;

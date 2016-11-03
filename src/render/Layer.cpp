@@ -26,6 +26,7 @@ namespace render {
     };
   
     void Layer::update (){
+        surface->clear();
         surface->setSprite(tiles);
     }
         

@@ -16,4 +16,5 @@
 #include "engine/Ruler.h"
 #include "engine/Engine.h"
 #include "engine/ActionMove.h"
+#include "engine/ActionDirection.h"
 #endif

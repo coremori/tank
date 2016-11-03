@@ -49,6 +49,8 @@ namespace state {
     
       
     void State::load (const char* file_name){
+        mobiles.clear();
+        grid.clear();
         grid.load(file_name);
         notifyObserver(*(new StateEvent(this, Level_Changed )));
     };

@@ -9,6 +9,7 @@
 #include "Ruler.h"
 #include "CommandSet.h"
 #include "../state/State.h"
+#include "LoadCommand.h"
 
 namespace engine{
 
@@ -16,11 +17,19 @@ namespace engine{
 
         commands = new CommandSet();
         state = s;
+        charTurn = 0;
 
     };
     
     void Engine::addCommand(Command* cmd) {
-        commands->add(cmd);
+        if(cmd->getCategory()==100)
+        {
+            LoadCommand* lcmd = dynamic_cast<LoadCommand*>(cmd);
+            state->load(lcmd->getFileName());
+            return;
+        }
+        if(cmd->getCharacter()==charTurn)
+            commands->add(cmd);
     };
        
     
@@ -42,7 +51,15 @@ namespace engine{
     }
     
     void Engine::setMode(EngineMode m) {
-        mode = m;
+        if((mode==m)&&(m==pause))
+            mode = play;
+        else 
+            mode = m;
+    }
+    
+    void Engine::endTurn() {
+        ruler.apply();
+        commands->clear();
     }
 
 }

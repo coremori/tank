@@ -18,7 +18,7 @@ namespace engine {
     };
     
     int DirectionCommand::getCategory () const{
-        return MAIN_CATEGORY;
+        return VIEW_CATEGORY;
     };
   
 

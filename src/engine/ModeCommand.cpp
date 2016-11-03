@@ -22,5 +22,9 @@ namespace engine {
         return MODE_CATEGORY;
     }
 
+    int ModeCommand::getCharacter() const {
+        return -1;
+    }
+
 }
 /*press ctrl+space for create function define in .h*/

@@ -19,7 +19,10 @@ namespace engine {
     int LoadCommand::getCategory () const{
         return MAIN_CATEGORY;
     };
-    
+
+    int LoadCommand::getCharacter() const {
+        return -1;
+    }
 
 
 

@@ -26,7 +26,10 @@ namespace render{
             const state::ElementEvent* event = static_cast<const state::ElementEvent*>(&e);
             if(event->idx!=-1)
             {
-                if (event->idx<tiles.size())
+                Layer::clear();
+                    Layer::elementToTiles(event->list);
+                    
+                /*if (event->idx<tiles.size())
                 {
                     Layer::clear();
                     Layer::elementToTiles(event->list);
@@ -37,7 +40,7 @@ namespace render{
                     Layer::clear();
                     Layer::elementToTiles(event->list);
                 }
-
+                 */
             }
         }
     }

@@ -35,7 +35,7 @@ namespace render {
     
     void Scene::update (){
         layers[0]->update();
-        layers[0]->clear();
+        //layers[0]->clear();
         layers[1]->update();
         layers[2]->update();
     };
@@ -51,9 +51,11 @@ namespace render {
             state::ElementList l = e.s->getMobiles();
             layers[0]->clear();
             layers[1]->clear();
+            layers[2]->clear();
             
             layers[0]->elementToTiles(&g);
             layers[1]->elementToTiles(&l);
+            
             
             layers[2]->charToTiles('s',height*8);
             layers[2]->charToTiles('c',height*8);
