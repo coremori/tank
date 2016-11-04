@@ -85,11 +85,11 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     
     sf::RenderWindow window(sf::VideoMode(w, h + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
-    sf::Music music;
+/*    sf::Music music;
     if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
         std::cout << "file not found "<<std::endl;
     music.play();
-    
+  */  
     //button "fin de tour"
     button((w-104)/2,0,104,1,0);//bouton centré
     button((w-104)/2,0,104,1,1);
@@ -124,7 +124,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
             if (event.type == sf::Event::Closed)
             {
                 engine->setMode(engine::close);
-                music.stop();
+                //music.stop();
                 window.close();
             }
             else if (event.type == sf::Event::KeyPressed)
