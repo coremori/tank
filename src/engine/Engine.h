@@ -3,6 +3,7 @@
 #define ENGINE__ENGINE__H
 
 #include "../state.h"
+#include <mutex>
 
 namespace engine {
   class CommandSet;
@@ -23,9 +24,11 @@ namespace engine {
     engine::Ruler ruler;
     // Attributes
   protected:
-    CommandSet* commands;
+    CommandSet* currentcommands;
+    CommandSet* waitingcommands;
     int charTurn;
     state::State* state;
+    mutable std::mutex commands_mutex;
     // Operations
   public:
     Engine (state::State* s);
@@ -35,8 +38,9 @@ namespace engine {
     void setcharTurn (int c);
     int getcharTurn () const;
     Ruler* getRuler ();
-    void setRuler ();
     void endTurn ();
+    void swapCommands ();
+    void update ();
   };
 
 };

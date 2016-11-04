@@ -10,18 +10,25 @@
 #include "CommandSet.h"
 #include "../state/State.h"
 #include "LoadCommand.h"
+#include <mutex>
+#include <chrono>
+#include <thread>
+
 
 namespace engine{
 
     Engine::Engine(state::State* s) : ruler(this) {
 
-        commands = new CommandSet();
+        currentcommands = new CommandSet();
+        waitingcommands = new CommandSet();
         state = s;
         charTurn = 0;
+        ruler.setState(state);
 
     };
     
-    void Engine::addCommand(Command* cmd) {
+    void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
+        commands_mutex.lock();
         if(cmd->getCategory()==100)
         {
             LoadCommand* lcmd = dynamic_cast<LoadCommand*>(cmd);
@@ -29,7 +36,8 @@ namespace engine{
             return;
         }
         if(cmd->getCharacter()==charTurn)
-            commands->add(cmd);
+            waitingcommands->add(cmd);
+        commands_mutex.unlock();
     };
        
     
@@ -45,10 +53,7 @@ namespace engine{
         return &ruler;
     }
     
-    void Engine::setRuler() {
-        ruler.setCommandSet(commands);
-        ruler.setState(state);
-    }
+    
     
     void Engine::setMode(EngineMode m) {
         if((mode==m)&&(m==pause))
@@ -56,12 +61,26 @@ namespace engine{
         else 
             mode = m;
     }
-    
-    void Engine::endTurn() {
+        
+    void Engine::swapCommands() {//lock commands and swap them
+        commands_mutex.lock();
+        CommandSet* s = currentcommands;
+        currentcommands = waitingcommands;
+        s->clear();
+        waitingcommands = s;
+        commands_mutex.unlock();
+    }
+
+    void Engine::endTurn() {//swap waitingcommands and currentcommands, send the waitingcommand to the ruler and apply them
+        swapCommands();
+        ruler.setCommandSet(currentcommands);
         ruler.apply();
-        commands->clear();
+    }
+    void Engine::update() {//tant ue la fenetre n'est pas fermée
+        while(mode!=close)
+        {
+            //std::this_thread::sleep_for(2s);
+        }
     }
 
 }
-
-/*press ctrl+space for create function define in .h*/

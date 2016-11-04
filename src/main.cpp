@@ -73,11 +73,11 @@ int main ()
    
     engine::Engine* engine = new engine::Engine(state);
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
-    engine->setRuler();
+    //engine->setRuler();
     
     engine->getRuler()->setActions(actions);
     //engine->getRuler()->impleRule(engine::play);
-    engine->getRuler()->apply();
+    //engine->getRuler()->apply();
     //scene->stateChanged(*state);
 
 

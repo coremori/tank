@@ -123,6 +123,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         {
             if (event.type == sf::Event::Closed)
             {
+                engine->setMode(engine::close);
                 music.stop();
                 window.close();
             }

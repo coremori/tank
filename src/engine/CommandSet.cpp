@@ -24,7 +24,9 @@ namespace engine{
     };
 
     void CommandSet::add(Command* command) {
-        commands.insert(std::make_pair(command->getCategory(),command));
+        auto a  = commands.insert(std::make_pair(command->getCategory(),command));
+        if(!a.second)
+            commands[command->getCategory()] = command;
     };
     
               
