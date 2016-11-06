@@ -16,5 +16,10 @@ namespace state {
         this->idx = idx;
     }
 
+    StateEvent* ElementEvent::clone() const {
+        return new ElementEvent(list, idx);
+    }
+
+
 }
 /*press ctrl+space for create function define in .h*/

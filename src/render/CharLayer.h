@@ -2,12 +2,7 @@
 #ifndef RENDER__CHARLAYER__H
 #define RENDER__CHARLAYER__H
 
-#include "../state.h"
-#include "state/StateEvent.h"
 
-namespace state {
-  class StateEvent;
-};
 namespace render {
   class Layer;
 }
@@ -23,7 +18,7 @@ namespace render {
     int XChar;
     // Operations
   public:
-    void stateChanged (const state::StateEvent& e);
+    void applyStateChanged ();
     void setXChar (int x);
   };
 

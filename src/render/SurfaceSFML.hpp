@@ -28,14 +28,13 @@
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
     
-    int nSprite;
     // Operations
   public:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     virtual void loadTexture (const char* image_file);
     virtual void clear ();
-    virtual void setSpriteCount (int n);
-    virtual void setSprite (const std::vector<render::Tile*> tiles);
+    virtual void setSprite (const std::vector<render::Tile> tiles);
+    virtual void setSpriteNum (int idx, render::Tile tile);
     void setSpriteButton (unsigned int x1, unsigned int y1, unsigned int xTex, unsigned int width);
 
   };

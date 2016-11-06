@@ -8,8 +8,7 @@
 #include "LandscapeLayer.h"
 
 namespace render {
-
-    void LandscapeLayer::stateChanged(const state::StateEvent& e) {
+    void LandscapeLayer::applyStateChanged() {
         //do nothing (le paysage est constant)
     }
 

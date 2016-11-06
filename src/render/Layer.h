@@ -11,33 +11,37 @@ namespace render {
 };
 namespace state {
   class ElementList;
-  class StateObserver;
+};
+namespace cache {
+  class CacheStateObserver;
 }
 
 #include "Tile.h"
-#include "state/StateObserver.h"
+#include "cache/CacheStateObserver.h"
 #include "Surface.h"
 
 namespace render {
 
   /// class Layer - 
-  class Layer : public state::StateObserver {
+  class Layer : public cache::CacheStateObserver {
     // Associations
     // Attributes
   protected:
     Surface* surface;
-    std::vector<Tile*> tiles;
+    std::vector<Tile> tiles;
+    std::vector<int> numTileToUpdate;
     // Operations
   public:
     Layer ();
     ~Layer ();
-    void setSurface (Surface* surface);
-    void setTile (Tile* tile);
-    Tile getTile (int i);
-    void update ();
-    void elementToTiles (const state::ElementList* list);
-    void charToTiles (char c, int Ypos);
     void clear ();
+    void charToTiles (char c, int Ypos);
+    void elementToTiles (const state::ElementList* list);
+    Tile getTile (int i);
+    void setTile (int idx, Tile tile);
+    void setSurface (Surface* surface);
+    void update ();
+    void updateAll ();
   };
 
 };

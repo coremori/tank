@@ -18,33 +18,64 @@
 
 
 namespace render{
-
-    void MobileLayer::stateChanged(const state::StateEvent& e) {
-        if(e==state::Element_Changed)
-        {
-            
-            const state::ElementEvent* event = static_cast<const state::ElementEvent*>(&e);
-            if(event->idx!=-1)
+    void MobileLayer::applyStateChanged() {
+        for(unsigned int i = 0; i<stateEvent.size(); i++){
+            if(*stateEvent[i]==state::Element_Changed)
             {
-                Layer::clear();
-                    Layer::elementToTiles(event->list);
-                    
-                /*if (event->idx<tiles.size())
+                const state::ElementEvent* event = static_cast<const state::ElementEvent*>(stateEvent[i]);
+                if(event->idx!=-1)// -1 = changement de niveau
                 {
-                    Layer::clear();
-                    Layer::elementToTiles(event->list);
-                    
+                    unsigned int idx = event->idx;
+
+                    if (idx<tiles.size())
+                    {
+                        state::Tank* tank = dynamic_cast<state::Tank*>(event->list->get(idx));
+                        tiles[idx].setX(tank->getX()-8);
+                        tiles[idx].setY(tank->getY()-2*8);
+                        switch(tank->getTankTypeId()){
+                                case state::Little_tank_green :
+                                    tiles[idx].setXTex(0);
+                                    tiles[idx].setYTex(0);
+
+                                    break;
+                                case state::Little_tank_grey :
+                                    tiles[idx].setXTex(96);
+                                    tiles[idx].setYTex(0);
+                                    break;
+                                case state::Big_tank_green :
+                                    tiles[idx].setXTex(0);
+                                    tiles[idx].setYTex(24);
+                                    break;
+                                case state::Big_tank_grey :
+                                    tiles[idx].setXTex(96);
+                                    tiles[idx].setYTex(24);
+                                    break;
+                            }
+                        switch(tank->getOrientation()){
+                                case state::right_down :
+                                    break;
+                                case state::left_down :
+                                    tiles[idx].setXTex(tiles[idx].getXTex()+24);
+                                    break;
+                                case state::right_up:
+                                    tiles[idx].setXTex(tiles[idx].getXTex()+48);
+                                    break;
+                                case state::left_up :
+                                    tiles[idx].setXTex(tiles[idx].getXTex()+72);
+                                    break;
+                            }
+                        Layer::numTileToUpdate.push_back(idx);//la tuile idx sera à recharger dans Surface pour être dessiner
+                    }
+                    else // si on change le level
+                    {
+                        Layer::clear();
+                        Layer::elementToTiles(event->list);
+                    }
+
                 }
-                else
-                {
-                    Layer::clear();
-                    Layer::elementToTiles(event->list);
-                }
-                 */
             }
         }
     }
-
         
 
 }

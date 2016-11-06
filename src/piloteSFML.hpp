@@ -26,13 +26,15 @@ public:
     
     
     
-    piloteSFML(render::Scene* s);
+    piloteSFML(state::State* s);
     virtual ~piloteSFML();
     void affiche();
     void setEngine(engine::Engine* e);
     
 private:
+    state::State* state;
     render::Scene* scene;
+    std::vector<cache::CacheStateObserver*> obs;
     std::vector<SurfaceSFML*> surfaces;
     std::vector<sf::Sprite*> s_button;
     engine::Engine* engine;
@@ -40,6 +42,7 @@ private:
     int character = 0;
 
     void button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
+    void applyChange();
 };
 
 #endif /* PILOTESFML_HPP */

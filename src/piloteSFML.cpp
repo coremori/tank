@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /* 
  * File:   piloteSFML.cpp
@@ -21,11 +16,35 @@
 #include <iostream>
 
 #include "engine.h"
+#include "render/LandscapeLayer.h"
+#include "render/MobileLayer.h"
+#include "render/CharLayer.h"
 
 
 
-piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue au layer les surfaces
-    this->scene = s;
+
+piloteSFML::piloteSFML(state::State* s) {//met la scene à afficher et attribue au layer les surfaces
+    state = s;
+    this->scene = new render::Scene();
+    obs.push_back(scene);
+    obs.push_back(new render::LandscapeLayer());
+    obs.push_back(new render::MobileLayer());
+    obs.push_back(new render::CharLayer());
+    
+    render::LandscapeLayer* landlayer = dynamic_cast<render::LandscapeLayer*>(obs[1]);
+    render::MobileLayer* mobilelayer = dynamic_cast<render::MobileLayer*>(obs[2]);
+    render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(obs[3]);
+    
+    scene->setLayer(0,landlayer);
+    scene->setLayer(1,mobilelayer);
+    scene->setLayer(2,charlayer);
+    
+    
+    state->getGrid().registerObserver(obs[1]);
+    state->getMobiles().registerObserver(obs[2]);
+    state->getMobiles().registerObserver(obs[3]);
+    state->registerObserver(obs[0]);
+    
     surfaces.push_back(new SurfaceSFML());
     surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour les boutons sans hover
     
@@ -45,6 +64,8 @@ piloteSFML::piloteSFML(render::Scene* s) {//met la scene à afficher et attribue
             //error
         }
     m_tilesetButton.setSmooth(true);
+    
+     state->load("res/Levels/level1.txt"); //charge le level.
     
 }
 
@@ -72,12 +93,19 @@ void piloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, 
     {
         surfaces[0]->setSpriteButton(x1, h*8+8, xTex, width);
     }
-}
+};
+
+    void piloteSFML::applyChange() {
+        for(unsigned int i = 0; i<obs.size(); i++)
+                obs[i]->applyStateChanged();
+    };
+
 
 
 void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
     //! mutex non mis !
-    scene->update();
+    applyChange();
+    scene->updateAll();
     int Pixel_def = 8;
     int h = scene->getHeight()*Pixel_def;
     int w = scene->getWidth()*Pixel_def;
@@ -172,19 +200,22 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 {
                     std::cout << "Button End turn pressed" << std::endl;
                     engine->endTurn();
+                    applyChange();
                     scene->update();
                 }
                 else if (rectLevel1->contains(localPosition))
                 {
                     std::cout << "Button level1 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
-                    scene->update();
+                    applyChange();
+                    scene->updateAll();
                 }
                 else if (rectLevel2->contains(localPosition))
                 {
                     std::cout << "Button level2 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
-                    scene->update();
+                    applyChange();
+                    scene->updateAll();
                 }
                 // le bouton gauche est enfoncé : on tire
                     //engine->addCommand(new engine::ModeCommand(engine::pause));

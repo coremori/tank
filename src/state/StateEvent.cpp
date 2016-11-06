@@ -22,7 +22,10 @@ namespace state{
         return (this->id!=id);
     }
 
-
+    StateEvent* StateEvent::clone() const {
+        return new StateEvent(s, id);
+    }
+  
 
 }
 /*press ctrl+space for create function define in .h*/

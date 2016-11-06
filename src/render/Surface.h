@@ -8,6 +8,8 @@ namespace render {
   class Tile;
 }
 
+#include "Tile.h"
+
 namespace render {
 
   /// class Surface - loadTexture : image + position de la texture dans image (donnée pat Tile) ; setSpriteTexture : on donne les tiles de la texture stocké à afficher
@@ -17,8 +19,8 @@ namespace render {
     Surface ();
     virtual void loadTexture (const char* image_file) = 0;
     virtual void clear () = 0;
-    virtual void setSpriteCount (int n) = 0;
-    virtual void setSprite (const std::vector<Tile*> tile) = 0;
+    virtual void setSprite (const std::vector<Tile> tile) = 0;
+    virtual void setSpriteNum (int idx, Tile tile) = 0;
   };
 
 };

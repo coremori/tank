@@ -5,6 +5,7 @@
  */
 
 #include "Tile.h"
+#include "CharLayer.h"
 
 namespace render {
       
@@ -14,6 +15,10 @@ namespace render {
         this->height = h;
         this->width = w;
     };
+    
+    Tile::~Tile(){
+        
+    }
     
     int Tile::getX () const{
         return x;

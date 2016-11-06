@@ -3,25 +3,22 @@
 #define RENDER__SCENE__H
 
 #include <vector>
-#include "../state.h"
-#include "state/StateEvent.h"
 
 namespace render {
   class Layer;
   class Surface;
 };
-namespace state {
-  class StateEvent;
-  class StateObserver;
+namespace cache {
+  class CacheStateObserver;
 }
 
-#include "state/StateObserver.h"
+#include "cache/CacheStateObserver.h"
 #include "Layer.h"
 
 namespace render {
 
   /// class Scene - height and width is for the window
-  class Scene : public state::StateObserver {
+  class Scene : public cache::CacheStateObserver {
     // Associations
     // Attributes
   protected:
@@ -35,10 +32,11 @@ namespace render {
     int getLayerCount () const;
     void setSurface (int idx, Surface* surface);
     void setLayer (int idx, Layer* layer);
-    void update ();
     int getHeight () const;
     int getWidth () const;
-    void stateChanged (const state::StateEvent& e);
+    void applyStateChanged ();
+    void update ();
+    void updateAll ();
   };
 
 };

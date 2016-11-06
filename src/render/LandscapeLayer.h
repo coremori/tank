@@ -2,12 +2,7 @@
 #ifndef RENDER__LANDSCAPELAYER__H
 #define RENDER__LANDSCAPELAYER__H
 
-#include "../state.h"
-#include "state/StateEvent.h"
 
-namespace state {
-  class StateEvent;
-};
 namespace render {
   class Layer;
 }
@@ -20,7 +15,7 @@ namespace render {
   class LandscapeLayer : public render::Layer {
     // Operations
   public:
-    void stateChanged (const state::StateEvent& e);
+    void applyStateChanged ();
   };
 
 };

@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <bits/stl_vector.h>
 #include "SurfaceSFML.hpp"
+#include <iostream>
 
 
     
@@ -42,11 +43,8 @@
         m_vertices.clear();
     };
     
-    void SurfaceSFML::setSpriteCount (int n){
-        nSprite = n;
-    };
     
-    void SurfaceSFML::setSprite (const std::vector<render::Tile*> tiles){//NOT DONE!!
+    void SurfaceSFML::setSprite (const std::vector<render::Tile> tiles){//NOT DONE!!
         // on charge la texture du tileset
         
         
@@ -62,14 +60,14 @@
                 // on récupère le numéro de tuile courant
 
                 // on en déduit sa position dans la texture du tileset
-                int tu = tiles[j]->getXTex();//position dans la texture
-                int tv = tiles[j]->getYTex();
+                int tu = tiles[j].getXTex();//position dans la texture
+                int tv = tiles[j].getYTex();
                 
-                unsigned int w = tiles[j]->getWidth();//width d'un affichage
-                unsigned int h = tiles[j]->getHeight();
+                unsigned int w = tiles[j].getWidth();//width d'un affichage
+                unsigned int h = tiles[j].getHeight();
                 
-                unsigned int x = tiles[j]->getX();//position dans l'image
-                unsigned int y = tiles[j]->getY();
+                unsigned int x = tiles[j].getX();//position dans l'image
+                unsigned int y = tiles[j].getY();
 
                 // on récupère un pointeur vers le quad à définir dans le tableau de vertex
                 sf::Vertex* quad = &m_vertices[j * 4];
@@ -89,6 +87,37 @@
         
     
     };
+    
+    void SurfaceSFML::setSpriteNum(int idx, render::Tile tile) {
+        
+        if((idx>=(m_vertices.getVertexCount()/4)))//si idx > size ou idx<0 (comparaison signed/unsigned avantageuse ici)
+            return;
+                
+        int tu = tile.getXTex();//position dans la texture
+                int tv = tile.getYTex();
+                
+                unsigned int w = tile.getWidth();//width d'un affichage
+                unsigned int h = tile.getHeight();
+                
+                unsigned int x = tile.getX();//position dans l'image
+                unsigned int y = tile.getY();
+
+                // on récupère un pointeur vers le quad à définir dans le tableau de vertex
+                sf::Vertex* quad = &m_vertices[idx * 4];
+                
+                // on définit ses quatre coins
+                quad[0].position = sf::Vector2f(x,y);
+                quad[1].position = sf::Vector2f(x+w, y);
+                quad[2].position = sf::Vector2f(x+w, y+h);
+                quad[3].position = sf::Vector2f(x, y+h);
+
+                // on définit ses quatre coordonnées de texture
+                quad[0].texCoords = sf::Vector2f(tu, tv);
+                quad[1].texCoords = sf::Vector2f(tu + w, tv);
+                quad[2].texCoords = sf::Vector2f(tu + w, tv +h);
+                quad[3].texCoords = sf::Vector2f(tu, tv +h);        
+    };
+
     
     void SurfaceSFML::setSpriteButton (unsigned int x1, unsigned int y1, unsigned int xTex, unsigned int width){
         

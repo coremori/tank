@@ -30,14 +30,7 @@ using namespace std;
 using namespace state;
 using namespace render;
 
-    
-void Flemme(void *){
-       /* cout << "I do nothing (the others works for me)" << endl;
-        
-        pthread_exit(NULL);*/
-    }
-
-
+ 
 
 int main ()
 {
@@ -50,8 +43,15 @@ int main ()
 */    
       
     State* state = new State();    
+    /*obs.push_back(*scene);
+    obs.push_back(*(new render::LandscapeLayer()));
+    obs.push_back(*(new render::MobileLayer()));
+    obs.push_back(*(new render::CharLayer()));
     
-    
+    render::LandscapeLayer* landlayer = dynamic_cast<render::LandscapeLayer*>(obs[1]);
+    render::MobileLayer* mobilelayer = dynamic_cast<render::MobileLayer*>(obs[2]);
+    render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(obs[3]);*/
+    /*
     LandscapeLayer* layer = new LandscapeLayer();
     MobileLayer* layerchar = new MobileLayer();
     CharLayer* layertext = new CharLayer();
@@ -67,8 +67,8 @@ int main ()
     scene->setLayer(1,layerchar);
     scene->setLayer(2,layertext);
     //scene->stateChanged(*state);
-    state->registerObserver(scene);
-    state->load("res/Levels/level1.txt");
+    state->registerObserver(scene);*/
+    //state->load("res/Levels/level1.txt");
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
     engine::Engine* engine = new engine::Engine(state);
@@ -82,7 +82,7 @@ int main ()
 
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    piloteSFML* rendu = new piloteSFML(scene);// s'occupe de l'affichage de la fenetre
+    piloteSFML* rendu = new piloteSFML(state);// s'occupe de l'affichage de la fenetre
     rendu->setEngine(engine);
     rendu->affiche();   
     /*

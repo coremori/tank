@@ -2,12 +2,7 @@
 #ifndef RENDER__MOBILELAYER__H
 #define RENDER__MOBILELAYER__H
 
-#include "../state.h"
-#include "state/StateEvent.h"
 
-namespace state {
-  class StateEvent;
-};
 namespace render {
   class Layer;
 }
@@ -20,7 +15,7 @@ namespace render {
   class MobileLayer : public render::Layer {
     // Operations
   public:
-    void stateChanged (const state::StateEvent& e);
+    void applyStateChanged ();
   };
 
 };

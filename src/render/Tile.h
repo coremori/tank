@@ -18,6 +18,7 @@ namespace render {
     // Operations
   public:
     Tile (int x = 0, int y = 0, int w = 8, int h = 8);
+    ~Tile ();
     int getX () const;
     int getY () const;
     int getWidth () const;

@@ -16,7 +16,7 @@ namespace render {
         
     };
     Scene::~Scene (){};
-    
+        
     
     int Scene::getLayerCount () const{
         return layers.size();
@@ -34,37 +34,41 @@ namespace render {
     };
     
     void Scene::update (){
-        layers[0]->update();
-        //layers[0]->clear();
         layers[1]->update();
         layers[2]->update();
     };
-  
-  
-    
-    void Scene::stateChanged(const state::StateEvent& e){
-        //notifié par son observateur
-        if(e==state::Level_Changed){//on charge tout le level
-            height = e.s->getGrid().getHeight();
-            width = e.s->getGrid().getWidth();
-            state::ElementGrid g = e.s->getGrid();
-            state::ElementList l = e.s->getMobiles();
-            layers[0]->clear();
-            layers[1]->clear();
-            layers[2]->clear();
-            
-            layers[0]->elementToTiles(&g);
-            layers[1]->elementToTiles(&l);
-            
-            
-            layers[2]->charToTiles('s',height*8);
-            layers[2]->charToTiles('c',height*8);
-            layers[2]->charToTiles('o',height*8);
-            layers[2]->charToTiles('r',height*8);
-            layers[2]->charToTiles('e',height*8);
-            layers[2]->charToTiles(' ',height*8);
-            layers[2]->charToTiles('0',height*8);
-            layers[2]->charToTiles('0',height*8);
+      
+    void Scene::updateAll() {
+        layers[0]->updateAll();
+        layers[1]->updateAll();
+        layers[2]->updateAll();
+    }
+    void Scene::applyStateChanged() {
+        for(unsigned int i = 0; i<stateEvent.size(); i++){
+            state::StateEvent e = *stateEvent[i];
+            //notifié par son observateur
+            if(e==state::Level_Changed){//on charge tout le level
+                height = e.s->getGrid().getHeight();
+                width = e.s->getGrid().getWidth();
+                state::ElementGrid g = e.s->getGrid();
+                state::ElementList l = e.s->getMobiles();
+                layers[0]->clear();
+                layers[1]->clear();
+                layers[2]->clear();
+
+                layers[0]->elementToTiles(&g);
+                layers[1]->elementToTiles(&l);
+
+
+                layers[2]->charToTiles('s',height*8);
+                layers[2]->charToTiles('c',height*8);
+                layers[2]->charToTiles('o',height*8);
+                layers[2]->charToTiles('r',height*8);
+                layers[2]->charToTiles('e',height*8);
+                layers[2]->charToTiles(' ',height*8);
+                layers[2]->charToTiles('0',height*8);
+                layers[2]->charToTiles('0',height*8);
+            }
         }
 
     };

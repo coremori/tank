@@ -6,6 +6,7 @@
 
 namespace state {
   class State;
+  class StateEvent;
   class StateObserver;
 }
 
@@ -26,6 +27,7 @@ namespace state {
     StateEvent (const State* s, StateEventId id);
     bool operator== (StateEventId id) const;
     bool operator!= (StateEventId id) const;
+    virtual StateEvent* clone () const;
   };
 
 };

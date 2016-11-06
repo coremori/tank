@@ -2,6 +2,7 @@
 #ifndef STATE__ELEMENTEVENT__H
 #define STATE__ELEMENTEVENT__H
 
+#include "state/StateEvent.h"
 
 namespace state {
   class ElementList;
@@ -21,6 +22,7 @@ namespace state {
     // Operations
   public:
     ElementEvent (const ElementList* list, int idx = -1);
+    StateEvent* clone () const;
   };
 
 };
