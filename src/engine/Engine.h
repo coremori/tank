@@ -9,9 +9,11 @@ namespace engine {
   class CommandSet;
   class Command;
   class Ruler;
+  class Record;
 }
 
 #include "EngineMode.h"
+#include "Record.h"
 #include "Ruler.h"
 #include "CommandSet.h"
 

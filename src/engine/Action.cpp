@@ -17,8 +17,7 @@ namespace engine{
         
     }
 
-    void undo(state::State* s){
+    void Action::undo(state::State* s){
         
     }
 }
-/*press ctrl+space for create function define in .h*/

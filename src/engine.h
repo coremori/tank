@@ -11,6 +11,7 @@
 #include "engine/MoveCommand.h"
 #include "engine/EngineMode.h"
 #include "engine/ModeCommand.h"
+#include "engine/Record.h"
 #include "engine/Action.h"
 #include "engine/ActionListTurn.h"
 #include "engine/Ruler.h"

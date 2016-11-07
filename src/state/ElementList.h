@@ -29,10 +29,11 @@ namespace state {
     int size () const;
     Element* get ( int idx) const;
     void clear ();
-    void set (int idx, Element* e);
+    void set ( int idx, Element* e);
     void load (const char* path);
     void notifyObserver (int idx = -1) const;
   };
 
 };
+
 #endif
