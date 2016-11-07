@@ -12,8 +12,14 @@ namespace cache{
             
     void CacheStateObserver::stateChanged(const state::StateEvent& e) {
         stateEvent.push_back(e.clone());
-        
-        
+        }
+
+    void CacheStateObserver::clear() {
+        for(unsigned int i = 0; i<stateEvent.size(); i++)
+            delete(stateEvent[i]);
+        stateEvent.clear();
     }
+
 }
 /*press ctrl+space for create function define in .h*/
+

@@ -8,7 +8,8 @@ namespace state {
   enum StateEventId {
     Level_Changed     = 1,
     Element_Changed     = 2,
-    Pv_Changed     = 3
+    Pv_Changed     = 3,
+    Projectile_Event     = 4
   };
 
 };

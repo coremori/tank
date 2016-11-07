@@ -30,13 +30,19 @@ namespace state {
     };
           
     bool ElementGrid::isSpace (int i, int j)  const{
-           assert (this->hasCell(i,j)); 
-           return ElementList::elements[i*width+j]->getTypeId()==space;
+        if(this->hasCell(i,j))
+        {
+            return elements[j*width+i]->getTypeId()==space;
+        }
+        return false;
     };
     
     void ElementGrid::setCell (int i, int j, Element* e){
-        assert (this->hasCell(i,j));
-        ElementList::set(i*width+j, e);
+        if(this->hasCell(i,j))
+        {
+            ElementList::set(j*width+i, e);
+        }
+        
     };
     
     bool ElementGrid::hasCell (int i, int j) const{

@@ -7,7 +7,6 @@
 #include "state/StateEvent.h"
 
 namespace state {
-  class StateEvent;
   class StateObserver;
 }
 
@@ -24,6 +23,8 @@ namespace cache {
   public:
     void stateChanged (const state::StateEvent& e);
     virtual void applyStateChanged () = 0;
+  protected:
+    void clear ();
   };
 
 };

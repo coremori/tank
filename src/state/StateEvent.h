@@ -25,6 +25,7 @@ namespace state {
     // Operations
   public:
     StateEvent (const State* s, StateEventId id);
+    virtual ~StateEvent ();
     bool operator== (StateEventId id) const;
     bool operator!= (StateEventId id) const;
     virtual StateEvent* clone () const;
