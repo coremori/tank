@@ -18,7 +18,7 @@ namespace state {
 
 namespace state {
 
-  /// class State - mobiles-> liste des truc mobile (tank, misile)
+  /// class State - mobiles-> liste des trucs mobiles (tank, missile)
   class State : public state::Observable {
     // Associations
     // Attributes

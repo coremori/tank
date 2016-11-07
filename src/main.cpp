@@ -69,6 +69,8 @@ int main ()
     //scene->stateChanged(*state);
     state->registerObserver(scene);*/
     //state->load("res/Levels/level1.txt");
+    
+    
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
     engine::Engine* engine = new engine::Engine(state);
@@ -80,22 +82,22 @@ int main ()
     //engine->getRuler()->apply();
     //scene->stateChanged(*state);
 
+    
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
     piloteSFML* rendu = new piloteSFML(state);// s'occupe de l'affichage de la fenetre
     rendu->setEngine(engine);
     rendu->affiche();   
     /*
-      rc = pthread_create(&threads[0], NULL, 
-                          PrintWindows, NULL);
+      rc = pthread_create(&threads[0], NULL,PrintWindows, NULL);
       
       if (rc){
          cout << "Error:unable to create thread," << rc << endl;
          exit(-1);
       }
       
-      rc = pthread_create(&threads[1], NULL, 
-                          Flemme, NULL);
+      rc = pthread_create(&threads[1], NULL,Flemme, NULL);
       
       if (rc){
          cout << "Error:unable to create thread," << rc << endl;
