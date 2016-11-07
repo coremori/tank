@@ -13,6 +13,11 @@ namespace state{
         this->s = s;
         this->id = id;
     }
+        
+    StateEvent::~StateEvent() {
+
+    }
+
     
     bool StateEvent::operator==(StateEventId id) const {
         return (this->id==id);

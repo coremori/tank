@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 #include "Layer.h"
 #include "state.h"
@@ -70,7 +66,7 @@ namespace render {
                 layers[2]->charToTiles('0',height*8);
             }
         }
-
+        CacheStateObserver::clear();
     };
     
     int Scene::getHeight () const{

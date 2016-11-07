@@ -4,9 +4,12 @@
 
 #include "render/Tile.h"
 #include "render/Surface.h"
+#include "render/Animation.h"
 #include "render/Layer.h"
 #include "render/Scene.h"
 #include "render/LandscapeLayer.h"
 #include "render/MobileLayer.h"
 #include "render/CharLayer.h"
+#include "render/Shell.h"
+#include "render/Missile.h"
 #endif

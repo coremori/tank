@@ -43,6 +43,7 @@ namespace render {
                     Layer::charToTiles(numStr[i] ,XChar);
             }
         }
+        CacheStateObserver::clear();
     }
     
     void CharLayer::setXChar (int x){

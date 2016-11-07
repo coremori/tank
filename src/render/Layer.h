@@ -8,9 +8,7 @@
 namespace render {
   class Surface;
   class Tile;
-};
-namespace state {
-  class ElementList;
+  class Animation;
 };
 namespace cache {
   class CacheStateObserver;
@@ -18,6 +16,7 @@ namespace cache {
 
 #include "Tile.h"
 #include "cache/CacheStateObserver.h"
+#include "Animation.h"
 #include "Surface.h"
 
 namespace render {
@@ -30,6 +29,7 @@ namespace render {
     Surface* surface;
     std::vector<Tile> tiles;
     std::vector<int> numTileToUpdate;
+    Animation* animation;
     // Operations
   public:
     Layer ();

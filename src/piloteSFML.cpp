@@ -95,10 +95,13 @@ void piloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, 
     }
 };
 
-    void piloteSFML::applyChange() {
+
+void piloteSFML::applyChange() {
         for(unsigned int i = 0; i<obs.size(); i++)
                 obs[i]->applyStateChanged();
-    };
+};
+
+
 
 
 
@@ -109,6 +112,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     int Pixel_def = 8;
     int h = scene->getHeight()*Pixel_def;
     int w = scene->getWidth()*Pixel_def;
+    sf::Clock clock;
     
     
     
@@ -134,7 +138,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     sf::Vector2i localPosition;
     //
-    
+    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,-1);
     
     while (window.isOpen())
     {
@@ -189,6 +193,8 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                     case sf::Keyboard::Space :
                         std::cout << "shot" << std::endl;
                         engine->addCommand(new engine::ShotCommand(character,10));
+                        
+                        obs[2]->stateChanged(*shellevent);
                         break;
                     default : break;
                 }
@@ -201,7 +207,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                     std::cout << "Button End turn pressed" << std::endl;
                     engine->endTurn();
                     applyChange();
-                    scene->update();
+                    
                 }
                 else if (rectLevel1->contains(localPosition))
                 {
@@ -225,7 +231,12 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         
                 
 
-        
+        sf::Time elapsed = clock.getElapsedTime();
+        if(elapsed >= sf::milliseconds(1000))
+        {
+            scene->update();
+            clock.restart();
+        }
         window.clear();
         for(unsigned int i=0; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);

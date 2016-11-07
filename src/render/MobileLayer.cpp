@@ -8,6 +8,7 @@
 #include "MobileLayer.h"
 #include "../state/StateEventId.h"
 #include "../state/ElementEvent.h"
+#include "../state/ProjectileEvent.h"
 #include "../state/Element.h"
 #include "../state/Tank.h"
 #include "../state/Shell.h"
@@ -15,10 +16,12 @@
 #include "../state/TypeId.h"
 #include <cstddef>
 #include "../state.h"
+#include "Shell.h"
+#include "Missile.h"
 
 
 namespace render{
-    void MobileLayer::applyStateChanged() {
+    void MobileLayer::applyStateChanged() {//move tank sprite's and create the projectiles
         for(unsigned int i = 0; i<stateEvent.size(); i++){
             if(*stateEvent[i]==state::Element_Changed)
             {
@@ -74,9 +77,27 @@ namespace render{
 
                 }
             }
+            else if (*stateEvent[i]==state::Projectile_Event)
+            {
+                const state::ProjectileEvent* event = static_cast<const state::ProjectileEvent*>(stateEvent[i]);
+                tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 16)));
+                
+                tiles[tiles.size()-1].setXTex(0);
+                tiles[tiles.size()-1].setYTex(96);
+                
+                if(event->yMax==-1)//type shell
+                {
+                    animation = new Shell(event->xImpact,event->rightDirection);
+                }
+                else
+                {
+                    animation = new Missile(event->xImpact, event->yImpact, event->rightDirection, event->yMax);
+                }
+               
+            }
         }
+        CacheStateObserver::clear();
     }
         
 
 }
-/*press ctrl+space for create function define in .h*/

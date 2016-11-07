@@ -71,19 +71,16 @@ namespace engine{
                 {
                     if(!(state->getGrid().isSpace(nextX/8,(nextY/8)+1)))
                     {
-                        std::cout << "toto" << std::endl;
                         actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter()));
                     }
                     else
                     {
                         if((state->getGrid().isSpace(nextX/8,nextY/8-1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8))))
                         {
-                            std::cout << "toto5" << std::endl;
                             actions->addAction(new ActionMove (move->getXmove(), move->getYmove()-8,move->getCharacter()));
                         }
                         else if((state->getGrid().isSpace(nextX/8,nextY/8+1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8+2))))
                         {
-                             std::cout << "toto2" << std::endl;
                             actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter()));
                         }
                             
