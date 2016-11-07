@@ -44,11 +44,54 @@ namespace engine{
             DirectionCommand* dcmd = dynamic_cast<DirectionCommand*>(cmd->get(VIEW_CATEGORY));
             actions->addAction(new ActionDirection(dcmd->getDirection(),dcmd->getCharacter()));
         }
-        if(cmd->get(300))
+        if(cmd->get(MOVE_CATEGORY))
         {
             //gere seulement le move command pour commencer et tester
-            MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(300));
-            actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter() ));
+            //
+            
+            MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(MOVE_CATEGORY));
+            
+            int nextX = state->getMobile(move->getCharacter())->getX()+move->getXmove();
+            int nextY = state->getMobile(move->getCharacter())->getY()+move->getYmove();
+            
+            if(state->getGrid().hasCell(nextX/8,nextY/8))
+            {
+                if(!(state->getGrid().isSpace(nextX/8,nextY/8)))
+                {
+                    if(state->getGrid().isSpace(nextX/8,(state->getMobile(move->getCharacter())->getY())/8+1))
+                    {
+                        actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter() ));
+                    }
+                    else if(((state->getGrid().isSpace(nextX/8,(state->getMobile(move->getCharacter())->getY()/8)-1))))
+                    {
+                        actions->addAction(new ActionMove (move->getXmove(), move->getYmove()-8,move->getCharacter() ));
+                    }
+                }
+                else 
+                {
+                    if(!(state->getGrid().isSpace(nextX/8,(nextY/8)+1)))
+                    {
+                        std::cout << "toto" << std::endl;
+                        actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter()));
+                    }
+                    else
+                    {
+                        if((state->getGrid().isSpace(nextX/8,nextY/8-1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8))))
+                        {
+                            std::cout << "toto5" << std::endl;
+                            actions->addAction(new ActionMove (move->getXmove(), move->getYmove()-8,move->getCharacter()));
+                        }
+                        else if((state->getGrid().isSpace(nextX/8,nextY/8+1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8+2))))
+                        {
+                             std::cout << "toto2" << std::endl;
+                            actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter()));
+                        }
+                            
+                    }
+                        
+                }
+            }
+            
         }
         
         
