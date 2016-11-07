@@ -1,4 +1,3 @@
-
 /* 
  * File:   piloteSFML.cpp
  * Author: corentin
