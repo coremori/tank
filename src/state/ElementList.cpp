@@ -97,5 +97,9 @@ namespace state {
     void ElementList::notifyObserver(int idx) const {
         Observable::notifyObserver(ElementEvent(this, idx));
     }
+    
+    void ElementList::notifyObserver (const StateEvent& event) const{
+        Observable::notifyObserver(event);
+    }
 
 };

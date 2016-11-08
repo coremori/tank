@@ -7,6 +7,7 @@
 namespace state {
   class Element;
   class State;
+  class StateEvent;
   class Observable;
 }
 
@@ -32,6 +33,7 @@ namespace state {
     void set ( int idx, Element* e);
     void load (const char* path);
     void notifyObserver (int idx = -1) const;
+    void notifyObserver (const StateEvent& event) const;
   };
 
 };
