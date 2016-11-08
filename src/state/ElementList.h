@@ -15,7 +15,7 @@ namespace state {
 
 namespace state {
 
-  /// class ElementList - 
+  /// class ElementList - List of Elements
   class ElementList : public state::Observable {
     // Associations
     // Attributes

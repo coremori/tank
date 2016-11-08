@@ -21,7 +21,7 @@ namespace cache {
 
 namespace render {
 
-  /// class Layer - 
+  /// class Layer - Layer to display - convert the element to tile and stock them
   class Layer : public cache::CacheStateObserver {
     // Associations
     // Attributes

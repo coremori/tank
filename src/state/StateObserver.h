@@ -10,7 +10,7 @@ namespace state {
 
 namespace state {
 
-  /// class StateObserver - 
+  /// class StateObserver - API of the observers
   class StateObserver {
     // Operations
   public:

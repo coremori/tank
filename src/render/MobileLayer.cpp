@@ -11,8 +11,6 @@
 #include "../state/ProjectileEvent.h"
 #include "../state/Element.h"
 #include "../state/Tank.h"
-#include "../state/Shell.h"
-#include "../state/Missile.h"
 #include "../state/TypeId.h"
 #include <cstddef>
 #include "../state.h"

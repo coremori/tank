@@ -17,15 +17,7 @@ namespace render{
         this->rightDirection = rightDirection;
         this->countTimeExplosion = 0;
     }
-        
-    int Missile::getXEnd() const {
-        return xEnd;
-    }
-    
-    int Missile::getYEnd() const {
-        return yEnd;
-    }
-        
+            
     bool Missile::setNextTile(Tile* tile) {
         if(tile->getX()>=xEnd)//vertical d'impact
         {

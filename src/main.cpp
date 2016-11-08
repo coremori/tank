@@ -8,8 +8,6 @@
 #include "state/Obstacle.h"
 #include "state/Space.h"
 #include "state/Tank.h"
-#include "state/Missile.h"
-#include "state/Shell.h"
 #include "engine.h"
 
 #include "piloteSFML.hpp"
@@ -34,6 +32,8 @@ using namespace render;
 
 int main ()
 {
+    
+   // render::
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     Etat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     State* state = new State();    
    

@@ -4,19 +4,19 @@
 
 
 namespace state {
-  class Mobile;
+  class Element;
 }
 
 #include "TypeId.h"
 #include "Orientation.h"
 #include "TankTypeId.h"
 #include "PlayerType.h"
-#include "Mobile.h"
+#include "Element.h"
 
 namespace state {
 
   /// class Tank - 
-  class Tank : public state::Mobile {
+  class Tank : public state::Element {
     // Associations
     state::TankTypeId TankType;
     state::PlayerType Player;
@@ -26,7 +26,7 @@ namespace state {
     int pv;
     // Operations
   public:
-    virtual bool isTank () const;
+    bool isStatic () const;
     virtual TypeId getTypeId () const;
     bool isPlayer () const;
     void setPv (int pv);

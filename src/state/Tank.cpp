@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 #include "state.hpp"
 
@@ -17,10 +13,10 @@ namespace state {
     this->pv = 100;
     };
     
-    
-    bool Tank::isTank () const  {
-        return true;
-    };
+    bool Tank::isStatic() const {
+        return false;
+    }
+
     
     TypeId Tank::getTypeId () const {
         return tank;

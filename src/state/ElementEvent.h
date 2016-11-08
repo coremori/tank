@@ -13,7 +13,7 @@ namespace state {
 
 namespace state {
 
-  /// class ElementEvent - 
+  /// class ElementEvent - Event "Element_Changed"
   class ElementEvent : public state::StateEvent {
     // Attributes
   public:

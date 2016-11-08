@@ -14,7 +14,7 @@ namespace state {
 
 namespace state {
 
-  /// class Observable - 
+  /// class Observable - List of the class's observers 
   class Observable {
     // Associations
     // Attributes

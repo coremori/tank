@@ -12,7 +12,7 @@ namespace state {
 
 namespace state {
 
-  /// class ProjectileEvent - 
+  /// class ProjectileEvent - Event "Projectile_Event"
   class ProjectileEvent : public state::StateEvent {
     // Attributes
   public:

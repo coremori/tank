@@ -17,7 +17,7 @@ namespace cache {
 
 namespace render {
 
-  /// class Scene - height and width is for the window
+  /// class Scene - Store the layers and the height/width of the game - reacts only to "Level_Changed"  StateEvent
   class Scene : public cache::CacheStateObserver {
     // Associations
     // Attributes

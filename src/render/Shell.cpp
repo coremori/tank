@@ -16,9 +16,6 @@ namespace render{
         this->countTimeExplosion = 0;
     }
     
-    int Shell::getXEnd() const {
-        return xEnd;
-    }
     
     bool Shell::setNextTile(Tile* tile) {//return false if the shell is at the target
         if(countTimeExplosion == 5)//dure 10 frame

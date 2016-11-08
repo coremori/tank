@@ -18,7 +18,7 @@ namespace state {
 
 namespace state {
 
-  /// class State - mobiles-> liste des truc mobile (tank, misile)
+  /// class State - Store the list of the elements of the background (grid) and the list of the tank(mobiles)
   class State : public state::Observable {
     // Associations
     // Attributes

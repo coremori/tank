@@ -15,7 +15,7 @@ namespace state {
 
 namespace state {
 
-  /// class StateEvent - 
+  /// class StateEvent - Event concerning the state
   class StateEvent {
     // Associations
     state::StateEventId id;

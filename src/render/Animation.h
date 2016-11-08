@@ -9,7 +9,7 @@ namespace render {
 
 namespace render {
 
-  /// class Animation - 
+  /// class Animation - Give the method to draw the next tile in a animation
   class Animation {
     // Attributes
   protected:
