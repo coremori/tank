@@ -14,6 +14,7 @@ namespace render {
     // Attributes
   protected:
     bool rightDirection;
+    int countTimeExplosion;
     // Operations
   public:
     virtual ~Animation ();

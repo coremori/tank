@@ -15,6 +15,7 @@ namespace render{
         this->yEnd = yEnd;
         this->yCeiling = yCeiling;
         this->rightDirection = rightDirection;
+        this->countTimeExplosion = 0;
     }
         
     int Missile::getXEnd() const {
@@ -26,29 +27,37 @@ namespace render{
     }
         
     bool Missile::setNextTile(Tile* tile) {
-        if(tile->getX()==xEnd)//vertical d'impact
+        if(tile->getX()>=xEnd)//vertical d'impact
         {
-            if(tile->getY()==yEnd)//Si on est au point d'impact, on a déjà exploser
-                return false;
-            tile->setY(tile->getY()+8);
-            if(tile->getY()==yEnd)//Si on est au point d'impact, on explose
+            if(tile->getY()>=yEnd)
             {
-                tile->setXTex(16);
-                tile->setYTex(112);
-            }
-        }
-        else if(tile->getY()==yCeiling)//si on est sur l'horizontal
-        {
-            if(rightDirection)//si on va à droite
-            {
-                tile->setX(tile->getX()+8);
+                if(countTimeExplosion == 5)//dure 10 frame
+                    return false;
+                if(!countTimeExplosion)//Si on est au point d'impact, on explose
+                {
+                    tile->setXTex(16);
+                    tile->setYTex(112);
+                }
+                countTimeExplosion ++;
             }
             else
             {
-                tile->setX(tile->getX()-8);
+                tile->setY(tile->getY()+3);
             }
             
-            if(tile->getX()==xEnd)
+        }
+        else if(tile->getY()<=yCeiling)//si on est sur l'horizontal
+        {
+            if(rightDirection)//si on va à droite
+            {
+                tile->setX(tile->getX()+3);
+            }
+            else
+            {
+                tile->setX(tile->getX()-3);
+            }
+            
+            if(tile->getX()>=xEnd)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< rightDirection depend!
             {
                 tile->setHeight(16);
                 tile->setWidth(8);
@@ -58,20 +67,20 @@ namespace render{
         }
         else//si on est sur la vertical de tir
         {
-            tile->setY(tile->getY()-8);
-            if(tile->getY()==yCeiling)
+            tile->setY(tile->getY()-3);
+            if(tile->getY()<=yCeiling)
             {
                 tile->setHeight(8);
                 tile->setWidth(16);
                 if(rightDirection)//ob va a droite
                 {
                     tile->setXTex(8);
-                    tile->setYTex(104);
+                    tile->setYTex(96);
                 }
                 else//on va à gauche
                 {
                     tile->setXTex(8);
-                    tile->setYTex(96);
+                    tile->setYTex(104);
                 }
             }
         }

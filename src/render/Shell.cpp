@@ -13,6 +13,7 @@ namespace render{
     Shell::Shell(int xEnd, bool rightDirection) {//xEnd and bool rightDirection = true if go to the right
         this->xEnd = xEnd;
         this->rightDirection = rightDirection;
+        this->countTimeExplosion = 0;
     }
     
     int Shell::getXEnd() const {
@@ -20,13 +21,21 @@ namespace render{
     }
     
     bool Shell::setNextTile(Tile* tile) {//return false if the shell is at the target
-        if(tile->getX()==xEnd)
+        if(countTimeExplosion == 5)//dure 10 frame
             return false;
-        tile->setX(tile->getX()+8);
-        if(tile->getX()==xEnd)
+        if(tile->getX()>=xEnd)
         {
-            tile->setXTex(8);
-            tile->setYTex(112);
+            
+            if(!countTimeExplosion)
+            {
+                tile->setXTex(8);
+                tile->setYTex(112);
+            }
+            countTimeExplosion ++;
+        }
+        else
+        {
+            tile->setX(tile->getX()+3);
         }
         return true;
     }

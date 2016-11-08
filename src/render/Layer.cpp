@@ -200,7 +200,8 @@ namespace render {
     void Layer::update (){// update tiles who have been modified
         if(animation != NULL)//animation existe
         {
-            if(!animation->setNextTile(&tiles[tiles.size()]))//set the next tile of the animation and return false if it is finish
+            bool test = animation->setNextTile(&tiles[tiles.size()-1]);
+            if(!test)//set the next tile of the animation and return false if it is finish
             {
                 delete(animation);
                 animation = NULL;

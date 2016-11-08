@@ -137,7 +137,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     sf::Vector2i localPosition;
     //
-    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,-1);
+    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,true,3);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
     while (window.isOpen())
     {
@@ -231,7 +231,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 
 
         sf::Time elapsed = clock.getElapsedTime();
-        if(elapsed >= sf::milliseconds(1000))
+        if(elapsed >= sf::milliseconds(50))
         {
             scene->update();
             clock.restart();
