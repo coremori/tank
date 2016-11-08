@@ -158,7 +158,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 //music.stop();
                 window.close();
             }
-            else if (event.type == sf::Event::KeyPressed)
+             else if (event.type == sf::Event::KeyPressed)
             {
                 switch(event.key.code){
                     case sf::Keyboard::Escape :

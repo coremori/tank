@@ -81,9 +81,9 @@ namespace render{
             {
                 const state::ProjectileEvent* event = static_cast<const state::ProjectileEvent*>(stateEvent[i]);
                 tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 16)));
-                
-                tiles[tiles.size()-1].setXTex(0);
-                tiles[tiles.size()-1].setYTex(96);
+                //tiles.push_back(*(new Tile(0,0, 8, 16)));
+                tiles[tiles.size()-1].setXTex(8);
+                tiles[tiles.size()-1].setYTex(88);
                 
                 if(event->yMax==-1)//type shell
                 {
