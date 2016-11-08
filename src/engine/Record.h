@@ -2,7 +2,7 @@
 #ifndef ENGINE__RECORD__H
 #define ENGINE__RECORD__H
 
-#include "../state.h"
+#include "state/State.h"
 #include <vector>
 
 namespace engine {

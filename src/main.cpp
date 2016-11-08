@@ -1,41 +1,17 @@
-// Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <fstream>
-#include <string.h>
-#include "state/Element.h"
-#include "state/ElementList.h"
-#include "state/Obstacle.h"
-#include "state/Space.h"
-#include "state/Tank.h"
-#include "engine.h"
+/* 
+ * Author: Corentin Morisse & Pierre-Bernard Le Roux 
+ * Created on September 24, 2016, 3:34 PM
+ *
+ * Part of tank */
 
-#include "piloteSFML.hpp"
-#include "render.h"
-/*#include <cstdlib>
-#include <pthread.h>*/
-
-/* #define NUM_THREADS     5*/
-
-void testSFML() {
-    sf::Texture texture;
-}
-
-// Fin test SFML
-
-
-using namespace std;
-using namespace state;
-using namespace render;
-
- 
+#include "state/State.h"
+#include "engine/Engine.h"
+#include "client/PiloteSFML.h"
 
 int main ()
 {
-    
-   // render::
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     Etat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    State* state = new State();    
+    state::State* state = new state::State();    
    
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
@@ -43,11 +19,9 @@ int main ()
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
     engine->getRuler()->setActions(actions);
 
-    
-
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
-    piloteSFML* rendu = new piloteSFML(state);// s'occupe de l'affichage de la fenetre
+    client::PiloteSFML* rendu = new client::PiloteSFML(state);// s'occupe de l'affichage de la fenetre
     rendu->setEngine(engine);
     rendu->affiche();   
        

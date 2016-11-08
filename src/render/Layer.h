@@ -3,26 +3,26 @@
 #define RENDER__LAYER__H
 
 #include <vector>
-#include "../state.h"
+#include "state/ElementList.h"
 
 namespace render {
   class Surface;
   class Tile;
   class Animation;
 };
-namespace cache {
+namespace client {
   class CacheStateObserver;
 }
 
 #include "Tile.h"
-#include "cache/CacheStateObserver.h"
+#include "client/CacheStateObserver.h"
 #include "Animation.h"
 #include "Surface.h"
 
 namespace render {
 
   /// class Layer - Layer to display - convert the element to tile and stock them
-  class Layer : public cache::CacheStateObserver {
+  class Layer : public client::CacheStateObserver {
     // Associations
     // Attributes
   protected:

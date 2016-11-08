@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#include "state.hpp"
+#include "state.h"
+#include <assert.h>
 
 
 namespace state {

@@ -2,7 +2,6 @@
 #ifndef STATE__PROJECTILEEVENT__H
 #define STATE__PROJECTILEEVENT__H
 
-#include "state/StateEvent.h"
 
 namespace state {
   class StateEvent;

@@ -2,7 +2,8 @@
 #ifndef ENGINE__ACTIONDIRECTION__H
 #define ENGINE__ACTIONDIRECTION__H
 
-#include "../state.h"
+#include "state/Orientation.h"
+#include "state/State.h"
 
 namespace engine {
   class Action;

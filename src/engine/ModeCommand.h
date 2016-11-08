@@ -12,7 +12,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class ModeCommand - 
+  /// class ModeCommand - Command change mode
   class ModeCommand : public engine::Command {
     // Attributes
   protected:

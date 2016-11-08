@@ -8,17 +8,17 @@ namespace render {
   class Layer;
   class Surface;
 };
-namespace cache {
+namespace client {
   class CacheStateObserver;
 }
 
-#include "cache/CacheStateObserver.h"
+#include "client/CacheStateObserver.h"
 #include "Layer.h"
 
 namespace render {
 
   /// class Scene - Store the layers and the height/width of the game - reacts only to "Level_Changed"  StateEvent
-  class Scene : public cache::CacheStateObserver {
+  class Scene : public client::CacheStateObserver {
     // Associations
     // Attributes
   protected:

@@ -12,7 +12,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class CommandSet - 
+  /// class CommandSet - list of commands
   class CommandSet {
     // Associations
     // Attributes

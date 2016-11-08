@@ -12,7 +12,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class LoadCommand - 
+  /// class LoadCommand - Command load
   class LoadCommand : public engine::Command {
     // Attributes
   protected:

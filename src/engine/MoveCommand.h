@@ -11,7 +11,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class MoveCommand - 
+  /// class MoveCommand - Command Move
   class MoveCommand : public engine::Command {
     // Attributes
   protected:

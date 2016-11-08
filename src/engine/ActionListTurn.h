@@ -3,7 +3,7 @@
 #define ENGINE__ACTIONLISTTURN__H
 
 #include <vector>
-#include "../state.h"
+#include "state/State.h"
 
 namespace engine {
   class Action;
@@ -13,7 +13,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class ActionListTurn - //liste les actions faite sur le tour
+  /// class ActionListTurn - List of a turn's action
   class ActionListTurn {
     // Associations
     // Attributes

@@ -6,6 +6,7 @@
 
 
 #include "ActionDirection.h"
+#include "../state/Tank.h"
 
 namespace engine {
     

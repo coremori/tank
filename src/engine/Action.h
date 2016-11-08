@@ -2,11 +2,11 @@
 #ifndef ENGINE__ACTION__H
 #define ENGINE__ACTION__H
 
-#include "../state.h"
+#include "state/State.h"
 
 namespace engine {
 
-  /// class Action - 
+  /// class Action - API of the differents action - Apply() for doing the action - Undo() for undo the action
   class Action {
     // Operations
   public:
