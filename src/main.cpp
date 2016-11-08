@@ -34,53 +34,14 @@ using namespace render;
 
 int main ()
 {
-   /*pthread_t threads[NUM_THREADS];
-   int rc;
-   void *status;
-   
-      cout << "main() : creating thread for the render " << endl;
-      
-*/    
-      
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     Etat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     State* state = new State();    
-    /*obs.push_back(*scene);
-    obs.push_back(*(new render::LandscapeLayer()));
-    obs.push_back(*(new render::MobileLayer()));
-    obs.push_back(*(new render::CharLayer()));
-    
-    render::LandscapeLayer* landlayer = dynamic_cast<render::LandscapeLayer*>(obs[1]);
-    render::MobileLayer* mobilelayer = dynamic_cast<render::MobileLayer*>(obs[2]);
-    render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(obs[3]);*/
-    /*
-    LandscapeLayer* layer = new LandscapeLayer();
-    MobileLayer* layerchar = new MobileLayer();
-    CharLayer* layertext = new CharLayer();
-    
-    layertext->setXChar(120);
-    state->getGrid().registerObserver(layer);
-    state->getMobiles().registerObserver(layerchar);
-    state->getMobiles().registerObserver(layertext);
-    
-    
-    Scene* scene = new Scene();
-    scene->setLayer(0,layer);
-    scene->setLayer(1,layerchar);
-    scene->setLayer(2,layertext);
-    //scene->stateChanged(*state);
-    state->registerObserver(scene);*/
-    //state->load("res/Levels/level1.txt");
-    
-    
+   
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
    
     engine::Engine* engine = new engine::Engine(state);
     engine::ActionListTurn* actions = new engine::ActionListTurn(state);
-    //engine->setRuler();
-    
     engine->getRuler()->setActions(actions);
-    //engine->getRuler()->impleRule(engine::play);
-    //engine->getRuler()->apply();
-    //scene->stateChanged(*state);
 
     
 
@@ -89,31 +50,7 @@ int main ()
     piloteSFML* rendu = new piloteSFML(state);// s'occupe de l'affichage de la fenetre
     rendu->setEngine(engine);
     rendu->affiche();   
-    /*
-      rc = pthread_create(&threads[0], NULL,PrintWindows, NULL);
-      
-      if (rc){
-         cout << "Error:unable to create thread," << rc << endl;
-         exit(-1);
-      }
-      
-      rc = pthread_create(&threads[1], NULL,Flemme, NULL);
-      
-      if (rc){
-         cout << "Error:unable to create thread," << rc << endl;
-         exit(-1);
-      }
-      
-    pthread_join(threads[0], &status);
-    pthread_join(threads[1], &status);
-    
-    
-    cout << "I was tired of waiting" << endl;
-   
-   
-    pthread_exit(0); 
-*/
-   
+       
 
     return 0;
 }
