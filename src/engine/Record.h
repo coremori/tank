@@ -15,7 +15,7 @@ namespace engine {
   class Record {
     // Attributes
   protected:
-    static state::State& mainState;
+    state::State& mainState;
     state::State* initState;
     state::State* lastState;
     std::vector<ActionListTurn*> actions;
