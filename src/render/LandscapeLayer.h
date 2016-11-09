@@ -11,7 +11,7 @@ namespace render {
 
 namespace render {
 
-  /// class LandscapeLayer - 
+  /// class LandscapeLayer - Background Layer, doesn't reacts with any StateEvent
   class LandscapeLayer : public render::Layer {
     // Operations
   public:

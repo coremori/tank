@@ -3,7 +3,6 @@
 #define STATE__OBSERVABLE__H
 
 #include <vector>
-#include "state/StateEvent.h"
 
 namespace state {
   class StateObserver;
@@ -14,7 +13,7 @@ namespace state {
 
 namespace state {
 
-  /// class Observable - 
+  /// class Observable - List of the class's observers 
   class Observable {
     // Associations
     // Attributes
@@ -24,7 +23,7 @@ namespace state {
   public:
     ~Observable ();
     void registerObserver (StateObserver* obs) const;
-    void notifyObserver (const StateEvent& event) const;
+    virtual void notifyObserver (const StateEvent& event) const;
   };
 
 };

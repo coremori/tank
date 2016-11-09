@@ -1,4 +1,4 @@
-#include "state.hpp"
+#include "state.h"
 
 /* constructeur à faire et typeId à mettre*/
 

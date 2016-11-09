@@ -29,13 +29,13 @@ namespace engine{
     
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
-        if(cmd->getCategory()==100)
+        if(cmd->getCategory()==100)//commande load
         {
             LoadCommand* lcmd = dynamic_cast<LoadCommand*>(cmd);
             state->load(lcmd->getFileName());
             return;
-        }
-        if(cmd->getCharacter()==charTurn)
+        }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< mettre ici le cas de commande pour le mode (on peut lui demander "reccord debut/fin everytime, et alors pas de mouvement)
+        if(cmd->getCharacter()==charTurn)//si c'est au tour du personnage
             waitingcommands->add(cmd);
         commands_mutex.unlock();
     };

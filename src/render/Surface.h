@@ -12,7 +12,7 @@ namespace render {
 
 namespace render {
 
-  /// class Surface - loadTexture : image + position de la texture dans image (donnée pat Tile) ; setSpriteTexture : on donne les tiles de la texture stocké à afficher
+  /// class Surface - API to the graphic interface
   class Surface {
     // Operations
   public:

@@ -8,9 +8,7 @@ namespace state {
   enum TypeId {
     obstacle = 1,
     space = 2,
-    tank = 3,
-    missile = 4,
-    shell = 5
+    tank = 3
   };
 
 };

@@ -2,7 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
-#include "../state.h"
+#include "state/State.h"
 #include <mutex>
 
 namespace engine {
@@ -19,7 +19,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class Engine - 
+  /// class Engine - Pilote of the game
   class Engine {
     // Associations
     engine::EngineMode mode;

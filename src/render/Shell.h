@@ -12,7 +12,7 @@ namespace render {
 
 namespace render {
 
-  /// class Shell - 
+  /// class Shell - Animation for the shell - use setNextTile for determining the next tile in the animation
   class Shell : public render::Animation {
     // Attributes
   protected:
@@ -20,7 +20,6 @@ namespace render {
     // Operations
   public:
     Shell (int xEnd, bool rightDirection);
-    int getXEnd () const;
     bool setNextTile (Tile* tile);
   };
 

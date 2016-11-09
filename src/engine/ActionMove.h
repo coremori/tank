@@ -2,7 +2,7 @@
 #ifndef ENGINE__ACTIONMOVE__H
 #define ENGINE__ACTIONMOVE__H
 
-#include "../state.h"
+#include "state/State.h"
 
 namespace engine {
   class Action;

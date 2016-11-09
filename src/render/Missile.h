@@ -12,7 +12,7 @@ namespace render {
 
 namespace render {
 
-  /// class Missile - 
+  /// class Missile - Animation for the missile - use setNextTile for determining the next tile in the animation
   class Missile : public render::Animation {
     // Attributes
   protected:
@@ -23,8 +23,6 @@ namespace render {
   public:
     Missile (int xEnd, int yEnd, int yCeiling, bool rightDirection);
     bool setNextTile (Tile* tile);
-    int getXEnd () const;
-    int getYEnd () const;
   };
 
 };

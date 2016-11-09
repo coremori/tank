@@ -647,43 +647,120 @@ void print_include_sfmllib(struct sfmllib_includes* si,char* name) {
 }
 
 struct statelib_includes{
+   int element;
+   int staticElement;
+   int obstacle;
+   int obstacleTypeId;
+   int space;
+   int typeId;
    int state;
+   int elementList;
+   int elementGrid;
+   int tank;
+   int tankTypeId;
+   int orientation;
    int stateEvent;
+   int elementEvent;
+   int projectileEvent;
+   int stateEventId;
+   int observable;
+   int stateObserver;
+   
+   //render part :
+   int surfaceSFML;
+   int scene;
+   
+   //engine part
+   int engine;
+   
 };
 
 void print_include_statelib(struct statelib_includes* si,char* name) {
     if ( strlen(name) > 0 ) {
-	if(!si->state && (strstr(name,"state::TypeId") 
-	|| strstr(name,"state::Element") 
-	|| strstr(name,"state::ElementGrid")
-	|| strstr(name,"state::ElementList")
-	|| strstr(name,"state::State")
-	|| strstr(name,"state::Mobile")
-	|| strstr(name,"state::OrientationMissile")
-	|| strstr(name,"state::Status")
-	|| strstr(name,"state::Projectile")
-	|| strstr(name,"state::StaticElement")
-	|| strstr(name,"state::Orientation")
-	|| strstr(name,"state::TankTypeId")
-	|| strstr(name,"state::PlayerType")
-	|| strstr(name,"state::Tank")
-	|| strstr(name,"state::Shell")
-	|| strstr(name,"state::Missile")
-	|| strstr(name,"state::SpaceTypeId")
-	|| strstr(name,"state::Space")
-	|| strstr(name,"state::ObstacleTypeId")
-	|| strstr(name,"state::ElementEvent")
-	|| strstr(name,"state::StateEventId")
-	|| strstr(name,"state::Observable")
-	|| strstr(name,"state::StateObserver")
-	|| strstr(name,"state::Obstacle"))){
-		print("#include \"../state.h\"\n");
-		si->state = 1;
+	if(!si->typeId && (strstr(name,"state::TypeId"))){
+		print("#include \"state/TypeId.h\"\n");
+		si->typeId = 1;
 	}
-	if(!si->stateEvent && (strstr(name,"StateEvent"))) {
+        if(!si->state && strstr(name,"state::State")){
+		print("#include \"state/State.h\"\n");
+		si->state = 1;
+        }
+        if(!si->elementList && strstr(name,"state::ElementList")){
+		print("#include \"state/ElementList.h\"\n");
+		si->elementList = 1;
+	}
+        if(!si->elementGrid && strstr(name,"state::ElementGrid")){
+		print("#include \"state/ElementGrid.h\"\n");
+		si->elementGrid = 1;
+	}
+        if(!si->tank && strstr(name,"state::Tank")){
+		print("#include \"state/Tank.h\"\n");
+		si->tank = 1;
+	}
+        if(!si->tankTypeId && strstr(name,"state::TankTypeId")){
+		print("#include \"state/TankTypeId.h\"\n");
+		si->tankTypeId = 1;
+	}
+        if(!si->elementGrid && strstr(name,"state::ElementGrid")){
+		print("#include \"state/ElementGrid.h\"\n");
+		si->elementGrid = 1;
+	}
+	if(!si->orientation && strstr(name,"state::Orientation")){
+		print("#include \"state/Orientation.h\"\n");
+		si->orientation = 1;
+	} 
+        if(!si->staticElement && strstr(name,"state::StaticElement")){
+		print("#include \"state/StaticElement.h\"\n");
+		si->staticElement = 1;
+	}
+	if(!si->space && strstr(name,"state::Space")){
+		print("#include \"state/Space.h\"\n");
+		si->space = 1;
+	}
+	if(!si->obstacle && strstr(name,"state::Obstacle")){
+		print("#include \"state/Obstacle.h\"\n");
+		si->obstacle = 1;
+	}
+        if(!si->obstacleTypeId && strstr(name,"state::ObstacleTypeId")){
+		print("#include \"state/ObstacleTypeId.h\"\n");
+		si->obstacleTypeId = 1;
+	}
+	if(!si->stateEvent && (strstr(name,"state::StateEvent"))) {
 		print("#include \"state/StateEvent.h\"\n");
 		si->stateEvent = 1;
 	}
+        if(!si->elementEvent && (strstr(name,"state::ElementEvent"))) {
+		print("#include \"state/ElementEvent.h\"\n");
+		si->elementEvent = 1;
+	}
+        if(!si->projectileEvent && (strstr(name,"state::ProjectileEvent"))) {
+		print("#include \"state/ProjectileEvent.h\"\n");
+		si->projectileEvent = 1;
+	}
+        if(!si->stateEventId && strstr(name, "state::StateEventId")){
+                print("#include \"state/StateEventId.h\"\n");
+		si->stateEventId = 1;
+        }
+        if(!si->observable && strstr(name, "state::Observable")){
+                print("#include \"state/Observable.h\"\n");
+		si->observable = 1;
+        }
+        if(!si->stateObserver && strstr(name, "state::StateObserver")){
+                print("#include \"state/StateObserver.h\"\n");
+		si->stateObserver = 1;
+        }
+        if(!si->surfaceSFML && strstr(name, "SurfaceSFML")){
+                print("#include \"render/SurfaceSFML.hpp\"\n");
+		si->surfaceSFML = 1;
+        }
+        if(!si->scene && strstr(name, "render::Scene")){
+                print("#include \"render/Scene.h\"\n");
+		si->scene = 1;
+        }
+        if(!si->engine && strstr(name, "engine::Engine")){
+                print("#include \"engine/Engine.h\"\n");
+		si->engine = 1;
+        }
 
     }
 }

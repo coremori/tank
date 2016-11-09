@@ -2,7 +2,7 @@
 #ifndef ENGINE__DIRECTIONCOMMAND__H
 #define ENGINE__DIRECTIONCOMMAND__H
 
-#include "../state.h"
+#include "state/Orientation.h"
 
 namespace engine {
   class Command;
@@ -12,7 +12,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class DirectionCommand - 
+  /// class DirectionCommand - Command Direction
   class DirectionCommand : public engine::Command {
     // Attributes
   protected:

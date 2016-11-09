@@ -11,8 +11,6 @@
 #include "../state/ProjectileEvent.h"
 #include "../state/Element.h"
 #include "../state/Tank.h"
-#include "../state/Shell.h"
-#include "../state/Missile.h"
 #include "../state/TypeId.h"
 #include <cstddef>
 #include "../state.h"
@@ -80,17 +78,20 @@ namespace render{
             else if (*stateEvent[i]==state::Projectile_Event)
             {
                 const state::ProjectileEvent* event = static_cast<const state::ProjectileEvent*>(stateEvent[i]);
-                tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 16)));
-                
-                tiles[tiles.size()-1].setXTex(0);
-                tiles[tiles.size()-1].setYTex(96);
-                
+                        
                 if(event->yMax==-1)//type shell
                 {
+                    tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 8)));
+                    tiles[tiles.size()-1].setXTex(0);
+                    tiles[tiles.size()-1].setYTex(112);
                     animation = new Shell(event->xImpact,event->rightDirection);
                 }
                 else
                 {
+                    tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 16)));
+                    tiles[tiles.size()-1].setXTex(0);
+                    tiles[tiles.size()-1].setYTex(96);
+                    
                     animation = new Missile(event->xImpact, event->yImpact, event->rightDirection, event->yMax);
                 }
                

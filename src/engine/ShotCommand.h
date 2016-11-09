@@ -11,7 +11,7 @@ namespace engine {
 
 namespace engine {
 
-  /// class ShotCommand - 
+  /// class ShotCommand - Command shot
   class ShotCommand : public engine::Command {
     // Attributes
   protected:

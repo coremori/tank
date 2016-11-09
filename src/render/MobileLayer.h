@@ -11,7 +11,7 @@ namespace render {
 
 namespace render {
 
-  /// class MobileLayer - 
+  /// class MobileLayer - 2nd layer, display the mobiles elements and the animation
   class MobileLayer : public render::Layer {
     // Operations
   public:

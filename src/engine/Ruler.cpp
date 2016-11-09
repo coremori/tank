@@ -16,6 +16,8 @@
 #include "Engine.h"
 #include "ActionDirection.h"
 #include "DirectionCommand.h"
+#include "ShotCommand.h"
+#include "state/Tank.h"
 
 namespace engine{
 
@@ -89,6 +91,42 @@ namespace engine{
                 }
             }
             
+        }
+        if(cmd->get(SHOT_CATEGORY))//Tir commande
+        {
+            ShotCommand* shot = dynamic_cast<ShotCommand*>(cmd->get(SHOT_CATEGORY));
+            state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(shot->getCharacter()));
+            if(tank->getOrientation()==state::right_up || tank->getOrientation()==state::left_up)//si on vise en haut
+            {
+                //note contre-intuitif : y = 0 est le haut, y = 252522xxx le bas de l'écran
+            }
+            else//tir au sol
+            {
+                int x = tank->getX()/8; // 8 est le nombre de pixel par bloc (element en position par pixel mais tableau d'element indexé en blocs (sand...)....)
+                int y = tank->getY()/8;
+                bool impact = false;
+                
+                while((state->getGrid().hasCell(x,y)) &&  !impact)//tant que l'on est dans le tableau et que c'est du vide
+                {
+                    if(!(state->getGrid().isSpace(x,y)))//impact mur
+                        impact = false;
+                    
+                    for (int i = 0; i<state->getGrid().size(); i++)
+                        if(state->getGrid().get(i)->getX()==x)//si on arrive sur un tank
+                             if(((8*y-state->getGrid().get(i)->getY()-1)>=0) && ((8*y-state->getGrid().get(i)->getY()-1)<=3))
+                             {
+                                  impact = true;
+                                  
+                             }
+                                
+                       
+                    if(tank->getOrientation()==state::right_down)//si on tir à droite
+                        x = x+1;//on peut avancer !
+                    else
+                        x = x-1;//on tir dans l'autre sens (recule)
+                }
+                
+            } 
         }
         
         

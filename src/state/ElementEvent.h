@@ -2,7 +2,6 @@
 #ifndef STATE__ELEMENTEVENT__H
 #define STATE__ELEMENTEVENT__H
 
-#include "state/StateEvent.h"
 
 namespace state {
   class ElementList;
@@ -13,7 +12,7 @@ namespace state {
 
 namespace state {
 
-  /// class ElementEvent - 
+  /// class ElementEvent - Event "Element_Changed"
   class ElementEvent : public state::StateEvent {
     // Attributes
   public:

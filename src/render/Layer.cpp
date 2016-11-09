@@ -43,8 +43,6 @@ namespace render {
         // std::vector<state::Element*> list;
         state::Obstacle* obstacle = NULL;
         state::Tank* tank = NULL;
-        state::Missile* missile = NULL;
-        state::Shell* shell = NULL;
         state::Element* element = NULL;
         unsigned prevSize = tiles.size();
         for(int i=0; i<e->size(); i++)
@@ -110,72 +108,6 @@ namespace render {
                                 break;
                         }
                     break;
-
-                case state::missile :
-                        missile = dynamic_cast<state::Missile*>(element);
-                        switch(missile->getStatus()){
-                            case state::normal :
-                                switch(missile->getOrientation()){
-                                case state::left :
-                                    tiles[i+prevSize].setHeight(8);
-                                    tiles[i+prevSize].setWidth(16);
-                                    tiles[i+prevSize].setXTex(8);
-                                    tiles[i+prevSize].setYTex(96);
-                                    break;
-                                case state::rigth :
-                                    tiles[i+prevSize].setHeight(8);
-                                    tiles[i+prevSize].setWidth(16);
-                                    tiles[i+prevSize].setXTex(8);
-                                    tiles[i+prevSize].setYTex(104);
-                                    break;
-                                case state::up :
-                                    tiles[i+prevSize].setHeight(16);
-                                    tiles[i+prevSize].setWidth(8);
-                                    tiles[i+prevSize].setXTex(0);
-                                    tiles[i+prevSize].setYTex(96);
-                                    break;
-                                case state::down :
-                                    tiles[i+prevSize].setHeight(16);
-                                    tiles[i+prevSize].setWidth(8);
-                                    tiles[i+prevSize].setXTex(24);
-                                    tiles[i+prevSize].setYTex(96);
-                                    break;
-                                }
-                                break;
-
-                            case state::explosion :
-                                tiles[i+prevSize].setXTex(16);
-                                tiles[i+prevSize].setYTex(112);
-                                break;
-
-                        }
-                        
-                    break;
-
-                case state::shell :
-                        shell = dynamic_cast<state::Shell*>(element);
-                        switch(shell->getStatus()){
-                            case state::normal :
-                                switch(shell->getOrientation()){
-                                    case state::left :
-                                        tiles[i+prevSize].setXTex(0);
-                                        tiles[i+prevSize].setYTex(112);
-                                        break;
-                                    case state::rigth :
-                                        tiles[i+prevSize].setXTex(0);
-                                        tiles[i+prevSize].setYTex(112);
-                                        break;
-                                    default :
-                                        break;
-                                }
-                                break;
-                            case state::explosion :
-                                tiles[i+prevSize].setXTex(8);
-                                tiles[i+prevSize].setYTex(112);
-                                break;        
-                        }
-                    break;
-
                 default ://space
                     tiles[i+prevSize].setXTex(32);
                     tiles[i+prevSize].setYTex(88);
@@ -200,7 +132,8 @@ namespace render {
     void Layer::update (){// update tiles who have been modified
         if(animation != NULL)//animation existe
         {
-            if(!animation->setNextTile(&tiles[tiles.size()]))//set the next tile of the animation and return false if it is finish
+            bool test = animation->setNextTile(&tiles[tiles.size()-1]);
+            if(!test)//set the next tile of the animation and return false if it is finish
             {
                 delete(animation);
                 animation = NULL;

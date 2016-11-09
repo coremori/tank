@@ -2,7 +2,6 @@
 #ifndef STATE__STATEEVENT__H
 #define STATE__STATEEVENT__H
 
-#include "state/StateEvent.h"
 
 namespace state {
   class State;
@@ -15,7 +14,7 @@ namespace state {
 
 namespace state {
 
-  /// class StateEvent - 
+  /// class StateEvent - Event concerning the state
   class StateEvent {
     // Associations
     state::StateEventId id;

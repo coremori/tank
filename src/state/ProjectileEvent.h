@@ -2,7 +2,6 @@
 #ifndef STATE__PROJECTILEEVENT__H
 #define STATE__PROJECTILEEVENT__H
 
-#include "state/StateEvent.h"
 
 namespace state {
   class StateEvent;
@@ -12,7 +11,7 @@ namespace state {
 
 namespace state {
 
-  /// class ProjectileEvent - 
+  /// class ProjectileEvent - Event "Projectile_Event"
   class ProjectileEvent : public state::StateEvent {
     // Attributes
   public:

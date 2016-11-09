@@ -90,7 +90,14 @@
     
     void SurfaceSFML::setSpriteNum(int idx, render::Tile tile) {
         
-        if((idx>=(m_vertices.getVertexCount()/4)))//si idx > size ou idx<0 (comparaison signed/unsigned avantageuse ici)
+        if(idx<0)
+            return;
+        unsigned int maxi = idx;
+        if((maxi==(m_vertices.getVertexCount()/4)))//si idx > size ou idx<0 (comparaison signed/unsigned avantageuse ici)
+        {
+            m_vertices.resize(m_vertices.getVertexCount()+4);
+        }
+        else if(maxi>(m_vertices.getVertexCount()/4))
             return;
                 
         int tu = tile.getXTex();//position dans la texture

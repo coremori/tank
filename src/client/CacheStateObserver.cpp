@@ -7,7 +7,7 @@
 
 #include "CacheStateObserver.h"
 
-namespace cache{
+namespace client{
 
             
     void CacheStateObserver::stateChanged(const state::StateEvent& e) {

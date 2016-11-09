@@ -5,7 +5,7 @@
 
 namespace engine {
 
-  /// class Command - 
+  /// class Command - API of command
   class Command {
     // Operations
   public:

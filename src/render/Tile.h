@@ -5,7 +5,7 @@
 
 namespace render {
 
-  /// class Tile - 
+  /// class Tile - Sprite of one element, need to be transfered to the surface for being displaying
   class Tile {
     // Attributes
   protected:

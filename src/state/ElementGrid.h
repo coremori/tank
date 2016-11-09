@@ -13,7 +13,7 @@ namespace state {
 
 namespace state {
 
-  /// class ElementGrid - 
+  /// class ElementGrid - List of Elements with a height and witdh
   class ElementGrid : public state::ElementList {
     // Attributes
   protected:

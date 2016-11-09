@@ -5,7 +5,7 @@
  * Created on October 18, 2016, 1:26 PM
  */
 
-#include "piloteSFML.hpp"
+#include "PiloteSFML.h"
 #include "render/Tile.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -19,13 +19,17 @@
 #include "render/MobileLayer.h"
 #include "render/CharLayer.h"
 
+#include "state/State.h"
 
 
+#include "state/ProjectileEvent.h"
 
-piloteSFML::piloteSFML(state::State* s) {//met la scene à afficher et attribue au layer les surfaces
+namespace client{
+
+PiloteSFML::PiloteSFML(state::State* s) {//met la scene à afficher et attribue au layer les surfaces
     state = s;
-    this->scene = new render::Scene();
-    obs.push_back(scene);
+    this->scene = *(new render::Scene());
+    obs.push_back(&scene);
     obs.push_back(new render::LandscapeLayer());
     obs.push_back(new render::MobileLayer());
     obs.push_back(new render::CharLayer());
@@ -34,9 +38,9 @@ piloteSFML::piloteSFML(state::State* s) {//met la scene à afficher et attribue 
     render::MobileLayer* mobilelayer = dynamic_cast<render::MobileLayer*>(obs[2]);
     render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(obs[3]);
     
-    scene->setLayer(0,landlayer);
-    scene->setLayer(1,mobilelayer);
-    scene->setLayer(2,charlayer);
+    scene.setLayer(0,landlayer);
+    scene.setLayer(1,mobilelayer);
+    scene.setLayer(2,charlayer);
     
     
     state->getGrid().registerObserver(obs[1]);
@@ -47,11 +51,11 @@ piloteSFML::piloteSFML(state::State* s) {//met la scene à afficher et attribue 
     surfaces.push_back(new SurfaceSFML());
     surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour les boutons sans hover
     
-    for(int i=0; i<scene->getLayerCount(); i++)
+    for(int i=0; i<scene.getLayerCount(); i++)
     {
         surfaces.push_back(new SurfaceSFML());
         surfaces[i+1]->loadTexture("res/Textures/textures.png");
-        scene->setSurface(i,surfaces[i+1]);
+        scene.setSurface(i,surfaces[i+1]);
     }
    
     
@@ -68,18 +72,18 @@ piloteSFML::piloteSFML(state::State* s) {//met la scene à afficher et attribue 
     
 }
 
-piloteSFML::~piloteSFML() {
+PiloteSFML::~PiloteSFML() {
 }
 
-void piloteSFML::setEngine(engine::Engine* e) {
+void PiloteSFML::setEngine(engine::Engine* e) {
     this->engine = e;
 }
 
 
 
-void piloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite) {//SpriteOrVertex == true : sprite
+void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite) {//SpriteOrVertex == true : sprite
     //TypeSprite : 0 -> non selectionner, 1-> selectionner
-    int h = scene->getHeight();
+    int h = scene.getHeight();
     if(SpriteOrVertex)
     {
         int s = s_button.size();
@@ -95,7 +99,7 @@ void piloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, 
 };
 
 
-void piloteSFML::applyChange() {
+void PiloteSFML::applyChange() {
         for(unsigned int i = 0; i<obs.size(); i++)
                 obs[i]->applyStateChanged();
 };
@@ -104,13 +108,13 @@ void piloteSFML::applyChange() {
 
 
 
-void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
+void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
     //! mutex non mis !
     applyChange();
-    scene->updateAll();
+    scene.updateAll();
     int Pixel_def = 8;
-    int h = scene->getHeight()*Pixel_def;
-    int w = scene->getWidth()*Pixel_def;
+    int h = scene.getHeight()*Pixel_def;
+    int w = scene.getWidth()*Pixel_def;
     sf::Clock clock;
     
     
@@ -137,7 +141,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     sf::Vector2i localPosition;
     //
-    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,-1);
+    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,true,3);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
     while (window.isOpen())
     {
@@ -158,7 +162,7 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 //music.stop();
                 window.close();
             }
-            else if (event.type == sf::Event::KeyPressed)
+             else if (event.type == sf::Event::KeyPressed)
             {
                 switch(event.key.code){
                     case sf::Keyboard::Escape :
@@ -213,14 +217,14 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                     std::cout << "Button level1 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
                     applyChange();
-                    scene->updateAll();
+                    scene.updateAll();
                 }
                 else if (rectLevel2->contains(localPosition))
                 {
                     std::cout << "Button level2 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
                     applyChange();
-                    scene->updateAll();
+                    scene.updateAll();
                 }
                 // le bouton gauche est enfoncé : on tire
                     //engine->addCommand(new engine::ModeCommand(engine::pause));
@@ -231,9 +235,9 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 
 
         sf::Time elapsed = clock.getElapsedTime();
-        if(elapsed >= sf::milliseconds(1000))
+        if(elapsed >= sf::milliseconds(50))
         {
-            scene->update();
+            scene.update();
             clock.restart();
         }
         window.clear();
@@ -252,3 +256,4 @@ void piloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     }
 }
 
+}

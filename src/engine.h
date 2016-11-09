@@ -18,4 +18,5 @@
 #include "engine/Engine.h"
 #include "engine/ActionMove.h"
 #include "engine/ActionDirection.h"
+#include "engine/ActionShot.h"
 #endif

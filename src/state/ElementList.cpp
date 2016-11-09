@@ -1,7 +1,7 @@
 #include "Element.h"
 #include <iostream>
 #include <fstream>
-#include "state.hpp"
+#include "state.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -96,6 +96,10 @@ namespace state {
 
     void ElementList::notifyObserver(int idx) const {
         Observable::notifyObserver(ElementEvent(this, idx));
+    }
+    
+    void ElementList::notifyObserver (const StateEvent& event) const{
+        Observable::notifyObserver(event);
     }
 
 };

@@ -11,7 +11,7 @@ namespace render {
 
 namespace render {
 
-  /// class CharLayer - 
+  /// class CharLayer - 3rd Layer, display the text depending of the state (pv)
   class CharLayer : public render::Layer {
     // Attributes
   protected:

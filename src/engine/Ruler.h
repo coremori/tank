@@ -2,7 +2,7 @@
 #ifndef ENGINE__RULER__H
 #define ENGINE__RULER__H
 
-#include "../state.h"
+#include "state/State.h"
 
 namespace engine {
   class ActionListTurn;
