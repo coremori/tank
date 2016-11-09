@@ -3,6 +3,7 @@
 #include "Layer.h"
 #include "state.h"
 #include "Scene.h"
+#include "CharLayer.h"
 
 
 namespace render {
@@ -55,15 +56,43 @@ namespace render {
                 layers[0]->elementToTiles(&g);
                 layers[1]->elementToTiles(&l);
 
+                render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(layers[2]);
+                charlayer->setXChar(height*8);
+                
+                layers[2]->charToTiles('p',height*8 , 50);
+                layers[2]->charToTiles('v',height*8 , 50 + 8);
+                layers[2]->charToTiles(' ',height*8 , 50 + 16);
+                layers[2]->charToTiles('p',height*8 , 50 + 24);
+                layers[2]->charToTiles('l',height*8 , 50 + 32);
+                layers[2]->charToTiles('a',height*8 , 50 + 40);
+                layers[2]->charToTiles('y',height*8 , 50 + 48);
+                layers[2]->charToTiles('e',height*8 , 50 + 56);
+                layers[2]->charToTiles('r',height*8 , 50 + 64);
+                layers[2]->charToTiles(' ',height*8 , 50 + 72);
+                layers[2]->charToTiles('1',height*8 , 50 + 80);
+                layers[2]->charToTiles(' ',height*8 , 50 + 88);
+                layers[2]->charToTiles(' ',height*8 , 50 + 96);
+                layers[2]->charToTiles('1',height*8, 50 + 104);
+                layers[2]->charToTiles('0',height*8, 50 + 112);
+                layers[2]->charToTiles('0',height*8, 50 + 120);
 
-                layers[2]->charToTiles('s',height*8);
-                layers[2]->charToTiles('c',height*8);
-                layers[2]->charToTiles('o',height*8);
-                layers[2]->charToTiles('r',height*8);
-                layers[2]->charToTiles('e',height*8);
-                layers[2]->charToTiles(' ',height*8);
-                layers[2]->charToTiles('0',height*8);
-                layers[2]->charToTiles('0',height*8);
+                layers[2]->charToTiles('p',height*8 +16, 50);
+                layers[2]->charToTiles('v',height*8 +16, 50 + 8);
+                layers[2]->charToTiles(' ',height*8 +16, 50 + 16);
+                layers[2]->charToTiles('p',height*8 +16, 50 + 24);
+                layers[2]->charToTiles('l',height*8 +16, 50 + 32);
+                layers[2]->charToTiles('a',height*8 +16, 50 + 40);
+                layers[2]->charToTiles('y',height*8 +16, 50 + 48);
+                layers[2]->charToTiles('e',height*8 +16, 50 + 56);
+                layers[2]->charToTiles('r',height*8 +16, 50 + 64);
+                layers[2]->charToTiles(' ',height*8 +16, 50 + 72);
+                layers[2]->charToTiles('2',height*8 +16, 50 + 80);
+                layers[2]->charToTiles(' ',height*8 +16, 50 + 88);
+                layers[2]->charToTiles(' ',height*8 +16, 50 + 96);
+                layers[2]->charToTiles('1',height*8+16, 50 + 104);
+                layers[2]->charToTiles('0',height*8+16, 50 + 112);
+                layers[2]->charToTiles('0',height*8+16, 50 + 120);
+
             }
         }
         CacheStateObserver::clear();

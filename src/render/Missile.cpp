@@ -19,7 +19,8 @@ namespace render{
     }
             
     bool Missile::setNextTile(Tile* tile) {
-        if(tile->getX()>=xEnd)//vertical d'impact
+        
+        if((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))//vertical d'impact
         {
             if(tile->getY()>=yEnd)
             {
@@ -43,19 +44,27 @@ namespace render{
             if(rightDirection)//si on va à droite
             {
                 tile->setX(tile->getX()+3);
+                if(tile->getX()>=xEnd)
+                {
+                    tile->setHeight(16);
+                    tile->setWidth(8);
+                    tile->setXTex(24);
+                    tile->setYTex(96);
+                }
             }
             else
             {
                 tile->setX(tile->getX()-3);
+                if(tile->getX()<=xEnd)
+                {
+                    tile->setHeight(16);
+                    tile->setWidth(8);
+                    tile->setXTex(24);
+                    tile->setYTex(96);
+                }
             }
             
-            if(tile->getX()>=xEnd)//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< rightDirection depend!
-            {
-                tile->setHeight(16);
-                tile->setWidth(8);
-                tile->setXTex(24);
-                tile->setYTex(96);
-            }
+            
         }
         else//si on est sur la vertical de tir
         {
@@ -64,7 +73,7 @@ namespace render{
             {
                 tile->setHeight(8);
                 tile->setWidth(16);
-                if(rightDirection)//ob va a droite
+                if(rightDirection)//on va a droite
                 {
                     tile->setXTex(8);
                     tile->setYTex(96);

@@ -17,20 +17,20 @@ namespace render {
         tiles.clear();
     }
     
-    void Layer::charToTiles(char c, int Ypos) {//on choisi d'alligner les truc en bas gauche avec un écart de 160 pixels (toujours modifiables après hein :P)
+    void Layer::charToTiles(char c, int Ypos, int Xpos) {//on choisi d'alligner les truc en bas gauche avec un écart de 160 pixels (toujours modifiables après hein :P)
         unsigned prevSize = tiles.size();  
         if (c==' '){
-            tiles.push_back(*(new Tile(160+prevSize*8,Ypos)));
+            tiles.push_back(*(new Tile(Xpos,Ypos)));
             tiles[prevSize].setXTex(0);
             tiles[prevSize].setYTex(48);//rien
         }
-        else if ((c>47)&(c<57)){//nombre
-            tiles.push_back((*new Tile(160+prevSize*8,Ypos)));
+        else if ((c>47)&&(c<58)){//nombre
+            tiles.push_back((*new Tile(Xpos,Ypos)));
             tiles[prevSize].setXTex((c-48)*8);
             tiles[prevSize].setYTex(64);
         }
         else{//alphabet
-            tiles.push_back(*(new Tile(160+prevSize*8,Ypos+1)));
+            tiles.push_back(*(new Tile(Xpos,Ypos+1)));
             tiles[prevSize].setXTex((c-97)*8);
             tiles[prevSize].setYTex(56);
         }    
