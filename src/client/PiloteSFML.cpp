@@ -140,8 +140,6 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     sf::IntRect* rectLevel2 = new sf::IntRect(w-74,h+8, 64, 23);
     
     sf::Vector2i localPosition;
-    //
-    state::ProjectileEvent* shellevent = new state::ProjectileEvent(80,64,160,64,true,3);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
     while (window.isOpen())
     {
@@ -196,8 +194,6 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                     case sf::Keyboard::Space :
                         std::cout << "shot" << std::endl;
                         engine->addCommand(new engine::ShotCommand(character,10));
-                        
-                        obs[2]->stateChanged(*shellevent);
                         break;
                     default : break;
                 }

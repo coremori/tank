@@ -35,7 +35,7 @@ namespace render {
     Layer ();
     ~Layer ();
     void clear ();
-    void charToTiles (char c, int Ypos);
+    void charToTiles (char c, int Ypos, int Xpos);
     void elementToTiles (const state::ElementList* list);
     Tile getTile (int i);
     void setTile (int idx, Tile tile);

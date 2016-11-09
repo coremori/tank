@@ -37,6 +37,7 @@ namespace engine {
     ~Engine ();
     void addCommand (Command* cmd);
     void setMode (EngineMode m);
+    EngineMode getMode () const;
     void setcharTurn (int c);
     int getcharTurn () const;
     Ruler* getRuler ();

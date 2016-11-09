@@ -29,15 +29,26 @@ namespace engine{
         {
             state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(characterTarget));
             tank->setPv(tank->getPv()-damage);
+            
+                s->getMobiles().notifyObserver(*(new state::StateEvent(s,state::Pv_Changed)));
         }
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
-        if((xImpact-tank->getX())>0){
-           s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
+        if(yMax==-1)
+        {
+            if((xImpact-tank->getX())>0)
+                s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
+            else
+                s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()-8,tank->getY()-7,xImpact,yImpact, false, yMax)));
         }
         else
         {
-            s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()-8,tank->getY()-7,xImpact,yImpact, false, yMax)));
+            if((xImpact-tank->getX())>0)
+                s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
+            else
+                s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, false, yMax)));
         }
+        
+        
             
         return;
     }
