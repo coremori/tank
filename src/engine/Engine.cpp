@@ -10,9 +10,14 @@
 #include "CommandSet.h"
 #include "../state/State.h"
 #include "LoadCommand.h"
+#include "state/Tank.h"
 #include <mutex>
 #include <chrono>
+#include <ctime>
 #include <thread>
+
+#include <iostream>
+
 
 
 namespace engine{
@@ -61,6 +66,11 @@ namespace engine{
         else 
             mode = m;
     }
+       
+    EngineMode Engine::getMode() const {
+        return mode;
+    }
+
         
     void Engine::swapCommands() {//lock commands and swap them
         commands_mutex.lock();
@@ -73,10 +83,26 @@ namespace engine{
 
     void Engine::endTurn() {//swap waitingcommands and currentcommands, send the waitingcommand to the ruler and apply them
         swapCommands();
+        /*if(charTurn == 1 )// Other player round
+            charTurn = 0;
+        else
+            charTurn = 1*/
         ruler.setCommandSet(currentcommands);
         ruler.apply();
+        for(int i = 0; i<state->getMobiles().size(); i++)
+        {
+            state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
+            if(tank->getPv() == 0){
+                if(i==1)
+                    std::cout << "Victoire" << std::endl;
+                else
+                    std::cout << "lost" << std::endl;
+            }
+        }
+            
     }
-    void Engine::update() {//tant ue la fenetre n'est pas fermée
+    void Engine::update() {//tant que la fenetre n'est pas fermée
+        
         while(mode!=close)
         {
             //std::this_thread::sleep_for(2s);
