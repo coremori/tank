@@ -32,36 +32,38 @@ namespace state {
     };
         
     void ElementList::clear (){
-        elements.clear();
+        elements.clear(); //Removes all elements from the "elements" container. 
     };
     
   
     void ElementList::set ( int idx, Element* e){
-        if(idx==size())
+        if(idx==size()) //sens?
             elements.push_back(e);
         elements[idx] = e;
     };
     
+    
+    
     void ElementList::load(const char* path){
+        
         int NB_STD_HEIGHT_SPRITE = 8;
-
         string line;
         ifstream myfile(path);
         int x=0,y=-NB_STD_HEIGHT_SPRITE;
         int w,h;
-        if(myfile.is_open())
-        {
+        
+        
+        if(myfile.is_open()){
+            
             myfile >> w >> h;
             s.getGrid().setWidth(w);
             s.getGrid().setHeight(h);
+            
             while (getline(myfile,line))
             {
-                
                 x = 0;
                 
                 for(unsigned int i = 0; i < line.length(); i++){
-                    
-                    
                     
                     if(line.at(i)=='.'){
                         this->elements.push_back(new Space(x,y));
@@ -83,6 +85,7 @@ namespace state {
                         this->elements.push_back(new Space(x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down,x,y));
                     }
+                    
                     x = x+NB_STD_HEIGHT_SPRITE;
                 }
                 y=y+NB_STD_HEIGHT_SPRITE;
