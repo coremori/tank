@@ -125,6 +125,11 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         std::cout << "file not found "<<std::endl;
     music.play();
   */  
+    
+    
+    
+    
+    
     //button "fin de tour"
     button((w-104)/2,0,104,1,0);//bouton centré
     button((w-104)/2,0,104,1,1);
@@ -140,6 +145,18 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     sf::IntRect* rectLevel2 = new sf::IntRect(w-74,h+8, 64, 23);
     
     sf::Vector2i localPosition;
+    
+    
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< test message victoire
+    int si = s_button.size();
+        s_button.push_back(new sf::Sprite());
+        s_button[si]->setTexture(m_tilesetButton);
+        s_button[si]->setTextureRect(sf::IntRect(104, 41, 120, 30));
+        s_button[si]->setPosition(0,0);
+        
+        
+        
+        
     
     while (window.isOpen())
     {
@@ -240,12 +257,14 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         for(unsigned int i=0; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);
         
+              
         if(hover)
             window.draw(*s_button[1]);
         else
             window.draw(*s_button[0]);
         
-        
+        if(engine->getMode()==engine::victoire)
+            window.draw(*s_button[2]);
         
         window.display();
         

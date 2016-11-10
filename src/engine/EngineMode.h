@@ -8,7 +8,10 @@ namespace engine {
   enum EngineMode {
     play     = 1,
     pause     = 2,
-    close     = 0
+    close     = 0,
+    animation     = 3,
+    victoire     = 4,
+    defaite     = 5
   };
 
 };

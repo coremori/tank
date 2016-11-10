@@ -94,9 +94,16 @@ namespace engine{
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
             if(tank->getPv() == 0){
                 if(i==1)
-                    std::cout << "Victoire" << std::endl;
+                {
+                     std::cout << "Victoire" << std::endl;
+                     mode = victoire;
+                }
                 else
+                {
                     std::cout << "lost" << std::endl;
+                    mode = defaite;
+                }
+                    
             }
         }
             
