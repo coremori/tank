@@ -2,8 +2,7 @@
 #ifndef AI__DUMBAI__H
 #define AI__DUMBAI__H
 
-#include "state/State.h"
-#include "state/StateEvent.h"
+#include "engine/CommandSet.h"
 
 namespace ai {
   class AI;
@@ -17,10 +16,8 @@ namespace ai {
   class DumbAI : public ai::AI {
     // Operations
   public:
-    DumbAI (const state::State& mainState);
-    void dumbMove (int idx, engine::CommandSet& commands);
+    DumbAI ();
     void run (engine::CommandSet& commands);
-    void stateChanged (const state::StateEvent& e);
   };
 
 };

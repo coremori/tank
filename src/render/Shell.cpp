@@ -33,9 +33,9 @@ namespace render{
         else
         {
             if(rightDirection)
-                tile->setX(tile->getX()+3);
+                tile->setX(tile->getX()+6);
             else
-                tile->setX(tile->getX()-3);
+                tile->setX(tile->getX()-6);
         }
         return true;
     }

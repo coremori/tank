@@ -26,6 +26,8 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/render.dia)
 
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/state.dia)
 
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/ai.dia)
+
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/engine.dia)
 
 

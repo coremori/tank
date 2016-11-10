@@ -15,6 +15,7 @@
 #include "ModeCommand.h"
 
 #include "state/Tank.h"
+#include "ai/DumbAI.h"
 #include <mutex>
 #include <chrono>
 #include <ctime>
@@ -34,6 +35,7 @@ namespace engine{
         charTurn = 0;
         ruler.setState(state);
         mode = play;
+        ai = new ai::DumbAI();
 
     };
     
@@ -89,10 +91,11 @@ namespace engine{
 
     void Engine::endTurn() {//swap waitingcommands and currentcommands, send the waitingcommand to the ruler and apply them
         swapCommands();
-        /*if(charTurn == 1 )// Other player round
+        if(charTurn == 1 )// Other player round
             charTurn = 0;
         else
-            charTurn = 1*/
+            charTurn = 1;
+        
         ruler.setCommandSet(currentcommands);
         ruler.apply();
         for(int i = 0; i<state->getMobiles().size(); i++)
@@ -146,6 +149,10 @@ namespace engine{
             update_mutex.lock();
             endTurn();
             update_mutex.unlock();
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            if(charTurn==1)
+                ai->run(*waitingcommands);
+
         }
     }
 

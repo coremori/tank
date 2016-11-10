@@ -672,6 +672,9 @@ struct statelib_includes{
    
    //engine part
    int engine;
+   int commandSet;
+   //ai part
+   int ai;
    
 };
 
@@ -760,6 +763,14 @@ void print_include_statelib(struct statelib_includes* si,char* name) {
         if(!si->engine && strstr(name, "engine::Engine")){
                 print("#include \"engine/Engine.h\"\n");
 		si->engine = 1;
+        }
+        if(!si->commandSet && strstr(name, "engine::CommandSet")){
+                print("#include \"engine/CommandSet.h\"\n");
+		si->commandSet = 1;
+        }
+        if(!si->ai && strstr(name, "ai::AI")){
+                print("#include \"ai/AI.h\"\n");
+		si->ai = 1;
         }
 
     }

@@ -5,24 +5,15 @@
  * Part of tank 
  */
 #include "AI.h"
+#include "engine.h"
 
 namespace ai {
 
-    AI::AI (const state::State& mainState){
+    AI::AI (){
         
     };
     
     AI::~AI (){
         
     };
-    
-    bool const AI::nextLocation (int idx, int& x, int& y){
-        
-    };
-    
-    void AI::run (engine::CommandSet& commands){
-        
-    };
-  
-
 };

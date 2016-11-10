@@ -2,21 +2,17 @@
 #ifndef AI__AI__H
 #define AI__AI__H
 
-#include "state/State.h"
+#include "engine/CommandSet.h"
 
 namespace ai {
 
   /// class AI - 
   class AI {
-    // Attributes
-  public:
-    const state::State& mainState;
     // Operations
   public:
-    bool const nextLocation (int idx, int& x, int& y);
-    AI (const state::State& mainState);
+    AI ();
     ~AI ();
-    void run (engine::CommandSet& commands);
+    virtual void run (engine::CommandSet& commands) = 0;
   };
 
 };

@@ -4,6 +4,7 @@
 
 #include "state/State.h"
 #include <mutex>
+#include "ai/AI.h"
 
 namespace engine {
   class CommandSet;
@@ -32,6 +33,7 @@ namespace engine {
     state::State* state;
     mutable std::mutex commands_mutex;
     mutable std::mutex update_mutex;
+    ai::AI* ai;
     // Operations
   public:
     Engine (state::State* s);
