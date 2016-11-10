@@ -146,13 +146,15 @@ namespace engine{
         }
         else if(waitingcommands->get(END_CATEGORY))
         {
-            update_mutex.lock();
-            endTurn();
-            update_mutex.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            if(charTurn==1)
-                ai->run(*waitingcommands);
-
+            if(mode!=victoire && mode!=defaite)
+            {
+                update_mutex.lock();
+                endTurn();
+                update_mutex.unlock();
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                if(charTurn==1)
+                    ai->run(*waitingcommands);
+            }
         }
     }
 

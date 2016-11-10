@@ -84,8 +84,13 @@ void PiloteSFML::createMenu() {
     int si = s_button.size();
         s_button.push_back(new sf::Sprite());
         s_button[si]->setTexture(m_tilesetButton);
-        s_button[si]->setTextureRect(sf::IntRect(104, 41, 120, 30));
-        s_button[si]->setPosition(0,0);
+        s_button[si]->setTextureRect(sf::IntRect(624, 0, 388, 72));
+        s_button[si]->setPosition(408,24);
+        
+        s_button.push_back(new sf::Sprite());
+        s_button[si+1]->setTexture(m_tilesetButton);
+        s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));
+        s_button[si+1]->setPosition(409,24);
         
     }
 
@@ -98,7 +103,7 @@ void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, 
         int s = s_button.size();
         s_button.push_back(new sf::Sprite());
         s_button[s]->setTexture(m_tilesetButton);
-        s_button[s]->setTextureRect(sf::IntRect(xTex, xTex+TypeSprite*23, width, 23));
+        s_button[s]->setTextureRect(sf::IntRect(xTex, TypeSprite*23, width, 23));
         s_button[s]->setPosition(x1,h*8+8);
     }
     else
@@ -247,8 +252,16 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         else
             window.draw(*s_button[0]);
         
-        if(engine->getMode()==engine::victoire)
-            window.draw(*s_button[2]);
+        switch(engine->getMode()){
+            case engine::victoire:
+                window.draw(*s_button[2]);
+                break;
+            case engine::defaite:
+                window.draw(*s_button[3]);
+                break;
+            default :
+                break;
+        }
         
         window.display();
         

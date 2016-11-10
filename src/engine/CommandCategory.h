@@ -13,11 +13,11 @@ namespace engine {
 
   enum CommandCategory {
     MAIN_CATEGORY = 100,
+    END_CATEGORY     = 150,
     MODE_CATEGORY = 200,
     MOVE_CATEGORY = 300,
     VIEW_CATEGORY = 400,
-    SHOT_CATEGORY = 500,
-    END_CATEGORY     = 150
+    SHOT_CATEGORY = 500
   };
 
 };
