@@ -10,7 +10,7 @@ namespace engine {
   class Action {
     // Operations
   public:
-    Action ();
+    virtual ~Action ();
     virtual void apply (state::State* s) = 0;
     virtual void undo (state::State* s) = 0;
   };

@@ -5,22 +5,34 @@
  * Part of Projet 
  */
 #include "Record.h"
+#include "ActionListTurn.h"
+#include <chrono>
+#include <ctime>
 
 // il faut : à chaque tour on rajoute une actionlistTurn à la liste ; on ratache celle-ci au Ruler (lancer par engine.endTurn())
 // l'engine (de préference, mais le ruler passe pour l'instant) doit géré le mode (reccord, normal...)
 namespace engine{
     Record::Record (state::State& s) : mainState(s){//veut plus compiler sinon :(
+        this->initState = &s;
+        this->lastState = &s;
+        
         
     }
-    void Record::clear (){
-        
+    
+    void Record::clear (){//clear actions
+        for(ActionListTurn* action : actions)
+            delete(action);
+        actions.clear();
     }
+    
     void Record::startRecord (){
         
     }
-    void Record::recordOne (ActionListTurn* actions){
-        
+    
+    void Record::recordOne (ActionListTurn* actions){//push back in action list the given arguments
+        this->actions.push_back(actions);
     }
+    
     void Record::stopRecord (){
         
     }
@@ -28,12 +40,39 @@ namespace engine{
         
     }
     bool Record::replayOne (){
+        
+        
         return false;//probablement si dernier tour enregistrer (pas de suivant)
     }
-    void Record::startRollback (){
+    void Record::startRollback (){//rollback all the game, and you can see it
+        typedef std::chrono::high_resolution_clock clock;
+        typedef std::chrono::duration<float, std::milli> duration;
+        clock::time_point start = clock::now();
+        duration elapsed;
+        
+        //elapsed.count();
+        //std::chrono::milliseconds millisec(20);
+        
+        while(actions.size()>0)
+        {
+            elapsed = clock::now() - start;
+            if(elapsed.count()>=20)
+            {
+                
+            }
+                //do nothing
+        }
+            //if((c_stop - c_start)>)
+            rollbackOne();
+        
+    
         
     }
     bool Record::rollbackOne (){
-        return false; // probablement si premier tour enregistrer (pas de tour précédent)
+        if(!actions.size())// Si pas de tour enregistrer (pas de tour précédent)
+            return false;
+        actions[actions.size()-1]->undo();
+        actions.pop_back();
+        return true; 
     }
 }

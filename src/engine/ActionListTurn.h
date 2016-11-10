@@ -22,10 +22,11 @@ namespace engine {
     state::State* state;
     // Operations
   public:
+    ActionListTurn (state::State* s);
+    ~ActionListTurn ();
     void apply ();
     void undo ();
     void addAction (Action* a);
-    ActionListTurn (state::State* s);
     void clear ();
   };
 

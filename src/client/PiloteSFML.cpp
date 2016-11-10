@@ -77,8 +77,17 @@ PiloteSFML::~PiloteSFML() {
 
 void PiloteSFML::setEngine(engine::Engine* e) {
     this->engine = e;
-}
+    }
 
+void PiloteSFML::createMenu() {
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< test message victoire
+    int si = s_button.size();
+        s_button.push_back(new sf::Sprite());
+        s_button[si]->setTexture(m_tilesetButton);
+        s_button[si]->setTextureRect(sf::IntRect(104, 41, 120, 30));
+        s_button[si]->setPosition(0,0);
+        
+    }
 
 
 void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite) {//SpriteOrVertex == true : sprite
@@ -146,17 +155,7 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
     
     sf::Vector2i localPosition;
     
-    
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< test message victoire
-    int si = s_button.size();
-        s_button.push_back(new sf::Sprite());
-        s_button[si]->setTexture(m_tilesetButton);
-        s_button[si]->setTextureRect(sf::IntRect(104, 41, 120, 30));
-        s_button[si]->setPosition(0,0);
-        
-        
-        
-        
+    createMenu();
     
     while (window.isOpen())
     {

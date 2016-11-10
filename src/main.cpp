@@ -10,6 +10,23 @@
 
 int main ()
 {
+    
+    typedef std::chrono::high_resolution_clock clock;
+        typedef std::chrono::duration<float, std::milli> duration;
+        clock::time_point start = clock::now();
+        duration elapsed;
+        
+        //elapsed.count();
+        //std::chrono::milliseconds millisec(20);
+        
+            elapsed = clock::now() - start;
+            if(elapsed.count()>=20)
+            {
+                
+            }
+       
+        
+        
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     Etat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     state::State* state = new state::State();    
    
