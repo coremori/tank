@@ -9,10 +9,16 @@
 #include "Action.h"
 
 namespace engine{
+    
 
     ActionListTurn::ActionListTurn(state::State* s) {
         this->state = s;
     };
+    
+    ActionListTurn::~ActionListTurn() {
+        for(Action* action : actions)
+            delete(action);
+    }
     
     void ActionListTurn::addAction(Action* a) {
         actions.push_back(a);

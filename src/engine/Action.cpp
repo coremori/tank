@@ -9,7 +9,7 @@
 
 namespace engine{
 
-    Action::Action() {
+    Action::~Action() {
 
     }
     
