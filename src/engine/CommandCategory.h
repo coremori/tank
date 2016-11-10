@@ -16,7 +16,8 @@ namespace engine {
     MODE_CATEGORY = 200,
     MOVE_CATEGORY = 300,
     VIEW_CATEGORY = 400,
-    SHOT_CATEGORY = 500
+    SHOT_CATEGORY = 500,
+    END_CATEGORY     = 150
   };
 
 };

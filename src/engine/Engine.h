@@ -31,6 +31,7 @@ namespace engine {
     int charTurn;
     state::State* state;
     mutable std::mutex commands_mutex;
+    mutable std::mutex update_mutex;
     // Operations
   public:
     Engine (state::State* s);
@@ -44,6 +45,7 @@ namespace engine {
     void endTurn ();
     void swapCommands ();
     void update ();
+    std::mutex& getUpdateMutex () const;
   };
 
 };

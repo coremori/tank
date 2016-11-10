@@ -16,7 +16,7 @@ namespace engine{
         this->initState = &s;
         this->lastState = &s;
         
-        
+        //fonction clone() nécéssaire pour toute les classes du State.dia (youhou)
     }
     
     void Record::clear (){//clear actions
@@ -44,6 +44,7 @@ namespace engine{
         
         return false;//probablement si dernier tour enregistrer (pas de suivant)
     }
+    
     void Record::startRollback (){//rollback all the game, and you can see it
         typedef std::chrono::high_resolution_clock clock;
         typedef std::chrono::duration<float, std::milli> duration;
@@ -52,22 +53,17 @@ namespace engine{
         
         //elapsed.count();
         //std::chrono::milliseconds millisec(20);
-        
-        while(actions.size()>0)
+        bool nofini = true;
+        while(nofini)
         {
             elapsed = clock::now() - start;
             if(elapsed.count()>=20)
             {
-                
+                nofini = rollbackOne();
             }
-                //do nothing
         }
-            //if((c_stop - c_start)>)
-            rollbackOne();
-        
-    
-        
     }
+    
     bool Record::rollbackOne (){
         if(!actions.size())// Si pas de tour enregistrer (pas de tour précédent)
             return false;

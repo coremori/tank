@@ -21,8 +21,8 @@
 
 #include "state/State.h"
 
+#include <thread>
 
-#include "state/ProjectileEvent.h"
 
 namespace client{
 
@@ -109,8 +109,12 @@ void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, 
 
 
 void PiloteSFML::applyChange() {
-        for(unsigned int i = 0; i<obs.size(); i++)
+    if (engine->getUpdateMutex().try_lock()) {
+            for(unsigned int i = 0; i<obs.size(); i++)
                 obs[i]->applyStateChanged();
+            engine->getUpdateMutex().unlock();
+        }
+    scene.update();
 };
 
 
@@ -118,14 +122,11 @@ void PiloteSFML::applyChange() {
 
 
 void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
-    //! mutex non mis !
     applyChange();
-    scene.updateAll();
+    
     int Pixel_def = 8;
     int h = scene.getHeight()*Pixel_def;
-    int w = scene.getWidth()*Pixel_def;
-    sf::Clock clock;
-    
+    int w = scene.getWidth()*Pixel_def;   
     
     
     sf::RenderWindow window(sf::VideoMode(w, h + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
@@ -134,9 +135,6 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         std::cout << "file not found "<<std::endl;
     music.play();
   */  
-    
-    
-    
     
     
     //button "fin de tour"
@@ -220,38 +218,25 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 if(rectEnd->contains(localPosition))
                 {
                     std::cout << "Button End turn pressed" << std::endl;
-                    engine->endTurn();
-                    applyChange();
-                    
+                    engine->addCommand(new engine::EndTurnCommand(character));                    
                 }
                 else if (rectLevel1->contains(localPosition))
                 {
                     std::cout << "Button level1 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
-                    applyChange();
-                    scene.updateAll();
                 }
                 else if (rectLevel2->contains(localPosition))
                 {
                     std::cout << "Button level2 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
-                    applyChange();
-                    scene.updateAll();
                 }
-                // le bouton gauche est enfoncé : on tire
-                    //engine->addCommand(new engine::ModeCommand(engine::pause));
-                        //std::cout << "Button mode pressed" << std::endl;    }
             }
         }
         
                 
-
-        sf::Time elapsed = clock.getElapsedTime();
-        if(elapsed >= sf::milliseconds(50))
-        {
-            scene.update();
-            clock.restart();
-        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        applyChange();
+        
         window.clear();
         for(unsigned int i=0; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);

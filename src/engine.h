@@ -19,4 +19,5 @@
 #include "engine/ActionMove.h"
 #include "engine/ActionDirection.h"
 #include "engine/ActionShot.h"
+#include "engine/EndTurnCommand.h"
 #endif

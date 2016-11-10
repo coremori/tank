@@ -92,7 +92,7 @@ namespace render {
                 layers[2]->charToTiles('1',height*8+16, 50 + 104);
                 layers[2]->charToTiles('0',height*8+16, 50 + 112);
                 layers[2]->charToTiles('0',height*8+16, 50 + 120);
-
+                updateAll();
             }
         }
         CacheStateObserver::clear();

@@ -10,6 +10,10 @@
 #include "CommandSet.h"
 #include "../state/State.h"
 #include "LoadCommand.h"
+#include "CommandCategory.h"
+#include "EndTurnCommand.h"
+#include "ModeCommand.h"
+
 #include "state/Tank.h"
 #include <mutex>
 #include <chrono>
@@ -29,18 +33,20 @@ namespace engine{
         state = s;
         charTurn = 0;
         ruler.setState(state);
+        mode = play;
 
     };
     
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
-        if(cmd->getCategory()==100)//commande load
+        /*if(cmd->getCategory()==100)//commande load
         {
             LoadCommand* lcmd = dynamic_cast<LoadCommand*>(cmd);
             state->load(lcmd->getFileName());
             return;
-        }//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< mettre ici le cas de commande pour le mode (on peut lui demander "reccord debut/fin everytime, et alors pas de mouvement)
-        if(cmd->getCharacter()==charTurn)//si c'est au tour du personnage
+        }*/
+        
+        if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage
             waitingcommands->add(cmd);
         commands_mutex.unlock();
     };
@@ -95,8 +101,8 @@ namespace engine{
             if(tank->getPv() == 0){
                 if(i==1)
                 {
-                     std::cout << "Victoire" << std::endl;
-                     mode = victoire;
+                    std::cout << "Victoire" << std::endl;
+                    mode = victoire;
                 }
                 else
                 {
@@ -108,11 +114,38 @@ namespace engine{
         }
             
     }
-    void Engine::update() {//tant que la fenetre n'est pas fermée
         
-        while(mode!=close)
+    std::mutex& Engine::getUpdateMutex() const {
+        return update_mutex;
+    }
+
+    
+    void Engine::update() {
+        /*vérifie les commandes de la list : passage au tour suivant ? 
+         *Changement de mode ? les mutex sont importants pour une lecture prolongé et l'actualisation du state, 
+         * pas nécéssaire pour vérifier leurs existence (puisque le render ne peut pas les supprimer, juste les remplacer)
+         */
+        
+        if(waitingcommands->get(MAIN_CATEGORY))//Load commande
         {
-            //std::this_thread::sleep_for(2s);
+            update_mutex.lock();
+            swapCommands();
+            LoadCommand* load = dynamic_cast<LoadCommand*>(currentcommands->get(MAIN_CATEGORY));
+            state->load(load->getFileName());
+            update_mutex.unlock();
+        }
+        else if(waitingcommands->get(MODE_CATEGORY))
+        {
+            commands_mutex.lock();
+            ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(waitingcommands->get(MODE_CATEGORY));//on change le mode mais conserve la liste en attente
+            setMode(modeCmd->getMode());
+            commands_mutex.unlock();
+        }
+        else if(waitingcommands->get(END_CATEGORY))
+        {
+            update_mutex.lock();
+            endTurn();
+            update_mutex.unlock();
         }
     }
 
