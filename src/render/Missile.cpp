@@ -69,6 +69,8 @@ namespace render{
         else//si on est sur la vertical de tir
         {
             tile->setY(tile->getY()-3);
+            if(tile->getY()<0)
+                    tile->setY(0);
             if(tile->getY()<=yCeiling)
             {
                 tile->setHeight(8);

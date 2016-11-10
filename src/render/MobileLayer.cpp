@@ -92,7 +92,7 @@ namespace render{
                     tiles[tiles.size()-1].setXTex(0);
                     tiles[tiles.size()-1].setYTex(96);
                     
-                    animation = new Missile(event->xImpact, event->yImpact, event->rightDirection, event->yMax);
+                    animation = new Missile(event->xImpact, event->yImpact, event->yMax, event->rightDirection) ;
                 }
                
             }

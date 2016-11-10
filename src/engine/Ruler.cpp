@@ -139,14 +139,14 @@ namespace engine{
                     }
                     for (int i = 0; i<state->getMobiles().size(); i++)
                         if(state->getMobile(i)->getY()==yImpact)//si on arrive sur un tank
-                             if(((xImpact-state->getMobile(i)->getX())<=8) && ((xImpact-state->getMobile(i)->getX())>=8))
+                             if(((xImpact-state->getMobile(i)->getX())<=8) && ((xImpact-state->getMobile(i)->getX())>=-8))
                              {
                                   impact = true;
-                                  yImpact = state->getMobile(i)->getY()+16;
+                                  yImpact = state->getMobile(i)->getY()-8;
                                   target = i;
                              }
-                }
-                actions->addAction(new ActionShot(shot->getCharacter(), target, damage, xImpact , yImpact, ymax, (tank->getOrientation()==state::right_up)));
+                }//(tank->getOrientation()==state::right_up)
+                actions->addAction(new ActionShot(shot->getCharacter(), target, damage, xImpact , yImpact, ymax, true));
                 
                 
             }
