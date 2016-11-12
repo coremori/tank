@@ -30,6 +30,7 @@ namespace engine {
     void setActions (ActionListTurn* const actions);
     void apply ();
     void setState (state::State* s);
+    void implementeRules ();
   };
 
 };

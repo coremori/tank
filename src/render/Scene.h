@@ -35,7 +35,7 @@ namespace render {
     int getHeight () const;
     int getWidth () const;
     void applyStateChanged ();
-    void update ();
+    bool update ();
     void updateAll ();
   };
 
