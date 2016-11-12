@@ -36,13 +36,13 @@ int main ()
     engine->getRuler()->setActions(actions);
     
     
-    
-    
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     
-    client::PiloteSFML* rendu = new client::PiloteSFML(state);// s'occupe de l'affichage de la fenetre
-    rendu->setEngine(engine);
+        client::PiloteSFML* rendu = new client::PiloteSFML(state);// s'occupe de l'affichage de la fenetre
+        rendu->setEngine(engine);
+    
+    
     
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Multithreading - engine+IA et rendu >>>>>>>>>>>>>>>>>>>>>>
         
