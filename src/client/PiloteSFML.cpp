@@ -64,11 +64,11 @@ PiloteSFML::PiloteSFML(state::State* s) {//met la scene à afficher et attribue 
     
     if (!m_tilesetButton.loadFromFile("res/Textures/button.png")) 
         {
-            //error
+            std::cout << "ERROR : file \"res/Textures/button.png\" not found" << std::endl;            
         }
-    m_tilesetButton.setSmooth(true);
     
-     state->load("res/Levels/level1.txt"); //charge le level.
+    m_tilesetButton.setSmooth(true);
+    state->load("res/Levels/level1.txt"); //charge le level.
     
 }
 
@@ -77,22 +77,21 @@ PiloteSFML::~PiloteSFML() {
 
 void PiloteSFML::setEngine(engine::Engine* e) {
     this->engine = e;
-    }
+}
 
 void PiloteSFML::createMenu() {
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< test message victoire
+    // message victoire
     int si = s_button.size();
         s_button.push_back(new sf::Sprite());
         s_button[si]->setTexture(m_tilesetButton);
         s_button[si]->setTextureRect(sf::IntRect(624, 0, 388, 72));
         s_button[si]->setPosition(408,24);
-        
+    //// message defaite    
         s_button.push_back(new sf::Sprite());
         s_button[si+1]->setTexture(m_tilesetButton);
-        s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));
-        s_button[si+1]->setPosition(409,24);
-        
-    }
+        s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));//xTex, yTex, width, height
+        s_button[si+1]->setPosition(409,24);      
+}
 
 
 void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite) {//SpriteOrVertex == true : sprite
@@ -119,12 +118,10 @@ void PiloteSFML::applyChange() {
                 obs[i]->applyStateChanged();
             engine->getUpdateMutex().unlock();
         }
-    scene.update();
+    //scene.update();
+    engine->setAnimInRun(scene.update());
+    
 };
-
-
-
-
 
 void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
     applyChange();
@@ -184,14 +181,12 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 switch(event.key.code){
                     case sf::Keyboard::Escape :
                         std::cout << "the escape key was pressed" << std::endl; 
-                        engine->setMode(engine::pause);
+                        engine->addCommand(new engine::ModeCommand(engine::replay));
                         break;
                     case sf::Keyboard::Right :
-                        std::cout << "right move" << std::endl;
                         engine->addCommand(new engine::MoveCommand(character,8,0));
                         break;
                     case sf::Keyboard::Left :
-                        std::cout << "left move" << std::endl;
                         engine->addCommand(new engine::MoveCommand(character,-8,0));
                         break;
                     case sf::Keyboard::E :
@@ -203,15 +198,12 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                         engine->addCommand(new engine::DirectionCommand(character,state::left_up));
                         break;
                     case sf::Keyboard::Q :
-                        std::cout << "direction left down" << std::endl;
                         engine->addCommand(new engine::DirectionCommand(character,state::left_down));
                         break;
                     case sf::Keyboard::D :
-                        std::cout << "direction right down" << std::endl;
                         engine->addCommand(new engine::DirectionCommand(character,state::right_down));
                         break;
                     case sf::Keyboard::Space :
-                        std::cout << "shot" << std::endl;
                         engine->addCommand(new engine::ShotCommand(character,10));
                         break;
                     default : break;
@@ -222,17 +214,14 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
             {
                 if(rectEnd->contains(localPosition))
                 {
-                    std::cout << "Button End turn pressed" << std::endl;
                     engine->addCommand(new engine::EndTurnCommand(character));                    
                 }
                 else if (rectLevel1->contains(localPosition))
                 {
-                    std::cout << "Button level1 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
                 }
                 else if (rectLevel2->contains(localPosition))
                 {
-                    std::cout << "Button level2 pressed" << std::endl;
                     engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
                 }
             }
@@ -243,16 +232,16 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         applyChange();
         
         window.clear();
-        for(unsigned int i=0; i<surfaces.size(); i++)
+        for(unsigned int i=0; i<surfaces.size(); i++)//dessin background, mobile et pv + button à affichage simple
             window.draw(*surfaces[i]);
         
               
-        if(hover)
+        if(hover)//pour le endTurn qui change de couleur
             window.draw(*s_button[1]);
         else
             window.draw(*s_button[0]);
         
-        switch(engine->getMode()){
+        switch(engine->getMode()){//pour la victoire//défaite
             case engine::victoire:
                 window.draw(*s_button[2]);
                 break;
