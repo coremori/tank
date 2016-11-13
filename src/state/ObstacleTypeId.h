@@ -7,8 +7,7 @@ namespace state {
 
   enum ObstacleTypeId {
     sand = 1,
-    border     = 3,
-    greenery = 2
+    border     = 2
   };
 
 };

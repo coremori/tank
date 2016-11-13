@@ -119,7 +119,7 @@ void PiloteSFML::applyChange() {
             engine->getUpdateMutex().unlock();
         }
     //scene.update();
-    engine->setAnimInRun(scene.update());
+    engine->setAnimRunning(scene.update());
     
 };
 

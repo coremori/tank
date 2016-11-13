@@ -14,6 +14,7 @@
 #include "state/TankTypeId.h"
 #include "state/PlayerType.h"
 #include "state/Tank.h"
+#include "state/SpaceTypeId.h"
 #include "state/Space.h"
 #include "state/ObstacleTypeId.h"
 #include "state/Obstacle.h"

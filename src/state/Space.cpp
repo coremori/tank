@@ -6,9 +6,10 @@ namespace state {
     // Associations
     // Operations
   
-    Space::Space (int x,int y){
+    Space::Space (SpaceTypeId id, int x,int y){
         this->x=x;
         this->y=y;
+        this->SpaceType = id;
     };
     
     bool Space::isSpace () const {
@@ -18,6 +19,10 @@ namespace state {
     TypeId Space::getTypeId () const {
         return space;
     };
-    
+        
+    SpaceTypeId Space::getSpaceTypeId() const {
+        return SpaceType;
+    }
+
   };
 

@@ -4,6 +4,8 @@
 #include "Layer.h"
 #include <cstddef>
 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>
 
 namespace render {
 
@@ -44,7 +46,11 @@ namespace render {
         state::Obstacle* obstacle = NULL;
         state::Tank* tank = NULL;
         state::Element* element = NULL;
+        state::Space* space = NULL;
         unsigned prevSize = tiles.size();
+        
+        srand (time(NULL));
+        
         for(int i=0; i<e->size(); i++)
         {   
             element = e->get(i);
@@ -54,15 +60,11 @@ namespace render {
                         obstacle = dynamic_cast<state::Obstacle*>(element);
                         switch(obstacle->getObstacleTypeId()){//if a la place
                             case state::sand :
-                                tiles[i+prevSize].setXTex(40);
-                                tiles[i+prevSize].setYTex(88);
-                                break;
-                            case state::greenery:
-                                tiles[i+prevSize].setXTex(64);
-                                tiles[i+prevSize].setYTex(88);
+                                tiles[i+prevSize].setXTex(72+(rand()%33));//some diversity
+                                tiles[i+prevSize].setYTex(96);//
                                 break;
                             case  state::border:
-                                tiles[i+prevSize].setXTex(48);
+                                tiles[i+prevSize].setXTex(72+(rand()%33));
                                 tiles[i+prevSize].setYTex(88);
                                 break;
                         }
@@ -109,8 +111,17 @@ namespace render {
                         }
                     break;
                 default ://space
-                    tiles[i+prevSize].setXTex(32);
-                    tiles[i+prevSize].setYTex(88);
+                    space = dynamic_cast<state::Space*>(element);
+                        switch(space->getSpaceTypeId()){//if a la place
+                            case state::sky :
+                                tiles[i+prevSize].setXTex(32);//some diversity
+                                tiles[i+prevSize].setYTex(88);//
+                                break;
+                            case state::greenery:
+                                tiles[i+prevSize].setXTex(72+(rand()%5)*8);
+                                tiles[i+prevSize].setYTex(80);
+                                break;
+                        }
                     break;                            
             }
         }

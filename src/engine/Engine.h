@@ -35,7 +35,7 @@ namespace engine {
     mutable std::mutex commands_mutex;
     mutable std::mutex update_mutex;
     ai::AI* ai;
-    bool AnimInRun;
+    bool AnimRunning;
     // Operations
   public:
     Engine (state::State* s);
@@ -50,7 +50,7 @@ namespace engine {
     void swapCommands ();
     void update ();
     std::mutex& getUpdateMutex () const;
-    void setAnimInRun (bool b);
+    void setAnimRunning (bool b);
   };
 
 };

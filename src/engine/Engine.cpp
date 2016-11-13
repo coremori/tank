@@ -40,7 +40,7 @@ namespace engine{
         
         mode = play;
         ai = new ai::DumbAI();
-        AnimInRun = false;
+        AnimRunning = false;
 
     };
         
@@ -134,9 +134,9 @@ namespace engine{
         return update_mutex;
     }
     
-    void Engine::setAnimInRun(bool b) {
+    void Engine::setAnimRunning(bool b) {
         update_mutex.lock();
-        AnimInRun = b;
+        AnimRunning = b;
         update_mutex.unlock();
     }
 
@@ -168,7 +168,7 @@ namespace engine{
             if(mode!=victoire && mode!=defaite && mode!=replay)
             {
                 update_mutex.lock();
-                if(!AnimInRun)//pas d'anim en cours
+                if(!AnimRunning)//pas d'anim en cours
                 {
                     endTurn();
                     update_mutex.unlock();
@@ -186,7 +186,7 @@ namespace engine{
         if(mode == replay)
         {
             update_mutex.lock();
-            if(!AnimInRun)
+            if(!AnimRunning)
                 reccord.replayOne();
             update_mutex.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));

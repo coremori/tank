@@ -7,6 +7,7 @@ namespace state {
   class StaticElement;
 }
 
+#include "SpaceTypeId.h"
 #include "TypeId.h"
 #include "StaticElement.h"
 
@@ -14,11 +15,14 @@ namespace state {
 
   /// class Space - 
   class Space : public state::StaticElement {
+    // Associations
+    state::SpaceTypeId SpaceType;
     // Operations
   public:
-    Space (int x, int y);
+    Space (SpaceTypeId id, int x, int y);
     virtual bool isSpace () const;
     TypeId getTypeId () const;
+    SpaceTypeId getSpaceTypeId () const;
   };
 
 };

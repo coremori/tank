@@ -50,7 +50,8 @@ namespace engine{
     }
     
     bool Record::replayOne (){
-        if(idx >=actions.size())
+        unsigned i = idx;
+        if(i >=actions.size())
             return false;//probablement si dernier tour enregistrer (pas de suivant)
         /*if(idx == 0)
             mainState = *initState; */

@@ -66,10 +66,10 @@ namespace state {
                 for(unsigned int i = 0; i < line.length(); i++){
                     
                     if(line.at(i)=='.'){
-                        this->elements.push_back(new Space(x,y));
+                        this->elements.push_back(new Space(sky,x,y));
                     }
                     else if(line.at(i)=='|'){
-                        this->elements.push_back(new Obstacle(greenery,x,y));
+                        this->elements.push_back(new Space(greenery,x,y));
                     }
                     else if(line.at(i)=='-'){
                         this->elements.push_back(new Obstacle(sand,x,y));
@@ -78,11 +78,11 @@ namespace state {
                         this->elements.push_back(new Obstacle(border,x,y));
                     }
                     else if(line.at(i)=='&'){
-                        this->elements.push_back(new Space(x,y));
+                        this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_green,realPlayer,right_down,x,y));
                     }
                     else if(line.at(i)=='%'){
-                        this->elements.push_back(new Space(x,y));
+                        this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down,x,y));
                     }
                     
