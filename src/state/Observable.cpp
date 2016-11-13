@@ -3,9 +3,9 @@
  * Created on October 25, 2016, 1:43 PM
  *
  * Part of tank */
-
-
 #include "Observable.h"
+
+
 
 namespace state {
 
@@ -24,4 +24,3 @@ namespace state {
 
 
 }
-/*press ctrl+space for create function define in .h*/

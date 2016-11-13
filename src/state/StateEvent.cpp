@@ -33,4 +33,3 @@ namespace state{
   
 
 }
-/*press ctrl+space for create function define in .h*/

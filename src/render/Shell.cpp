@@ -18,8 +18,10 @@ namespace render{
     
     
     bool Shell::setNextTile(Tile* tile) {//return false if the shell is at the target
+        
         if(countTimeExplosion == 5)//dure 10 frame
             return false;
+        
         if((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))
         {
             

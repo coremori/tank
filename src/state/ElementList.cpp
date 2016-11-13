@@ -37,7 +37,7 @@ namespace state {
     
   
     void ElementList::set ( int idx, Element* e){
-        if(idx==size()) //sens?
+        if(idx==size())
             elements.push_back(e);
         elements[idx] = e;
     };

@@ -26,8 +26,11 @@ namespace patch
 
 namespace render {
     void CharLayer::applyStateChanged() {
+        
         for(unsigned int i = 0; i<stateEvent.size(); i++){
+            
             state::StateEvent e = *stateEvent[i];
+            
             if (e==state::Pv_Changed)
             {
                 std::string s = "pv player ";

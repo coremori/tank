@@ -3,8 +3,6 @@
  * Created on October 22, 2016, 6:57 PM
  *
  * Part of tank */
-
-
 #include "Engine.h"
 #include "Ruler.h"
 #include "CommandSet.h"
@@ -51,13 +49,6 @@ namespace engine{
 
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
-        /*if(cmd->getCategory()==100)//commande load
-        {
-            LoadCommand* lcmd = dynamic_cast<LoadCommand*>(cmd);
-            state->load(lcmd->getFileName());
-            return;
-        }*/
-        
         if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage
             waitingcommands->add(cmd);
         commands_mutex.unlock();
@@ -143,8 +134,8 @@ namespace engine{
     
     void Engine::update() {
         /*vérifie les commandes de la list : passage au tour suivant ? 
-         *Changement de mode ? les mutex sont importants pour une lecture prolongé et l'actualisation du state, 
-         * pas nécéssaire pour vérifier leurs existence (puisque le render ne peut pas les supprimer, juste les remplacer)
+         *Changement de mode ? les mutex sont importants pour une lecture prolongée et l'actualisation du state, 
+         * pas nécessaires pour vérifier leur existence (puisque le render ne peut pas les supprimer, juste les remplacer)
          */
         
         if(waitingcommands->get(MAIN_CATEGORY))//Load commande
