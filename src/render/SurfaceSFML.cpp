@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include <vector>
 #include <assert.h> 
 
@@ -16,7 +10,7 @@
 
     
     void SurfaceSFML::loadTexture (const char* image_file)
-    {   //basicque : "res/Textures/textures.png"
+    {   //basic: "res/Textures/textures.png"
         //Vérifier l'ordre h/w
         
         if (!m_tileset.loadFromFile(image_file)) 

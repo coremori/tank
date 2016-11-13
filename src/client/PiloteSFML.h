@@ -35,6 +35,7 @@ namespace client {
     ~PiloteSFML ();
     void affiche ();
     void setEngine (engine::Engine* e);
+    void eventUp (sf::Event& event, sf::RenderWindow& window, engine::Engine* engine, int character, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition);
   protected:
     void button (unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
     void applyChange ();

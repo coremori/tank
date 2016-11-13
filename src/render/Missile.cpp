@@ -66,7 +66,7 @@ namespace render{
             
             
         }
-        else//si on est sur la vertical de tir
+        else//si on est sur la verticale de tir
         {
             tile->setY(tile->getY()-3);
             if(tile->getY()<0)
@@ -75,7 +75,7 @@ namespace render{
             {
                 tile->setHeight(8);
                 tile->setWidth(16);
-                if(rightDirection)//on va a droite
+                if(rightDirection)//on va à droite
                 {
                     tile->setXTex(8);
                     tile->setYTex(96);

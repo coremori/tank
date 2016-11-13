@@ -26,8 +26,11 @@ namespace patch
 
 namespace render {
     void CharLayer::applyStateChanged() {
+        
         for(unsigned int i = 0; i<stateEvent.size(); i++){
+            
             state::StateEvent e = *stateEvent[i];
+            
             if (e==state::Pv_Changed)
             {
                 const state::Tank* tank = static_cast<const state::Tank*>(e.s->getMobile(0));            
@@ -66,6 +69,7 @@ namespace render {
                 Layer::charToTiles('2',XChar + 16, 50 + 80);
                 Layer::charToTiles(' ',XChar + 16, 50 + 88);
                 Layer::charToTiles(' ',XChar + 16, 50 + 96);
+                
                 for(unsigned int i = 0; i<numStr.size(); i++)
                     Layer::charToTiles(numStr[i] ,XChar + 16, 146 + i*8);
                 
