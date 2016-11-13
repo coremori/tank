@@ -45,9 +45,9 @@ namespace client{
         scene.setLayer(2,charlayer);
 
 
-        state->getGrid().registerObserver(obs[1]);
-        state->getMobiles().registerObserver(obs[2]);
-        state->getMobiles().registerObserver(obs[3]);
+        state->registerObserver(obs[1]);
+        state->registerObserver(obs[2]);
+        state->registerObserver(obs[3]);
         state->registerObserver(obs[0]);
 
         surfaces.push_back(new SurfaceSFML());
@@ -65,8 +65,8 @@ namespace client{
         if (!m_tilesetButton.loadFromFile("res/Textures/button.png"))
             std::cout << "Erreur - button.png non chargé" << std::endl;
         
-
-        m_tilesetButton.setSmooth(true);
+        m_tilesetButton.setSmooth(true); //lissage de l'image
+        
         state->load("res/Levels/level1.txt"); //charge le level.
 
     }
@@ -76,28 +76,38 @@ namespace client{
 
 
 
-    PiloteSFML::~PiloteSFML() {
+    PiloteSFML::~PiloteSFML() {}
+    
+    
+    
+    
+    
+    void PiloteSFML::setEngine(engine::Engine* e) {
+        this->engine = e;
+    }
+
+    
+    
+    
+    void PiloteSFML::createMenu() {
+        // message victoire
+        int si = s_button.size();
+            s_button.push_back(new sf::Sprite());
+            s_button[si]->setTexture(m_tilesetButton);
+            s_button[si]->setTextureRect(sf::IntRect(624, 0, 388, 72));
+            s_button[si]->setPosition(408,24);
+        //// message defaite    
+            s_button.push_back(new sf::Sprite());
+            s_button[si+1]->setTexture(m_tilesetButton);
+            s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));//xTex, yTex, width, height
+            s_button[si+1]->setPosition(409,24);      
     }
     
-void PiloteSFML::setEngine(engine::Engine* e) {
-    this->engine = e;
-}
+    
+    
 
-void PiloteSFML::createMenu() {
-    // message victoire
-    int si = s_button.size();
-        s_button.push_back(new sf::Sprite());
-        s_button[si]->setTexture(m_tilesetButton);
-        s_button[si]->setTextureRect(sf::IntRect(624, 0, 388, 72));
-        s_button[si]->setPosition(408,24);
-    //// message defaite    
-        s_button.push_back(new sf::Sprite());
-        s_button[si+1]->setTexture(m_tilesetButton);
-        s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));//xTex, yTex, width, height
-        s_button[si+1]->setPosition(409,24);      
-}
-
-    void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite){//SpriteOrVertex == true : sprite
+    void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite){
+        //SpriteOrVertex == true : sprite
         //TypeSprite : 0 -> non selectionné, 1-> selectionné
         int h = scene.getHeight();
         if(SpriteOrVertex)
@@ -127,12 +137,18 @@ void PiloteSFML::createMenu() {
         if (engine->getUpdateMutex().try_lock()) {
                 for(unsigned int i = 0; i<obs.size(); i++)
                     obs[i]->applyStateChanged();
-                engine->getUpdateMutex().unlock();
-            }
+                    engine->getUpdateMutex().unlock();
+        }
         //scene.update();
     engine->setAnimRunning(scene.update());
     };
 
+    
+    
+    
+    
+    
+    
     
     void PiloteSFML::eventUp(sf::Event* event,engine::Engine* engine,int character,sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
         
