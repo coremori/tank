@@ -23,6 +23,7 @@ namespace engine {
   /// class Engine - Pilote of the game
   class Engine {
     // Associations
+    engine::Record reccord;
     engine::EngineMode mode;
     engine::Ruler ruler;
     // Attributes
@@ -34,6 +35,7 @@ namespace engine {
     mutable std::mutex commands_mutex;
     mutable std::mutex update_mutex;
     ai::AI* ai;
+    bool AnimInRun;
     // Operations
   public:
     Engine (state::State* s);
@@ -48,6 +50,7 @@ namespace engine {
     void swapCommands ();
     void update ();
     std::mutex& getUpdateMutex () const;
+    void setAnimInRun (bool b);
   };
 
 };

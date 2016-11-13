@@ -42,6 +42,7 @@ namespace render {
     void setSurface (Surface* surface);
     void update ();
     void updateAll ();
+    bool updateAnimation ();
   };
 
 };

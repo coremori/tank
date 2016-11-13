@@ -11,7 +11,8 @@ namespace engine {
     pause     = 2,
     animation     = 3,
     victoire     = 4,
-    defaite     = 5
+    defaite     = 5,
+    replay
   };
 
 };

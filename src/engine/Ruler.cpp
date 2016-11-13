@@ -38,11 +38,11 @@ namespace engine{
     };
     
     void Ruler::apply() {
-        if(cmd->get(200))//On le mettra dans l'apply(time)
-        {
-            ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(cmd->get(200));//mode category
-            engine->setMode(modeCmd->getMode());
-        }
+        actions->apply();
+        //actions->clear();//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< enlever pour l'enregistrement
+    };
+        
+    void Ruler::implementeRules() {
         if(cmd->get(VIEW_CATEGORY))
         {
             DirectionCommand* dcmd = dynamic_cast<DirectionCommand*>(cmd->get(VIEW_CATEGORY));
@@ -193,12 +193,9 @@ namespace engine{
                 actions->addAction(new ActionShot(shot->getCharacter(), target, damage, xImpact , yImpact, -1, (tank->getOrientation()==state::right_down)));
             } 
         }
-               
-        actions->apply();
-        actions->clear();//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< enlever pour l'enregistrement
-    };
-    
-    
+        apply();
+    }
+
     
     
     void Ruler::setState(state::State* s) {

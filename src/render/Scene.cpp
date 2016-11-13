@@ -1,5 +1,8 @@
 
 
+#include <iosfwd>
+#include <string>
+
 #include "Layer.h"
 #include "state.h"
 #include "Scene.h"
@@ -30,9 +33,12 @@ namespace render {
         layers[idx] = layer;
     };
     
-    void Scene::update (){
+    bool Scene::update (){
+        bool b = layers[1]->updateAnimation();
         layers[1]->update();
+        b = b || layers[2]->updateAnimation();
         layers[2]->update();
+        return b;
     };
       
     void Scene::updateAll() {
@@ -40,6 +46,7 @@ namespace render {
         layers[1]->updateAll();
         layers[2]->updateAll();
     }
+    
     void Scene::applyStateChanged() {
         for(unsigned int i = 0; i<stateEvent.size(); i++){
             state::StateEvent e = *stateEvent[i];
@@ -58,40 +65,26 @@ namespace render {
 
                 render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(layers[2]);
                 charlayer->setXChar(height*8);
+                std::string s = "pv player ";
+                std::string st = "  100";
+                unsigned int i = 0;
+                /* for player 1*/
+                for(i = 0; i<s.size(); i++)
+                    layers[2]->charToTiles(s[i],height*8 , 50 + 8*i);
                 
-                layers[2]->charToTiles('p',height*8 , 50);
-                layers[2]->charToTiles('v',height*8 , 50 + 8);
-                layers[2]->charToTiles(' ',height*8 , 50 + 16);
-                layers[2]->charToTiles('p',height*8 , 50 + 24);
-                layers[2]->charToTiles('l',height*8 , 50 + 32);
-                layers[2]->charToTiles('a',height*8 , 50 + 40);
-                layers[2]->charToTiles('y',height*8 , 50 + 48);
-                layers[2]->charToTiles('e',height*8 , 50 + 56);
-                layers[2]->charToTiles('r',height*8 , 50 + 64);
-                layers[2]->charToTiles(' ',height*8 , 50 + 72);
-                layers[2]->charToTiles('1',height*8 , 50 + 80);
-                layers[2]->charToTiles(' ',height*8 , 50 + 88);
-                layers[2]->charToTiles(' ',height*8 , 50 + 96);
-                layers[2]->charToTiles('1',height*8, 50 + 104);
-                layers[2]->charToTiles('0',height*8, 50 + 112);
-                layers[2]->charToTiles('0',height*8, 50 + 120);
-
-                layers[2]->charToTiles('p',height*8 +16, 50);
-                layers[2]->charToTiles('v',height*8 +16, 50 + 8);
-                layers[2]->charToTiles(' ',height*8 +16, 50 + 16);
-                layers[2]->charToTiles('p',height*8 +16, 50 + 24);
-                layers[2]->charToTiles('l',height*8 +16, 50 + 32);
-                layers[2]->charToTiles('a',height*8 +16, 50 + 40);
-                layers[2]->charToTiles('y',height*8 +16, 50 + 48);
-                layers[2]->charToTiles('e',height*8 +16, 50 + 56);
-                layers[2]->charToTiles('r',height*8 +16, 50 + 64);
-                layers[2]->charToTiles(' ',height*8 +16, 50 + 72);
-                layers[2]->charToTiles('2',height*8 +16, 50 + 80);
-                layers[2]->charToTiles(' ',height*8 +16, 50 + 88);
-                layers[2]->charToTiles(' ',height*8 +16, 50 + 96);
-                layers[2]->charToTiles('1',height*8+16, 50 + 104);
-                layers[2]->charToTiles('0',height*8+16, 50 + 112);
-                layers[2]->charToTiles('0',height*8+16, 50 + 120);
+                layers[2]->charToTiles('1',height*8 , 50 + 80);//player's num
+                
+                for(i = 0; i<st.size(); i++)
+                    layers[2]->charToTiles(st[i],height*8 , 138 + 8*i);
+                
+                /* for player 2*/
+                for(i = 0; i<s.size(); i++)
+                    layers[2]->charToTiles(s[i],height*8 + 16 , 50 + 8*i);
+                
+                layers[2]->charToTiles('2',height*8 + 16 , 50 + 80);//player's num
+                
+                for(i = 0; i<st.size(); i++)
+                    layers[2]->charToTiles(st[i],height*8  + 16, 138 + 8*i);
                 updateAll();
             }
         }

@@ -33,29 +33,28 @@ namespace render {
             
             if (e==state::Pv_Changed)
             {
+                std::string s = "pv player ";
+                std::string st = "  ";
+                unsigned int i = 0;
+                clear();
+                /* for player 1*/
                 const state::Tank* tank = static_cast<const state::Tank*>(e.s->getMobile(0));            
                 std::string numStr = patch::to_string(tank->getPv());
-                Layer::clear();
+                for(i = 0; i<s.size(); i++)
+                    charToTiles(s[i],XChar , 50 + 8*i);
                 
-                Layer::charToTiles('p',XChar, 50);
-                Layer::charToTiles('v',XChar, 50 + 8);
-                Layer::charToTiles(' ',XChar, 50 + 16);
-                Layer::charToTiles('p',XChar, 50 + 24);
-                Layer::charToTiles('l',XChar, 50 + 32);
-                Layer::charToTiles('a',XChar, 50 + 40);
-                Layer::charToTiles('y',XChar, 50 + 48);
-                Layer::charToTiles('e',XChar, 50 + 56);
-                Layer::charToTiles('r',XChar, 50 + 64);
-                Layer::charToTiles(' ',XChar, 50 + 72);
-                Layer::charToTiles('1',XChar, 50 + 80);
-                Layer::charToTiles(' ',XChar, 50 + 88);
-                Layer::charToTiles(' ',XChar, 50 + 96);
-
+                charToTiles('1',XChar , 50 + 80);//player's num
+                
+                for(i = 0; i<st.size(); i++)
+                    charToTiles(st[i],XChar , 138 + 8*i);
+                
                 for(unsigned int i = 0; i<numStr.size(); i++)
-                    Layer::charToTiles(numStr[i] ,XChar, 146 + i*8);
-                    
+                    charToTiles(numStr[i] ,XChar, 146 + i*8);
+                
+                /* for player 2*/                              
                 const state::Tank* tank2 = static_cast<const state::Tank*>(e.s->getMobile(1));            
                 numStr = patch::to_string(tank2->getPv());
+<<<<<<< HEAD
                 Layer::charToTiles('p',XChar + 16, 50);
                 Layer::charToTiles('v',XChar + 16, 50 + 8);
                 Layer::charToTiles(' ',XChar + 16, 50 + 16);
@@ -69,9 +68,18 @@ namespace render {
                 Layer::charToTiles('2',XChar + 16, 50 + 80);
                 Layer::charToTiles(' ',XChar + 16, 50 + 88);
                 Layer::charToTiles(' ',XChar + 16, 50 + 96);
+=======
+                for(i = 0; i<s.size(); i++)
+                    charToTiles(s[i],XChar + 16 , 50 + 8*i);
+                
+                charToTiles('2',XChar + 16 , 50 + 80);//player's num
+                
+                for(i = 0; i<st.size(); i++)
+                    charToTiles(st[i],XChar  + 16, 138 + 8*i);
+>>>>>>> bdf8d37c38389c61e7fc46371328d74af0d88d23
                 
                 for(unsigned int i = 0; i<numStr.size(); i++)
-                    Layer::charToTiles(numStr[i] ,XChar + 16, 146 + i*8);
+                    charToTiles(numStr[i] ,XChar + 16, 146 + i*8);
                 
                 updateAll();
             }

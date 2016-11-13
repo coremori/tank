@@ -13,11 +13,18 @@
 // l'engine (de préference, mais le ruler passe pour l'instant) doit géré le mode (reccord, normal...)
 namespace engine{
     Record::Record (state::State& s) : mainState(s){//veut plus compiler sinon :(
-        this->initState = &s;
-        this->lastState = &s;
+        this->initState = new state::State();
+        initState->load("res/Levels/level1.txt");
         
+        this->lastState = &s;
+        idx = 0;
         //fonction clone() nécéssaire pour toute les classes du State.dia (youhou)
     }
+
+    Record::~Record() {
+
+    }
+
     
     void Record::clear (){//clear actions
         for(ActionListTurn* action : actions)
@@ -37,12 +44,19 @@ namespace engine{
         
     }
     void Record::startReplay (){
-        
+        //lastState = mainState; copy mon amie where are you?
+        //mainState = initState;
+        mainState.load("res/Levels/level1.txt");
     }
+    
     bool Record::replayOne (){
-        
-        
-        return false;//probablement si dernier tour enregistrer (pas de suivant)
+        if(idx >=actions.size())
+            return false;//probablement si dernier tour enregistrer (pas de suivant)
+        /*if(idx == 0)
+            mainState = *initState; */
+        actions[idx]->apply();
+        idx ++;
+        return true;
     }
     
     void Record::startRollback (){//rollback all the game, and you can see it
@@ -51,8 +65,6 @@ namespace engine{
         clock::time_point start = clock::now();
         duration elapsed;
         
-        //elapsed.count();
-        //std::chrono::milliseconds millisec(20);
         bool nofini = true;
         while(nofini)
         {

@@ -25,18 +25,28 @@
 
 namespace engine{
 
-    Engine::Engine(state::State* s) : ruler(this) {
+    Engine::Engine(state::State* s) : reccord(*s), ruler(this){
 
         currentcommands = new CommandSet();
         waitingcommands = new CommandSet();
         state = s;
         charTurn = 0;
         ruler.setState(state);
+        ActionListTurn* first = new ActionListTurn(s);
+        ruler.setActions(first);
+        reccord.recordOne(first);
+        
         mode = play;
         ai = new ai::DumbAI();
+        AnimInRun = false;
 
     };
-    
+        
+    Engine::~Engine() {
+        reccord.~Record();
+        
+    }
+
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
         /*if(cmd->getCategory()==100)//commande load
@@ -71,6 +81,8 @@ namespace engine{
             mode = play;
         else 
             mode = m;
+        if(mode == replay)
+                reccord.startReplay();
     }
        
     EngineMode Engine::getMode() const {
@@ -95,7 +107,7 @@ namespace engine{
             charTurn = 1;
         
         ruler.setCommandSet(currentcommands);
-        ruler.apply();
+        ruler.implementeRules();
         for(int i = 0; i<state->getMobiles().size(); i++)
         {
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
@@ -119,6 +131,12 @@ namespace engine{
     std::mutex& Engine::getUpdateMutex() const {
         return update_mutex;
     }
+    
+    void Engine::setAnimInRun(bool b) {
+        update_mutex.lock();
+        AnimInRun = b;
+        update_mutex.unlock();
+    }
 
     
     void Engine::update() {
@@ -140,19 +158,36 @@ namespace engine{
             commands_mutex.lock();
             ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(waitingcommands->get(MODE_CATEGORY));//on change le mode mais conserve la liste en attente
             setMode(modeCmd->getMode());
+            waitingcommands->clear();
             commands_mutex.unlock();
         }
         else if(waitingcommands->get(END_CATEGORY))
         {
-            if(mode!=victoire && mode!=defaite)
+            if(mode!=victoire && mode!=defaite && mode!=replay)
             {
                 update_mutex.lock();
-                endTurn();
-                update_mutex.unlock();
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                if(charTurn==1)
-                    ai->run(*waitingcommands);
+                if(!AnimInRun)//pas d'anim en cours
+                {
+                    endTurn();
+                    update_mutex.unlock();
+                    ActionListTurn* turn = new ActionListTurn(state);
+                    ruler.setActions(turn);
+                    reccord.recordOne(turn);
+                    if(charTurn==1)
+                        ai->run(*waitingcommands);
+                }
+                else
+                    update_mutex.unlock();
             }
+        }
+        
+        if(mode == replay)
+        {
+            update_mutex.lock();
+            if(!AnimInRun)
+                reccord.replayOne();
+            update_mutex.unlock();
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
     }
 
