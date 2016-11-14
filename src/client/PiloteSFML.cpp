@@ -202,98 +202,99 @@ void PiloteSFML::createMenu() {
 
 
 
-    void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
-        
+void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
+
+    applyChange();
+
+    int Pixel_def = 8;
+    int h = scene.getHeight()*Pixel_def;
+    int w = scene.getWidth()*Pixel_def;   
+
+
+    sf::RenderWindow window(sf::VideoMode(w, h + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
+    /*
+    sf::Music music;
+    if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
+        std::cout << "file not found "<<std::endl;
+    music.play();
+    */
+
+
+    //button "fin de tour"
+    button((w-104)/2,0,104,1,0);//bouton centré
+    button((w-104)/2,0,104,1,1);
+    sf::IntRect* rectEnd = new sf::IntRect((w-104)/2,h+8, 104, 23);
+    bool hover = false;
+
+
+
+    //button "level 1"
+    button(w-148,104,64,0,0);
+    sf::IntRect* rectLevel1 = new sf::IntRect(w-148,h+8, 64, 23);
+
+
+
+    //button "level 2"
+    button(w-74,168,64,0,0);
+    sf::IntRect* rectLevel2 = new sf::IntRect(w-74,h+8, 64, 23);
+
+    sf::Vector2i localPosition;
+
+    createMenu();
+
+    while (window.isOpen())
+    {
+
+        sf::Event event;
+        localPosition = sf::Mouse::getPosition(window);
+
+        if(rectEnd->contains(localPosition))
+            hover = true;
+        else
+            hover = false;
+
+        while (window.pollEvent(event)){
+            eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
+            if (event.type == sf::Event::Closed){
+                engine->setMode(engine::close);
+                //music.stop();
+               window.close();
+            }
+        }
+
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
         applyChange();
 
-        int Pixel_def = 8;
-        int h = scene.getHeight()*Pixel_def;
-        int w = scene.getWidth()*Pixel_def;   
+        window.clear();
+        for(unsigned int i=0; i<surfaces.size(); i++)
+            window.draw(*surfaces[i]);
 
 
-        sf::RenderWindow window(sf::VideoMode(w, h + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
-        /*
-        sf::Music music;
-        if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
-            std::cout << "file not found "<<std::endl;
-        music.play();
-        */
+        if(hover)
+            window.draw(*s_button[1]);
+        else
+            window.draw(*s_button[0]);
 
+        switch(engine->getMode()){
 
-        //button "fin de tour"
-        button((w-104)/2,0,104,1,0);//bouton centré
-        button((w-104)/2,0,104,1,1);
-        sf::IntRect* rectEnd = new sf::IntRect((w-104)/2,h+8, 104, 23);
-        bool hover = false;
+            case engine::victoire:
+                window.draw(*s_button[2]);
+                break;
 
-        
-        
-        //button "level 1"
-        button(w-148,104,64,0,0);
-        sf::IntRect* rectLevel1 = new sf::IntRect(w-148,h+8, 64, 23);
+            case engine::defaite:
+                window.draw(*s_button[3]);
+                break;
 
-        
-        
-        //button "level 2"
-        button(w-74,168,64,0,0);
-        sf::IntRect* rectLevel2 = new sf::IntRect(w-74,h+8, 64, 23);
-
-        sf::Vector2i localPosition;
-
-        createMenu();
-
-        while (window.isOpen())
-        {
-            
-            sf::Event event;
-            localPosition = sf::Mouse::getPosition(window);
-
-            if(rectEnd->contains(localPosition))
-                hover = true;
-            else
-                hover = false;
-
-            while (window.pollEvent(event)){
-                eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
-                if (event.type == sf::Event::Closed){
-                    engine->setMode(engine::close);
-                    //music.stop();
-                   window.close();
-                }
-            }
-
-
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            applyChange();
-
-            window.clear();
-            for(unsigned int i=0; i<surfaces.size(); i++)
-                window.draw(*surfaces[i]);
-
-
-            if(hover)
-                window.draw(*s_button[1]);
-            else
-                window.draw(*s_button[0]);
-
-            switch(engine->getMode()){
-                
-                case engine::victoire:
-                    window.draw(*s_button[2]);
-                    break;
-                
-                case engine::defaite:
-                    window.draw(*s_button[3]);
-                    break;
-                
-                default :
-                    break;
-            }
-
-            window.display();
-
+            default :
+                break;
         }
+
+        window.display();
+
     }
+}
+
 }
     
 
