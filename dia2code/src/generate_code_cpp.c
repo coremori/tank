@@ -640,7 +640,7 @@ struct sfmllib_includes{
 void print_include_sfmllib(struct sfmllib_includes* si,char* name) {
     if ( strlen(name) > 0 ) {
 	if(!si->already && (strstr(name,"sf::texture") || strstr(name,"sf::VertexArray") || strstr(name,"sf::Sprite"))){
-		print("#include <SFML/Graphics.hpp>");
+		print("#include <SFML/Graphics.hpp>\n");
 		si->already = 1;
 	}
     }

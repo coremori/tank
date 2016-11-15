@@ -12,6 +12,8 @@
 #include "engine/DirectionCommand.h"
 #include "engine/MoveCommand.h"
 #include "engine/ShotCommand.h"
+#include <iostream>
+
 
 namespace ai{
 
@@ -25,7 +27,12 @@ namespace ai{
         return 1;
     }
     int HeuristicAI::distanceOtherChar() {
-        return 1;
+        int other;
+        if(character==1)
+                other = 0;
+            else
+                other = 1;
+        return state->getMobile(other)->getX()-state->getMobile(character)->getX();
     }
     
     void HeuristicAI::move(bool esquive) {
@@ -37,24 +44,22 @@ namespace ai{
         state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other));
         int distance = distanceOtherChar();
         
-        if(esquive){
-            if(((othertank->getOrientation() == state::right_up) && (distance!=-10 ))||  ((othertank->getOrientation() == state::left_up) && (distance!=10 )))
-            {
-                 //do nothing
-            }
-            else if((othertank->getOrientation() == state::right_up) && (distance==-10 ))
+        if(esquive){//on fuit
+            if(((othertank->getOrientation() == state::right_up) && (distance==-10 ))||  ((othertank->getOrientation() == state::left_up) && (distance!=10 )))
             {
                 commands->add(new engine::MoveCommand(character,-8,0));
             }
-            else if((othertank->getOrientation() == state::left_up) && (distance==10 ))
+            else if((othertank->getOrientation() == state::left_up) && (distance==10))
             {
                 commands->add(new engine::MoveCommand(character,8,0));
-            }
-            else{
-                //
-            }
+            }    
         }
-              
+        else if(distance>=0||distance != 10){//on se rapproche si le missile n'est pas à porter
+            commands->add(new engine::MoveCommand(character,8,0));
+        }
+        else if(distance<=0||distance != -10){
+            commands->add(new engine::MoveCommand(character,-8,0));
+        }
     }
     
     void HeuristicAI::nextOrientation() {
@@ -64,6 +69,7 @@ namespace ai{
     void HeuristicAI::run(engine::CommandSet& commands) {
         this->commands = &commands;
         shot();
+        move(false);
     }
 
     void HeuristicAI::shot() {
@@ -73,7 +79,7 @@ namespace ai{
 
     bool HeuristicAI::touchable() {
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        int distance = distanceOtherChar();
+        int distance = distanceOtherChar()/8;
         if(distance==10 || distance==-10 )//si on vise en haut
         {
             return true;
@@ -95,7 +101,7 @@ namespace ai{
             {
                 while(distance>=1 && (state->getGrid().isSpace(x,y)))
                 {
-                    x +=8;
+                    x ++;
                     distance --;                
                 }
 
@@ -104,10 +110,11 @@ namespace ai{
             {
                 while(distance<=1 && (state->getGrid().isSpace(x,y)))
                 {
-                    x-=8;
+                    x--;
                     distance ++;                
                 }
             }
+            std::cout << "x= " << x << " y= "<< y << state->getGrid().isSpace(x,y) << std::endl;
             if (distance == 0)//si pas de mur touché
                 return true;
             else

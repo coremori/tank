@@ -2,7 +2,6 @@
 #ifndef CLIENT__PILOTERENDU__H
 #define CLIENT__PILOTERENDU__H
 
-#include "engine/Engine.h"
 
 namespace client {
 
@@ -10,7 +9,6 @@ namespace client {
   class PiloteRendu {
     // Operations
   public:
-    virtual void setEngine (engine::Engine* e) = 0;
     virtual void display () = 0;
   };
 

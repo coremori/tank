@@ -4,16 +4,8 @@
  *
  * Part of tank */
 
-#include <thread>
 
-#include "state/State.h"
-#include "engine/Engine.h"
-#include "client/PiloteSFML.h"
 #include "client/Pilote.h"
-
-
-#include <pthread.h>
-
 
 int main ()
 {

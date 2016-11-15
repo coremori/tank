@@ -2,12 +2,13 @@
 #ifndef CLIENT__PILOTESFML__H
 #define CLIENT__PILOTESFML__H
 
-#include "state/State.h"
 #include "render/Scene.h"
 #include <vector>
 #include "render/SurfaceSFML.hpp"
 #include "engine/Engine.h"
 #include <SFML/Graphics.hpp>
+#include "state/State.h"
+
 namespace client {
   class CacheStateObserver;
   class PiloteRendu;
@@ -23,7 +24,6 @@ namespace client {
     // Associations
     // Attributes
   protected:
-    state::State* state;
     render::Scene scene;
     std::vector<CacheStateObserver*>  obs;
     std::vector<SurfaceSFML*> surfaces;
@@ -33,15 +33,14 @@ namespace client {
     int character;
     // Operations
   public:
-    PiloteSFML (state::State* s, engine::Engine* e);
+    PiloteSFML (state::State* state, engine::Engine* e);
     ~PiloteSFML ();
     void display ();
-    void setEngine (engine::Engine* e);
-    void eventUp (sf::Event* event, engine::Engine* engine, int character, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition);
   protected:
     void button (unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
     void applyChange ();
     void createMenu ();
+    void eventUp (sf::Event* event, engine::Engine* engine, int character, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition);
   };
 
 };

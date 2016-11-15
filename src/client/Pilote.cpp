@@ -27,14 +27,14 @@ namespace client{
     }
         
     void Pilote::launch() {//launch the thread for the engine and the rendu
-        rendu->setEngine(&engine);
+        //rendu->setEngine(&engine);
         std::thread t1(&PiloteRendu::display,rendu);// the thread for the rendu run in PiloteSFML.display()
-        std::thread t2(&Pilote::run,this); // launch run() de l'objet courant (this)*/
+        std::thread t2(&Pilote::runEngine,this); // launch run() de l'objet courant (this)*/
         t2.join();
         t1.join();
     }
         
-    void Pilote::run() {//thread for the engine
+    void Pilote::runEngine() {//thread for the engine
         
         // toutes les 50 ms
         while(engine.getMode()!=engine::close)

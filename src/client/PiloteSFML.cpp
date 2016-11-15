@@ -27,9 +27,9 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* s, engine::Engine* e) {//met la scene à afficher et attribue au layer les surfaces
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e) {//met la scene à afficher et attribue au layer les surfaces
         character = 0;
-        state = s;
+        //state = s;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
         obs.push_back(new render::LandscapeLayer());
@@ -67,7 +67,7 @@ namespace client{
         
         m_tilesetButton.setSmooth(true); //lissage de l'image
         
-        state->load("res/Levels/level1.txt"); //charge le level.
+        state->load("res/Levels/level1.txt"); //charge le level, pour être sur qu'il existe
 
     }
 
