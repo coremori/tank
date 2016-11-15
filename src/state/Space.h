@@ -4,6 +4,7 @@
 
 
 namespace state {
+  class Element;
   class StaticElement;
 }
 
@@ -23,6 +24,7 @@ namespace state {
     virtual bool isSpace () const;
     TypeId getTypeId () const;
     SpaceTypeId getSpaceTypeId () const;
+    Element* clone () const;
   };
 
 };

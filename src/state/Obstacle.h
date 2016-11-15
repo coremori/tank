@@ -4,6 +4,7 @@
 
 
 namespace state {
+  class Element;
   class StaticElement;
 }
 
@@ -24,6 +25,7 @@ namespace state {
     TypeId getTypeId () const;
     void setObstacleTypeId (ObstacleTypeId id);
     ObstacleTypeId getObstacleTypeId () const;
+    Element* clone () const;
   };
 
 };

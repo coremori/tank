@@ -56,6 +56,13 @@ namespace state {
     TankTypeId Tank::getTankTypeId () const {
         return TankType;
     };
+        
+    Element* Tank::clone() const {
+        Tank* newtank = new Tank(TankType,Player,orientation,x,y);
+        newtank->setPv(pv);
+        return newtank;
+    }
+
     
   };
 

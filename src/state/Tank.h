@@ -7,10 +7,10 @@ namespace state {
   class Element;
 }
 
-#include "TypeId.h"
-#include "Orientation.h"
 #include "TankTypeId.h"
 #include "PlayerType.h"
+#include "Orientation.h"
+#include "TypeId.h"
 #include "Element.h"
 
 namespace state {
@@ -26,8 +26,9 @@ namespace state {
     int pv;
     // Operations
   public:
+    Tank (TankTypeId tanktypeid, PlayerType playertype, Orientation orientation, int x, int y);
     bool isStatic () const;
-    virtual TypeId getTypeId () const;
+    TypeId getTypeId () const;
     bool isPlayer () const;
     void setPv (int pv);
     int getPv () const;
@@ -35,7 +36,7 @@ namespace state {
     void setOrientation (Orientation o);
     void setTankTypeId (TankTypeId id);
     TankTypeId getTankTypeId () const;
-    Tank (TankTypeId tanktypeid, PlayerType playertype, Orientation orientation, int x, int y);
+    Element* clone () const;
   };
 
 };

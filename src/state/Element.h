@@ -3,6 +3,10 @@
 #define STATE__ELEMENT__H
 
 
+namespace state {
+  class Element;
+}
+
 #include "TypeId.h"
 
 namespace state {
@@ -24,6 +28,7 @@ namespace state {
     int getY () const;
     void setX (int x);
     void setY (int y);
+    virtual Element* clone () const = 0;
   };
 
 };

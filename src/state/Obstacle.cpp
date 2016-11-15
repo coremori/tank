@@ -32,6 +32,10 @@ namespace state{
     ObstacleTypeId Obstacle::getObstacleTypeId () const {
         return this->ObstacleType;
     };
-  
+      
+    Element* Obstacle::clone() const {
+        return new Obstacle(ObstacleType, x, y);
+    }
+
 
 };

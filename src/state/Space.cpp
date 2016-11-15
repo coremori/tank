@@ -23,6 +23,11 @@ namespace state {
     SpaceTypeId Space::getSpaceTypeId() const {
         return SpaceType;
     }
+        
+    Element* Space::clone() const {
+        return new Space(SpaceType, x, y);
+    }
+
 
   };
 
