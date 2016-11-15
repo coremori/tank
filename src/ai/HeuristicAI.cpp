@@ -37,9 +37,9 @@ namespace ai{
     
     
     int HeuristicAI::directionOtherChar() {
-      
-                
-        return 1;
+        int other = (character)? 0:1;
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(other));
+        return tank->getOrientation();
     }
     
     
@@ -50,11 +50,7 @@ namespace ai{
     
     
     int HeuristicAI::distanceOtherChar() { //renvoie la distance entre les deux tanks
-        int other;
-        if(character==1)
-            other = 0;
-        else
-            other = 1;
+        int other = (character)? 0:1;
         return state->getMobile(other)->getX()-state->getMobile(character)->getX(); 
     }
     
