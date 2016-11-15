@@ -64,11 +64,7 @@ namespace ai{
     
     
     void HeuristicAI::move(bool esquive) {
-        int other;
-            if(character==1)
-                other = 0;
-            else
-                other = 1;
+        int other = (character)? 0:1;
         state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other));
         int distance = distanceOtherChar();
         
@@ -156,22 +152,21 @@ namespace ai{
     
     
     bool HeuristicAI::touchable() {
+        
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
         int distance = distanceOtherChar()/8;
-        if(distance==10 || distance==-10 )//si on vise en haut
+        
+        if(distance==10 || distance==-10 )//si on vise en haut - à modifier lorsque la puissance de tir sera intégrée
         {
             return true;
         }
         else
         {
-            int other;
-            if(character==1)
-                other = 0;
-            else
-                other = 1;
+            int other = (character)? 0:1;
             
             if(!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
                 return false;
+            
             int x = tank->getX()/8;
             int y = tank->getY()/8;
             
@@ -192,6 +187,7 @@ namespace ai{
                     distance ++;                
                 }
             }
+            
             if (distance == 0)//si pas de mur touché
                 return true;
             else

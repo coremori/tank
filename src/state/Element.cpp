@@ -13,11 +13,11 @@ namespace state {
     
     
     int Element::getX () const {
-        return x;
+        return x;//pixels
     };
     
     int Element::getY () const {
-        return y;
+        return y;//pixels
     };
     
     void Element::setX (int x){
