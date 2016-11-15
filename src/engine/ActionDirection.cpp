@@ -33,4 +33,3 @@ namespace engine {
     }
 
 }
-/*press ctrl+space for create function define in .h*/
