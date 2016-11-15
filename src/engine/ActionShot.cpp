@@ -39,7 +39,7 @@ namespace engine{
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         if(yMax==-1)
         {
-            std::cout << "Projectile au sol tiré "<<std::endl;
+            std::cout << "Projectile au sol tiré par "<<character<<std::endl;
             if((xImpact-tank->getX())>0)
                 s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
             else
@@ -47,7 +47,7 @@ namespace engine{
         }
         else
         {
-            std::cout << "Missile tiré "<<std::endl;
+            std::cout << "Missile tiré par "<<character<<std::endl;
             if((xImpact-tank->getX())>0)
                 s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
             else

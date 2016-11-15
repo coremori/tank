@@ -8,10 +8,11 @@
 #include "engine.h"
 
 namespace ai {
+    AI::AI(state::State* state, int character) {
+        this->state = state;
+        this->character = character;
+    }
 
-    AI::AI (){
-        
-    };
     
     AI::~AI (){
         

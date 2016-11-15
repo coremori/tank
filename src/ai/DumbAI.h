@@ -2,6 +2,7 @@
 #ifndef AI__DUMBAI__H
 #define AI__DUMBAI__H
 
+#include "state/State.h"
 #include "engine/CommandSet.h"
 
 namespace ai {
@@ -16,7 +17,7 @@ namespace ai {
   class DumbAI : public ai::AI {
     // Operations
   public:
-    DumbAI ();
+    DumbAI (state::State* state, int character);
     void run (engine::CommandSet& commands);
   };
 
