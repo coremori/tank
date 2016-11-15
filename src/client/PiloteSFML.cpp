@@ -274,7 +274,7 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
         while (window.pollEvent(event)){
             eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
             if (event.type == sf::Event::Closed){
-                engine->setMode(engine::close);
+               engine->setMode(engine::close);
                 //music.stop();
                window.close();
             }
