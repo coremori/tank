@@ -8,7 +8,6 @@ namespace state {
 }
 
 #include "TankTypeId.h"
-#include "PlayerType.h"
 #include "Orientation.h"
 #include "TypeId.h"
 #include "Element.h"
@@ -19,17 +18,15 @@ namespace state {
   class Tank : public state::Element {
     // Associations
     state::TankTypeId TankType;
-    state::PlayerType Player;
     state::Orientation orientation;
     // Attributes
   protected:
     int pv;
     // Operations
   public:
-    Tank (TankTypeId tanktypeid, PlayerType playertype, Orientation orientation, int x, int y);
+    Tank (TankTypeId tanktypeid, Orientation orientation, int x, int y);
     bool isStatic () const;
     TypeId getTypeId () const;
-    bool isPlayer () const;
     void setPv (int pv);
     int getPv () const;
     Orientation getOrientation () const;

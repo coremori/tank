@@ -79,11 +79,11 @@ namespace state {
                     }
                     else if(line.at(i)=='&'){
                         this->elements.push_back(new Space(sky,x,y));
-                        s.getMobiles().elements.push_back(new Tank(Little_tank_green,realPlayer,right_down,x,y));
+                        s.getMobiles().elements.push_back(new Tank(Little_tank_green,right_down,x,y));
                     }
                     else if(line.at(i)=='%'){
                         this->elements.push_back(new Space(sky,x,y));
-                        s.getMobiles().elements.push_back(new Tank(Little_tank_grey,realPlayer,left_down,x,y));
+                        s.getMobiles().elements.push_back(new Tank(Little_tank_grey,left_down,x,y));
                     }
                     
                     x = x+NB_STD_HEIGHT_SPRITE;

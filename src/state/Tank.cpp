@@ -4,10 +4,9 @@
 
 namespace state {
 
-    Tank::Tank(TankTypeId tanktypeid, PlayerType playertype, Orientation orientation,int x,int y){
+    Tank::Tank(TankTypeId tanktypeid, Orientation orientation,int x,int y){
     this->TankType = tanktypeid;
     this->orientation = orientation;
-    this->Player = playertype;
     this->x=x;
     this->y=y;
     this->pv = 100;
@@ -21,12 +20,7 @@ namespace state {
     TypeId Tank::getTypeId () const {
         return tank;
     };
-    
-    
-    bool Tank::isPlayer () const {
-        return Player;
-    };
-    
+        
     void Tank::setPv (int pv){
         if(pv<0){
             this->pv = 0;
@@ -58,7 +52,7 @@ namespace state {
     };
         
     Element* Tank::clone() const {
-        Tank* newtank = new Tank(TankType,Player,orientation,x,y);
+        Tank* newtank = new Tank(TankType,orientation,x,y);
         newtank->setPv(pv);
         return newtank;
     }
