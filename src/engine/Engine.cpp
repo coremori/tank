@@ -101,6 +101,7 @@ namespace engine{
         
         ruler.setCommandSet(currentcommands);
         ruler.implementeRules();
+       
         for(int i = 0; i<state->getMobiles().size(); i++)
         {
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
@@ -167,7 +168,10 @@ namespace engine{
                     ruler.setActions(turn);
                     reccord.recordOne(turn);
                     if(charTurn==1)
+                    {
                         ai->run(*waitingcommands);
+                    }
+                        
                 }
                 else
                     update_mutex.unlock();

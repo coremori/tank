@@ -28,7 +28,7 @@ namespace client{
     
     
     PiloteSFML::PiloteSFML(state::State* s) {//met la scene à afficher et attribue au layer les surfaces
-
+        character = 0;
         state = s;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
@@ -45,9 +45,9 @@ namespace client{
         scene.setLayer(2,charlayer);
 
 
-        state->registerObserver(obs[1]);
-        state->registerObserver(obs[2]);
-        state->registerObserver(obs[3]);
+        state->getGrid().registerObserver(obs[1]);
+        state->getMobiles().registerObserver(obs[2]);
+        state->getMobiles().registerObserver(obs[3]);
         state->registerObserver(obs[0]);
 
         surfaces.push_back(new SurfaceSFML());
@@ -150,7 +150,7 @@ namespace client{
     
     
     
-    void PiloteSFML::eventUp(sf::Event* event,sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
+    void PiloteSFML::eventUp(sf::Event* event,engine::Engine* engine, int character, sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
         
         if (event->type == sf::Event::KeyPressed)
         {
@@ -269,7 +269,7 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
             hover = false;
 
         while (window.pollEvent(event)){
-            eventUp(&event,rectEnd,rectLevel1,rectLevel2,localPosition);
+            eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
             if (event.type == sf::Event::Closed){
                 engine->setMode(engine::close);
                 //music.stop();
