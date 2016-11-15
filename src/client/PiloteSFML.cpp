@@ -150,7 +150,7 @@ namespace client{
     
     
     
-    void PiloteSFML::eventUp(sf::Event* event,engine::Engine* engine,int character,sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
+    void PiloteSFML::eventUp(sf::Event* event,sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
         
         if (event->type == sf::Event::KeyPressed)
         {
@@ -161,35 +161,35 @@ namespace client{
                     break;
 
                 case sf::Keyboard::Right :
-                    engine->addCommand(new engine::MoveCommand(character,8,0));
+                    engine->addCommand(new engine::MoveCommand(this->character,8,0));
                     break;
 
                 case sf::Keyboard::Left :
-                    engine->addCommand(new engine::MoveCommand(character,-8,0));
+                    engine->addCommand(new engine::MoveCommand(this->character,-8,0));
                     break;
 
                 case sf::Keyboard::E :
                     std::cout << "direction rigth up " << std::endl;
-                    engine->addCommand(new engine::DirectionCommand(character,state::right_up));
+                    engine->addCommand(new engine::DirectionCommand(this->character,state::right_up));
                     break;
 
                 case sf::Keyboard::Z :
                     std::cout << "direction left up" << std::endl;
-                    engine->addCommand(new engine::DirectionCommand(character,state::left_up));
+                    engine->addCommand(new engine::DirectionCommand(this->character,state::left_up));
                     break;
 
                 case sf::Keyboard::Q :
                     std::cout << "direction left down" << std::endl;
-                    engine->addCommand(new engine::DirectionCommand(character,state::left_down));
+                    engine->addCommand(new engine::DirectionCommand(this->character,state::left_down));
                     break;
 
                 case sf::Keyboard::D :
                     std::cout << "direction right down" << std::endl;
-                    engine->addCommand(new engine::DirectionCommand(character,state::right_down));
+                    engine->addCommand(new engine::DirectionCommand(this->character,state::right_down));
                     break;
 
                 case sf::Keyboard::Space :
-                    engine->addCommand(new engine::ShotCommand(character,10));
+                    engine->addCommand(new engine::ShotCommand(this->character,10));
                     break;
 
                 default : break;
@@ -200,7 +200,7 @@ namespace client{
         {
             if(rectEnd->contains(localPosition))
             {
-                engine->addCommand(new engine::EndTurnCommand(character));                    
+                engine->addCommand(new engine::EndTurnCommand(this->character));                    
             }
             else if (rectLevel1->contains(localPosition))
             {
@@ -270,7 +270,7 @@ namespace client{
                 hover = false;
 
             while (window.pollEvent(event)){
-                eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
+                eventUp(&event,rectEnd,rectLevel1,rectLevel2,localPosition);
                 if (event.type == sf::Event::Closed){
                     engine->setMode(engine::close);
                     //music.stop();
