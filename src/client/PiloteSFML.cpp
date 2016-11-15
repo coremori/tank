@@ -140,12 +140,18 @@ namespace client{
     
     
     
-    
-    
-    
-    void PiloteSFML::eventUp(sf::Event* event,engine::Engine* engine, int character, sf::IntRect* rectEnd,sf::IntRect* rectLevel1,sf::IntRect* rectLevel2,sf::Vector2i localPosition){
+    void PiloteSFML::eventUp(sf::Event* event, sf::RenderWindow* window, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition) {
         
-        if (event->type == sf::Event::KeyPressed)
+        if (event->type == sf::Event::Closed){
+           engine->setMode(engine::close);
+            //music.stop();
+           window->close();
+        }
+        else if (event->type == sf::Event::Resized)
+        {
+            window->setView(sf::View(sf::FloatRect(0, 0, event->size.width, event->size.height)));
+        }
+        else if (event->type == sf::Event::KeyPressed)
         {
             switch(event->key.code){
                 case sf::Keyboard::P :
@@ -259,21 +265,11 @@ void PiloteSFML::display(){//ouvre la fenetre et affiche les sprites (boucle jus
             hover = true;
         else
             hover = false;
-
+        
         while (window.pollEvent(event)){
-            eventUp(&event,engine,character,rectEnd,rectLevel1,rectLevel2,localPosition);
-            if (event.type == sf::Event::Closed){
-               engine->setMode(engine::close);
-                //music.stop();
-               window.close();
-            }
-            else if (event.type == sf::Event::Resized)
-            {
-                window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
-            }
+            eventUp(&event,&window,rectEnd,rectLevel1,rectLevel2,localPosition);
         }
-
-
+            
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         applyChange();
 
