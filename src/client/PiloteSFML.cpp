@@ -155,7 +155,9 @@ namespace client{
         if (event->type == sf::Event::KeyPressed)
         {
             switch(event->key.code){
-
+                case sf::Keyboard::P :
+                    engine->setMode(engine::AI);
+                    break;
                 case sf::Keyboard::Escape :
                     engine->setMode(engine::replay);
                     break;

@@ -4,6 +4,7 @@
 
 #include "state/State.h"
 #include <mutex>
+#include <vector>
 #include "ai/AI.h"
 
 namespace engine {
@@ -34,7 +35,7 @@ namespace engine {
     state::State* state;
     mutable std::mutex commands_mutex;
     mutable std::mutex update_mutex;
-    ai::AI* ai;
+    std::vector<ai::AI*> ai;
     bool AnimRunning;
     // Operations
   public:

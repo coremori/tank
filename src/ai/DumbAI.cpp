@@ -10,13 +10,11 @@
 #include "engine.h"
 
 namespace ai {
+    DumbAI::DumbAI(state::State* state, int character) : AI(state,character){
+    }
 
-    DumbAI::DumbAI (){
-        
-    };
-    
     void DumbAI::run (engine::CommandSet& commands){//choix aléatoire
-        int character = 1;
+        //int character = 1;
         srand (time(NULL));
         switch(rand() % 10){
             case 0: 

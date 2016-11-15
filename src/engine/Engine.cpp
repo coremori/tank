@@ -37,7 +37,10 @@ namespace engine{
         reccord.recordOne(first);
         
         mode = play;
-        ai = new ai::DumbAI();
+        ai.push_back(new ai::DumbAI(s,0));
+        ai.push_back(new ai::DumbAI(s,1));
+        
+        
         AnimRunning = false;
 
     };
@@ -70,7 +73,7 @@ namespace engine{
     
     
     void Engine::setMode(EngineMode m) {
-        if((mode==m)&&(m==pause))
+        if(mode==m)
             mode = play;
         else 
             mode = m;
@@ -155,36 +158,48 @@ namespace engine{
             waitingcommands->clear();
             commands_mutex.unlock();
         }
-        else if(waitingcommands->get(END_CATEGORY))
+        switch(mode)
         {
-            if(mode!=victoire && mode!=defaite && mode!=replay)
-            {
+            case replay :
                 update_mutex.lock();
+                if(!AnimRunning)
+                    reccord.replayOne();
+                update_mutex.unlock();
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                break;
+            case AI :
                 if(!AnimRunning)//pas d'anim en cours
                 {
+                    ai[charTurn]->run(*waitingcommands);
+                    update_mutex.lock();
                     endTurn();
                     update_mutex.unlock();
                     ActionListTurn* turn = new ActionListTurn(state);
                     ruler.setActions(turn);
                     reccord.recordOne(turn);
-                    if(charTurn==1)
-                    {
-                        ai->run(*waitingcommands);
-                    }
-                        
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 }
-                else
-                    update_mutex.unlock();
-            }
-        }
-        
-        if(mode == replay)
-        {
-            update_mutex.lock();
-            if(!AnimRunning)
-                reccord.replayOne();
-            update_mutex.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                break;
+            case play :
+                if(waitingcommands->get(END_CATEGORY))
+                {
+                    if(!AnimRunning)//pas d'anim en cours
+                    {
+                        update_mutex.lock();
+                        endTurn();
+                        update_mutex.unlock();
+                        ActionListTurn* turn = new ActionListTurn(state);
+                        ruler.setActions(turn);
+                        reccord.recordOne(turn);
+                        if(charTurn==1)
+                        {
+                            ai[1]->run(*waitingcommands);
+                        }
+
+                    }
+                }
+                break;
+            default : break;
         }
     }
 

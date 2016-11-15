@@ -2,15 +2,20 @@
 #ifndef AI__AI__H
 #define AI__AI__H
 
+#include "state/State.h"
 #include "engine/CommandSet.h"
 
 namespace ai {
 
   /// class AI - 
   class AI {
+    // Attributes
+  public:
+    state::State* state;
+    int character;
     // Operations
   public:
-    AI ();
+    AI (state::State* state, int character);
     ~AI ();
     virtual void run (engine::CommandSet& commands) = 0;
   };

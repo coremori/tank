@@ -4,4 +4,6 @@
 
 #include "ai/AI.h"
 #include "ai/DumbAI.h"
+#include "ai/Orientation.h"
+#include "ai/HeuristicAI.h"
 #endif
