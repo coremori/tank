@@ -6,6 +6,7 @@
 namespace state {
   class State;
   class Element;
+  class ElementGrid;
   class ElementList;
 }
 
@@ -30,6 +31,7 @@ namespace state {
     bool hasCell (int i, int j) const;
     void setHeight (int h);
     void setWidth (int w);
+    void operator= (const ElementGrid e);
   };
 
 };

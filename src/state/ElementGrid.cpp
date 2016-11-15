@@ -53,8 +53,12 @@ namespace state {
         width = w;
     };
     
-    
-    
+    void ElementGrid::operator=(const ElementGrid e) {
+        ElementList::operator =(*this);
+        width = e.getWidth();
+        height = e.getHeight();
+    }
+
   };
 
 

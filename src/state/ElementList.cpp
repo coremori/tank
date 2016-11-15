@@ -23,15 +23,16 @@ namespace state {
 
    
     int ElementList::size () const{
-        //elements[0]->getObstacleType();
         return elements.size();
     };
         
     Element* ElementList::get ( int idx)  const{
-        return elements[idx];
+            return elements[idx];
     };
         
     void ElementList::clear (){
+    /*    for(Element* e : elements)
+            delete(e);*/
         elements.clear(); //Removes all elements from the "elements" container. 
     };
     
@@ -104,5 +105,12 @@ namespace state {
     void ElementList::notifyObserver (const StateEvent& event) const{
         Observable::notifyObserver(event);
     }
+        
+    void ElementList::operator=(const ElementList e) {//copy the elements of the other ElementList
+        //not copy the state reference
+        for(int i = 0; i <= e.size(); i++)
+            elements.push_back(e.get(i)->clone());
+    }
+
 
 };
