@@ -14,6 +14,7 @@
 
 #include "state/Tank.h"
 #include "ai/DumbAI.h"
+#include "ai/HeuristicAI.h"
 #include <mutex>
 #include <chrono>
 #include <ctime>
@@ -37,9 +38,8 @@ namespace engine{
         reccord.recordOne(first);
         
         mode = play;
-        ai.push_back(new ai::DumbAI(s,0));
-        ai.push_back(new ai::DumbAI(s,1));
-        
+        ai.push_back(new ai::HeuristicAI(s,0));
+        ai.push_back(new ai::HeuristicAI(s,1));
         
         AnimRunning = false;
 

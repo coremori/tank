@@ -214,6 +214,7 @@ namespace client{
             }
         }
         
+        
     } 
 
 
@@ -276,6 +277,10 @@ void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jus
                 engine->setMode(engine::close);
                 //music.stop();
                window.close();
+            }
+            else if (event.type == sf::Event::Resized)
+            {
+                window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
             }
         }
 

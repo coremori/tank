@@ -6,40 +6,115 @@
 
 
 #include "HeuristicAI.h"
+#include "state/Tank.h"
+#include "engine/Engine.h"
+#include "engine/EndTurnCommand.h"
+#include "engine/DirectionCommand.h"
+#include "engine/MoveCommand.h"
+#include "engine/ShotCommand.h"
 
 namespace ai{
 
-    HeuristicAI::HeuristicAI(state::State* state, int character) : AI(state,character){
-
-    }
+    HeuristicAI::HeuristicAI(state::State* state, int character) : AI(state,character){}
+    
     void HeuristicAI::choice() {
 
     }
 
     int HeuristicAI::directionOtherChar() {
-
+        return 1;
     }
     int HeuristicAI::distanceOtherChar() {
-
+        return 1;
     }
+    
     void HeuristicAI::move(bool esquive) {
-
+        int other;
+            if(character==1)
+                other = 0;
+            else
+                other = 1;
+        state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other));
+        int distance = distanceOtherChar();
+        
+        if(esquive){
+            if(((othertank->getOrientation() == state::right_up) && (distance!=-10 ))||  ((othertank->getOrientation() == state::left_up) && (distance!=10 )))
+            {
+                 //do nothing
+            }
+            else if((othertank->getOrientation() == state::right_up) && (distance==-10 ))
+            {
+                commands->add(new engine::MoveCommand(character,-8,0));
+            }
+            else if((othertank->getOrientation() == state::left_up) && (distance==10 ))
+            {
+                commands->add(new engine::MoveCommand(character,8,0));
+            }
+            else{
+                //
+            }
+        }
+              
     }
+    
     void HeuristicAI::nextDirection() {
-
+        
     }
-    int HeuristicAI::run(engine::CommandSet& commands) {
-
+    void HeuristicAI::run(engine::CommandSet& commands) {
+        this->commands = &commands;
+        shot();
     }
 
     void HeuristicAI::shot() {
-
+        if(touchable())
+            commands->add(new engine::ShotCommand(character,10));
     }
 
     bool HeuristicAI::touchable() {
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        int distance = distanceOtherChar();
+        if(tank->getOrientation()==state::right_up && distance==10 )//si on vise en haut
+        {
+            return true;
+        }
+        else if(tank->getOrientation()==state::left_up && distance==-10)//si on vise en haut
+        {
+            return true;
+        }
+        else
+        {
+            int other;
+            if(character==1)
+                other = 0;
+            else
+                other = 1;
+            
+            if(!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
+                return false;
+            int x = tank->getX()/8;
+            int y = tank->getY()/8;
+            
+            if(tank->getOrientation()==state::right_down && distance>=0)
+            {
+                while(distance>=1 && (state->getGrid().isSpace(x,y)))
+                {
+                    x +=8;
+                    distance --;                
+                }
 
+            }
+            else if(tank->getOrientation()==state::left_down && distance<=0)
+            {
+                while(distance<=1 && (state->getGrid().isSpace(x,y)))
+                {
+                    x-=8;
+                    distance ++;                
+                }
+            }
+            if (distance == 0)//si pas de mur touché
+                return true;
+            else
+                return false;
+        }
     }
-
 }
-
-/*press ctrl+space for create function define in .h*/

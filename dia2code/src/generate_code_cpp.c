@@ -965,7 +965,7 @@ gen_namespace(batch *b,declaration *nsd)
                         print ("};\n");    
                     }                    
                     curnsname = incfile->package;
-                    print ("namespace %s {\n", incfile->package);
+                    print ("namespace %s {\n", incfile->package);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< gere ici les declarations preventive de classe
                     indentlevel++;
                 }
                 print ("class %s;\n", incfile->name);

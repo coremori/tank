@@ -8,6 +8,8 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "engine.h"
+#include "engine/Engine.h"
+
 
 namespace ai {
     DumbAI::DumbAI(state::State* state, int character) : AI(state,character){
