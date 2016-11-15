@@ -60,7 +60,7 @@ namespace engine{
             
             if(state->getGrid().hasCell(nextX/8,nextY/8))
             {
-                if(!(state->getGrid().isSpace(nextX/8,nextY/8))){ //car une case fait 8 pixels de 
+                if(!(state->getGrid().isSpace(nextX/8,nextY/8))){ //car une unité de texture fait 8 pixels de largeur.
                     if(state->getGrid().isSpace(nextX/8,(state->getMobile(move->getCharacter())->getY())/8+1))
                     {
                         actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter() ));
