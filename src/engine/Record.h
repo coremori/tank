@@ -25,9 +25,7 @@ namespace engine {
     Record (state::State& s);
     ~Record ();
     void clear ();
-    void startRecord ();
     void recordOne (ActionListTurn* actions);
-    void stopRecord ();
     void startReplay ();
     bool replayOne ();
     void startRollback ();

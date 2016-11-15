@@ -10,8 +10,8 @@
 namespace engine {
   class CommandSet;
   class Command;
-  class Ruler;
   class Record;
+  class Ruler;
 }
 
 #include "EngineMode.h"
@@ -44,8 +44,6 @@ namespace engine {
     void addCommand (Command* cmd);
     void setMode (EngineMode m);
     EngineMode getMode () const;
-    void setcharTurn (int c);
-    Ruler* getRuler ();
     void endTurn ();
     void swapCommands ();
     void update ();

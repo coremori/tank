@@ -12,8 +12,6 @@
 #include "engine/DirectionCommand.h"
 #include "engine/MoveCommand.h"
 #include "engine/ShotCommand.h"
-#include <iostream>
-
 
 namespace ai{
 
@@ -114,7 +112,6 @@ namespace ai{
                     distance ++;                
                 }
             }
-            std::cout << "x= " << x << " y= "<< y << state->getGrid().isSpace(x,y) << std::endl;
             if (distance == 0)//si pas de mur touché
                 return true;
             else

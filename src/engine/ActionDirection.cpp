@@ -23,8 +23,6 @@ namespace engine {
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         OldDirection = tank->getOrientation();
         tank->setOrientation(Newdirection);
-        //s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
-        //s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
         s->getMobiles().notifyObserver(character);
         
         std::cout << "character "<<character<<" regarde vers" ;
@@ -47,8 +45,6 @@ namespace engine {
     void ActionDirection::undo(state::State* s) {
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         tank->setOrientation(OldDirection);
-        //s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
-        //s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
         s->getMobiles().notifyObserver(character);
     }
 

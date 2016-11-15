@@ -59,17 +59,6 @@ namespace engine{
     };
        
     
-    void Engine::setcharTurn(int c) {
-        charTurn = c;
-    }
-    
-
-    Ruler* Engine::getRuler() {
-        return &ruler;
-    }
-    
-    
-    
     void Engine::setMode(EngineMode m) {
         if(mode==m)
             mode = play;

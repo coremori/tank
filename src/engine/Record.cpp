@@ -32,17 +32,10 @@ namespace engine{
         actions.clear();
     }
     
-    void Record::startRecord (){
-        
-    }
-    
     void Record::recordOne (ActionListTurn* actions){//push back in action list the given arguments
         this->actions.push_back(actions);
     }
     
-    void Record::stopRecord (){
-        
-    }
     void Record::startReplay (){
         //lastState = mainState; copy mon amie where are you?
         //mainState = initState;
