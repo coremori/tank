@@ -1,6 +1,7 @@
 #include "ActionMove.h"
 #include "../state.h"
 
+#include <iostream>
 namespace engine {
 
     ActionMove::ActionMove (int dx, int dy, int character){
@@ -14,6 +15,7 @@ namespace engine {
         s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
         s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
         s->getMobiles().notifyObserver(character);
+        std::cout << "Mouvement de "<< character << " vers + ("<<dx/8<<","<<dy/8<<")" << std::endl;
     };
     
     void ActionMove::undo (state::State* s){

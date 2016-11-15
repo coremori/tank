@@ -11,6 +11,9 @@
 #include "state/ProjectileEvent.h"
 #include "state/Obstacle.h"
 
+
+#include <iostream>
+
 namespace engine{
 
     ActionShot::ActionShot(int character, int characterTarget, int damage, int xImpact, int yImpact, int yMax, bool displayPv) {
@@ -31,10 +34,12 @@ namespace engine{
             tank->setPv(tank->getPv()-damage);
             
                 s->getMobiles().notifyObserver(*(new state::StateEvent(s,state::Pv_Changed)));
+                 std::cout << "Tank "<< characterTarget << " a pris "<<damage<<" dégat causé par " ;
         }
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         if(yMax==-1)
         {
+            std::cout << "Projectile au sol tiré "<<std::endl;
             if((xImpact-tank->getX())>0)
                 s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
             else
@@ -42,6 +47,7 @@ namespace engine{
         }
         else
         {
+            std::cout << "Missile tiré "<<std::endl;
             if((xImpact-tank->getX())>0)
                 s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
             else

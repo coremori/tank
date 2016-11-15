@@ -7,6 +7,10 @@
 
 #include "ActionDirection.h"
 #include "../state/Tank.h"
+#include "../state/Orientation.h"
+
+#include <iostream>
+
 
 namespace engine {
     
@@ -22,6 +26,22 @@ namespace engine {
         //s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
         //s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
         s->getMobiles().notifyObserver(character);
+        
+        std::cout << "character "<<character<<" regarde vers" ;
+        switch(Newdirection){
+            case state::left_down:
+                std::cout << " gauche bas" << std::endl;
+                break;
+            case state::left_up:
+                std::cout << " gauche haut" << std::endl;
+                break;
+            case state::right_down:
+                std::cout << " droite bas" << std::endl;
+                break;
+            case state::right_up:
+                std::cout << " droite haut" << std::endl;
+                break;
+        }
     }
     
     void ActionDirection::undo(state::State* s) {
