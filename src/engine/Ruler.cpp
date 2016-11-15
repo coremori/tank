@@ -69,7 +69,6 @@ namespace engine{
     
     void Ruler::apply() {
         actions->apply();
-        //actions->clear();//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< enlever pour l'enregistrement
     };
     
     
@@ -96,9 +95,6 @@ namespace engine{
         
         if(cmd->get(MOVE_CATEGORY))
         {
-            //gere seulement le move command pour commencer et tester
-            //
-            
             MoveCommand* move = dynamic_cast<MoveCommand*>(cmd->get(MOVE_CATEGORY));
             
             int nextX = state->getMobile(move->getCharacter())->getX()+move->getXmove();
@@ -120,17 +116,7 @@ namespace engine{
                         actions->addAction(new ActionMove (move->getXmove(), move->getYmove(),move->getCharacter()));//on va tout droit
                     }
                     else //
-                    {   //Vérifier que le premier if du truc en commentaire ci-dessous ne sert à rien
-                        /*
-                        if((state->getGrid().isSpace(nextX/8,nextY/8-1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8))))
-                        {
-                            actions->addAction(new ActionMove (move->getXmove(), move->getYmove()-8,move->getCharacter()));
-                        }
-                        else if((state->getGrid().isSpace(nextX/8,nextY/8+1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8+2))))
-                        {
-                            actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter()));
-                        }
-                        */
+                    {   
                         if((state->getGrid().isSpace(nextX/8,nextY/8+1)) && (!(state->getGrid().isSpace(nextX/8,nextY/8+2))))//si on a bien un "escalier" et pas le vide...
                         {
                             actions->addAction(new ActionMove (move->getXmove(), move->getYmove()+8,move->getCharacter()));
@@ -148,8 +134,19 @@ namespace engine{
         {
             ShotCommand* shot = dynamic_cast<ShotCommand*>(cmd->get(SHOT_CATEGORY));
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(shot->getCharacter()));
+            state::Orientation o;
+            if(cmd->get(VIEW_CATEGORY))
+            {
+                DirectionCommand* dcmd = dynamic_cast<DirectionCommand*>(cmd->get(VIEW_CATEGORY));
+                o = dcmd->getDirection();
+            }
+            else
+            {
+                o = tank->getOrientation();
+            }
             
-            if(tank->getOrientation()==state::right_up || tank->getOrientation()==state::left_up)//si on vise en haut = tir de missile
+            
+            if(o==state::right_up || o==state::left_up)//si on vise en haut = tir de missile
             {
                 //note contre-intuitif : y = 0 est le haut, y = 252522xxx le bas de l'écran
                 
@@ -162,7 +159,7 @@ namespace engine{
                 //la fonction suivante calcule le point d'impact
                 //tant que l'on est dans le tableau et que c'est du vide
                 
-                if(tank->getOrientation()==state::right_up)//si on tire à droite
+                if(o==state::right_up)//si on tire à droite
                     xmax = tank->getX()+8+8*shot->getPower();
                 else //si on tire à gauche
                     xmax = tank->getX()-8-8*shot->getPower();
@@ -176,7 +173,7 @@ namespace engine{
                 while((state->getGrid().hasCell(xImpact/8,yImpact/8)) &&  !impact)
                 {
                     if(xImpact!=xmax){
-                        if(tank->getOrientation()==state::right_up)//si on tire à droite
+                        if(o==state::right_up)//si on tire à droite
                             xImpact = xImpact+8;
                         else
                             xImpact = xImpact-8;
@@ -212,7 +209,7 @@ namespace engine{
                 bool impact = false;
                 int target = -1;
                 int xImpact = 0;
-                if(tank->getOrientation()==state::right_down)
+                if(o==state::right_down)
                         xImpact = state->getGrid().getWidth()*8;
                     
                 int yImpact = 0;
@@ -222,7 +219,7 @@ namespace engine{
                 //tant que l'on est dans le tableau et que c'est du vide                
                 while((state->getGrid().hasCell(x,y)) &&  !impact)
                 {
-                    if(tank->getOrientation()==state::right_down)//si on tire à droite
+                    if(o==state::right_down)//si on tire à droite
                         x = x+1;//on peut avancer !
                     else //on tire à gauche
                         x = x-1;
@@ -230,7 +227,7 @@ namespace engine{
                     if(!(state->getGrid().isSpace(x,y)))//impact mur
                     {
                         impact = true;
-                        if(tank->getOrientation()==state::right_down)
+                        if(o==state::right_down)
                             xImpact = 8*x-3; //-3 pour que l'explosion soit centrée sur le tank
                         else
                             xImpact = 8*x+3;
@@ -252,7 +249,7 @@ namespace engine{
                         }
                     }
                 }
-                actions->addAction(new ActionShot(shot->getCharacter(), target, damage, xImpact , yImpact, -1, (tank->getOrientation()==state::right_down)));
+                actions->addAction(new ActionShot(shot->getCharacter(), target, damage, xImpact , yImpact, -1, (o==state::right_down)));
             } 
         }
         apply();

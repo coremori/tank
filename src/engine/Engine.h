@@ -45,7 +45,6 @@ namespace engine {
     void setMode (EngineMode m);
     EngineMode getMode () const;
     void setcharTurn (int c);
-    int getcharTurn () const;
     Ruler* getRuler ();
     void endTurn ();
     void swapCommands ();

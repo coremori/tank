@@ -27,7 +27,7 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* s) {//met la scene à afficher et attribue au layer les surfaces
+    PiloteSFML::PiloteSFML(state::State* s, engine::Engine* e) {//met la scene à afficher et attribue au layer les surfaces
         character = 0;
         state = s;
         this->scene = *(new render::Scene());
@@ -60,7 +60,7 @@ namespace client{
             scene.setSurface(i,surfaces[i+1]);
         }
 
-        engine = nullptr;
+        engine = e;
 
         if (!m_tilesetButton.loadFromFile("res/Textures/button.png"))
             std::cout << "Erreur - button.png non chargé" << std::endl;
@@ -79,13 +79,6 @@ namespace client{
     PiloteSFML::~PiloteSFML() {}
     
     
-    
-    
-    
-    void PiloteSFML::setEngine(engine::Engine* e) {
-        this->engine = e;
-    }
-
     
     
     
@@ -171,22 +164,18 @@ namespace client{
                     break;
 
                 case sf::Keyboard::E :
-                    std::cout << "direction rigth up " << std::endl;
                     engine->addCommand(new engine::DirectionCommand(this->character,state::right_up));
                     break;
 
                 case sf::Keyboard::Z :
-                    std::cout << "direction left up" << std::endl;
                     engine->addCommand(new engine::DirectionCommand(this->character,state::left_up));
                     break;
 
                 case sf::Keyboard::Q :
-                    std::cout << "direction left down" << std::endl;
                     engine->addCommand(new engine::DirectionCommand(this->character,state::left_down));
                     break;
 
                 case sf::Keyboard::D :
-                    std::cout << "direction right down" << std::endl;
                     engine->addCommand(new engine::DirectionCommand(this->character,state::right_down));
                     break;
 
@@ -221,7 +210,7 @@ namespace client{
 
 
 
-void PiloteSFML::affiche(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
+void PiloteSFML::display(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
 
     applyChange();
 

@@ -39,7 +39,8 @@ namespace engine{
         
         mode = play;
         ai.push_back(new ai::HeuristicAI(s,0));
-        ai.push_back(new ai::HeuristicAI(s,1));
+        ai.push_back(new ai::DumbAI(s,1));
+        
         
         AnimRunning = false;
 
@@ -62,9 +63,6 @@ namespace engine{
         charTurn = c;
     }
     
-    int Engine::getcharTurn() const {
-        return charTurn;
-    };
 
     Ruler* Engine::getRuler() {
         return &ruler;

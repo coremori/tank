@@ -14,43 +14,13 @@
 
 #include <pthread.h>
 
-void eng(engine::Engine* e){
-    client::Pilote pilote = *(new client::Pilote(e));
-    pilote.run();
-}
-
-void rend(client::PiloteSFML* p){
-    p->affiche();
-}
 
 int main ()
 {
-           
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<     Etat     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    state::State* state = new state::State();    
-   
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    Engine    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    
-   
-    engine::Engine* engine = new engine::Engine(state);
-    engine::ActionListTurn* actions = new engine::ActionListTurn(state);
-    engine->getRuler()->setActions(actions);
-    
-    
-
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    
-        client::PiloteSFML* rendu = new client::PiloteSFML(state);// s'occupe de l'affichage de la fenetre
-        rendu->setEngine(engine);
-    
-    
-    
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Multithreading - engine+IA et rendu >>>>>>>>>>>>>>>>>>>>>>
-        
-    std::thread t1(eng,engine); // pass by value
-    std::thread t2(rend,rendu); // pass by value
-    t2.join();
-    t1.join();
     
+    client::Pilote* pilote = new client::Pilote();
+    pilote->launch();
        
 
     return 0;

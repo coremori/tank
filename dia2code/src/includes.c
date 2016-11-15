@@ -46,12 +46,14 @@ void push_include (umlclassnode *node)
     } else {
 #endif
         umlpackage* package = node->key->package;
+        
         if (!package) {
             add_include (node->key->name,NULL);
         }
         else {
             add_include (node->key->name,package->name);
         }
+         
 #ifndef NO_NAMESPACE_SINGLE_FILE
     }
 #endif

@@ -57,9 +57,10 @@ namespace ai{
               
     }
     
-    void HeuristicAI::nextDirection() {
+    void HeuristicAI::nextOrientation() {
         
     }
+    
     void HeuristicAI::run(engine::CommandSet& commands) {
         this->commands = &commands;
         shot();
@@ -73,6 +74,47 @@ namespace ai{
     bool HeuristicAI::touchable() {
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
         int distance = distanceOtherChar();
+        if(distance==10 || distance==-10 )//si on vise en haut
+        {
+            return true;
+        }
+        else
+        {
+            int other;
+            if(character==1)
+                other = 0;
+            else
+                other = 1;
+            
+            if(!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
+                return false;
+            int x = tank->getX()/8;
+            int y = tank->getY()/8;
+            
+            if(distance>=0)
+            {
+                while(distance>=1 && (state->getGrid().isSpace(x,y)))
+                {
+                    x +=8;
+                    distance --;                
+                }
+
+            }
+            else if(distance<0)
+            {
+                while(distance<=1 && (state->getGrid().isSpace(x,y)))
+                {
+                    x-=8;
+                    distance ++;                
+                }
+            }
+            if (distance == 0)//si pas de mur touché
+                return true;
+            else
+                return false;
+        }
+        
+        /*
         if(tank->getOrientation()==state::right_up && distance==10 )//si on vise en haut
         {
             return true;
@@ -115,6 +157,6 @@ namespace ai{
                 return true;
             else
                 return false;
-        }
+        }*/
     }
 }

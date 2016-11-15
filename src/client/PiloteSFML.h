@@ -10,14 +10,16 @@
 #include <SFML/Graphics.hpp>
 namespace client {
   class CacheStateObserver;
+  class PiloteRendu;
 }
 
+#include "PiloteRendu.h"
 #include "CacheStateObserver.h"
 
 namespace client {
 
   /// class PiloteSFML - 
-  class PiloteSFML {
+  class PiloteSFML : public client::PiloteRendu {
     // Associations
     // Attributes
   protected:
@@ -31,9 +33,9 @@ namespace client {
     int character;
     // Operations
   public:
-    PiloteSFML (state::State* s);
+    PiloteSFML (state::State* s, engine::Engine* e);
     ~PiloteSFML ();
-    void affiche ();
+    void display ();
     void setEngine (engine::Engine* e);
     void eventUp (sf::Event* event, engine::Engine* engine, int character, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition);
   protected:
