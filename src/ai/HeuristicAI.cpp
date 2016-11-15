@@ -17,21 +17,55 @@ namespace ai{
 
     HeuristicAI::HeuristicAI(state::State* state, int character) : AI(state,character){}
     
+    
+    
+    
+    
+    
+    
+    
     void HeuristicAI::choice() {
-
+        
+            
     }
 
+    
+    
+    
+    
+    
+    
+    
     int HeuristicAI::directionOtherChar() {
+      
+                
         return 1;
     }
-    int HeuristicAI::distanceOtherChar() {
+    
+    
+    
+    
+    
+    
+    
+    
+    int HeuristicAI::distanceOtherChar() { //renvoie la distance entre les deux tanks
         int other;
         if(character==1)
-                other = 0;
-            else
-                other = 1;
-        return state->getMobile(other)->getX()-state->getMobile(character)->getX();
+            other = 0;
+        else
+            other = 1;
+        return state->getMobile(other)->getX()-state->getMobile(character)->getX(); 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     void HeuristicAI::move(bool esquive) {
         int other;
@@ -60,9 +94,41 @@ namespace ai{
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     void HeuristicAI::nextOrientation() {
-        
+        if(touchable()){
+            if(distanceOtherChar() < 0)
+                commands->add(new engine::DirectionCommand(character,state::left_up));
+            else
+                commands->add(new engine::DirectionCommand(character,state::right_up));
+            //else if(distanceOtherChar()==0)
+                //si ils sont au même endroit, on fait un suicide?
+        }        
+        else{
+            if(distanceOtherChar() < 0)
+                commands->add(new engine::DirectionCommand(character,state::left_down));
+            else
+                commands->add(new engine::DirectionCommand(character,state::right_down));
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     void HeuristicAI::run(engine::CommandSet& commands) {
         this->commands = &commands;
@@ -70,11 +136,29 @@ namespace ai{
         move(false);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     void HeuristicAI::shot() {
         if(touchable())
             commands->add(new engine::ShotCommand(character,10));
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     bool HeuristicAI::touchable() {
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
         int distance = distanceOtherChar()/8;

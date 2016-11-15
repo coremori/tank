@@ -78,11 +78,11 @@ namespace state {
                     else if(line.at(i)=='~'){
                         this->elements.push_back(new Obstacle(border,x,y));
                     }
-                    else if(line.at(i)=='&'){
+                    else if(line.at(i)=='&'){ //Human tank
                         this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_green,right_down,x,y));
                     }
-                    else if(line.at(i)=='%'){
+                    else if(line.at(i)=='%'){ //AI tank
                         this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_grey,left_down,x,y));
                     }

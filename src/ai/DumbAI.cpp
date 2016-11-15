@@ -12,9 +12,15 @@
 
 
 namespace ai {
+    
+    
     DumbAI::DumbAI(state::State* state, int character) : AI(state,character){
     }
 
+    
+    
+    
+    
     void DumbAI::run (engine::CommandSet& commands){//choix aléatoire
         //int character = 1;
         srand (time(NULL));
