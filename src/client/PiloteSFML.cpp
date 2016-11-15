@@ -271,7 +271,7 @@ void PiloteSFML::display(){//ouvre la fenetre et affiche les sprites (boucle jus
         }
             
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        applyChange();
+        applyChange();//actualise l'affichage
 
         window.clear();
         for(unsigned int i=0; i<surfaces.size(); i++)
