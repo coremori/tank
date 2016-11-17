@@ -89,7 +89,9 @@ namespace engine{
         if(cmd->get(VIEW_CATEGORY))
         {
             DirectionCommand* dcmd = dynamic_cast<DirectionCommand*>(cmd->get(VIEW_CATEGORY));
-            actions->addAction(new ActionDirection(dcmd->getDirection(),dcmd->getCharacter()));
+            state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(dcmd->getCharacter()));
+            if(tank->getOrientation()!=dcmd->getDirection())
+                actions->addAction(new ActionDirection(dcmd->getDirection(),dcmd->getCharacter()));
         }
         
         

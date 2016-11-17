@@ -98,12 +98,12 @@ namespace engine{
             if(tank->getPv() == 0){
                 if(i==1)
                 {
-                    std::cout << "Victoire" << std::endl;
+                    std::cout << "Victory character 0" << std::endl;
                     mode = victoire;
                 }
                 else
                 {
-                    std::cout << "lost" << std::endl;
+                    std::cout << "Lost character 1" << std::endl;
                     mode = defaite;
                 }
                     
