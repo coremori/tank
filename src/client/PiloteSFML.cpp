@@ -51,21 +51,22 @@ namespace client{
         state->registerObserver(obs[0]);
 
         surfaces.push_back(new SurfaceSFML());
-        surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour les boutons sans hover
-
+        surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour le mode victory
+        surfaces.push_back(new SurfaceSFML());
+        surfaces[1]->loadTexture("res/Textures/button.png"); // surface pour le mode defaite
+        
         for(int i=0; i<scene.getLayerCount(); i++)
         {
             surfaces.push_back(new SurfaceSFML());
-            surfaces[i+1]->loadTexture("res/Textures/textures.png");
-            scene.setSurface(i,surfaces[i+1]);
+            surfaces[i+2]->loadTexture("res/Textures/textures.png");
+            scene.setSurface(i,surfaces[i+2]);
         }
 
         engine = e;
 
-        if (!m_tilesetButton.loadFromFile("res/Textures/button.png"))
-            std::cout << "Erreur - button.png non chargé" << std::endl;
         
-        m_tilesetButton.setSmooth(true); //lissage de l'image
+        
+        //m_tilesetButton.setSmooth(true); //lissage de l'image
         
         state->load("res/Levels/level1.txt"); //charge le level, pour être sur qu'il existe
 
@@ -83,40 +84,34 @@ namespace client{
     
     
     void PiloteSFML::createMenu() {
+        //create the window and the button
+        applyChange();
+        int Pixel_def = 8;
+        int h = scene.getHeight()*Pixel_def;
+        int w = scene.getWidth()*Pixel_def;   
+
+        window.create(sf::VideoMode(w, h + 40), "Rendu");
         // message victoire
-        int si = s_button.size();
-            s_button.push_back(new sf::Sprite());
-            s_button[si]->setTexture(m_tilesetButton);
-            s_button[si]->setTextureRect(sf::IntRect(624, 0, 388, 72));
-            s_button[si]->setPosition(408,24);
+        surfaces[0]->setSpriteButton(408, 24, 624, 388);//paramètre : xPos, yPos, xTex, width texture
         //// message defaite    
-            s_button.push_back(new sf::Sprite());
-            s_button[si+1]->setTexture(m_tilesetButton);
-            s_button[si+1]->setTextureRect(sf::IntRect(237, 0, 385, 72));//xTex, yTex, width, height
-            s_button[si+1]->setPosition(409,24);      
+        surfaces[1]->setSpriteButton(409, 24,237, 385);
+        
+        //button "fin de tour"
+        /* Dans l'ordre : emplacement texture, commande à exécuter, position xTex, largeur de l'image, hauteur de l'image
+         *présence d'un deuxième sprite lorsqu'on passe la souris dessus, position x dans l'écran, position y dans l'écran*/
+        button.push_back(*(new Button("res/Textures/button.png", new engine::EndTurnCommand(this->character),0,104,23,true, (w-104)/2,h+8)));  
+
+        //button "level 1"
+        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level1.txt"),104,64,23,false, w-148,h+8)));
+
+        //button "level 2"
+        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level2.txt"),168,64,23,false, w-74,h+8)));
+        
+        //button "AI"
+        button.push_back(*(new Button("res/Textures/button.png", new engine::ModeCommand(engine::AI),1010,74,23,false, w-232,h+8)));
+   
     }
     
-    
-    
-
-    void PiloteSFML::button(unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int TypeSprite){
-        //SpriteOrVertex == true : sprite
-        //TypeSprite : 0 -> non selectionné, 1-> selectionné
-        int h = scene.getHeight();
-        if(SpriteOrVertex)
-        {
-            int s = s_button.size();
-            s_button.push_back(new sf::Sprite());
-            s_button[s]->setTexture(m_tilesetButton);
-            s_button[s]->setTextureRect(sf::IntRect(xTex, TypeSprite*23, width, 23));
-            s_button[s]->setPosition(x1,h*8+8);
-        }
-        else
-        {
-            surfaces[0]->setSpriteButton(x1, h*8+8, xTex, width);
-        }
-    };
-
 
 
 
@@ -140,157 +135,109 @@ namespace client{
     
     
     
-    void PiloteSFML::eventUp(sf::Event* event, sf::RenderWindow* window, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition) {
-        
-        if (event->type == sf::Event::Closed){
-           engine->setMode(engine::close);
-            //music.stop();
-           window->close();
-        }
-        else if (event->type == sf::Event::Resized)
-        {
-            window->setView(sf::View(sf::FloatRect(0, 0, event->size.width, event->size.height)));
-        }
-        else if (event->type == sf::Event::KeyPressed)
-        {
-            switch(event->key.code){
-                case sf::Keyboard::P :
-                    engine->setMode(engine::AI);
-                    break;
-                case sf::Keyboard::Escape :
-                    engine->setMode(engine::replay);
-                    break;
-
-                case sf::Keyboard::Right :
-                    engine->addCommand(new engine::MoveCommand(this->character,8,0));
-                    break;
-
-                case sf::Keyboard::Left :
-                    engine->addCommand(new engine::MoveCommand(this->character,-8,0));
-                    break;
-
-                case sf::Keyboard::E :
-                    engine->addCommand(new engine::DirectionCommand(this->character,state::right_up));
-                    break;
-
-                case sf::Keyboard::Z :
-                    engine->addCommand(new engine::DirectionCommand(this->character,state::left_up));
-                    break;
-
-                case sf::Keyboard::Q :
-                    engine->addCommand(new engine::DirectionCommand(this->character,state::left_down));
-                    break;
-
-                case sf::Keyboard::D :
-                    engine->addCommand(new engine::DirectionCommand(this->character,state::right_down));
-                    break;
-
-                case sf::Keyboard::Space :
-                    engine->addCommand(new engine::ShotCommand(this->character,10));
-                    break;
-
-                default : break;
+    void PiloteSFML::eventUp() {
+        sf::Event event;
+        sf::Vector2i localPosition2;
+        localPosition2 = sf::Mouse::getPosition(window);
+        while (window.pollEvent(event)){
+            if (event.type == sf::Event::Closed){
+               engine->setMode(engine::close);
+               window.close();
             }
-
-        }
-        else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            if(rectEnd->contains(localPosition))
+            else if (event.type == sf::Event::Resized)
             {
-                engine->addCommand(new engine::EndTurnCommand(this->character));                    
+                window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
             }
-            else if (rectLevel1->contains(localPosition))
+            else if (event.type == sf::Event::KeyPressed)
             {
-                engine->addCommand(new engine::LoadCommand("res/Levels/level1.txt"));
+                switch(event.key.code){
+                    case sf::Keyboard::P :
+                        engine->setMode(engine::AI);
+                        break;
+                    case sf::Keyboard::Escape :
+                        engine->setMode(engine::replay);
+                        break;
+
+                    case sf::Keyboard::Right :
+                        engine->addCommand(new engine::MoveCommand(this->character,8,0));
+                        break;
+
+                    case sf::Keyboard::Left :
+                        engine->addCommand(new engine::MoveCommand(this->character,-8,0));
+                        break;
+
+                    case sf::Keyboard::E :
+                        engine->addCommand(new engine::DirectionCommand(this->character,state::right_up));
+                        break;
+
+                    case sf::Keyboard::Z :
+                        engine->addCommand(new engine::DirectionCommand(this->character,state::left_up));
+                        break;
+
+                    case sf::Keyboard::Q :
+                        engine->addCommand(new engine::DirectionCommand(this->character,state::left_down));
+                        break;
+
+                    case sf::Keyboard::D :
+                        engine->addCommand(new engine::DirectionCommand(this->character,state::right_down));
+                        break;
+
+                    case sf::Keyboard::Space :
+                        engine->addCommand(new engine::ShotCommand(this->character,10));
+                        break;
+
+                    default : break;
+                }
+
             }
-            else if (rectLevel2->contains(localPosition))
+            else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
-                engine->addCommand(new engine::LoadCommand("res/Levels/level2.txt"));
+                for(unsigned int i=0; i<button.size(); i++)
+                    button[i].press(localPosition2,engine);
             }
         }
-        
-        
     } 
 
 
 
 
 
-void PiloteSFML::display(){//ouvre la fenetre et affiche les sprites (boucle jusqu'à fermeture de la fenetre)
+void PiloteSFML::display(){
 
-    applyChange();
+    //applyChange();
 
-    int Pixel_def = 8;
-    int h = scene.getHeight()*Pixel_def;
-    int w = scene.getWidth()*Pixel_def;   
+   
 
-
-    sf::RenderWindow window(sf::VideoMode(w, h + 40), "Rendu");// fenetre d'affichage, on rajoute deux ligne en bas
-    /*
-    sf::Music music;
-    if (!music.openFromFile("res/Sounds/GameMusic/music_game.ogg"))
-        std::cout << "file not found "<<std::endl;
-    music.play();
-    */
-
-
-    //button "fin de tour"
-    button((w-104)/2,0,104,1,0);//bouton centré
-    button((w-104)/2,0,104,1,1);
-    sf::IntRect* rectEnd = new sf::IntRect((w-104)/2,h+8, 104, 23);
-    bool hover = false;
-
-
-
-    //button "level 1"
-    button(w-148,104,64,0,0);
-    sf::IntRect* rectLevel1 = new sf::IntRect(w-148,h+8, 64, 23);
-
-
-    //button "level 2"
-    button(w-74,168,64,0,0);
-    sf::IntRect* rectLevel2 = new sf::IntRect(w-74,h+8, 64, 23);
-
-    sf::Vector2i localPosition;
-
-    createMenu();
-
-    while (window.isOpen())
-    {
-
-        sf::Event event;
+    /*if(!window.isOpen())
+    {*/
+        sf::Vector2i localPosition;
         localPosition = sf::Mouse::getPosition(window);
-
-        if(rectEnd->contains(localPosition))
-            hover = true;
-        else
-            hover = false;
         
-        while (window.pollEvent(event)){
-            eventUp(&event,&window,rectEnd,rectLevel1,rectLevel2,localPosition);
-        }
+        //eventUp();
             
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        applyChange();//actualise l'affichage
+        
+        //applyChange();//actualise l'affichage
 
         window.clear();
-        for(unsigned int i=0; i<surfaces.size(); i++)
+        for(unsigned int i=2; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);
 
-
+        for(unsigned int i=0; i<button.size(); i++)
+            button[i].draw(&window,localPosition);
+        /*
         if(hover)
             window.draw(*s_button[1]);
         else
             window.draw(*s_button[0]);
-
+         * */
         switch(engine->getMode()){
 
             case engine::victoire:
-                window.draw(*s_button[2]);
+                window.draw(*surfaces[0]);
                 break;
 
             case engine::defaite:
-                window.draw(*s_button[3]);
+                window.draw(*surfaces[1]);
                 break;
 
             default :
@@ -299,7 +246,7 @@ void PiloteSFML::display(){//ouvre la fenetre et affiche les sprites (boucle jus
 
         window.display();
 
-    }
+    //}
 }
 
 }

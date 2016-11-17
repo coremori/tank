@@ -6,14 +6,15 @@
 #include <vector>
 #include "render/SurfaceSFML.hpp"
 #include "engine/Engine.h"
-#include <SFML/Graphics.hpp>
 #include "state/State.h"
 
 namespace client {
   class CacheStateObserver;
+  class Button;
   class PiloteRendu;
 }
 
+#include "Button.h"
 #include "PiloteRendu.h"
 #include "CacheStateObserver.h"
 
@@ -28,19 +29,17 @@ namespace client {
     std::vector<CacheStateObserver*>  obs;
     std::vector<SurfaceSFML*> surfaces;
     engine::Engine* engine;
-    sf::Texture m_tilesetButton;
-    std::vector<sf::Sprite*> s_button;
+    std::vector<Button> button;
     int character;
+    sf::RenderWindow window;
     // Operations
   public:
     PiloteSFML (state::State* state, engine::Engine* e);
     ~PiloteSFML ();
     void display ();
-  protected:
-    void button (unsigned int x1, unsigned int xTex, unsigned int width, bool SpriteOrVertex, int numSprite = 0);
     void applyChange ();
     void createMenu ();
-    void eventUp (sf::Event* event, sf::RenderWindow* window, sf::IntRect* rectEnd, sf::IntRect* rectLevel1, sf::IntRect* rectLevel2, sf::Vector2i localPosition);
+    void eventUp ();
   };
 
 };

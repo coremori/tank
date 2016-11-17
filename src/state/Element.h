@@ -24,8 +24,8 @@ namespace state {
     virtual ~Element ();
     virtual TypeId getTypeId () const = 0;
     virtual bool isStatic () const = 0;
-    int getX () const;//pixels
-    int getY () const;//pixels
+    int getX () const;
+    int getY () const;
     void setX (int x);
     void setY (int y);
     virtual Element* clone () const = 0;

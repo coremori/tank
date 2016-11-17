@@ -9,7 +9,10 @@ namespace client {
   class PiloteRendu {
     // Operations
   public:
+    virtual void createMenu () = 0;
     virtual void display () = 0;
+    virtual void eventUp () = 0;
+    virtual void applyChange () = 0;
   };
 
 };

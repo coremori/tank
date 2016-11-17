@@ -130,7 +130,7 @@
         int tu = xTex;//position dans la texture
 
         unsigned int w = width;//width d'un affichage
-        unsigned int h = 23;
+        unsigned int h = 72;
 
         // on récupère un pointeur vers le quad à définir dans le tableau de vertex
         sf::Vertex* quad = &m_vertices[size];

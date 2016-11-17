@@ -25,6 +25,7 @@ namespace client {
   public:
     Pilote ();
     void runEngine ();
+    void runRender ();
     void launch ();
   };
 

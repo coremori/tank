@@ -27,8 +27,9 @@ namespace client{
     }
         
     void Pilote::launch() {//launch the thread for the engine and the rendu
-        //rendu->setEngine(&engine);
-        std::thread t1(&PiloteRendu::display,rendu);// the thread for the rendu run in PiloteSFML.display()
+        state.load("res/Levels/level1.txt");
+        rendu->createMenu();
+        std::thread t1(&Pilote::runRender,this);// the thread for the rendu run in PiloteSFML.display()
         std::thread t2(&Pilote::runEngine,this); // launch run() de l'objet courant (this)*/
         t2.join();
         t1.join();
@@ -43,5 +44,17 @@ namespace client{
             engine.update();
         }
     }
+        
+    void Pilote::runRender() {//thread for the rendu
+        // toutes les 50 ms
+        while(engine.getMode()!=engine::close)
+        {
+            rendu->applyChange();
+            rendu->display();
+            rendu->eventUp();
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+    }
+
 }
 
