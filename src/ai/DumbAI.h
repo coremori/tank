@@ -13,7 +13,7 @@ namespace ai {
 
 namespace ai {
 
-  /// class DumbAI - 
+  /// class DumbAI - The most basic AI. Choice commands randomly
   class DumbAI : public ai::AI {
     // Operations
   public:

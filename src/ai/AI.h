@@ -7,10 +7,10 @@
 
 namespace ai {
 
-  /// class AI - 
+  /// class AI - Abstract class for AI
   class AI {
     // Attributes
-  public:
+  protected:
     state::State* state;
     int character;
     // Operations
@@ -18,6 +18,8 @@ namespace ai {
     AI (state::State* state, int character);
     ~AI ();
     virtual void run (engine::CommandSet& commands) = 0;
+    int getCharacter () const;
+    state::State* getState ();
   };
 
 };
