@@ -92,7 +92,7 @@ namespace client{
 
         window.create(sf::VideoMode(w, h + 40), "Rendu");
         // message victoire
-        surfaces[0]->setSpriteButton(408, 24, 624, 388);//paramètre : xPos, yPos, xTex, width texture
+        surfaces[0]->setSpriteButton(408, 24, 624, 385);//paramètre : xPos, yPos, xTex, width texture
         //// message defaite    
         surfaces[1]->setSpriteButton(409, 24,237, 385);
         
