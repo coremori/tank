@@ -1,11 +1,14 @@
 #include "Element.h"
 #include <iostream>
 #include <fstream>
-#include "state.h"
+#include "State.h"
 #include <stdio.h>
 #include <string.h>
-
-
+#include "ElementList.h"
+#include "Space.h"
+#include "Obstacle.h"
+#include "Tank.h"
+#include "ElementEvent.h"
 using namespace std;
 
 namespace state {

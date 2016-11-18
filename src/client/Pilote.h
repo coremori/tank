@@ -4,6 +4,8 @@
 
 #include "state/State.h"
 #include "engine/Engine.h"
+#include <vector>
+#include "engine/CommandSet.h"
 
 namespace client {
   class PiloteRendu;
@@ -21,6 +23,7 @@ namespace client {
     state::State state;
     engine::Engine engine;
     PiloteRendu* rendu;
+    std::vector<engine::CommandSet*> command;
     // Operations
   public:
     Pilote ();

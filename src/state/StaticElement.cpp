@@ -5,7 +5,7 @@
  */
 
 #include "state.h"
-
+#include "StaticElement.h"
 namespace state {
     
   /// class StaticElement - 

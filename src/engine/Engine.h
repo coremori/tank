@@ -4,8 +4,7 @@
 
 #include "state/State.h"
 #include <mutex>
-#include <vector>
-#include "ai/AI.h"
+#include <stdint.h>
 
 namespace engine {
   class CommandSet;
@@ -35,8 +34,8 @@ namespace engine {
     state::State* state;
     mutable std::mutex commands_mutex;
     mutable std::mutex update_mutex;
-    std::vector<ai::AI*> ai;
     bool AnimRunning;
+    int64_t lastEndTurnTime;
     // Operations
   public:
     Engine (state::State* s);
@@ -46,9 +45,11 @@ namespace engine {
     EngineMode getMode () const;
     void endTurn ();
     void swapCommands ();
-    void update ();
+    void update (int64_t timeNow);
     std::mutex& getUpdateMutex () const;
     void setAnimRunning (bool b);
+    int getCharTurn () const;
+    void takeCommands (CommandSet* commandset);
   };
 
 };

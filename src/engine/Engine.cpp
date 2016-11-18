@@ -38,11 +38,10 @@ namespace engine{
         reccord.recordOne(first);
         
         mode = play;
-        ai.push_back(new ai::HeuristicAI(s,0));
-        ai.push_back(new ai::DumbAI(s,1));
         
         
         AnimRunning = false;
+        lastEndTurnTime = 0;
 
     };
         
@@ -84,10 +83,7 @@ namespace engine{
 
     void Engine::endTurn() {//swap waitingcommands and currentcommands, send the waitingcommand to the ruler and apply them
         swapCommands();
-        if(charTurn == 1 )// Other player round
-            charTurn = 0;
-        else
-            charTurn = 1;
+        charTurn = charTurn ? 0:1;
         
         ruler.setCommandSet(currentcommands);
         ruler.implementeRules();
@@ -123,7 +119,7 @@ namespace engine{
     }
 
     
-    void Engine::update() {
+    void Engine::update(int64_t timeNow) {
         /*vérifie les commandes de la list : passage au tour suivant ? 
          *Changement de mode ? les mutex sont importants pour une lecture prolongée et l'actualisation du state, 
          * pas nécessaires pour vérifier leur existence (puisque le render ne peut pas les supprimer, juste les remplacer)
@@ -145,49 +141,60 @@ namespace engine{
             waitingcommands->clear();
             commands_mutex.unlock();
         }
-        switch(mode)
-        {
-            case replay :
+        if(mode == replay){
+            if((timeNow-lastEndTurnTime)>500){//500 ms entre chaque tour
                 update_mutex.lock();
                 if(!AnimRunning)
                     reccord.replayOne();
                 update_mutex.unlock();
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-                break;
-            case AI :
-                if(!AnimRunning)//pas d'anim en cours
-                {
-                    ai[charTurn]->run(*waitingcommands);
+                lastEndTurnTime = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());                        
+            }
+        }
+        else if(mode == AI || mode == play){
+            if(waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
+            {
+                if((timeNow-lastEndTurnTime)>500){
                     update_mutex.lock();
                     endTurn();
                     update_mutex.unlock();
                     ActionListTurn* turn = new ActionListTurn(state);
                     ruler.setActions(turn);
                     reccord.recordOne(turn);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                    lastEndTurnTime = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
                 }
-                break;
-            case play :
-                if(waitingcommands->get(END_CATEGORY))
-                {
-                    if(!AnimRunning)//pas d'anim en cours
-                    {
-                        update_mutex.lock();
-                        endTurn();
-                        update_mutex.unlock();
-                        ActionListTurn* turn = new ActionListTurn(state);
-                        ruler.setActions(turn);
-                        reccord.recordOne(turn);
-                        if(charTurn==1)
-                        {
-                            ai[1]->run(*waitingcommands);
-                        }
-
-                    }
-                }
-                break;
-            default : break;
+            }
         }
     }
 
+    int Engine::getCharTurn() const{
+        return charTurn;
+    }
+        
+    void Engine::takeCommands(CommandSet* commandset) {/* prend un commandset et transfert les commandes vers celui de l'engine*/
+        if(commandset->get(MAIN_CATEGORY))
+        {
+            addCommand(commandset->get(MAIN_CATEGORY));
+        }
+        if(commandset->get(END_CATEGORY))
+        {
+            addCommand(commandset->get(END_CATEGORY));
+        }
+        if(commandset->get(MODE_CATEGORY))
+        {
+            addCommand(commandset->get(MODE_CATEGORY));
+        }
+        if(commandset->get(VIEW_CATEGORY))
+        {
+            addCommand(commandset->get(VIEW_CATEGORY));
+        }
+        if(commandset->get(MOVE_CATEGORY))
+        {
+            addCommand(commandset->get(MOVE_CATEGORY));
+        }
+        if(commandset->get(SHOT_CATEGORY))
+        {
+            addCommand(commandset->get(SHOT_CATEGORY));
+        }
+        commandset->clear();
+    }
 }

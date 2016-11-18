@@ -728,7 +728,7 @@ void print_include_statelib(struct statelib_includes* si,char* name) {
 		print("#include \"state/ObstacleTypeId.h\"\n");
 		si->obstacleTypeId = 1;
 	}
-	if(!si->stateEvent && (strstr(name,"state::StateEvent"))) {
+	if(!si->stateEvent && (strstr(name,"state::StateEvent") || strstr(name,"StateEvent") )) {
 		print("#include \"state/StateEvent.h\"\n");
 		si->stateEvent = 1;
 	}

@@ -112,5 +112,6 @@ namespace ai{
         nextOrientation();
         shot();
         choice();
+        commands.add(new engine::EndTurnCommand(character));
     }
 }

@@ -2,6 +2,7 @@
 #ifndef STATE__ELEMENTEVENT__H
 #define STATE__ELEMENTEVENT__H
 
+#include "state/StateEvent.h"
 
 namespace state {
   class ElementList;

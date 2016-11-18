@@ -12,6 +12,9 @@
 #include <ctime>
 #include <thread>
 #include "PiloteSFML.h"
+#include "ai/AI.h"
+#include "ai/HeuristicAI.h"
+#include "ai/DumbAI.h"
 
 namespace client{
 
@@ -20,6 +23,10 @@ namespace client{
         
     }*/
     Pilote::Pilote() : engine(&state){
+        
+        
+        command.push_back(new engine::CommandSet());
+        command.push_back(new engine::CommandSet());
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         rendu = new PiloteSFML(&state, &engine);
             
@@ -38,10 +45,23 @@ namespace client{
     void Pilote::runEngine() {//thread for the engine
         
         // toutes les 50 ms
+        int64_t timeNow;
+        std::vector<ai::AI*> ai;
+        ai.push_back(new ai::HeuristicAI(&state,0));
+        ai.push_back(new ai::DumbAI(&state,1));
         while(engine.getMode()!=engine::close)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            engine.update();
+            if(engine.getMode()==engine::AI){
+                ai[engine.getCharTurn()]->run(*command[engine.getCharTurn()]);
+                engine.takeCommands(command[engine.getCharTurn()]);
+            }
+            else if(engine.getMode()==engine::play && engine.getCharTurn()==1){
+                    ai[1]->run(*command[1]);
+                    engine.takeCommands(command[1]);
+            }
+            timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+            engine.update(timeNow);
         }
     }
         

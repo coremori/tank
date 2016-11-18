@@ -3,6 +3,7 @@
 #define STATE__OBSERVABLE__H
 
 #include <vector>
+#include "state/StateEvent.h"
 
 namespace state {
   class StateObserver;

@@ -6,6 +6,9 @@
 
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
+#include "state/Obstacle.h"
+#include "state/Tank.h"
+#include "state/Space.h"
 
 namespace render {
 

@@ -91,10 +91,10 @@ namespace client{
         int w = scene.getWidth()*Pixel_def;   
 
         window.create(sf::VideoMode(w, h + 40), "Rendu");
-        // message victoire
+        // message victoir3
         surfaces[0]->setSpriteButton(408, 24, 624, 385);//paramètre : xPos, yPos, xTex, width texture
         //// message defaite    
-        surfaces[1]->setSpriteButton(409, 24,237, 385);
+        surfaces[1]->setSpriteButton(409, 24,240, 382);
         
         //button "fin de tour"
         /* Dans l'ordre : emplacement texture, commande à exécuter, position xTex, largeur de l'image, hauteur de l'image
@@ -102,13 +102,13 @@ namespace client{
         button.push_back(*(new Button("res/Textures/button.png", new engine::EndTurnCommand(this->character),0,104,23,true, (w-104)/2,h+8)));  
 
         //button "level 1"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level1.txt"),104,64,23,false, w-148,h+8)));
+        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level1.txt"),104,69,23,true, w-148,h+8)));
 
         //button "level 2"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level2.txt"),168,64,23,false, w-74,h+8)));
+        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level2.txt"),173,69,23,true, w-74,h+8)));
         
         //button "AI"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::ModeCommand(engine::AI),1010,74,23,false, w-232,h+8)));
+        button.push_back(*(new Button("res/Textures/button.png", new engine::ModeCommand(engine::AI),1010,74,23,true, w-232,h+8)));
    
     }
     

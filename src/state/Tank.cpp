@@ -1,6 +1,7 @@
 
 
 #include "state.h"
+#include "Tank.h"
 
 namespace state {
 

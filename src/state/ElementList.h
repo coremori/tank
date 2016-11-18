@@ -3,6 +3,7 @@
 #define STATE__ELEMENTLIST__H
 
 #include <vector>
+#include "state/StateEvent.h"
 
 namespace state {
   class Element;

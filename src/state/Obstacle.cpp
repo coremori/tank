@@ -5,6 +5,7 @@
  */
 
 #include "state.h"
+#include "Obstacle.h"
 
 namespace state{
 

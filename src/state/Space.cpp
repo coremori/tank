@@ -1,5 +1,5 @@
 #include "state.h"
-
+#include "Space.h"
 namespace state {
 
   /// class Space - 
