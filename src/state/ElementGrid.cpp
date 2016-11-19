@@ -53,8 +53,12 @@ namespace state {
         width = w;
     };
     
-    void ElementGrid::operator=(const ElementGrid e) {
-        ElementList::operator =(*this);
+    void ElementGrid::copy(const ElementGrid e) {
+        
+        clear();
+        
+        for(int i = 0; i < e.size(); i++)
+            elements.push_back(e.get(i)->clone());
         width = e.getWidth();
         height = e.getHeight();
     }

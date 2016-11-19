@@ -13,6 +13,13 @@ namespace state {
     
     State::~State (){ // supprime tout pour l'instant
     };
+        
+    void State::copy(const State s) {
+        grid.copy(s.getGrid());
+        mobiles.copy(s.getMobiles());
+        notifyObserver(*(new StateEvent(this, Level_Changed )));
+    }
+
     
     ElementGrid& State::getGrid () {
         return grid;

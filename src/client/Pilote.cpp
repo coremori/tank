@@ -49,12 +49,14 @@ namespace client{
         std::vector<ai::AI*> ai;
         ai.push_back(new ai::HeuristicAI(&state,0));
         ai.push_back(new ai::DumbAI(&state,1));
+        int alreadyplay = 1;
         while(engine.getMode()!=engine::close)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            if(engine.getMode()==engine::AI){
+            if(engine.getMode()==engine::AI && alreadyplay!=engine.getCharTurn()){
                 ai[engine.getCharTurn()]->run(*command[engine.getCharTurn()]);
                 engine.takeCommands(command[engine.getCharTurn()]);
+                alreadyplay = engine.getCharTurn();
             }
             else if(engine.getMode()==engine::play && engine.getCharTurn()==1){
                     ai[1]->run(*command[1]);

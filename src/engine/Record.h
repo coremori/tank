@@ -15,14 +15,13 @@ namespace engine {
   class Record {
     // Attributes
   protected:
-    state::State& mainState;
+    state::State* mainState;
     state::State* initState;
-    state::State* lastState;
     std::vector<ActionListTurn*> actions;
     int idx;
     // Operations
   public:
-    Record (state::State& s);
+    Record (state::State* s);
     ~Record ();
     void clear ();
     void recordOne (ActionListTurn* actions);

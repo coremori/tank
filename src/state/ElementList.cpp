@@ -4,6 +4,7 @@
 #include "State.h"
 #include <stdio.h>
 #include <string.h>
+#include <locale>
 #include "ElementList.h"
 #include "Space.h"
 #include "Obstacle.h"
@@ -21,7 +22,6 @@ namespace state {
     
     
     ElementList::~ElementList (){
-        clear();
     };
 
    
@@ -34,9 +34,10 @@ namespace state {
     };
         
     void ElementList::clear (){
-    /*    for(Element* e : elements)
-            delete(e);*/
-        elements.clear(); //Removes all elements from the "elements" container. 
+        /*for(int i = elements.size()-1; i>=0; i--){
+            delete(elements[i]);
+        }*/
+        elements.clear();
     };
     
   
@@ -109,9 +110,12 @@ namespace state {
         Observable::notifyObserver(event);
     }
         
-    void ElementList::operator=(const ElementList e) {//copy the elements of the other ElementList
+    void ElementList::copy(const ElementList e) {//copy the elements of the other ElementList
         //not copy the state reference
-        for(int i = 0; i <= e.size(); i++)
+        /*for(Element* el : elements)
+            delete(el);*/
+        clear();
+        for(int i = 0; i < e.size(); i++)
             elements.push_back(e.get(i)->clone());
     }
 

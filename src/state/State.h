@@ -9,6 +9,7 @@ namespace state {
   class ElementGrid;
   class Element;
   class StateEvent;
+  class State;
   class Observable;
 }
 
@@ -37,6 +38,7 @@ namespace state {
     const Element* getMobile (int idx) const;
     void load (const char* file_name);
     void notifyObserver (const StateEvent& event) const;
+    void copy (const State s);
   };
 
 };

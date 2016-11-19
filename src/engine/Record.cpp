@@ -12,13 +12,12 @@
 // il faut : à chaque tour on rajoute une actionlistTurn à la liste ; on ratache celle-ci au Ruler (lancer par engine.endTurn())
 // l'engine (de préference, mais le ruler passe pour l'instant) doit géré le mode (reccord, normal...)
 namespace engine{
-    Record::Record (state::State& s) : mainState(s){//veut plus compiler sinon :(
-        this->initState = new state::State();
-        initState->load("res/Levels/level1.txt");
-        
-        this->lastState = &s;
+    Record::Record (state::State* s) {//veut plus compiler sinon :(
+        mainState = s;
+        mainState->load("res/Levels/level1.txt");
+        initState = new state::State();
+        initState->copy(*mainState);
         idx = 0;
-        //fonction clone() nécéssaire pour toute les classes du State.dia (youhou)
     }
 
     Record::~Record() {
@@ -37,17 +36,13 @@ namespace engine{
     }
     
     void Record::startReplay (){
-        //lastState = mainState; copy mon amie where are you?
-        //mainState = initState;
-        mainState.load("res/Levels/level1.txt");
+        mainState->copy(*initState);
     }
     
     bool Record::replayOne (){
         unsigned i = idx;
         if(i >=actions.size())
-            return false;//probablement si dernier tour enregistrer (pas de suivant)
-        /*if(idx == 0)
-            mainState = *initState; */
+            return false;
         actions[idx]->apply();
         idx ++;
         return true;

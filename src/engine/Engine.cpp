@@ -26,7 +26,7 @@
 
 namespace engine{
 
-    Engine::Engine(state::State* s) : reccord(*s), ruler(this){
+    Engine::Engine(state::State* s) : reccord(s), ruler(this){
 
         currentcommands = new CommandSet();
         waitingcommands = new CommandSet();
@@ -63,8 +63,12 @@ namespace engine{
             mode = play;
         else 
             mode = m;
-        if(mode == replay)
-                reccord.startReplay();
+        if(mode == replay){
+            update_mutex.lock();
+            reccord.startReplay();
+            update_mutex.unlock();
+        }
+                
     }
        
     EngineMode Engine::getMode() const {
@@ -135,22 +139,16 @@ namespace engine{
         }
         else if(waitingcommands->get(MODE_CATEGORY))
         {
+            if(!AnimRunning){
             commands_mutex.lock();
             ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(waitingcommands->get(MODE_CATEGORY));//on change le mode mais conserve la liste en attente
             setMode(modeCmd->getMode());
             waitingcommands->clear();
             commands_mutex.unlock();
-        }
-        if(mode == replay){
-            if((timeNow-lastEndTurnTime)>500){//500 ms entre chaque tour
-                update_mutex.lock();
-                if(!AnimRunning)
-                    reccord.replayOne();
-                update_mutex.unlock();
-                lastEndTurnTime = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());                        
             }
         }
-        else if(mode == AI || mode == play){
+        
+        if(mode == AI || mode == play){
             if(waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
             {
                 if((timeNow-lastEndTurnTime)>500){
@@ -162,6 +160,18 @@ namespace engine{
                     reccord.recordOne(turn);
                     lastEndTurnTime = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
                 }
+            }
+        }
+        else if(mode == replay){
+            if((timeNow-lastEndTurnTime)>500){//500 ms entre chaque tour
+                update_mutex.lock();
+                if(!AnimRunning)
+                    if(!reccord.replayOne()){
+                        mode = play;
+                        endTurn();
+                    }
+                update_mutex.unlock();
+                lastEndTurnTime = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());                        
             }
         }
     }

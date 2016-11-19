@@ -152,10 +152,10 @@ namespace client{
             {
                 switch(event.key.code){
                     case sf::Keyboard::P :
-                        engine->setMode(engine::AI);
+                        engine->addCommand(new engine::ModeCommand(engine::AI));
                         break;
                     case sf::Keyboard::Escape :
-                        engine->setMode(engine::replay);
+                        engine->addCommand(new engine::ModeCommand(engine::replay));
                         break;
 
                     case sf::Keyboard::Right :

@@ -36,7 +36,7 @@ namespace state {
     void load (const char* path);
     void notifyObserver (int idx = -1) const;
     void notifyObserver (const StateEvent& event) const;
-    void operator= (const ElementList e);
+    virtual void copy (const ElementList e);
   };
 
 };
