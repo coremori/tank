@@ -10,11 +10,13 @@ namespace engine {
         this->character = character;
     };
     
-    void ActionMove::apply (state::State* s){
+    void ActionMove::apply (state::State* s,bool notify){
         //next position is actual + (dx,dy))
         s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
         s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
-        s->getMobiles().notifyObserver(character);
+        if(notify==true){
+            s->getMobiles().notifyObserver(character);
+        }
         std::cout << "character "<<character<<" bouge vers + ("<<dx/8<<","<<dy/8<<")" << std::endl;
     };
     

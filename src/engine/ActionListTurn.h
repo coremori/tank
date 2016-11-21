@@ -17,6 +17,8 @@ namespace engine {
   class ActionListTurn {
     // Associations
     // Attributes
+  public:
+    bool notify;
   protected:
     std::vector<Action*> actions;
     state::State* state;

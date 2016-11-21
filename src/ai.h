@@ -7,4 +7,7 @@
 #include "ai/DistanceUtility.h"
 #include "ai/EvolvedAI.h"
 #include "ai/HeuristicAI.h"
+#include "ai/TreeAI.h"
+#include "ai/SearchNode.h"
+#include "ai/SearchTree.h"
 #endif

@@ -14,16 +14,28 @@
 
 namespace engine {
     
+    
+    
+    
     ActionDirection::ActionDirection(state::Orientation direction, int character) {
         this->Newdirection = direction;
         this->character = character;
     };
     
-    void ActionDirection::apply(state::State* s) {
+    
+    
+    
+    
+    
+    
+    void ActionDirection::apply(state::State* s, bool notify) {
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         OldDirection = tank->getOrientation();
         tank->setOrientation(Newdirection);
-        s->getMobiles().notifyObserver(character);
+        
+        if(notify==true){
+            s->getMobiles().notifyObserver(character);
+        }
         
         std::cout << "character "<<character<<" regarde vers" ;
         switch(Newdirection){
@@ -41,6 +53,12 @@ namespace engine {
                 break;
         }
     }
+    
+    
+    
+    
+    
+    
     
     void ActionDirection::undo(state::State* s) {
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));

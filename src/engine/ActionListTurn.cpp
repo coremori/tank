@@ -13,6 +13,7 @@ namespace engine{
 
     ActionListTurn::ActionListTurn(state::State* s) {
         this->state = s;
+        notify = true;
     };
     
     ActionListTurn::~ActionListTurn() {
@@ -26,7 +27,7 @@ namespace engine{
     
     void ActionListTurn::apply() {
         for(unsigned int i=0; i<actions.size(); i++)
-            actions.at(i)->apply(state);
+            actions.at(i)->apply(state,notify);
     };
 
     void ActionListTurn::undo() {
