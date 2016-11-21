@@ -13,7 +13,7 @@ namespace engine{
 
     }
     
-    void Action::apply(state::State* s){
+    void Action::apply(state::State* s, bool notify){
         
     }
 

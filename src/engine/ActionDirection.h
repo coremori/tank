@@ -23,7 +23,7 @@ namespace engine {
     // Operations
   public:
     ActionDirection (state::Orientation direction, int character);
-    void apply (state::State* s);
+    void apply (state::State* s, bool notify);
     void undo (state::State* s);
   };
 

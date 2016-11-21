@@ -22,7 +22,7 @@ namespace engine {
     // Operations
   public:
     ActionMove (int dx, int dy, int character);
-    void apply (state::State* s);
+    void apply (state::State* s, bool notify);
     void undo (state::State* s);
   };
 

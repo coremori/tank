@@ -26,7 +26,7 @@ namespace engine {
     // Operations
   public:
     ActionShot (int character, int characterTarget, int damage, int xImpact, int yImpact, int yMax, bool displayPv = false);
-    void apply (state::State* s);
+    void apply (state::State* s, bool notify);
     void undo (state::State* s);
   };
 
