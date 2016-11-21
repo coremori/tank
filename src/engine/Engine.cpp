@@ -123,7 +123,7 @@ namespace engine{
     }
 
     
-    void Engine::update(int64_t timeNow) {
+    void Engine::update(int64_t timeNow, int64_t timeinterval) {
         /*vérifie les commandes de la list : passage au tour suivant ? 
          *Changement de mode ? les mutex sont importants pour une lecture prolongée et l'actualisation du state, 
          * pas nécessaires pour vérifier leur existence (puisque le render ne peut pas les supprimer, juste les remplacer)
@@ -151,7 +151,7 @@ namespace engine{
         if(mode == AI || mode == play){
             if(waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
             {
-                if((timeNow-lastEndTurnTime)>500){
+                if((timeNow-lastEndTurnTime)>timeinterval){
                     update_mutex.lock();
                     endTurn();
                     update_mutex.unlock();

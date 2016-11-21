@@ -45,7 +45,7 @@ namespace engine {
     EngineMode getMode () const;
     void endTurn ();
     void swapCommands ();
-    void update (int64_t timeNow);
+    void update (int64_t timeNow, int64_t timeinterval);
     std::mutex& getUpdateMutex () const;
     void setAnimRunning (bool b);
     int getCharTurn () const;

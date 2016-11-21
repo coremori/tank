@@ -63,7 +63,7 @@ namespace client{
                     engine.takeCommands(command[1]);
             }
             timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
-            engine.update(timeNow);
+            engine.update(timeNow,500);
         }
     }
         
