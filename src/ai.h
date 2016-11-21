@@ -7,14 +7,8 @@
 #include "ai/DistanceUtility.h"
 #include "ai/EvolvedAI.h"
 #include "ai/HeuristicAI.h"
-<<<<<<< HEAD
 #include "ai/SearchNode.h"
 #include "ai/SearchTree.h"
 #include "ai/Gardener.h"
 #include "ai/TreeAI.h"
-=======
-#include "ai/TreeAI.h"
-#include "ai/SearchNode.h"
-#include "ai/SearchTree.h"
->>>>>>> refs/remotes/origin/master
 #endif
