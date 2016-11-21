@@ -13,7 +13,6 @@
 #include "CommandCategory.h"
 #include <cstddef>
 #include <iostream>
-#include "Engine.h"
 #include "ActionMove.h"
 #include "ActionDirection.h"
 #include "ActionShot.h"
@@ -30,8 +29,8 @@ namespace engine{
     
     
     
-    Ruler::Ruler(Engine* engine) {
-        this->engine = engine;
+    Ruler::Ruler() {
+
         
     };
     
