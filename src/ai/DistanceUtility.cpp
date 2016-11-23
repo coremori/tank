@@ -24,7 +24,7 @@ namespace ai{
 
     
     void DistanceUtility::updateDistance(state::State* state, int character) {
-        /*update the X distance between the two players
+        /* Update the X distance between the two players
          * The value are negative for player at the left side, positive at the right side
          */
         int other = (character)? 0:1;
@@ -34,18 +34,17 @@ namespace ai{
     
     
     bool DistanceUtility::inMissileFireRange() const {
-        /*Return true if fire a missile will impact the otherplayer
+        /*Returns true if fire a missile will impact the othe rplayer
          * */ 
         if(distance==80 || distance==-80 )//si on vise en haut - à modifier lorsque la puissance de tir sera intégrée
-        {
             return true;
-        }
-        return false;
+        else
+            return false;
     }
     
     
     bool DistanceUtility::inShellFireRange(state::State* state, int CharShoting) const {
-        /*Return true if fire a shell will impact the otherplayer
+        /*Returns true if fire a shell will impact the other player
          *The shell is shot by CharShoting
          * */ 
         int character = CharShoting;
