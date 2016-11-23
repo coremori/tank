@@ -29,24 +29,36 @@ namespace ai{
 
 }
 
-/*press ctrl+space for create function define in .h*/
-ApplyAction(Node* node){
+
+/*
+int ApplyAction(Node* node){
     if(node.depth == dephtmax){
-        evaluate score}
+        evaluate score
+        return score;
+    }
     else
     {
+        int max = -5000;
         for(int i = 0; i<3 ; i++){
             crée le child et l'ajoute au tableau
         state.aplly next suivant i applique action nécésaire pour passé à cet état là
         
-        crée fils : si i = 0 move gauche, i =1 move droite...
+        crée fils : si i = 0 move gauche, i =2 move droite...
         
         
-        ApplyAction(nextChild);
+        if(ApplyAction(nextChild) > max)
+            max = renovie;
         state.undo  //on repasse à l'état de départ
         }
     }
 }   
         
+     
+renvoyer le node pour avoir la liste des actions a effectuer
         
         
+coder une fonction tir
+        
+fonction eval score 
+ * 
+ */
