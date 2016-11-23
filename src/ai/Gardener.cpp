@@ -5,13 +5,14 @@
  * Part of tank 
  */
 #include "Gardener.h"
+#include "Node.h"
 
 namespace ai{
     Gardener::Gardener (int depthMax, state::State* state){
         this->depthMax = depthMax;
         this->state->copy(*state);//on stocke une copie qu'on pourra facilement modifié
         for(int j = 1; j<depthMax; j++)//à chaque profondeur
-            for(int i = 0; i<(4^(j)); i++)// on crée 4 node pour chaque de la couche d'avant
+            for(int i = 0; i<(3^(j)); i++)// on crée 4 node pour chaque de la couche d'avant
                 nodeWarehouse.push_back(new Node());
     }
     
@@ -33,8 +34,9 @@ namespace ai{
         if(Node->Score != 0)
             return Node->Score;
         int max = 0;
+        Node * child;
         for(size_t i = 0; i<Node->child.size() ; i++){
-            Node* child = Node->child[i];
+            child = Node->child[i];
             int value = minimax_rec_min(child);
             if(value > max)
                 max = value;
@@ -56,6 +58,59 @@ namespace ai{
     }
 
     
+   
+ /*    
+    int character;
+    Engine* engineTest;
+    cuurent ActualpvMe;
+    cureent ActualpvOther;
+  */  
+    
+
+    void Gardener::evaluateScore(Node* node) {
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        int pvMe = tank->getPv(); // pv de notre joueur
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
+        int pvOther = tank->getPv(); // pv du joueur adverse
+        int score = 0;
+        if(pvOther == 0){
+            score += 1000;
+        }
+        else if(pvMe == 0){
+            score -= 1000;
+        }
+        
+        score += (ActualpvOther - pvOther) + (pvMe - ActualpvMe);
+        
+        node->Score = score;  
+    }
+    
+    
+    
+   //utilisable
+    shot(){
+        if(distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
+            engineTest.add(new engine::ShotCommand(character,10));
+    };
+    
+    nextOrientation(){
+        if(distanceUtility.inMissileFireRange()){
+            if(distanceUtility.getDistance() < 0)
+                engineTest.add(new engine::DirectionCommand(character,state::left_up));
+            else
+                engineTest.add(new engine::DirectionCommand(character,state::right_up));
+                
+            //else if(distanceOtherChar()==0)
+                //si ils sont au même endroit, on fait un suicide?
+        }        
+        else if(distanceUtility.inShellFireRange(state,character))
+        {
+            if(distanceUtility.getDistance() < 0)
+                engineTest.add(new engine::DirectionCommand(character,state::left_down));
+            else
+                engineTest.add(new engine::DirectionCommand(character,state::right_down));
+        }
+    };
     
     void ApplyAction(Node* node){
         
@@ -90,4 +145,8 @@ namespace ai{
 
 }
 
+Node* Gardener::createChild(Node* node){
+    children.push_back(new Node());
+    return child;
+}      
 

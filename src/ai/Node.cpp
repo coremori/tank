@@ -18,21 +18,50 @@ namespace ai{
     }
         
     const int Node::getScore() {
-        return Score;
+        return score;
     }
     
     void Node::setScore(int score) {
-        this->Score = score;
+        this->score = score;
     }
 
 
 
 }
 
-  
+
+/*
+int ApplyAction(Node* node){
+    if(node.depth == dephtmax){
+        evaluate score
+        return score;
+    }
+    else
+    {
+        int max = -5000;
+        for(int i = 0; i<3 ; i++){
+            crée le child et l'ajoute au tableau
+        state.aplly next suivant i applique action nécésaire pour passé à cet état là
         
-Node* Gardener::createChild(Node* node){
-    children.push_back(new Node());
-    return child;
-}        
+        crée fils : si i = 0 move gauche, i =2 move droite...
+        
+        
+        if(ApplyAction(nextChild) > max)
+            max = renovie;
+        state.undo  //on repasse à l'état de départ
+        }
+    }
+}   
+        
+     
+renvoyer le node pour avoir la liste des actions a effectuer
+        
+        
+coder une fonction tir
+        
+fonction eval score 
+ * 
+ */
+        
+  
         

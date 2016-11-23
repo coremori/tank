@@ -3,7 +3,6 @@
 #define AI__GARDENER__H
 
 #include <vector>
-#include "engine/Engine.h"
 #include "state/State.h"
 
 namespace ai {
@@ -23,18 +22,25 @@ namespace ai {
   protected:
     std::vector<Node*> nodeWarehouse;
     int depthMax;
-    engine::EngineMode SavedMode;
     state::State* state;
     engine::Ruler* ruler;
+<<<<<<< HEAD
+=======
+    int character;
+    int ActualpvMe;
+    int ActualpvOther;
+>>>>>>> 2d3a897b584d7da935c8de7d64ddfd7138481702
     // Operations
   public:
     Gardener (int depthMax, state::State* state);
-    void Evaluate ();
-    int bestMove ();
     int minimax_rec (Node* Node);
     int minimax_rec_max (Node* Node);
     int minimax_rec_min (Node* Node);
     std::vector<Node*> createChild (Node* Node);
+    void evaluateScore (Node* node);
+    void shot (int character);
+    nextOrientation (int character);
+    void ApplyAction (Node* node);
   };
 
 };
