@@ -7,6 +7,10 @@
 #include "ai/DistanceUtility.h"
 #include "ai/EvolvedAI.h"
 #include "ai/HeuristicAI.h"
+<<<<<<< HEAD
+=======
+#include "ai/Node.h"
+>>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
 #include "ai/Gardener.h"
 #include "ai/TreeAI.h"
 #include "ai/Node.h"

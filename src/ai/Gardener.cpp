@@ -27,7 +27,13 @@ namespace ai{
     }
     
     
+<<<<<<< HEAD
     
+=======
+    int Gardener::bestMove (){
+        return 0;
+    }
+>>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
     int Gardener::minimax_rec (Node* Node){
         return 45;
     }
@@ -60,8 +66,19 @@ namespace ai{
         }
         return min;
     }
+
     
+<<<<<<< HEAD
     */
+=======
+   
+ /*    
+    int character;
+    Engine* engineTest;
+    cuurent ActualpvMe;
+    cureent ActualpvOther;
+  */  
+>>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
     
 
 
@@ -112,6 +129,7 @@ namespace ai{
         }
     }
     
+<<<<<<< HEAD
     
     void Gardener::createChild (Node* Node) {
         ai::Node* newNode = new ai::Node();
@@ -126,6 +144,12 @@ namespace ai{
         if(node->depth == depthMax){
             evaluateScore(node);
             return node;
+=======
+    void ApplyAction(Node* node){
+        
+        if(node.depth == depthmax){
+            evaluateScore(node);    
+>>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
         }
         else{
             character = character?0:1;
@@ -148,6 +172,7 @@ namespace ai{
                     //command move to the right
                 }
                     
+<<<<<<< HEAD
             //state.apply next suivant i applique action nécésaire pour passé à cet état là
                 shot(character);
                 nextOrientation(character);
@@ -170,6 +195,14 @@ namespace ai{
                 ruler->setActions(action.back());
                 ruler->undo();
                 action.pop_back();
+=======
+            //state.apply next suivant i applique action nécésaire pour passer à cet état là
+            ruler->implementesRules();
+            ruler->apply();
+
+            ApplyAction(node->child.back());
+            ruler->undo();  //on repasse à l'état de départ
+>>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
             }
             return maxNode;
         }

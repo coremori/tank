@@ -270,7 +270,9 @@ namespace engine{
             this->state = s;
     }
 
-    
+    void Ruler::undo (){
+        actions->undo();
+    }
 
 
 }
