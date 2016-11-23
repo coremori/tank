@@ -18,11 +18,11 @@ namespace ai{
     }
         
     const int Node::getScore() {
-        return Score;
+        return score;
     }
     
     void Node::setScore(int score) {
-        this->Score = score;
+        this->score = score;
     }
 
 
@@ -63,8 +63,5 @@ fonction eval score
  * 
  */
         
-Node* Gardener::createChild(Node* node){
-    children.push_back(new Node());
-    return child;
-}        
+  
         

@@ -58,14 +58,15 @@ namespace ai{
     }
     
     
-    
+ /*    
     int character;
     Engine* engineTest;
     cuurent ActualpvMe;
     cureent ActualpvOther;
+  */  
     
-    
-    evaluateScore(Node* node){
+
+    void Gardener::evaluateScore(Node* node) {
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
         int pvMe = tank->getPv(); // pv de notre joueur
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
@@ -80,7 +81,7 @@ namespace ai{
         
         score += (ActualpvOther - pvOther) + (pvMe - ActualpvMe);
         
-        node->Score = score;        
+        node->Score = score;  
     }
     
     
@@ -145,4 +146,8 @@ namespace ai{
 
 }
 
+Node* Gardener::createChild(Node* node){
+    children.push_back(new Node());
+    return child;
+}      
 
