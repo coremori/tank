@@ -14,9 +14,9 @@ namespace ai {
   /// class Node - 
   class Node {
     // Attributes
-  public:
-    std::vector<Node*> child;
-    int Score;
+  protected:
+    std::vector<Node*> children;
+    int score;
     int depth;
     std::vector<int> choiceMove;
     // Operations

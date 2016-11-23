@@ -112,7 +112,35 @@ namespace ai{
     
     
             
-    
+    /*press ctrl+space for create function define in .h*/
+    void ApplyAction(Node* node){
+        
+        if(node.depth == depthmax){
+            evaluateScore(node);
+        }
+        else{
+
+            for(int i = 0; i<3 ; i++){
+                node->child.push_back(createChild(node));
+                
+                if(i==0){
+                    //command move to the left
+                }
+                else if(i==1){
+                    //command do nothing
+                }
+                else if(i==2){
+                    //command move to the right
+                }
+                    
+            state.apply next suivant i applique action nécésaire pour passé à cet état là
+
+
+            ApplyAction(node->child.back());
+              //on repasse à l'état de départ
+            }
+        }
+    } 
     
 
 }

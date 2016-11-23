@@ -25,6 +25,7 @@ namespace ai {
     int depthMax;
     engine::EngineMode SavedMode;
     state::State* state;
+    engine::Ruler* Ruler;
     // Operations
   public:
     Gardener (int depthMax, state::State* state);
@@ -33,6 +34,7 @@ namespace ai {
     int minimax_rec (Node* Node);
     int minimax_rec_max (Node* Node);
     int minimax_rec_min (Node* Node);
+    std::vector<Node*> createChild (Node* Node);
   };
 
 };
