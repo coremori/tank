@@ -7,29 +7,24 @@
 
 namespace ai {
   class Node;
-  class SearchTree;
 }
 
-#include "SearchTree.h"
+#include "Node.h"
 
 namespace ai {
 
   /// class Gardener - 
   class Gardener {
     // Associations
-    ai::SearchTree tree;
     // Attributes
   protected:
     std::vector<Node*> nodeWarehouse;
     int depthMax;
     state::State* state;
     engine::Ruler* ruler;
-<<<<<<< HEAD
-=======
     int character;
     int ActualpvMe;
     int ActualpvOther;
->>>>>>> 2d3a897b584d7da935c8de7d64ddfd7138481702
     // Operations
   public:
     Gardener (int depthMax, state::State* state);

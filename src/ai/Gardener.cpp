@@ -17,11 +17,6 @@ namespace ai{
     }
     
     
-    
-    void Gardener::Evaluate (){
-        
-    }
-    
     int Gardener::bestMove (){
         return 0;
     }

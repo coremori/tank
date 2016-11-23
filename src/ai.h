@@ -8,7 +8,6 @@
 #include "ai/EvolvedAI.h"
 #include "ai/HeuristicAI.h"
 #include "ai/Node.h"
-#include "ai/SearchTree.h"
 #include "ai/Gardener.h"
 #include "ai/TreeAI.h"
 #endif

@@ -6,18 +6,21 @@
 #include "engine/CommandSet.h"
 
 namespace ai {
-  class EvolvedAI;
+  class Node;
   class Gardener;
+  class EvolvedAI;
 }
 
-#include "EvolvedAI.h"
 #include "Gardener.h"
+#include "EvolvedAI.h"
 
 namespace ai {
 
   /// class TreeAI - 
-  class TreeAI : public ai::EvolvedAI {
-    // Associations
+  class TreeAI : public ai::Gardener, public ai::EvolvedAI {
+    // Attributes
+  public:
+    Node* root;
     // Operations
   public:
     TreeAI (state::State* state, int character);

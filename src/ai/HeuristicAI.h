@@ -2,8 +2,8 @@
 #ifndef AI__HEURISTICAI__H
 #define AI__HEURISTICAI__H
 
-#include "engine/CommandSet.h"
 #include "state/State.h"
+#include "engine/CommandSet.h"
 
 namespace ai {
   class EvolvedAI;
@@ -15,16 +15,11 @@ namespace ai {
 
   /// class HeuristicAI - Average AI. Choice the best action for the turn and don't anticipate much
   class HeuristicAI : public ai::EvolvedAI {
-    // Attributes
-  protected:
-    engine::CommandSet* commands;
     // Operations
   public:
     HeuristicAI (state::State* state, int character);
     void choice ();
     void move (bool esquive);
-    void nextOrientation ();
-    void shot ();
     void run (engine::CommandSet& commands);
   };
 
