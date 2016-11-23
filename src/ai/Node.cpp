@@ -10,11 +10,11 @@
 namespace ai{
 
     Node * const Node::getChild(size_t i) {
-        return child[i];
+        return children[i];
     }
         
     const size_t Node::getChildCount() {
-        return child.size();
+        return children.size();
     }
         
     const int Node::getScore() {
@@ -29,24 +29,10 @@ namespace ai{
 
 }
 
-/*press ctrl+space for create function define in .h*/
-ApplyAction(Node* node){
-    if(node.depth == dephtmax){
-        evaluate score}
-    else
-    {
-        for(int i = 0; i<3 ; i++){
-            crée le child et l'ajoute au tableau
-        state.aplly next suivant i applique action nécésaire pour passé à cet état là
+  
         
-        crée fils : si i = 0 move gauche, i =1 move droite...
-        
-        
-        ApplyAction(nextChild);
-        state.undo  //on repasse à l'état de départ
-        }
-    }
-}   
-        
-        
+Node* Gardener::createChild(Node* node){
+    children.push_back(new Node());
+    return child;
+}        
         
