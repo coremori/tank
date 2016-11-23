@@ -54,12 +54,13 @@ namespace ai{
         }
         return min;
     }
+
     
-    /*press ctrl+space for create function define in .h*/
+    
     void ApplyAction(Node* node){
         
         if(node.depth == depthmax){
-            evaluateScore(node);
+            evaluateScore(node);    
         }
         else{
 
@@ -76,11 +77,12 @@ namespace ai{
                     //command move to the right
                 }
                     
-            state.apply next suivant i applique action nécésaire pour passé à cet état là
-
+            //state.apply next suivant i applique action nécésaire pour passer à cet état là
+            ruler->implementesRules();
+            ruler->apply();
 
             ApplyAction(node->child.back());
-              //on repasse à l'état de départ
+            ruler->undo();  //on repasse à l'état de départ
             }
         }
     } 

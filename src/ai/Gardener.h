@@ -25,7 +25,7 @@ namespace ai {
     int depthMax;
     engine::EngineMode SavedMode;
     state::State* state;
-    engine::Ruler* Ruler;
+    engine::Ruler* ruler;
     // Operations
   public:
     Gardener (int depthMax, state::State* state);
