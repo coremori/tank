@@ -26,7 +26,7 @@
 
 namespace engine{
 
-    Engine::Engine(state::State* s) : reccord(s), ruler(this){
+    Engine::Engine(state::State* s) : reccord(s), ruler(){
 
         currentcommands = new CommandSet();
         waitingcommands = new CommandSet();
