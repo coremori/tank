@@ -74,6 +74,9 @@ namespace engine{
     
     
     
+    void Ruler::undo (){
+        actions->undo();
+    }
     
     
     

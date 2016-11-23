@@ -29,6 +29,7 @@ namespace engine {
     void apply ();
     void setState (state::State* s);
     void implementeRules ();
+    void undo ();
   };
 
 };

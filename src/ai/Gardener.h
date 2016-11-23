@@ -3,22 +3,26 @@
 #define AI__GARDENER__H
 
 #include <vector>
+#include "engine/ActionListTurn.h"
 #include "state/State.h"
+#include "engine/Ruler.h"
+#include "engine/CommandSet.h"
 
 namespace ai {
+  class DistanceUtility;
   class Node;
-  class SearchTree;
 }
 
-#include "SearchTree.h"
+#include "DistanceUtility.h"
 
 namespace ai {
 
   /// class Gardener - 
   class Gardener {
-    // Associations
-    ai::SearchTree tree;
     // Attributes
+  public:
+    DistanceUtility distanceUtility;
+    std::vector<engine::ActionListTurn*> action;
   protected:
     std::vector<Node*> nodeWarehouse;
     int depthMax;
@@ -27,17 +31,19 @@ namespace ai {
     int character;
     int ActualpvMe;
     int ActualpvOther;
+    engine::CommandSet* commandsTest;
     // Operations
   public:
     Gardener (int depthMax, state::State* state);
     int minimax_rec (Node* Node);
     int minimax_rec_max (Node* Node);
     int minimax_rec_min (Node* Node);
-    std::vector<Node*> createChild (Node* Node);
+    void createChild (Node* Node);
     void evaluateScore (Node* node);
     void shot (int character);
-    nextOrientation (int character);
-    void ApplyAction (Node* node);
+    void nextOrientation (int character);
+    Node* ApplyActionMax (Node* node);
+    Node* ApplyActionMin (Node* node);
   };
 
 };

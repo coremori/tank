@@ -673,6 +673,9 @@ struct statelib_includes{
    //engine part
    int engine;
    int commandSet;
+   int ruler;
+   int actionlistturn;
+   
    //ai part
    int ai;
    
@@ -767,6 +770,14 @@ void print_include_statelib(struct statelib_includes* si,char* name) {
         if(!si->commandSet && strstr(name, "engine::CommandSet")){
                 print("#include \"engine/CommandSet.h\"\n");
 		si->commandSet = 1;
+        }
+        if(!si->ruler && strstr(name, "engine::Ruler")){
+                print("#include \"engine/Ruler.h\"\n");
+		si->ruler = 1;
+        }
+        if(!si->actionlistturn && strstr(name, "engine::ActionListTurn")){
+                print("#include \"engine/ActionListTurn.h\"\n");
+		si->actionlistturn = 1;
         }
         if(!si->ai && strstr(name, "ai::AI")){
                 print("#include \"ai/AI.h\"\n");
