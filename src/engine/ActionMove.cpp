@@ -16,8 +16,8 @@ namespace engine {
         s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
         if(notify==true){
             s->getMobiles().notifyObserver(character);
+            std::cout << "character "<<character<<" bouge vers + ("<<dx/8<<","<<dy/8<<")" << std::endl;
         }
-        std::cout << "character "<<character<<" bouge vers + ("<<dx/8<<","<<dy/8<<")" << std::endl;
     };
     
     void ActionMove::undo (state::State* s){

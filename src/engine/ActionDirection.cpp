@@ -35,22 +35,21 @@ namespace engine {
         
         if(notify==true){
             s->getMobiles().notifyObserver(character);
-        }
-        
-        std::cout << "character "<<character<<" regarde vers" ;
-        switch(Newdirection){
-            case state::left_down:
-                std::cout << " gauche bas" << std::endl;
-                break;
-            case state::left_up:
-                std::cout << " gauche haut" << std::endl;
-                break;
-            case state::right_down:
-                std::cout << " droite bas" << std::endl;
-                break;
-            case state::right_up:
-                std::cout << " droite haut" << std::endl;
-                break;
+            std::cout << "character "<<character<<" regarde vers" ;
+            switch(Newdirection){
+                case state::left_down:
+                    std::cout << " gauche bas" << std::endl;
+                    break;
+                case state::left_up:
+                    std::cout << " gauche haut" << std::endl;
+                    break;
+                case state::right_down:
+                    std::cout << " droite bas" << std::endl;
+                    break;
+                case state::right_up:
+                    std::cout << " droite haut" << std::endl;
+                    break;
+            }
         }
     }
     
