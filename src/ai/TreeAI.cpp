@@ -8,22 +8,24 @@
 #include "Node.h"
 #include "engine/MoveCommand.h"
 #include "state/State.h"
+#include "engine/EndTurnCommand.h"
 
 namespace ai{
 
     TreeAI::TreeAI(state::State* state, int character) : EvolvedAI(state,character){
-        
-        state::State* t = new state::State();
-        t->load("res/Levels/level1.txt");
-        slaveGardener = new Gardener(5,t);
+        const int depthmax = 3;
+        slaveGardener = new Gardener(depthmax,state);
     }
 
 
     void TreeAI::run (engine::CommandSet& commands){
         this->commands = &commands;
+        distanceUtility.updateDistance(state,character);
         root = new Node();
         root->score = 0;
+        root->depth = 0;
         slaveGardener->setStart();
+        slaveGardener->changeMobile(&state->getMobiles());
         Node* toDo = slaveGardener->ApplyActionMax(root);
         shot();
         nextOrientation();
@@ -35,6 +37,7 @@ namespace ai{
             this->commands->add(new engine::MoveCommand(character,8,0));
             //command move to the right
         }
+        this->commands->add(new engine::EndTurnCommand(character));
     }
     
 

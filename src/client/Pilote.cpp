@@ -48,8 +48,8 @@ namespace client{
         // toutes les 50 ms
         int64_t timeNow;
         std::vector<ai::AI*> ai;
-        ai.push_back(new ai::TreeAI(&state,0));
-        ai.push_back(new ai::DumbAI(&state,1));
+        ai.push_back(new ai::HeuristicAI(&state,0));
+        ai.push_back(new ai::TreeAI(&state,1));
         int alreadyplay = 1;
         while(engine.getMode()!=engine::close)
         {

@@ -5,6 +5,8 @@
  * Part of tank */
 
 
+#include <iostream>
+
 #include "DistanceUtility.h"
 #include "AI.h"
 #include "state/Tank.h"
@@ -68,7 +70,7 @@ namespace ai{
         }
         else if(distance<0)
         {
-            while(distance<=1 && (state->getGrid().isSpace(x,y)))
+            while(distance<=-1 && (state->getGrid().isSpace(x,y)))
             {
                 x--;
                 distance ++;                

@@ -13,18 +13,21 @@
 #include "state/State.h"
 #include "engine/Ruler.h"
 #include <cstddef>
+#include <iostream>
 
 
 namespace ai{
     Gardener::Gardener (int depthMax, state::State* state){
         this->depthMax = depthMax;
+        
         this->state = new state::State();
-        this->state->load("res/Levels/level1.txt");;//on stocke une copie qu'on pourra facilement modifié
+        this->state->load("res/Levels/level1.txt");//on stocke une copie qu'on pourra facilement modifié
+        //la copie veut pas donc chargement brutal
         
        
         this->ruler = new engine::Ruler();
         
-        
+        ruler->setState(this->state);
         
         this->commandsTest = new engine::CommandSet();
         this->ruler->setCommandSet(commandsTest);
@@ -98,7 +101,7 @@ namespace ai{
     
     void Gardener::createChild (Node* Node) {
         ai::Node* newNode = new ai::Node();
-        newNode->depth = Node->depth;
+        newNode->depth = Node->depth+1;
         newNode->score = 0;
         Node->children.push_back(newNode);
             nodeWarehouse.push_back(newNode);
@@ -117,7 +120,6 @@ namespace ai{
             for(int i = 0; i<3 ; i++){
                 createChild(node);
                 nodeWarehouse.back()->choiceMove.push_back(i);
-                
                 if(i==0){
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
@@ -131,16 +133,18 @@ namespace ai{
                     //command move to the right
                 }  
             //state.apply next suivant i applique action nécésaire pour passé à cet état là
+                
                 shot(character);
                 nextOrientation(character);
                 
                 engine::ActionListTurn* tour = new engine::ActionListTurn(state);
                 tour->notify = false;
                 action.push_back(tour);
-        
+                
                 ruler->setActions(tour);
                 ruler->implementeRules();
-                ruler->apply();
+                commandsTest->clear();
+                //ruler->apply();
                 
                 examNode = ApplyActionMin(nodeWarehouse.back());
                 if(maxNode == NULL)
@@ -212,4 +216,10 @@ namespace ai{
             return minNode;
         }
     }
+    
+    
+    void Gardener::changeMobile(state::ElementList* mobile) {
+        state->getMobiles().copy(*mobile);
+    }
+
 }
