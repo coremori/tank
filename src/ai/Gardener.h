@@ -13,20 +13,12 @@ namespace ai {
   class Node;
 }
 
-<<<<<<< HEAD
 #include "DistanceUtility.h"
-=======
-#include "Node.h"
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
 
 namespace ai {
 
   /// class Gardener - 
   class Gardener {
-<<<<<<< HEAD
-=======
-    // Associations
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
     // Attributes
   public:
     DistanceUtility distanceUtility;
@@ -52,6 +44,7 @@ namespace ai {
     void nextOrientation (int character);
     Node* ApplyActionMax (Node* node);
     Node* ApplyActionMin (Node* node);
+    void setStart ();
   };
 
 };

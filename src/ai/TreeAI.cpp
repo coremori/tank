@@ -5,49 +5,38 @@
  * Part of tank 
  */
 #include "TreeAI.h"
+#include "Node.h"
+#include "engine/MoveCommand.h"
+#include "state/State.h"
 
 namespace ai{
 
-    void run (engine::CommandSet& commands){
+    TreeAI::TreeAI(state::State* state, int character) : EvolvedAI(state,character){
         
+        state::State* t = new state::State();
+        t->load("res/Levels/level1.txt");
+        slaveGardener = new Gardener(5,t);
     }
-    
-    void HeuristicAI::run(engine::CommandSet& commands) {//determine the command played by the AI
+
+
+    void TreeAI::run (engine::CommandSet& commands){
         this->commands = &commands;
-        distanceUtility.updateDistance(state,character);
-        nextOrientation();
+        root = new Node();
+        root->score = 0;
+        slaveGardener->setStart();
+        Node* toDo = slaveGardener->ApplyActionMax(root);
         shot();
-        choice();
-        commands.add(new engine::EndTurnCommand(character));
+        nextOrientation();
+        if(toDo->choiceMove[0] == 0){
+            this->commands->add(new engine::MoveCommand(character,-8,0));
+                    //command move to the left
+        }
+        else if(toDo->choiceMove[0] == 2){
+            this->commands->add(new engine::MoveCommand(character,8,0));
+            //command move to the right
+        }
     }
     
-        void DumbAI::run (engine::CommandSet& commands){//choix aléatoire
-        //int character = 1;
-        srand (time(NULL));
-        switch(rand() % 10){
-            case 0: 
-                commands.add(new engine::MoveCommand(character,8,0));
-                break;
-            case 1:
-                commands.add(new engine::MoveCommand(character,-8,0));
-                break;
-            case 2:
-                commands.add(new engine::DirectionCommand(character,state::right_up));
-                break;
-            case 3 :
-                commands.add(new engine::DirectionCommand(character,state::left_up));
-                break;
-            case 4:
-                commands.add(new engine::DirectionCommand(character,state::left_down));
-                break;
-            case 5:
-                commands.add(new engine::DirectionCommand(character,state::right_down));
-                break;
-            default : 
-                commands.add(new engine::ShotCommand(character,10));
-                break;
-        }
-        commands.add(new engine::EndTurnCommand(character));//passer au tour suivant : n'oublions pas !
-    }
+
 
 }

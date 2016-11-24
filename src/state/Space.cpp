@@ -25,7 +25,8 @@ namespace state {
     }
         
     Element* Space::clone() const {
-        return new Space(SpaceType, x, y);
+        Space* toto = new Space(SpaceType, x, y);
+        return toto;
     }
 
 

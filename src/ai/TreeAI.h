@@ -11,16 +11,18 @@ namespace ai {
   class EvolvedAI;
 }
 
-#include "Gardener.h"
 #include "EvolvedAI.h"
+#include "Gardener.h"
 
 namespace ai {
 
   /// class TreeAI - 
-  class TreeAI : public ai::Gardener, public ai::EvolvedAI {
+  class TreeAI : public ai::EvolvedAI {
+    // Associations
     // Attributes
   public:
     Node* root;
+    Gardener* slaveGardener;
     // Operations
   public:
     TreeAI (state::State* state, int character);

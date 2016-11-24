@@ -10,76 +10,41 @@
 #include "engine/ShotCommand.h"
 #include "engine/DirectionCommand.h"
 #include "engine/MoveCommand.h"
+#include "state/State.h"
+#include "engine/Ruler.h"
 #include <cstddef>
 
 
 namespace ai{
     Gardener::Gardener (int depthMax, state::State* state){
         this->depthMax = depthMax;
-        this->state->copy(*state);//on stocke une copie qu'on pourra facilement modifié
+        this->state = new state::State();
+        this->state->load("res/Levels/level1.txt");;//on stocke une copie qu'on pourra facilement modifié
+        
+       
+        this->ruler = new engine::Ruler();
+        
         
         
         this->commandsTest = new engine::CommandSet();
+        this->ruler->setCommandSet(commandsTest);
         
-        
+        character = 0;
         
         
     }
     
-    
-<<<<<<< HEAD
-    
-=======
-    int Gardener::bestMove (){
-        return 0;
-    }
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
-    int Gardener::minimax_rec (Node* Node){
-        return 45;
-    }
-    
-    /*
-    int Gardener::minimax_rec_max (Node* Node){
-        if(Node->getScore() != 0){
-            return Node->getScore();
-        }
-        int max = 0;
-        Node* child;
-        for(size_t i = 0; i<Node->child.size() ; i++){
-            child = Node->child[i];
-            int value = minimax_rec_min(child);
-            if(value > max)
-                max = value;
-        }
-        return max;
-    }
-    
-    int Gardener::minimax_rec_min (Node* Node){
-        if(Node->Score != 0)
-            return Node->Score;
-        int min = 0;
-        for(size_t i = 0; i<Node->child.size() ; i++){
-            Node* child = Node->child[i];
-            int value = minimax_rec_max(child);
-            if(value < min)
-                min = value;
-        }
-        return min;
+        
+    void Gardener::setStart() {
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        ActualpvMe = tank->getPv(); // pv de notre joueur
+        tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
+        ActualpvOther = tank->getPv(); // pv du joueur adverse
     }
 
     
-<<<<<<< HEAD
-    */
-=======
-   
- /*    
-    int character;
-    Engine* engineTest;
-    cuurent ActualpvMe;
-    cureent ActualpvOther;
-  */  
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
-    
+
+
 
 
     void Gardener::evaluateScore(Node* node) {
@@ -129,7 +94,7 @@ namespace ai{
         }
     }
     
-<<<<<<< HEAD
+
     
     void Gardener::createChild (Node* Node) {
         ai::Node* newNode = new ai::Node();
@@ -144,12 +109,6 @@ namespace ai{
         if(node->depth == depthMax){
             evaluateScore(node);
             return node;
-=======
-    void ApplyAction(Node* node){
-        
-        if(node.depth == depthmax){
-            evaluateScore(node);    
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
         }
         else{
             character = character?0:1;
@@ -157,7 +116,7 @@ namespace ai{
             Node* examNode = NULL;
             for(int i = 0; i<3 ; i++){
                 createChild(node);
-                nodeWarehouse.back()->choiceMove = i;
+                nodeWarehouse.back()->choiceMove.push_back(i);
                 
                 if(i==0){
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
@@ -170,9 +129,7 @@ namespace ai{
                 else if(i==2){
                     commandsTest->add(new engine::MoveCommand(character,8,0));
                     //command move to the right
-                }
-                    
-<<<<<<< HEAD
+                }  
             //state.apply next suivant i applique action nécésaire pour passé à cet état là
                 shot(character);
                 nextOrientation(character);
@@ -195,14 +152,6 @@ namespace ai{
                 ruler->setActions(action.back());
                 ruler->undo();
                 action.pop_back();
-=======
-            //state.apply next suivant i applique action nécésaire pour passer à cet état là
-            ruler->implementesRules();
-            ruler->apply();
-
-            ApplyAction(node->child.back());
-            ruler->undo();  //on repasse à l'état de départ
->>>>>>> ef2d6e680ef658a70450a24cb548770604f07c89
             }
             return maxNode;
         }
@@ -219,7 +168,7 @@ namespace ai{
             Node* examNode = NULL;
             for(int i = 0; i<3 ; i++){
                 createChild(node);
-                nodeWarehouse.back()->choiceMove = i;
+                nodeWarehouse.back()->choiceMove.push_back(i);
                 
                 if(i==0){
                     commandsTest->add(new engine::MoveCommand(character,-8,0));

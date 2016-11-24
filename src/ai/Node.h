@@ -18,7 +18,7 @@ namespace ai {
     std::vector<Node*> children;
     int score;
     int depth;
-    int choiceMove;
+    std::vector<int> choiceMove;
     // Operations
   public:
     int const getScore ();
