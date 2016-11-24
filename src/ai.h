@@ -6,8 +6,9 @@
 #include "ai/DumbAI.h"
 #include "ai/DistanceUtility.h"
 #include "ai/EvolvedAI.h"
+#include "ai/Move.h"
+#include "ai/Node.h"
 #include "ai/Gardener.h"
 #include "ai/TreeAI.h"
-#include "ai/Node.h"
 #include "ai/HeuristicAI.h"
 #endif

@@ -4,9 +4,6 @@
  *
  * Part of tank */
 
-
-#include <iostream>
-
 #include "DistanceUtility.h"
 #include "AI.h"
 #include "state/Tank.h"
@@ -51,8 +48,11 @@ namespace ai{
          * */ 
         int character = CharShoting;
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        int distance = this->distance/8;        
+        
+        //distance to the other tank
         int other = (character)? 0:1;
+        int distance = (state->getMobile(other)->getX()-state->getMobile(character)->getX())/8;        
+        
         if(!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
             return false;
             

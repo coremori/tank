@@ -6,7 +6,6 @@
 #include "engine/CommandSet.h"
 
 namespace ai {
-  class Node;
   class Gardener;
   class EvolvedAI;
 }
@@ -16,12 +15,11 @@ namespace ai {
 
 namespace ai {
 
-  /// class TreeAI - 
+  /// class TreeAI - Best Ai. Use a tree for determining the best move to do
   class TreeAI : public ai::EvolvedAI {
     // Associations
     // Attributes
-  public:
-    Node* root;
+  protected:
     Gardener* slaveGardener;
     // Operations
   public:

@@ -13,7 +13,6 @@
 #include "state/State.h"
 #include "engine/Ruler.h"
 #include <cstddef>
-#include <iostream>
 
 
 namespace ai{
@@ -37,13 +36,24 @@ namespace ai{
         
     }
     
-        
-    void Gardener::setStart() {
+            
+    Node* Gardener::Start() {
+        /* Calculate the best move 
+         * Use the minimax Recursion algorithme
+         */
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        ActualpvMe = tank->getPv(); // pv de notre joueur
+        ActualpvDif  = tank->getPv(); // pv de notre joueur
         tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
-        ActualpvOther = tank->getPv(); // pv du joueur adverse
+        ActualpvDif  -= tank->getPv(); // pv du joueur adverse
+        //distanceUtility.updateDistance(state,character);
+        Node* root = new Node();
+        root->score = 0;
+        root->depth = 0;
+        return ApplyActionMax(root);
     }
+
+    
+ 
 
     
 
@@ -51,6 +61,11 @@ namespace ai{
 
 
     void Gardener::evaluateScore(Node* node) {
+        /* Score given by :
+         * score += (other injurie) - (my injurie )
+         * score += 1000 if victory
+         * score -= 1000 if lost
+         */
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
         int pvMe = tank->getPv(); // pv de notre joueur
         tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
@@ -63,22 +78,24 @@ namespace ai{
             score -= 1000;
         }
         
-        score += (ActualpvOther - pvOther) + (pvMe - ActualpvMe);
+        score += ActualpvDif - pvOther + pvMe;
         
-        node->setScore(score);  
+        node->score = score;  
     }
    
 
-    
-   
-   //utilisable
 
     void Gardener::shot(int character) {
+        /* If we can impact the other, we shot
+         */
         if(distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
             commandsTest->add(new engine::ShotCommand(character,10));
     }
 
     void Gardener::nextOrientation(int character) {
+        /* Create the command for the best next orientation
+         * Orientation selected is the greatest damage 
+         */
         if(distanceUtility.inMissileFireRange()){
             if(distanceUtility.getDistance() < 0)
                 commandsTest->add(new engine::DirectionCommand(character,state::left_up));
@@ -100,6 +117,8 @@ namespace ai{
 
     
     void Gardener::createChild (Node* Node) {
+        /* Create a children of Node
+         */
         ai::Node* newNode = new ai::Node();
         newNode->depth = Node->depth+1;
         newNode->score = 0;
@@ -109,6 +128,13 @@ namespace ai{
             
     
     Node* Gardener::ApplyActionMax(Node* node) {
+        /* Part of the Minimax algorithme
+         * return the node if we are at the maximum depth
+         * else
+         * Create the children of the node 
+         * Calculate and return the maximun score of the children
+         *
+         */
         if(node->depth == depthMax){
             evaluateScore(node);
             return node;
@@ -119,16 +145,18 @@ namespace ai{
             Node* examNode = NULL;
             for(int i = 0; i<3 ; i++){
                 createChild(node);
-                nodeWarehouse.back()->choiceMove.push_back(i);
                 if(i==0){
+                    nodeWarehouse.back()->choiceMove.push_back(left);
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
                 }
                 else if(i==1){
+                    nodeWarehouse.back()->choiceMove.push_back(noMove);
                     //commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command do nothing
                 }
                 else if(i==2){
+                    nodeWarehouse.back()->choiceMove.push_back(right);
                     commandsTest->add(new engine::MoveCommand(character,8,0));
                     //command move to the right
                 }  
@@ -162,6 +190,13 @@ namespace ai{
     }
     
     Node* Gardener::ApplyActionMin(Node* node) {
+        /* Part of the Minimax algorithme
+         * return the node if we are at the maximum depth
+         * else
+         * Create the children of the node 
+         * Calculate and return the minimum score of the node's children
+         *
+         */
         if(node->depth == depthMax){
             evaluateScore(node);
             return node;
@@ -172,17 +207,19 @@ namespace ai{
             Node* examNode = NULL;
             for(int i = 0; i<3 ; i++){
                 createChild(node);
-                nodeWarehouse.back()->choiceMove.push_back(i);
                 
                 if(i==0){
+                    nodeWarehouse.back()->choiceMove.push_back(left);
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
                 }
                 else if(i==1){
+                    nodeWarehouse.back()->choiceMove.push_back(noMove);
                     //commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command do nothing
                 }
                 else if(i==2){
+                    nodeWarehouse.back()->choiceMove.push_back(right);
                     commandsTest->add(new engine::MoveCommand(character,8,0));
                     //command move to the right
                 }
@@ -197,7 +234,7 @@ namespace ai{
         
                 ruler->setActions(tour);
                 ruler->implementeRules();
-                ruler->apply();
+                //ruler->apply();
                 
                 examNode = ApplyActionMin(nodeWarehouse.back());
                 

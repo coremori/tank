@@ -3,28 +3,24 @@
 #define AI__NODE__H
 
 #include <vector>
-#include <stdlib.h>
 
 namespace ai {
   class Node;
 }
 
+#include "Move.h"
+
 namespace ai {
 
-  /// class Node - 
+  /// class Node - Node of the move Tree "\n"// Contain the node's depth , children and score
   class Node {
+    // Associations
     // Attributes
   public:
     std::vector<Node*> children;
     int score;
     int depth;
-    std::vector<int> choiceMove;
-    // Operations
-  public:
-    int const getScore ();
-    void setScore (int score);
-    size_t const getChildCount ();
-    Node* const getChild (size_t i);
+    std::vector<Move> choiceMove;
   };
 
 };

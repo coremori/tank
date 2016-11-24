@@ -18,8 +18,6 @@ namespace ai {
     AI (state::State* state, int character);
     ~AI ();
     virtual void run (engine::CommandSet& commands) = 0;
-    int getCharacter () const;
-    state::State* getState ();
   };
 
 };

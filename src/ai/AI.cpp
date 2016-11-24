@@ -14,14 +14,6 @@ namespace ai {
         this->character = character;
     }
 
-    int AI::getCharacter() const {
-        return character;
-    }
-    
-    state::State* AI::getState() {
-        return state;
-    }
-
     
     AI::~AI (){
         
