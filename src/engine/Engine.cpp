@@ -103,7 +103,7 @@ namespace engine{
                 }
                 else
                 {
-                    std::cout << "Lost character 1" << std::endl;
+                    std::cout << "Victory character 1" << std::endl;
                     mode = defaite;
                 }
                     

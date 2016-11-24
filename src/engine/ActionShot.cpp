@@ -28,14 +28,16 @@ namespace engine{
     }
     
     void ActionShot::apply(state::State* s,bool notify) {//apply the action
-        std::cout << "character "<<character ;
+        if(notify)
+            std::cout << "character "<<character ;
 
         
         state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
         if(yMax==-1)
         {
-            std::cout << " tire un obus ";
+            
             if(notify==true){
+                std::cout << " tire un obus ";
                 if((xImpact-tank->getX())>0)
                     s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
                 else
@@ -44,8 +46,9 @@ namespace engine{
         }
         else
         {
-            std::cout << " tire un missile ";
+            
             if(notify==true){
+                std::cout << " tire un missile ";
                 if((xImpact-tank->getX())>0)
                     s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
                 else
@@ -58,11 +61,12 @@ namespace engine{
             tank->setPv(tank->getPv()-damage);
                 if(notify==true){
                     s->getMobiles().notifyObserver(*(new state::StateEvent(s,state::Pv_Changed)));
+                    std::cout << "et touche Tank "<< characterTarget << " qui prend "<<damage<<" dégats " ;
                 }
-                std::cout << "et touche Tank "<< characterTarget << " qui prend "<<damage<<" dégats " ;
+                
         }
-        
-        std::cout << std::endl;
+        if(notify)
+            std::cout << std::endl;
         
     }
     
