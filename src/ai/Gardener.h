@@ -7,6 +7,7 @@
 #include "state/State.h"
 #include "engine/Ruler.h"
 #include "engine/CommandSet.h"
+#include "state/ElementList.h"
 
 namespace ai {
   class DistanceUtility;
@@ -45,6 +46,7 @@ namespace ai {
     Node* ApplyActionMax (Node* node);
     Node* ApplyActionMin (Node* node);
     void setStart ();
+    void changeMobile (state::ElementList* mobile);
   };
 
 };
