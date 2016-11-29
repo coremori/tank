@@ -15,7 +15,7 @@ namespace client {
 
 namespace client {
 
-  /// class Pilote - 
+  /// class Pilote - Run the engine and rendu thread
   class Pilote {
     // Associations
     // Attributes
