@@ -4,6 +4,8 @@
  *
  * Part of tank */
 
+ /// class Pilote - Run the engine and rendu thread
+
 
 #include "Pilote.h"
 #include "engine/Engine.h"
@@ -19,11 +21,10 @@
 
 namespace client{
 
-    /*Pilote::Pilote(engine::Engine* engine) { //: state(state::State()), engine(&state)
-        this->engine = engine;
-        
-    }*/
     Pilote::Pilote() : engine(&state){
+        /* Create the engine from the state
+         * Create the CommandSet for the Ai in this computer (Will be taking the CommandSet from the server in the next upgrade)
+         */
         
         
         command.push_back(new engine::CommandSet());
@@ -34,7 +35,11 @@ namespace client{
             
     }
         
-    void Pilote::launch() {//launch the thread for the engine and the rendu
+    void Pilote::launch() {
+        /* Launch the thread for the engine and the rendu
+         * Load the level for the state
+         * Create the rendu Menu
+         */
         state.load("res/Levels/level1.txt");
         rendu->createMenu();
         std::thread t1(&Pilote::runRender,this);// the thread for the rendu run in PiloteSFML.display()
@@ -43,9 +48,11 @@ namespace client{
         t1.join();
     }
         
-    void Pilote::runEngine() {//thread for the engine
-        
-        // toutes les 50 ms
+    void Pilote::runEngine() {
+        /* Thread for the engine
+         * Create the Ai for AI mode
+         * Every 50ms check the commandSet and update the state
+         * */
         int64_t timeNow;
         std::vector<ai::AI*> ai;
         ai.push_back(new ai::HeuristicAI(&state,0));
@@ -55,21 +62,33 @@ namespace client{
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
             if(engine.getMode()==engine::AI && alreadyplay!=engine.getCharTurn()){
+                /* In AI mode, and the ai chosen is the Ai who doesn't play the turn before
+                 * run create the ai's command list 
+                 * takeCommand send these command to the engine (it will be the same for the command from the server)
+                 * update the ai to use next turn
+                 */
                 ai[engine.getCharTurn()]->run(*command[engine.getCharTurn()]);
                 engine.takeCommands(command[engine.getCharTurn()]);
                 alreadyplay = engine.getCharTurn();
             }
             else if(engine.getMode()==engine::play && engine.getCharTurn()==1){
-                    ai[1]->run(*command[1]);
-                    engine.takeCommands(command[1]);
+                /* In play mode, this is the ai turn
+                 */
+                ai[1]->run(*command[1]);
+                engine.takeCommands(command[1]);
             }
             timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
             engine.update(timeNow,500);
         }
     }
         
-    void Pilote::runRender() {//thread for the rendu
-        // toutes les 50 ms
+    void Pilote::runRender() {
+        /* Thread for the rendu
+         * Every 50ms : 
+         * Update the change in the state
+         * Draw the new display
+         * check if a key was pressed
+         * */
         while(engine.getMode()!=engine::close)
         {
             rendu->applyChange();

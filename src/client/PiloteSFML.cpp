@@ -27,9 +27,12 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e) {//met la scene à afficher et attribue au layer les surfaces
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e) {
+        /* Set  the scene to display
+         * Create the layer and register then to the state
+         * Create the Surface
+         * */
         character = 0;
-        //state = s;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
         obs.push_back(new render::LandscapeLayer());
@@ -51,9 +54,9 @@ namespace client{
         state->registerObserver(obs[0]);
 
         surfaces.push_back(new SurfaceSFML());
-        surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour le mode victory
+        surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour la victoire
         surfaces.push_back(new SurfaceSFML());
-        surfaces[1]->loadTexture("res/Textures/button.png"); // surface pour le mode defaite
+        surfaces[1]->loadTexture("res/Textures/button.png"); // surface pour la  defaite
         
         for(int i=0; i<scene.getLayerCount(); i++)
         {
@@ -63,13 +66,6 @@ namespace client{
         }
 
         engine = e;
-
-        
-        
-        //m_tilesetButton.setSmooth(true); //lissage de l'image
-        
-        state->load("res/Levels/level1.txt"); //charge le level, pour être sur qu'il existe
-
     }
 
 
@@ -84,21 +80,24 @@ namespace client{
     
     
     void PiloteSFML::createMenu() {
-        //create the window and the button
+        /* create the window and the button
+         * The state must be initialized before using this function
+         * */
         applyChange();
         int Pixel_def = 8;
         int h = scene.getHeight()*Pixel_def;
         int w = scene.getWidth()*Pixel_def;   
 
         window.create(sf::VideoMode(w, h + 40), "Rendu");
-        // message victoir3
+        // message victoire
         surfaces[0]->setSpriteButton(408, 24, 624, 385);//paramètre : xPos, yPos, xTex, width texture
         //// message defaite    
         surfaces[1]->setSpriteButton(409, 24,240, 382);
         
         //button "fin de tour"
         /* Dans l'ordre : emplacement texture, commande à exécuter, position xTex, largeur de l'image, hauteur de l'image
-         *présence d'un deuxième sprite lorsqu'on passe la souris dessus, position x dans l'écran, position y dans l'écran*/
+         * présence d'un deuxième sprite lorsqu'on passe la souris dessus, position x dans l'écran, position y dans l'écran
+         */
         button.push_back(*(new Button("res/Textures/button.png", new engine::EndTurnCommand(this->character),0,104,23,true, (w-104)/2,h+8)));  
 
         //button "level 1"
@@ -122,12 +121,13 @@ namespace client{
 
 
     void PiloteSFML::applyChange() {
+        /* Update the display if the state had changed
+         */
         if (engine->getUpdateMutex().try_lock()) {
                 for(unsigned int i = 0; i<obs.size(); i++)
                     obs[i]->applyStateChanged();
                     engine->getUpdateMutex().unlock();
         }
-        //scene.update();
     engine->setAnimRunning(scene.update());
     };
 
@@ -136,11 +136,16 @@ namespace client{
     
     
     void PiloteSFML::eventUp() {
+        /* Check if a key or a button was pressed
+         */
         sf::Event event;
         sf::Vector2i localPosition2;
         localPosition2 = sf::Mouse::getPosition(window);
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed){
+                /* Window Closing 
+                 * Set the mode to engine::Close for stopping the engine thread
+                 */
                engine->setMode(engine::close);
                window.close();
             }
@@ -192,6 +197,8 @@ namespace client{
             }
             else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
+                /* Check the buttons
+                 */
                 for(unsigned int i=0; i<button.size(); i++)
                     button[i].press(localPosition2,engine);
             }
@@ -202,50 +209,35 @@ namespace client{
 
 
 
-void PiloteSFML::display(){
+    void PiloteSFML::display(){
+        /* Draw the display depending on the mode
+         */
 
-    //applyChange();
-
-   
-
-    /*if(!window.isOpen())
-    {*/
         sf::Vector2i localPosition;
         localPosition = sf::Mouse::getPosition(window);
-        
-        //eventUp();
-            
-        
-        //applyChange();//actualise l'affichage
 
         window.clear();
         for(unsigned int i=2; i<surfaces.size(); i++)
             window.draw(*surfaces[i]);
 
+        /* Draw the button*/
         for(unsigned int i=0; i<button.size(); i++)
             button[i].draw(&window,localPosition);
-        /*
-        if(hover)
-            window.draw(*s_button[1]);
-        else
-            window.draw(*s_button[0]);
-         * */
+
         switch(engine->getMode()){
             case engine::Finish:
                 if(engine->getCharTurn() == character)
-                    window.draw(*surfaces[1]);
+                    window.draw(*surfaces[1]);//Lost
                 else
-                    window.draw(*surfaces[0]);
+                    window.draw(*surfaces[0]);//win
                 break;
-                
+
             default :
                 break;
         }
 
         window.display();
-
-    //}
-}
+    }
 
 }
     

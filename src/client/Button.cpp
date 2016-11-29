@@ -22,12 +22,13 @@ namespace client{
          * heightButton :  hauteur de l'image/sprite
          * Hoover : présence d'un deuxième sprite lorsqu'on passe la souris dessus ?
          * xPos : position x dans l'écran
-         * yPos : position y dans l'écran*/
+         * yPos : position y dans l'écran
+         */
         
         this->command = command;//stockage de la commande a effectue en cas d'appuie
         
         if (!m_tilesetButton.loadFromFile(image_file))//chargement de la texture
-            std::cout << "Erreur - button.png non chargé" << std::endl;
+            std::cout << "Erreur - " << image_file <<" non chargé" << std::endl;
        
         s_button.push_back(new sf::Sprite());
         s_button[0]->setTexture(m_tilesetButton);
@@ -48,7 +49,7 @@ namespace client{
     
     
     void Button::draw(sf::RenderWindow* window, sf::Vector2i localPosition) const {
-        /* draw the button
+        /* draw the button, depending of the cursor
          */
         if(frame->contains(localPosition))
         {
@@ -62,7 +63,7 @@ namespace client{
     }
     
     void Button::press(sf::Vector2i localPosition, engine::Engine* engine) const {
-        /* Launch the command if we are on the button
+        /* Launch the command if we click on the button
          */
         if(frame->contains(localPosition))
             {
