@@ -10,7 +10,7 @@
 #include "engine/ShotCommand.h"
 
 namespace ai{
-    EvolvedAI::EvolvedAI(state::State* state, int character) : AI(state,character){}
+    EvolvedAI::EvolvedAI(const state::State* state, int character) : AI(state,character){}
     
     
     
@@ -18,8 +18,7 @@ namespace ai{
     
     
     
-    void EvolvedAI::nextOrientation() {//determine the next orientation
-       
+    void EvolvedAI::nextOrientation() {//determine the next orientation        
         if(distanceUtility.inMissileFireRange()){
             if(distanceUtility.getDistance() < 0)
                 commands->add(new engine::DirectionCommand(character,state::left_up));

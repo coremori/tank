@@ -11,11 +11,11 @@ namespace ai {
   class AI {
     // Attributes
   protected:
-    state::State* state;
+    const state::State* state;
     int character;
     // Operations
   public:
-    AI (state::State* state, int character);
+    AI (const state::State* state, int character);
     ~AI ();
     virtual void run (engine::CommandSet& commands) = 0;
   };

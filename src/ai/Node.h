@@ -12,7 +12,7 @@ namespace ai {
 
 namespace ai {
 
-  /// class Node - Node of the move Tree "\n"// Contain the node's depth , children and score
+  /// class Node - Node of the move Tree. Contain the node's depth , children and score
   class Node {
     // Associations
     // Attributes

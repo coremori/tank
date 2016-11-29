@@ -16,7 +16,7 @@
 
 
 namespace ai{
-    Gardener::Gardener (int depthMax, state::State* state){
+    Gardener::Gardener (int depthMax, const state::State* state){
         this->depthMax = depthMax;
         
         this->state = new state::State();

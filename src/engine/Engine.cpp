@@ -59,6 +59,9 @@ namespace engine{
        
     
     void Engine::setMode(EngineMode m) {
+        /* The engine mode will be the parameter
+         * If it is already the mode, then the next mode will be "play"
+         */
         if(mode==m)
             mode = play;
         else 
@@ -85,7 +88,11 @@ namespace engine{
         commands_mutex.unlock();
     }
 
-    void Engine::endTurn() {//swap waitingcommands and currentcommands, send the waitingcommand to the ruler and apply them
+    void Engine::endTurn() {
+        /* swap waitingcommands and currentcommands
+         * send the waitingcommand to the ruler and apply them
+         * check if one player doesn't have any pv and the game is finish
+         */
         swapCommands();
         charTurn = charTurn ? 0:1;
         
@@ -154,7 +161,7 @@ namespace engine{
             }
         }
         else if(mode == replay){
-            if((timeNow-lastEndTurnTime)>500){//500 ms entre chaque tour
+            if((timeNow-lastEndTurnTime)>timeinterval){//timeinterval ms between each turn
                 update_mutex.lock();
                 if(!AnimRunning)
                     if(!reccord.replayOne()){

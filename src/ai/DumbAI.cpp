@@ -14,7 +14,7 @@
 namespace ai {
     
     
-    DumbAI::DumbAI(state::State* state, int character) : AI(state,character){
+    DumbAI::DumbAI(const state::State* state, int character) : AI(state,character){
     }
 
     

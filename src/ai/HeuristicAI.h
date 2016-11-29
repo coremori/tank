@@ -17,7 +17,7 @@ namespace ai {
   class HeuristicAI : public ai::EvolvedAI {
     // Operations
   public:
-    HeuristicAI (state::State* state, int character);
+    HeuristicAI (const state::State* state, int character);
     void choice ();
     void move (bool esquive);
     void run (engine::CommandSet& commands);

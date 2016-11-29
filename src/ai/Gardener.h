@@ -35,7 +35,7 @@ namespace ai {
     int ActualpvDif;
     // Operations
   public:
-    Gardener (int depthMax, state::State* state);
+    Gardener (int depthMax, const state::State* state);
     Node* Start ();
     void changeMobile (state::ElementList* mobile);
   protected:

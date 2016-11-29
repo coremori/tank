@@ -9,9 +9,8 @@ namespace engine {
     close     = 0,
     play     = 1,
     AI     = 2,
-    victoire     = 4,
-    defaite     = 5,
-    replay     = 3
+    replay     = 3,
+    Finish     = 4
   };
 
 };

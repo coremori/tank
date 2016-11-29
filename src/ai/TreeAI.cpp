@@ -12,7 +12,7 @@
 
 namespace ai{
 
-    TreeAI::TreeAI(state::State* state, int character) : EvolvedAI(state,character){
+    TreeAI::TreeAI(const state::State* state, int character) : EvolvedAI(state,character){
         const int depthmax = 3;
         slaveGardener = new Gardener(depthmax,state);
     }
@@ -26,7 +26,10 @@ namespace ai{
         this->commands = &commands;
         distanceUtility.updateDistance(state,character);
         
-        slaveGardener->changeMobile(&state->getMobiles());
+        state::State* cop = new state::State();
+        cop->copy(*state);
+        
+        slaveGardener->changeMobile(&cop->getMobiles());
         Node* toDo = slaveGardener->Start();
         shot();
         nextOrientation();

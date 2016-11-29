@@ -24,7 +24,7 @@ namespace ai {
     engine::CommandSet* commands;
     // Operations
   public:
-    EvolvedAI (state::State* state, int character);
+    EvolvedAI (const state::State* state, int character);
     virtual void run (engine::CommandSet& commands) = 0;
     void nextOrientation ();
     void shot ();

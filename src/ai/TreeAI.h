@@ -23,7 +23,7 @@ namespace ai {
     Gardener* slaveGardener;
     // Operations
   public:
-    TreeAI (state::State* state, int character);
+    TreeAI (const state::State* state, int character);
     void run (engine::CommandSet& commands);
   };
 

@@ -19,8 +19,8 @@ namespace state {
     ElementList::ElementList (State& s) : s(s) {
         
     };
-    
-    
+        
+
     ElementList::~ElementList (){
     };
 

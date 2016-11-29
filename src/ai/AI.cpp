@@ -9,7 +9,7 @@
 
 
 namespace ai {
-    AI::AI(state::State* state, int character) {
+    AI::AI(const state::State* state, int character) {
         this->state = state;
         this->character = character;
     }

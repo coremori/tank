@@ -22,7 +22,7 @@ namespace ai{
     }
 
     
-    void DistanceUtility::updateDistance(state::State* state, int character) {
+    void DistanceUtility::updateDistance(const state::State* state, int character) {
         /* Update the X distance between the two players
          * The value are negative for player at the left side, positive at the right side
          */
@@ -42,12 +42,13 @@ namespace ai{
     }
     
     
-    bool DistanceUtility::inShellFireRange(state::State* state, int CharShoting) const {
+    bool DistanceUtility::inShellFireRange(const state::State* state, int CharShoting) const {
         /*Returns true if fire a shell will impact the other player
          *The shell is shot by CharShoting
          * */ 
         int character = CharShoting;
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
         
         //distance to the other tank
         int other = (character)? 0:1;

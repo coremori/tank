@@ -17,7 +17,7 @@ namespace ai {
   class DumbAI : public ai::AI {
     // Operations
   public:
-    DumbAI (state::State* state, int character);
+    DumbAI (const state::State* state, int character);
     void run (engine::CommandSet& commands);
   };
 

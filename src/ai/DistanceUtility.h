@@ -14,8 +14,8 @@ namespace ai {
     // Operations
   public:
     DistanceUtility ();
-    void updateDistance (state::State* state, int character);
-    bool inShellFireRange (state::State* state, int CharShoting) const;
+    void updateDistance (const state::State* state, int character);
+    bool inShellFireRange (const state::State* state, int CharShoting) const;
     bool inMissileFireRange () const;
     int getDistance () const;
   };

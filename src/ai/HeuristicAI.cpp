@@ -19,7 +19,7 @@
 
 
 namespace ai{
-    HeuristicAI::HeuristicAI(state::State* state, int character) : EvolvedAI(state,character){}
+    HeuristicAI::HeuristicAI(const state::State* state, int character) : EvolvedAI(state,character){}
     
     
     
@@ -29,9 +29,9 @@ namespace ai{
     
     
     void HeuristicAI::choice() {//choice to attack or defend move
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
         int other = (character)? 0:1;
-        state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other));
+        state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other)->clone());
 
         if(tank->getPv()<=30 && othertank->getPv()>30)
             move(true);
@@ -44,7 +44,11 @@ namespace ai{
     
     
     
-    void HeuristicAI::move(bool esquive) {//move for use missile or escape
+    void HeuristicAI::move(bool esquive) {
+        /* move for use missile or escape
+         * if esquive == true then the next move will be to evade the maximun damage
+         * else it will be to use the missile
+         */ 
         int distance = distanceUtility.getDistance()/8;
         if(esquive){//on fuit
             if(distance == -9 || distance == -10|| distance == 11)//partir vers la gauche est plus rapide (et choix pour le centre)
@@ -67,7 +71,11 @@ namespace ai{
     
     
     
-    void HeuristicAI::run(engine::CommandSet& commands) {//determine the command played by the AI
+    void HeuristicAI::run(engine::CommandSet& commands) {
+        /* Determine the command played by the AI
+         * Use nextOrientation() and shot() for doing the greatest damage to the other player
+         * Use choice() to determine the best next move
+         * */
         this->commands = &commands;
         distanceUtility.updateDistance(state,character);
         nextOrientation();
