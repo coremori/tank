@@ -231,15 +231,13 @@ void PiloteSFML::display(){
             window.draw(*s_button[0]);
          * */
         switch(engine->getMode()){
-
-            case engine::victoire:
-                window.draw(*surfaces[0]);
+            case engine::Finish:
+                if(engine->getCharTurn() == character)
+                    window.draw(*surfaces[1]);
+                else
+                    window.draw(*surfaces[0]);
                 break;
-
-            case engine::defaite:
-                window.draw(*surfaces[1]);
-                break;
-
+                
             default :
                 break;
         }
