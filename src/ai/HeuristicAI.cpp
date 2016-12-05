@@ -19,6 +19,8 @@
 
 
 namespace ai{
+    
+    
     HeuristicAI::HeuristicAI(const state::State* state, int character) : EvolvedAI(state,character){}
     
     
