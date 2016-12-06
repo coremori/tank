@@ -13,20 +13,30 @@ namespace state{
         this->s = s;
         this->id = id;
     }
-        
+       
+    
+    
     StateEvent::~StateEvent() {
 
     }
 
     
+    
+   
     bool StateEvent::operator==(StateEventId id) const {
         return (this->id==id);
     }
+    
+    
+    
     
     bool StateEvent::operator!=(StateEventId id) const {
         return (this->id!=id);
     }
 
+    
+    
+    
     StateEvent* StateEvent::clone() const {
         return new StateEvent(s, id);
     }

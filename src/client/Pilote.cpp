@@ -21,24 +21,26 @@
 
 namespace client{
 
+    
+    
     Pilote::Pilote() : engine(&state){
         /* Create the engine from the state
          * Create the CommandSet for the Ai in this computer (Will be taking the CommandSet from the server in the next upgrade)
          */
-        
-        
         command.push_back(new engine::CommandSet());
         command.push_back(new engine::CommandSet());
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        rendu = new PiloteSFML(&state, &engine);
-            
-            
+        rendu = new PiloteSFML(&state, &engine);      
     }
+    
+   
+    
+    
         
     void Pilote::launch() {
-        /* Launch the thread for the engine and the rendu
+        /* Launch the thread for the engine and the render
          * Load the level for the state
-         * Create the rendu Menu
+         * Create the render Menu
          */
         state.load("res/Levels/level1.txt");
         rendu->createMenu();
@@ -47,7 +49,11 @@ namespace client{
         t2.join();
         t1.join();
     }
-        
+     
+    
+    
+    
+    
     void Pilote::runEngine() {
         /* Thread for the engine
          * Create the Ai for AI mode
@@ -81,7 +87,10 @@ namespace client{
             engine.update(timeNow,500);
         }
     }
-        
+      
+    
+    
+    
     void Pilote::runRender() {
         /* Thread for the rendu
          * Every 50ms : 
@@ -98,5 +107,15 @@ namespace client{
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

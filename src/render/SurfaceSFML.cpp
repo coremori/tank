@@ -21,6 +21,9 @@
     };
     
        
+    
+    
+    
     void SurfaceSFML::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         // on applique la transformation
@@ -33,9 +36,20 @@
         target.draw(m_vertices, states);
     }
     
+    
+    
+    
+    
+    
     void SurfaceSFML::clear (){
         m_vertices.clear();
     };
+    
+    
+    
+    
+    
+    
     
     
     void SurfaceSFML::setSprite (const std::vector<render::Tile> tiles){//NOT DONE!!
@@ -82,6 +96,11 @@
     
     };
     
+    
+    
+    
+    
+    
     void SurfaceSFML::setSpriteNum(int idx, render::Tile tile) {
         
         if(idx<0)
@@ -119,6 +138,10 @@
                 quad[3].texCoords = sf::Vector2f(tu, tv +h);        
     };
 
+    
+    
+    
+    
     
     void SurfaceSFML::setSpriteButton (unsigned int x1, unsigned int y1, unsigned int xTex, unsigned int width){
         

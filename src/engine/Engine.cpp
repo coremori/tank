@@ -24,8 +24,14 @@
 
 
 
+
+
+
 namespace engine{
 
+    
+    
+    
     Engine::Engine(state::State* s) : reccord(s), ruler(){
 
         currentcommands = new CommandSet();
@@ -39,17 +45,27 @@ namespace engine{
         
         mode = play;
         
-        
         AnimRunning = false;
         lastEndTurnTime = 0;
 
     };
-        
+  
+    
+    
+    
+    
+    
     Engine::~Engine() {
         reccord.~Record();
         
     }
 
+    
+    
+    
+    
+    
+    
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
         if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage
@@ -57,6 +73,13 @@ namespace engine{
         commands_mutex.unlock();
     };
        
+    
+    
+    
+    
+    
+    
+    
     
     void Engine::setMode(EngineMode m) {
         /* The engine mode will be the parameter
@@ -74,10 +97,25 @@ namespace engine{
                 
     }
        
+    
+    
+    
+    
+    
+    
+    
+    
     EngineMode Engine::getMode() const {
         return mode;
     }
 
+    
+    
+    
+    
+    
+    
+    
         
     void Engine::swapCommands() {//lock commands and swap them
         commands_mutex.lock();
@@ -88,6 +126,15 @@ namespace engine{
         commands_mutex.unlock();
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     void Engine::endTurn() {
         /* swap waitingcommands and currentcommands
          * send the waitingcommand to the ruler and apply them
@@ -110,9 +157,23 @@ namespace engine{
             
     }
         
+    
+    
+    
+    
+    
+    
+    
     std::mutex& Engine::getUpdateMutex() const {
         return update_mutex;
     }
+    
+    
+    
+    
+    
+    
+    
     
     void Engine::setAnimRunning(bool b) {
         update_mutex.lock();
@@ -120,6 +181,16 @@ namespace engine{
         update_mutex.unlock();
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     void Engine::update(int64_t timeNow, int64_t timeinterval) {
         /*vérifie les commandes de la list : passage au tour suivant ? 
@@ -174,10 +245,22 @@ namespace engine{
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
     int Engine::getCharTurn() const{
         return charTurn;
     }
+
+    
+    
+    
         
+    
     void Engine::takeCommands(CommandSet* commandset) {/* prend un commandset et transfert les commandes vers celui de l'engine*/
         if(commandset->get(MAIN_CATEGORY))
         {
@@ -205,4 +288,7 @@ namespace engine{
         }
         commandset->clear();
     }
+    
+    
+    
 }

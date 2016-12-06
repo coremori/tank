@@ -16,8 +16,12 @@ namespace client{
         /* Save the event create by the engine thread in stateEvent
          */
         stateEvent.push_back(e.clone());
-        }
+    }
 
+    
+    
+    
+    
     void CacheStateObserver::clear() {
         /* clear the stateEvent list
          */
@@ -26,5 +30,7 @@ namespace client{
         stateEvent.clear();
     }
 
+    
+    
 }
 

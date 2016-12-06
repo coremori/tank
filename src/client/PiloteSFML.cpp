@@ -47,7 +47,6 @@ namespace client{
         scene.setLayer(1,mobilelayer);
         scene.setLayer(2,charlayer);
 
-
         state->getGrid().registerObserver(obs[1]);
         state->getMobiles().registerObserver(obs[2]);
         state->getMobiles().registerObserver(obs[3]);
@@ -128,7 +127,7 @@ namespace client{
                     obs[i]->applyStateChanged();
                     engine->getUpdateMutex().unlock();
         }
-    engine->setAnimRunning(scene.update());
+        engine->setAnimRunning(scene.update());
     };
 
     

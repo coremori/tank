@@ -28,8 +28,6 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/engine.dia)
 
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/ai.dia)
 
-
-
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/client.dia)
 
 # Sources
@@ -51,4 +49,17 @@ if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(run ${SFML_LIBRARIES})
 endif()
+
+
+# jsoncpp
+include_directories ("${PROJECT_SOURCE_DIR}/src/extern/jsoncpp-0.10.5/dist")
+file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/src/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
+
+
+# Target
+add_executable(plt ${main_sources} ${jsoncpp_sources})
+
+# libmicrohttpd
+include_directories ("${PROJECT_SOURCE_DIR}/src/extern/libmicrohttpd/include")
+target_link_libraries(plt "${PROJECT_SOURCE_DIR}/src/extern/libmicrohttpd/lib/libmicrohttpd.so")
 
