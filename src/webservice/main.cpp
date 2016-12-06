@@ -53,7 +53,7 @@ main_handler (void *cls,
           const char *upload_data, size_t *upload_data_size, void **ptr) 
 {
     // Données pour une requête (en plusieurs appels à cette fonction)
-    Request *request = (Request*)*ptr;
+    Request *request = (Request*)*ptr; //ptr diff de 0 si requete dejà crée (permet de la remplir en dehors de la fonction)
 
     // Premier appel pour cette requête
     if (!request) { 
@@ -63,8 +63,8 @@ main_handler (void *cls,
         }
         *ptr = request;
         if (strcmp(method, MHD_HTTP_METHOD_POST) == 0
-         || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {
-            request->pp = MHD_create_post_processor(connection,1024,&post_iterator,request);
+         || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {//methode put ou post
+            request->pp = MHD_create_post_processor(connection,1024,&post_iterator,request);//création, port 1024
             if (!request->pp) {
                 cerr << "Failed to setup post processor for " << url << endl;
                 return MHD_NO;
@@ -73,10 +73,10 @@ main_handler (void *cls,
         return MHD_YES;
     }    
     
-    // Cas où il faut récupérer les données envoyés par l'utilisateur
+    // Cas où il faut récupérer les données envoyés par l'utilisateur (requete déjà crée, 2eme appel de la fonction, et ici get ne prend pas de donnée)
     if (strcmp(method, MHD_HTTP_METHOD_POST) == 0
-     || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {
-        MHD_post_process(request->pp,upload_data,*upload_data_size);
+     || strcmp(method, MHD_HTTP_METHOD_PUT) == 0) {//methode put ou post
+        MHD_post_process(request->pp,upload_data,*upload_data_size);// post data are included
         if (*upload_data_size != 0) {
             request->data = upload_data;
             *upload_data_size = 0;
@@ -88,20 +88,20 @@ main_handler (void *cls,
     string response;
     try {
 
-        ServicesManager *manager = (ServicesManager*) cls;
+        ServicesManager *manager = (ServicesManager*) cls;// affichage pourie des reponses du service (trouve le service et affiche les data sur le terminal...)
         status = manager->queryService(response,request->data,url,method);
     }
     catch(ServiceException& e) {
-        status = e.status();
+        status = e.status();//cas où requete invalide
         response = e.what();
         response += "\n";
     }
-    catch(exception& e) {
+    catch(exception& e) {//cas où pas de serveur
         status = HttpStatus::SERVER_ERROR;
         response = e.what();
         response += "\n";
     }
-    catch(...) {
+    catch(...) {// cas où le programmeur ne comprend plus ce qu'il se passe
         status = HttpStatus::SERVER_ERROR;
         response = "Unknown exception\n";
     }
@@ -111,8 +111,8 @@ main_handler (void *cls,
     if (strcmp(method,MHD_HTTP_METHOD_GET) == 0) {
         MHD_add_response_header(mhd_response,"Content-Type","application/json; charset=utf-8");
     }
-    int ret = MHD_queue_response(connection, status, mhd_response);
-    MHD_destroy_response(mhd_response);
+    int ret = MHD_queue_response(connection, status, mhd_response);// repond à l'envoyeur
+    MHD_destroy_response(mhd_response);//détruit la réponse crée (puisque déjà envoyé)
     return ret;
 }
 
@@ -135,7 +135,7 @@ int main(int argc, char *const *argv)
                 MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
                 // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
                 // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
-                atoi(argv[1]),
+                atoi(argv[1]),//ascii to integer
                 NULL, NULL, 
                 &main_handler, (void*) &servicesManager,
                 MHD_OPTION_NOTIFY_COMPLETED, request_completed, NULL,
