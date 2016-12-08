@@ -25,7 +25,11 @@ namespace engine{
 
     void CommandSet::add(Command* command) {
         auto a  = commands.insert(std::make_pair(command->getCategory(),command));
-        if(!a.second)
+        if(!a.second)//first renvoie le type de catégorie second la commande. 
+            /*Si on insère une commande avec une clé déjà existante, la commande
+             * n'est pas ajoutée donc on force l'ajout ce qui supprime l'ancienne
+             * commande de la même catégorie!
+             */
             commands[command->getCategory()] = command;
     };
     

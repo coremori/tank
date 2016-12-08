@@ -68,7 +68,7 @@ namespace engine{
     
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
-        if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage
+        if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage ou c'est une commande prioritaire indépendante du joueur
             waitingcommands->add(cmd);
         commands_mutex.unlock();
     };

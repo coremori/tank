@@ -24,8 +24,7 @@
     
     
     
-    void SurfaceSFML::draw(sf::RenderTarget& target, sf::RenderStates states) const
-    {
+    void SurfaceSFML::draw(sf::RenderTarget& target, sf::RenderStates states) const{
         // on applique la transformation
         states.transform *= getTransform();
 
@@ -47,8 +46,7 @@
     
     
     
-    
-    
+  
     
     
     
@@ -105,8 +103,10 @@
         
         if(idx<0)
             return;
+        
         unsigned int maxi = idx;
-        if((maxi==(m_vertices.getVertexCount()/4)))//si idx > size ou idx<0 (comparaison signed/unsigned avantageuse ici)
+        
+        if(maxi==(m_vertices.getVertexCount()/4))//si idx > size ou idx<0 (comparaison signed/unsigned avantageuse ici)
         {
             m_vertices.resize(m_vertices.getVertexCount()+4);
         }
@@ -164,12 +164,11 @@
         quad[2].position = sf::Vector2f(x1+w, y1+h);
         quad[3].position = sf::Vector2f(x1, y1+h);
 
-        // on définit ses quatre coordonnées de texture
+        // on définit ses quatre coordonnées dans la texture
         quad[0].texCoords = sf::Vector2f(tu, 0);
         quad[1].texCoords = sf::Vector2f(tu + w,0);
         quad[2].texCoords = sf::Vector2f(tu + w, h);
-        quad[3].texCoords = sf::Vector2f(tu, h);
-            
+        quad[3].texCoords = sf::Vector2f(tu, h);       
     }
   
     

@@ -151,6 +151,7 @@ namespace client{
             else if (event.type == sf::Event::Resized)
             {
                 window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
+                //pas d'agrandissement quand on agrandit la fenêtre
             }
             else if (event.type == sf::Event::KeyPressed)
             {
