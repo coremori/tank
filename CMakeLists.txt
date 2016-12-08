@@ -51,15 +51,5 @@ if(SFML_FOUND)
 endif()
 
 
-# jsoncpp
-include_directories ("${PROJECT_SOURCE_DIR}/src/extern/jsoncpp-0.10.5/dist")
-file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/src/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
 
-
-# Target
-add_executable(plt ${main_sources} ${jsoncpp_sources})
-
-# libmicrohttpd
-include_directories ("${PROJECT_SOURCE_DIR}/src/extern/libmicrohttpd/include")
-target_link_libraries(plt "${PROJECT_SOURCE_DIR}/src/extern/libmicrohttpd/lib/libmicrohttpd.so")
 
