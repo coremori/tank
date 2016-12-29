@@ -6,5 +6,6 @@
 #include "client/PiloteRendu.h"
 #include "client/CacheStateObserver.h"
 #include "client/PiloteSFML.h"
+#include "client/PlayerType.h"
 #include "client/Pilote.h"
 #endif

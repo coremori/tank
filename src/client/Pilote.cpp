@@ -30,7 +30,7 @@ namespace client{
         command.push_back(new engine::CommandSet());
         command.push_back(new engine::CommandSet());
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        rendu = new PiloteSFML(&state, &engine);      
+        rendu = new PiloteSFML(&state, &engine,command[0]);      
     }
     
    
@@ -64,6 +64,8 @@ namespace client{
         ai.push_back(new ai::HeuristicAI(&state,0));
         ai.push_back(new ai::TreeAI(&state,1));
         int alreadyplay = 1;
+        
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< a changer 
         while(engine.getMode()!=engine::close)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -86,6 +88,14 @@ namespace client{
             timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
             engine.update(timeNow,500);
         }
+        
+        
+        
+        
+        
+        //<<<<<<<<<<<<<<<<< remove from server
+        
+        
     }
       
     
@@ -107,8 +117,31 @@ namespace client{
         }
     }
 
+        
+    bool Pilote::getCommand(int characterAsked, int characterSender) {
+        /* Ask the server the command for characterAsked
+         * If it can't return false*/
+
+        
+        return false;
+    }
+       
+        
+    void Pilote::waitGetCommand(int characterAsked, int characterSender) {
+        /* Ask the server the command for characterAsked
+         * Wait until the server give the command*/
+
+    }
+
     
     
+    bool Pilote::postCommand(int characterSender) {
+        /* Post the command create by characterSender to the server
+         * return false if the server refuse them
+         */
+    }
+
+
     
     
     

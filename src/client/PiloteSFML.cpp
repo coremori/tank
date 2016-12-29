@@ -32,7 +32,7 @@ namespace client{
          * Create the layer and register then to the state
          * Create the Surface
          * */
-        this->commandList = commandlist;
+        this->commandList = commandList;
         character = 0;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);

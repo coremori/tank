@@ -11,6 +11,7 @@ namespace client {
   class PiloteRendu;
 }
 
+#include "PlayerType.h"
 #include "PiloteRendu.h"
 
 namespace client {
@@ -30,6 +31,9 @@ namespace client {
     void runEngine ();
     void runRender ();
     void launch ();
+    void waitGetCommand (int characterAsked, int characterSender);
+    bool getCommand (int characterAsked, int characterSender);
+    bool postCommand (int characterSender);
   };
 
 };
