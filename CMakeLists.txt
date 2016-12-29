@@ -3,6 +3,9 @@ project (plt)
 
 # Directories
 include_directories ("${PROJECT_SOURCE_DIR}/src")
+include_directories ("${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist")
+
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
@@ -17,6 +20,9 @@ IF(CMAKE_COMPILER_IS_GNUCC)
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-strict-overflow -std=c++11 -pthread -g")
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
+# jsoncpp
+include_directories ("${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist")
+file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
 
 # Generate headers
 set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
@@ -30,12 +36,14 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/ai.dia)
 
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/client.dia)
 
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/server.dia)
+
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)
-
+file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
 
 # Executables
-add_executable(run ${main_sources})
+add_executable(run ${jsoncpp_sources} ${main_sources} )
 
 # SFML
 if(WIN32)

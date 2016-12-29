@@ -678,6 +678,9 @@ struct statelib_includes{
    
    //ai part
    int ai;
+
+   //Json part
+   int Json;
    
 };
 
@@ -781,6 +784,10 @@ void print_include_statelib(struct statelib_includes* si,char* name) {
         }
         if(!si->ai && strstr(name, "ai::AI")){
                 print("#include \"ai/AI.h\"\n");
+		si->ai = 1;
+        }
+	if(!si->Json && strstr(name, "Json::Value")){
+                print("#include \"json/json.h\"\n");
 		si->ai = 1;
         }
 

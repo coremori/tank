@@ -1,7 +1,8 @@
 
-
+START_DIR=${PWD}
 HEADERS:=$(shell find src -type f -name '*.h')
 DIA2CODE_DIR:=./dia2code
+
 
 all: | clean dia2code configure build
 
@@ -20,6 +21,8 @@ ${DIA2CODE_DIR}/bin/dia2code:
 configure:
 	@mkdir -p build 
 	@cd build && cmake ..
+	@cd "${START_DIR}/extern/jsoncpp-0.10.5" && python amalgamate.py 
+	
 
 build:
 	@make -s -j4 -C build

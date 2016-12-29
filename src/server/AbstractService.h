@@ -3,6 +3,10 @@
 #define SERVER__ABSTRACTSERVICE__H
 
 #include <string>
+#include "json/json.h"
+#include "json/json.h"
+#include "json/json.h"
+#include "json/json.h"
 
 #include "HttpStatus.h"
 
