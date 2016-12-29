@@ -27,11 +27,12 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e) {
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, engine::CommandSet* commandList){
         /* Set  the scene to display
          * Create the layer and register then to the state
          * Create the Surface
          * */
+        this->commandList = commandlist;
         character = 0;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
@@ -200,7 +201,7 @@ namespace client{
                 /* Check the buttons
                  */
                 for(unsigned int i=0; i<button.size(); i++)
-                    button[i].press(localPosition2,engine);
+                    button[i].press(localPosition2,commandList);
             }
         }
     } 

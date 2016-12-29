@@ -6,6 +6,7 @@
 #include <vector>
 #include "render/SurfaceSFML.hpp"
 #include "engine/Engine.h"
+#include "engine/CommandSet.h"
 #include "state/State.h"
 
 namespace client {
@@ -32,9 +33,10 @@ namespace client {
     std::vector<Button> button;
     int character;
     sf::RenderWindow window;
+    engine::CommandSet* commandList;
     // Operations
   public:
-    PiloteSFML (state::State* state, engine::Engine* e);
+    PiloteSFML (state::State* state, engine::Engine* e, engine::CommandSet* commandList);
     ~PiloteSFML ();
     void display ();
     void applyChange ();

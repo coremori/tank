@@ -62,12 +62,12 @@ namespace client{
             window->draw(*s_button[0]);
     }
     
-    void Button::press(sf::Vector2i localPosition, engine::Engine* engine) const {
+    void Button::press(sf::Vector2i localPosition, engine::CommandSet* commandList) const {
         /* Launch the command if we click on the button
          */
         if(frame->contains(localPosition))
             {
-                engine->addCommand(command);                    
+                commandList->add(command);                   
             }
     }
 
