@@ -8,7 +8,7 @@
 #ifndef __AbstractService_hpp__
 #define __AbstractService_hpp__
 
-#include <../extern/jsoncpp-0.10.5/include/json/json.h>
+#include <json/json.h>
 #include <iostream>
 
 #include "ServiceException.hpp"

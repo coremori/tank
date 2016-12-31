@@ -22,12 +22,16 @@ configure:
 	@mkdir -p build 
 	@cd build && cmake ..
 	@cd "${START_DIR}/extern/jsoncpp-0.10.5" && python amalgamate.py 
+	@cd "${START_DIR}/extern/libmicrohttpd-0.9.46" && ./configure --prefix="${START_DIR}/extern/libmicrohttpd" &&  make -j5 install
+
+
 	
 
 build:
 	@make -s -j4 -C build
 
 run: build
+	./bin/server 8080
 	./bin/run
 
 test:

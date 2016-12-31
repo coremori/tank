@@ -7,6 +7,7 @@
   /// class CacheStateObserver - Save the StateEvent that the Pilote will update after
 
 #include "CacheStateObserver.h"
+#include "state/StateEvent.h"
 
 namespace client{
 

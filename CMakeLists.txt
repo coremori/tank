@@ -39,11 +39,20 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/client.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/server.dia)
 
 # Sources
-file(GLOB_RECURSE main_sources src/*.cpp)
+file(GLOB_RECURSE server_sources src/server/*.cpp)
+file(GLOB_RECURSE client_sources src/client/*.cpp src/render/*.cpp)
+file(GLOB_RECURSE main_sources src/ai/*.cpp src/state/*.cpp src/engine/*.cpp)
 file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/extern/jsoncpp-0.10.5/dist/jsoncpp.cpp")
 
 # Executables
-add_executable(run ${jsoncpp_sources} ${main_sources} )
+add_executable(run ${jsoncpp_sources} ${main_sources} ${client_sources})
+add_executable(server ${jsoncpp_sources} ${main_sources} ${server_sources} )
+
+
+# libmicrohttpd
+include_directories ("${PROJECT_SOURCE_DIR}/extern/libmicrohttpd/include")
+target_link_libraries(server "${PROJECT_SOURCE_DIR}/extern/libmicrohttpd/lib/libmicrohttpd.so")
+
 
 # SFML
 if(WIN32)
@@ -56,6 +65,7 @@ find_package(SFML 2 COMPONENTS graphics window audio system)
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(run ${SFML_LIBRARIES})
+  target_link_libraries(server ${SFML_LIBRARIES})
 endif()
 
 
