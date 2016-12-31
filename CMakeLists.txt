@@ -61,11 +61,10 @@ set(CMAKE_MODULE_PATH "${SFML_ROOT}/cmake/Modules" ${CMAKE_MODULE_PATH})
 else(WIN32)
 SET(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules/" ${CMAKE_MODULE_PATH})
 endif(WIN32)
-find_package(SFML 2 COMPONENTS graphics window audio system)
+find_package(SFML 2 COMPONENTS graphics window audio system network)
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(run ${SFML_LIBRARIES})
-  target_link_libraries(server ${SFML_LIBRARIES})
 endif()
 
 

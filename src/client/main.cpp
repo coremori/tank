@@ -10,7 +10,7 @@
 int main ()
 {
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Multithreading - engine+IA et rendu >>>>>>>>>>>>>>>>>>>>>>
-    
+        
     client::Pilote* pilote = new client::Pilote();
     pilote->launch();
        

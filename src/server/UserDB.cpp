@@ -12,7 +12,7 @@
 //<<<<<<<<<<<<<<<<<<<<<<< done
 
 namespace server {
-    UserDB::UserDB() : idseq(1) {
+    UserDB::UserDB() : idseq(0) {
 
     }
 

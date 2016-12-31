@@ -18,6 +18,11 @@
 #include "ai/HeuristicAI.h"
 #include "ai/DumbAI.h"
 #include "ai/TreeAI.h"
+#include <SFML/Network.hpp>
+
+#include <json/json.h>
+
+#include <iostream>
 
 namespace client{
 
@@ -65,6 +70,32 @@ namespace client{
         ai.push_back(new ai::TreeAI(&state,1));
         int alreadyplay = 1;
         
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<< enregistrer le joueur puis le delete to do
+        int player;
+        sf::Http http("http://localhost",8080);
+        
+        sf::Http::Request request;
+        request.setMethod(sf::Http::Request::Get);
+        request.setUri("user");
+
+        sf::Http::Response response = http.sendRequest(request);
+        
+        
+        std::cout << "status: " << response.getStatus() << std::endl;
+        std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
+        std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
+        std::cout << "body: " << response.getBody() << std::endl;
+        
+        Json::Reader jsonReader;
+        Json::Value jsonIn;
+        
+        if (!jsonReader.parse(response.getBody(),jsonIn))
+                std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
+        player = jsonIn["character"].asInt();
+        
+        std::cout << player << std::endl;
+        
+
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< a changer 
         while(engine.getMode()!=engine::close)
         {
