@@ -6,6 +6,7 @@
 #include "engine/Engine.h"
 #include <vector>
 #include "engine/CommandSet.h"
+#include <SFML/Network.hpp>
 
 namespace client {
   class PiloteRendu;
@@ -19,12 +20,15 @@ namespace client {
   /// class Pilote - Run the engine and rendu thread
   class Pilote {
     // Associations
+    client::PlayerType player;
     // Attributes
   protected:
     state::State state;
     engine::Engine engine;
     PiloteRendu* rendu;
     std::vector<engine::CommandSet*> command;
+    int character;
+    sf::Http http;
     // Operations
   public:
     Pilote ();

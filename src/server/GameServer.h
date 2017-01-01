@@ -27,8 +27,8 @@ namespace server {
   protected:
     UserDB& userDB;
     std::vector<engine::CommandSet*> commandSaved;
-    engine::Engine engine;
-    state::State state;
+    engine::Engine* engine;
+    state::State* state;
     // Operations
   public:
     GameServer (UserDB& userDB);

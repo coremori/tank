@@ -158,38 +158,38 @@ namespace client{
             {
                 switch(event.key.code){
                     case sf::Keyboard::P :
-                        engine->addCommand(new engine::ModeCommand(engine::AI));
+                        commandList->add(new engine::ModeCommand(engine::AI));
                         break;
                     case sf::Keyboard::Escape :
-                        engine->addCommand(new engine::ModeCommand(engine::replay));
+                        commandList->add(new engine::ModeCommand(engine::replay));
                         break;
 
                     case sf::Keyboard::Right :
-                        engine->addCommand(new engine::MoveCommand(this->character,8,0));
+                        commandList->add(new engine::MoveCommand(this->character,8,0));
                         break;
 
                     case sf::Keyboard::Left :
-                        engine->addCommand(new engine::MoveCommand(this->character,-8,0));
+                        commandList->add(new engine::MoveCommand(this->character,-8,0));
                         break;
 
                     case sf::Keyboard::E :
-                        engine->addCommand(new engine::DirectionCommand(this->character,state::right_up));
+                        commandList->add(new engine::DirectionCommand(this->character,state::right_up));
                         break;
 
                     case sf::Keyboard::Z :
-                        engine->addCommand(new engine::DirectionCommand(this->character,state::left_up));
+                        commandList->add(new engine::DirectionCommand(this->character,state::left_up));
                         break;
 
                     case sf::Keyboard::Q :
-                        engine->addCommand(new engine::DirectionCommand(this->character,state::left_down));
+                        commandList->add(new engine::DirectionCommand(this->character,state::left_down));
                         break;
 
                     case sf::Keyboard::D :
-                        engine->addCommand(new engine::DirectionCommand(this->character,state::right_down));
+                        commandList->add(new engine::DirectionCommand(this->character,state::right_down));
                         break;
 
                     case sf::Keyboard::Space :
-                        engine->addCommand(new engine::ShotCommand(this->character,10));
+                        commandList->add(new engine::ShotCommand(this->character,10));
                         break;
 
                     default : break;

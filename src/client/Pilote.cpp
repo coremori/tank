@@ -24,6 +24,8 @@
 
 #include <iostream>
 
+#include "engine.h"
+
 namespace client{
 
     
@@ -34,6 +36,8 @@ namespace client{
          */
         command.push_back(new engine::CommandSet());
         command.push_back(new engine::CommandSet());
+        http.setHost("http://localhost",8080);
+        //http("http://localhost",8080);
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         rendu = new PiloteSFML(&state, &engine,command[0]);      
     }
@@ -72,7 +76,7 @@ namespace client{
         
         //<<<<<<<<<<<<<<<<<<<<<<<<<<< enregistrer le joueur puis le delete to do
         int player;
-        sf::Http http("http://localhost",8080);
+       
         
         sf::Http::Request request;
         request.setMethod(sf::Http::Request::Get);
@@ -91,10 +95,16 @@ namespace client{
         
         if (!jsonReader.parse(response.getBody(),jsonIn))
                 std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
-        player = jsonIn["character"].asInt();
+        character = jsonIn["character"].asInt();
         
-        std::cout << player << std::endl;
+        //std::cout << player << std::endl;
         
+        command[0]->add(new engine::MoveCommand(this->character,-8,0));
+        
+        postCommand(0);
+                
+                
+        getCommand(0,0);
 
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< a changer 
         while(engine.getMode()!=engine::close)
@@ -118,6 +128,10 @@ namespace client{
             }
             timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
             engine.update(timeNow,500);
+            if(getCommand(0,character)){
+                engine.addCommand(new engine::EndTurnCommand(this->character));
+            }
+            
         }
         
         
@@ -125,6 +139,16 @@ namespace client{
         
         
         //<<<<<<<<<<<<<<<<< remove from server
+        sf::Http::Request requestDelete;
+        requestDelete.setMethod(sf::Http::Request::Delete);
+        character ?  requestDelete.setUri("user/1"):requestDelete.setUri("user/0");  
+        response = http.sendRequest(requestDelete);
+        
+        
+        std::cout << "status: " << response.getStatus() << std::endl;
+        std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
+        std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
+        std::cout << "body: " << response.getBody() << std::endl;
         
         
     }
@@ -149,19 +173,58 @@ namespace client{
     }
 
         
-    bool Pilote::getCommand(int characterAsked, int characterSender) {
+    bool Pilote::getCommand(int characterAsked, int characterSender) {// direction a faire
         /* Ask the server the command for characterAsked
          * If it can't return false*/
+        sf::Http::Request request;
+        request.setMethod(sf::Http::Request::Get);
+        request.setUri("game");
 
+        sf::Http::Response response = http.sendRequest(request);
         
-        return false;
+        
+        std::cout << "status: " << response.getStatus() << std::endl;
+        std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
+        std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
+        std::cout << "body: " << response.getBody() << std::endl;
+        
+        if(response.getStatus() !=  200){
+            return false;//impossible de récupérer les commandes
+        }
+        
+        Json::Reader jsonReader;
+        Json::Value jsonIn;
+        
+        if (!jsonReader.parse(response.getBody(),jsonIn))
+                std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
+        //player = jsonIn["character"].asInt();
+        int player = jsonIn["character"].asInt();
+        
+        if(jsonIn["Xmove"].asInt())
+            engine.addCommand(new engine::MoveCommand(player,jsonIn["Xmove"].asInt(),jsonIn["Ymove"].asInt()));
+        
+   /*     if(jsonIn["Direction"].asInt())//
+            engine.addCommand(new engine::DirectionCommand(player,jsonIn["Direction"].asInt()));
+        */
+        if(jsonIn["PowerShot"].asInt())
+            engine.addCommand(new engine::ShotCommand(player,jsonIn["PowerShot"].asInt()));
+        
+   /*     if(jsonIn["Mode"].asInt())
+            engine.addCommand(new engine::ModeCommand(jsonIn["Mode"].asInt()));
+    */       
+        
+        
+        return true;;
     }
        
         
     void Pilote::waitGetCommand(int characterAsked, int characterSender) {
         /* Ask the server the command for characterAsked
          * Wait until the server give the command*/
-
+        while(!getCommand(characterAsked,characterSender))
+        {
+     
+        }
     }
 
     
@@ -170,6 +233,51 @@ namespace client{
         /* Post the command create by characterSender to the server
          * return false if the server refuse them
          */
+        
+        sf::Http::Request request;
+        request.setMethod(sf::Http::Request::Post);
+        request.setUri("game");
+
+        
+        Json::Value jsonOut;
+
+        jsonOut["Character"] = characterSender;
+        
+        if(command[0]->get(engine::VIEW_CATEGORY))
+        {
+            engine::DirectionCommand* dcmd = dynamic_cast<engine::DirectionCommand*>(command[0]->get(engine::VIEW_CATEGORY));
+            jsonOut["Direction"] = dcmd->getDirection();
+        }
+
+        if(command[0]->get(engine::MOVE_CATEGORY))
+        {
+            engine::MoveCommand* move = dynamic_cast<engine::MoveCommand*>(command[0]->get(engine::MOVE_CATEGORY));            
+            jsonOut["Xmove"] = move->getXmove();
+            jsonOut["Ymove"] = move->getYmove();
+        }
+
+        if(command[0]->get(engine::SHOT_CATEGORY))//Shot command
+        {
+            engine::ShotCommand* shot = dynamic_cast<engine::ShotCommand*>(command[0]->get(engine::SHOT_CATEGORY));
+            jsonOut["PowerShot"] = shot->getPower();
+        }   
+
+        if(command[0]->get(engine::MODE_CATEGORY))
+        {
+
+            engine::ModeCommand* modeCmd = dynamic_cast<engine::ModeCommand*>(command[0]->get(engine::MODE_CATEGORY));//on change le mode mais conserve la liste en attente
+            jsonOut["Mode"] =  modeCmd->getMode();
+        }
+        
+        request.setBody(jsonOut.toStyledString());
+        sf::Http::Response response = http.sendRequest(request);
+        
+        
+        std::cout << "status: " << response.getStatus() << std::endl;
+        
+        if(response.getStatus() == 204)
+            return true;
+        return false;
     }
 
 

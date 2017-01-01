@@ -635,12 +635,17 @@ update_file_if_changed(batch *b,char* filename) {
 
 struct sfmllib_includes{
    int already;
+   int network;
 };
 
 void print_include_sfmllib(struct sfmllib_includes* si,char* name) {
     if ( strlen(name) > 0 ) {
 	if(!si->already && (strstr(name,"sf::texture") || strstr(name,"sf::VertexArray") || strstr(name,"sf::Sprite"))){
 		print("#include <SFML/Graphics.hpp>\n");
+		si->already = 1;
+	}
+	if(!si->network && (strstr(name,"sf::Http"))){
+		print("#include <SFML/Network.hpp>\n");
 		si->already = 1;
 	}
     }
