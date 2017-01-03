@@ -7,7 +7,6 @@
 #include "render/SurfaceSFML.hpp"
 #include "engine/Engine.h"
 #include "state/State.h"
-#include "engine/CommandSet.h"
 
 namespace client {
   class CacheStateObserver;
@@ -37,7 +36,7 @@ namespace client {
     Pilote* pilote;
     // Operations
   public:
-    PiloteSFML (state::State* state, engine::Engine* e, engine::CommandSet* commandList, int character, Pilote* pilote);
+    PiloteSFML (state::State* state, engine::Engine* e, int character, Pilote* pilote);
     ~PiloteSFML ();
     void display ();
     void applyChange ();

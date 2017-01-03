@@ -6,6 +6,7 @@
 #include "engine/CommandSet.h"
 #include "engine/Engine.h"
 #include "state/State.h"
+#include "ai/AI.h"
 #include "json/json.h"
 #include "json/json.h"
 
@@ -29,6 +30,7 @@ namespace server {
     std::vector<engine::CommandSet*> commandSaved;
     engine::Engine* engine;
     state::State* state;
+    std::vector<ai::AI*>  ai;
     // Operations
   public:
     GameServer (UserDB& userDB);

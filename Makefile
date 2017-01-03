@@ -3,7 +3,7 @@ HEADERS:=$(shell find src -type f -name '*.h')
 DIA2CODE_DIR:=./dia2code
 
 
-all: | clean dia2code configure build
+all: | clean  configure dia2code  build
 
 clean:
 	@rm -rf bin build ${HEADERS}
@@ -19,10 +19,13 @@ ${DIA2CODE_DIR}/bin/dia2code:
 	cd ${DIA2CODE_DIR} && ./build.sh
 
 configure:
-	@mkdir -p build
-	@cd build && cmake ..
+	@mkdir -p build 
 	@cd "${START_DIR}/extern" && ./configure --prefix="${START_DIR}/extern"
+	@cd build && cmake ..
 
+
+
+	
 
 build:
 	@make -s -j4 -C build

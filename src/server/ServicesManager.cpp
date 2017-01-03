@@ -7,6 +7,8 @@
 
 #include "ServicesManager.hpp"
 #include "AbstractService.h"
+#include <iostream>
+
 
 using namespace std;
 
@@ -59,8 +61,6 @@ namespace server {
                     pos = 0;
                     characterAsked = stoi(end,&pos);//string to integer, pos devient = position juste après le dernier chiffre (425de -> pos = 3 (adresse de d))
                 }
-                    if (pos != end.size())//si il ya des caracteres après
-                    throw ServiceException(HttpStatus::BAD_REQUEST,"Url malformée: '"+end+"' n'est pas un nombre");
             }
             catch(...) {
                 throw ServiceException(HttpStatus::BAD_REQUEST,"Url malformée: '"+end+"' n'est pas un nombre");

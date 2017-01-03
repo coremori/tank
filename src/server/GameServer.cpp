@@ -15,6 +15,9 @@
 #include "engine/ModeCommand.h"
 #include <iostream>
 #include "../state.h"
+#include "ai/HeuristicAI.h"
+#include "ai/TreeAI.h"
+#include "engine/EndTurnCommand.h"
 //><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<bibliotheque nonincluse  && reste le post
 
 namespace server {
@@ -26,6 +29,9 @@ namespace server {
                 
         commandSaved.push_back(new engine::CommandSet());
         commandSaved.push_back(new engine::CommandSet());
+        
+        ai.push_back(new ai::HeuristicAI(state,0));
+        ai.push_back(new ai::TreeAI(state,1));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<   recup commande
     HttpStatus GameServer::get (Json::Value& out, int characterSender, int characterAsked) const {
@@ -35,14 +41,39 @@ namespace server {
         if (!user)
             throw ServiceException(HttpStatus::NOT_FOUND,"Invalid user id");// on regarde si le joueur existe
 
-        const User* userAsked = userDB.getUser(characterAsked);
+        User* userAsked = userDB.getUser(characterAsked);
+        
         
         if (!userAsked)
             throw ServiceException(HttpStatus::NOT_FOUND,"Invalid user id");// on regarde si le joueur existe (joueur dont on veut récupérer les commandes
         
+
+        if(engine->getMode() == engine::AI){
+            
+                commandSaved[engine->getCharTurn()]->clear();
+                ai[engine->getCharTurn()]->run(*commandSaved[engine->getCharTurn()]);
+                userAsked->take_command_from[1] = true;
+                userAsked->take_command_from[0] = true;
+                engine->takeCommands(commandSaved[engine->getCharTurn()]);
+                int64_t timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+                engine->update(timeNow,0);
+ 
+        } else{
+        
+            if(engine->getMode() == engine::play && userAsked->ai){
+                commandSaved[engine->getCharTurn()]->clear();
+                ai[engine->getCharTurn()]->run(*commandSaved[engine->getCharTurn()]);
+                userAsked->take_command_from[1] = true;
+                userAsked->take_command_from[0] = true;
+                engine->takeCommands(commandSaved[engine->getCharTurn()]);
+                int64_t timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+                engine->update(timeNow,0);
+            } else if(user->take_command_from[characterAsked])
+                throw ServiceException(HttpStatus::SERVICE_UNAVAILABLE,"Waiting for the other player");
+        }
+        
         out["Character"] = characterAsked;
         engine::CommandSet* cmd = commandSaved[characterAsked];
-        
         
         if(cmd->get(engine::VIEW_CATEGORY))
         {
@@ -64,7 +95,6 @@ namespace server {
 
         if(cmd->get(engine::MODE_CATEGORY))
         {
-
             engine::ModeCommand* modeCmd = dynamic_cast<engine::ModeCommand*>(cmd->get(engine::MODE_CATEGORY));//on change le mode mais conserve la liste en attente
             out["Mode"] =  modeCmd->getMode();
         }
@@ -86,38 +116,36 @@ namespace server {
             throw ServiceException(HttpStatus::BAD_REQUEST,"Character sender is not the character waited");
     //        unique_ptr<User> usermod (new User(*user));
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Verif Est ce que l'autre joueur a prit les commandes ? (un tour de retard ?) Si non -> return HttpStatus::SERVICE_UNAVAILABLE
-
+         
             
             int other = characterSender ? 0:1;
             User* userOther = userDB.getUser(other);
         if(!userOther->take_command_from[characterSender])
                     throw ServiceException(HttpStatus::SERVICE_UNAVAILABLE,"Other player didn't take the previous command");
-
+            
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Partie lecture des données et conversion vers la liste de commande correspondante
         //Json::Value jsonIn;
-        
         userOther->take_command_from[characterSender] = false;
         user->take_command_from[characterSender] = false;
         
-        int player = in["character"].asInt();
-        
+        int player = in["Character"].asInt();
+        commandSaved[player]->clear();
         if(in["Xmove"].asInt())
-            commandSaved[0]->add(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
-            //engine.addCommand(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
+            commandSaved[player]->add(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
             
         if(in["Direction"].asInt()){
             switch(in["Direction"].asInt()){
                 case 1:
-                    engine->addCommand(new engine::DirectionCommand(player,state::left_down));
+                    commandSaved[player]->add(new engine::DirectionCommand(player,state::left_down));
                     break;
                 case 2:
-                    engine->addCommand(new engine::DirectionCommand(player,state::left_up));
+                    commandSaved[player]->add(new engine::DirectionCommand(player,state::left_up));
                     break;
                 case 3:
-                    engine->addCommand(new engine::DirectionCommand(player,state::right_down));
+                    commandSaved[player]->add(new engine::DirectionCommand(player,state::right_down));
                     break;
                 case 4:
-                    engine->addCommand(new engine::DirectionCommand(player,state::right_up));
+                    commandSaved[player]->add(new engine::DirectionCommand(player,state::right_up));
                     break;
             }
         }
@@ -126,27 +154,30 @@ namespace server {
 
         
         if(in["PowerShot"].asInt())
-            commandSaved[0]->add(new engine::ShotCommand(player,in["PowerShot"].asInt()));
+            commandSaved[player]->add(new engine::ShotCommand(player,in["PowerShot"].asInt()));
             //engine->addCommand(new engine::ShotCommand(player,in["PowerShot"].asInt()));
         
 
         if(in["Mode"].asInt()){
             switch(in["Mode"].asInt()){
                 case 1:
-                    engine->addCommand(new engine::ModeCommand(engine::play));
+                    commandSaved[player]->add(new engine::ModeCommand(engine::play));
                     break;
                 case 2:
-                    engine->addCommand(new engine::ModeCommand(engine::AI));
+                    commandSaved[player]->add(new engine::ModeCommand(engine::AI));
                     break;
                 case 3:
-                    engine->addCommand(new engine::ModeCommand(engine::replay));
+                    commandSaved[player]->add(new engine::ModeCommand(engine::replay));
                 default:
-                    engine->addCommand(new engine::ModeCommand(engine::play));
+                    commandSaved[player]->add(new engine::ModeCommand(engine::play));
                     break;
             }
         }
-        
-        printf("end post\n");
+        commandSaved[player]->add(new engine::EndTurnCommand(player));
+        engine->takeCommands(commandSaved[player]);
+        int64_t timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
+
+        engine->update(timeNow,0);
         return HttpStatus::NO_CONTENT;//ok & pas de donnée renvoyer
     }
 

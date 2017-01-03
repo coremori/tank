@@ -28,7 +28,7 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, engine::CommandSet* commandList, int character, Pilote* pilote){
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, int character, Pilote* pilote){
         /* Set  the scene to display
          * Create the layer and register then to the state
          * Create the Surface

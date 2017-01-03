@@ -142,10 +142,8 @@ namespace engine{
          */
         swapCommands();
         charTurn = charTurn ? 0:1;
-        
         ruler.setCommandSet(currentcommands);
         ruler.implementeRules();
-       
         for(int i = 0; i<state->getMobiles().size(); i++)
         {
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
@@ -220,7 +218,7 @@ namespace engine{
         if(mode == AI || mode == play){
             if(waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
             {
-                if((timeNow-lastEndTurnTime)>timeinterval){
+                if((timeNow-lastEndTurnTime)>=timeinterval){
                     update_mutex.lock();
                     endTurn();
                     update_mutex.unlock();
@@ -286,7 +284,7 @@ namespace engine{
         {
             addCommand(commandset->get(SHOT_CATEGORY));
         }
-        commandset->clear();
+       // commandset->clear();
     }
     
     

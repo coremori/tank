@@ -4,7 +4,6 @@
 
 #include "state/State.h"
 #include "engine/Engine.h"
-#include <vector>
 #include "engine/CommandSet.h"
 #include <SFML/Network.hpp>
 #include <mutex>
@@ -13,7 +12,6 @@ namespace client {
   class PiloteRendu;
 }
 
-#include "PlayerType.h"
 #include "PiloteRendu.h"
 
 namespace client {
@@ -21,16 +19,17 @@ namespace client {
   /// class Pilote - Run the engine and rendu thread
   class Pilote {
     // Associations
-    client::PlayerType player;
     // Attributes
   protected:
     state::State state;
     engine::Engine engine;
     PiloteRendu* rendu;
-    std::vector<engine::CommandSet*> command;
+    engine::CommandSet* command;
     int character;
     sf::Http http;
     mutable std::mutex commands_mutex;
+    engine::CommandSet* command_waiting;
+    int already;
     // Operations
   public:
     Pilote ();
