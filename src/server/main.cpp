@@ -121,7 +121,7 @@ main_handler (void *cls,
 int main(int argc, char *const *argv)
 {
 
-    printf("Need two people connected before starting the game")
+    printf("Need two people connected before starting the game");
     try {
         ServicesManager servicesManager;
         

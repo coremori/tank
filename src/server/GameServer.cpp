@@ -108,17 +108,51 @@ namespace server {
         if(in["Xmove"].asInt())
             commandSaved[0]->add(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
             //engine.addCommand(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
+            
+        if(jsonIn["Direction"].asInt()){
+            switch(jsonIn["Direction"].asInt()){
+                case 1:
+                    engine.addCommand(new engine::DirectionCommand(player,left_down));
+                    break;
+                case 2:
+                    engine.addCommand(new engine::DirectionCommand(player,left_up));
+                    break;
+                case 3:
+                    engine.addCommand(new engine::DirectionCommand(player,right_down));
+                    break;
+                case 4:
+                    engine.addCommand(new engine::DirectionCommand(player,right_up));
+                    break;
+            }
+        }
+                    
+            
+
         
-   /*     if(jsonIn["Direction"].asInt())//
-            engine.addCommand(new engine::DirectionCommand(player,jsonIn["Direction"].asInt()));
-        */
         if(in["PowerShot"].asInt())
             commandSaved[0]->add(new engine::ShotCommand(player,in["PowerShot"].asInt()));
             //engine.addCommand(new engine::ShotCommand(player,in["PowerShot"].asInt()));
         
-   /*     if(jsonIn["Mode"].asInt())
-            engine.addCommand(new engine::ModeCommand(jsonIn["Mode"].asInt()));
-    */       
+
+        if(jsonIn["Mode"].asInt()){
+            switch(jsonIn["Mode"].asInt()){
+                case 0:
+                    engine.addCommand(new engine::ModeCommand(close));
+                    break;
+                case 1:
+                    engine.addCommand(new engine::ModeCommand(play));
+                    break;
+                case 2:
+                    engine.addCommand(new engine::ModeCommand(AI));
+                    break;
+                case 3:
+                    engine.addCommand(new engine::ModeCommand(replay));
+                    break;
+                case 4:
+                    engine.addCommand(new engine::ModeCommand(Finish));
+                    break;
+            }
+        }
         
         printf("end post\n");
         return HttpStatus::NO_CONTENT;//ok & pas de donnée renvoyer
