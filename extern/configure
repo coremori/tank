@@ -1,0 +1,20 @@
+#!/bin/bash
+
+MAIN_DIR=$PWD
+
+# jsoncpp
+cd "$MAIN_DIR" || exit 2
+tar -xzf jsoncpp-0.10.5.tar.gz || exit 2
+cd jsoncpp-0.10.5 || exit 2
+python amalgamate.py || exit 2
+
+
+# libmicrohttpd
+cd "$MAIN_DIR" || exit 2
+tar -xzf libmicrohttpd-0.9.46.tar.gz || exit 2
+cd libmicrohttpd-0.9.46 || exit 2
+./configure --prefix="$MAIN_DIR/libmicrohttpd" || exit 2
+make -j5 install || exit 2
+
+
+
