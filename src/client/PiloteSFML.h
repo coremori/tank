@@ -6,12 +6,13 @@
 #include <vector>
 #include "render/SurfaceSFML.hpp"
 #include "engine/Engine.h"
-#include "engine/CommandSet.h"
 #include "state/State.h"
+#include "engine/CommandSet.h"
 
 namespace client {
   class CacheStateObserver;
   class Button;
+  class Pilote;
   class PiloteRendu;
 }
 
@@ -33,10 +34,10 @@ namespace client {
     std::vector<Button> button;
     int character;
     sf::RenderWindow window;
-    engine::CommandSet* commandList;
+    Pilote* pilote;
     // Operations
   public:
-    PiloteSFML (state::State* state, engine::Engine* e, engine::CommandSet* commandList);
+    PiloteSFML (state::State* state, engine::Engine* e, engine::CommandSet* commandList, int character, Pilote* pilote);
     ~PiloteSFML ();
     void display ();
     void applyChange ();

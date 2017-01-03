@@ -22,18 +22,20 @@
 #include "state/State.h"
 
 #include <thread>
+#include "Pilote.h"
 
 namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, engine::CommandSet* commandList){
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, engine::CommandSet* commandList, int character, Pilote* pilote){
         /* Set  the scene to display
          * Create the layer and register then to the state
          * Create the Surface
          * */
-        this->commandList = commandList;
-        character = 0;
+        this->pilote = pilote;
+       // this->commandList = commandList;
+        this->character = character;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
         obs.push_back(new render::LandscapeLayer());
@@ -158,38 +160,38 @@ namespace client{
             {
                 switch(event.key.code){
                     case sf::Keyboard::P :
-                        commandList->add(new engine::ModeCommand(engine::AI));
+                        pilote->addCommand(new engine::ModeCommand(engine::AI));
                         break;
                     case sf::Keyboard::Escape :
-                        commandList->add(new engine::ModeCommand(engine::replay));
+                        pilote->addCommand(new engine::ModeCommand(engine::replay));
                         break;
 
                     case sf::Keyboard::Right :
-                        commandList->add(new engine::MoveCommand(this->character,8,0));
+                        pilote->addCommand(new engine::MoveCommand(this->character,8,0));
                         break;
 
                     case sf::Keyboard::Left :
-                        commandList->add(new engine::MoveCommand(this->character,-8,0));
+                        pilote->addCommand(new engine::MoveCommand(this->character,-8,0));
                         break;
 
                     case sf::Keyboard::E :
-                        commandList->add(new engine::DirectionCommand(this->character,state::right_up));
+                        pilote->addCommand(new engine::DirectionCommand(this->character,state::right_up));
                         break;
 
                     case sf::Keyboard::Z :
-                        commandList->add(new engine::DirectionCommand(this->character,state::left_up));
+                        pilote->addCommand(new engine::DirectionCommand(this->character,state::left_up));
                         break;
 
                     case sf::Keyboard::Q :
-                        commandList->add(new engine::DirectionCommand(this->character,state::left_down));
+                        pilote->addCommand(new engine::DirectionCommand(this->character,state::left_down));
                         break;
 
                     case sf::Keyboard::D :
-                        commandList->add(new engine::DirectionCommand(this->character,state::right_down));
+                        pilote->addCommand(new engine::DirectionCommand(this->character,state::right_down));
                         break;
 
                     case sf::Keyboard::Space :
-                        commandList->add(new engine::ShotCommand(this->character,10));
+                        pilote->addCommand(new engine::ShotCommand(this->character,10));
                         break;
 
                     default : break;
@@ -201,7 +203,7 @@ namespace client{
                 /* Check the buttons
                  */
                 for(unsigned int i=0; i<button.size(); i++)
-                    button[i].press(localPosition2,commandList);
+                    button[i].press(localPosition2,pilote);
             }
         }
     } 

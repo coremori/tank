@@ -7,8 +7,11 @@
 
 #include <iostream>
 
-#include "Button.h"
 
+#include "engine.h"
+#include "Button.h"
+#include "button.hpp"
+#include <SFML/Graphics.hpp>
 namespace client{
     
 
@@ -62,12 +65,12 @@ namespace client{
             window->draw(*s_button[0]);
     }
     
-    void Button::press(sf::Vector2i localPosition, engine::CommandSet* commandList) const {
+    void Button::press(sf::Vector2i localPosition, Pilote* pilote) const {
         /* Launch the command if we click on the button
          */
         if(frame->contains(localPosition))
             {
-                commandList->add(command);                   
+                pilote->addCommand(command);                   
             }
     }
 

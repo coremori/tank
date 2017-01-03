@@ -4,7 +4,10 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "engine/CommandSet.h"
+
+namespace client {
+  class Pilote;
+}
 
 namespace client {
 
@@ -20,7 +23,7 @@ namespace client {
   public:
     Button (const char* image_file, engine::Command* command, unsigned int xTex, unsigned int widthButton, unsigned int heightButton, bool Hoover, unsigned int xPos, unsigned int yPos);
     void draw (sf::RenderWindow* window, sf::Vector2i localPosition) const;
-    void press (sf::Vector2i localPosition, engine::CommandSet* commandList) const;
+    void press (sf::Vector2i localPosition, Pilote* pilote) const;
   };
 
 };

@@ -37,9 +37,29 @@ namespace client{
         command.push_back(new engine::CommandSet());
         command.push_back(new engine::CommandSet());
         http.setHost("http://localhost",8080);
-        //http("http://localhost",8080);
+        sf::Http::Request request;
+        request.setMethod(sf::Http::Request::Get);
+        request.setUri("user");
+
+        sf::Http::Response response = http.sendRequest(request);
+        
+        if(response.getStatus() != 200){
+            std::cout << "Server answers for taking character number Error : " << response.getStatus() << std::endl;
+            std::cout << "status: " << response.getStatus() << std::endl;
+            std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
+            std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
+            std::cout << "body: " << response.getBody() << std::endl;
+        } else {
+        
+            Json::Reader jsonReader;
+            Json::Value jsonIn;
+
+            if (!jsonReader.parse(response.getBody(),jsonIn))
+                    std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
+            character = jsonIn["character"].asInt();
+        }
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        rendu = new PiloteSFML(&state, &engine,command[0]);      
+        rendu = new PiloteSFML(&state, &engine,command[0], character, this);      
     }
     
    
@@ -72,30 +92,13 @@ namespace client{
         std::vector<ai::AI*> ai;
         ai.push_back(new ai::HeuristicAI(&state,0));
         ai.push_back(new ai::TreeAI(&state,1));
-        int alreadyplay = 1;
+        //int alreadyplay = 1;
         
         //<<<<<<<<<<<<<<<<<<<<<<<<<<< enregistrer le joueur puis le delete to do
-        int player;
        
-        
         sf::Http::Request request;
-        request.setMethod(sf::Http::Request::Get);
-        request.setUri("user");
-
-        sf::Http::Response response = http.sendRequest(request);
+        sf::Http::Response response;
         
-        
-        std::cout << "status: " << response.getStatus() << std::endl;
-        std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
-        std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
-        std::cout << "body: " << response.getBody() << std::endl;
-        
-        Json::Reader jsonReader;
-        Json::Value jsonIn;
-        
-        if (!jsonReader.parse(response.getBody(),jsonIn))
-                std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
-        character = jsonIn["character"].asInt();
         
         //std::cout << player << std::endl;
         
@@ -106,31 +109,49 @@ namespace client{
                 
         getCommand(0,0);
 
+        
+        std::cout << "Command for moving : left - right  " << std::endl;
+        std::cout << "Command changing direction :  " << std::endl;
+        std::cout << "q : left:  " << std::endl;
+        std::cout << "z : left-up:  " << std::endl;
+        std::cout << "d : right:  " << std::endl;
+        std::cout << "e : right-up:  " << std::endl;
+        std::cout << "Command for shot : space  " << std::endl;
+        std::cout << "Command for ai only : p  " << std::endl;
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< a changer 
         while(engine.getMode()!=engine::close)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            if(engine.getMode()==engine::AI && alreadyplay!=engine.getCharTurn()){
+            
+            //if(engine.getMode()==engine::AI && alreadyplay!=engine.getCharTurn()){
                 /* In AI mode, and the ai chosen is the Ai who doesn't play the turn before
                  * run create the ai's command list 
                  * takeCommand send these command to the engine (it will be the same for the command from the server)
                  * update the ai to use next turn
                  */
-                ai[engine.getCharTurn()]->run(*command[engine.getCharTurn()]);
+            /*    ai[engine.getCharTurn()]->run(*command[engine.getCharTurn()]);
                 engine.takeCommands(command[engine.getCharTurn()]);
                 alreadyplay = engine.getCharTurn();
             }
             else if(engine.getMode()==engine::play && engine.getCharTurn()==1){
-                /* In play mode, this is the ai turn
-                 */
-                ai[1]->run(*command[1]);
+                * In play mode, this is the ai turn
+                *
+                *ai[1]->run(*command[1]);
                 engine.takeCommands(command[1]);
+            }*/
+            if(engine.getCharTurn()==character){
+                if(command[0]->get(engine::END_CATEGORY)){
+                commands_mutex.lock();
+                postCommand(character);
+                commands_mutex.unlock();
+                waitGetCommand(character,character);
+                } 
+            } else {
+                getCommand(character ? 0:1,character);
             }
+            
             timeNow = static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
             engine.update(timeNow,500);
-            if(getCommand(0,character)){
-                engine.addCommand(new engine::EndTurnCommand(this->character));
-            }
             
         }
         
@@ -144,11 +165,12 @@ namespace client{
         character ?  requestDelete.setUri("user/1"):requestDelete.setUri("user/0");  
         response = http.sendRequest(requestDelete);
         
-        
-        std::cout << "status: " << response.getStatus() << std::endl;
-        std::cout << "HTTP version: " << response.getMajorHttpVersion() << "." << response.getMinorHttpVersion() << std::endl;
-        std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
-        std::cout << "body: " << response.getBody() << std::endl;
+        if(response.getStatus()!=200){
+            std::cout << "Error delete : " << std::endl;
+            std::cout << "status: " << response.getStatus() << std::endl;
+            std::cout << "Content-Type header:" << response.getField("Content-Type") << std::endl;
+            std::cout << "body: " << response.getBody() << std::endl;
+        }
         
         
     }
@@ -212,8 +234,7 @@ namespace client{
    /*     if(jsonIn["Mode"].asInt())
             engine.addCommand(new engine::ModeCommand(jsonIn["Mode"].asInt()));
     */       
-        
-        
+        engine.addCommand(new engine::EndTurnCommand(this->character));
         return true;;
     }
        
@@ -282,7 +303,11 @@ namespace client{
 
 
     
-    
+    void Pilote::addCommand (engine::Command* command){
+        commands_mutex.lock();
+        this->command[0]->add(command);
+        commands_mutex.unlock();
+    }
     
     
     

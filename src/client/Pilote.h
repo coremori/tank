@@ -7,6 +7,7 @@
 #include <vector>
 #include "engine/CommandSet.h"
 #include <SFML/Network.hpp>
+#include <mutex>
 
 namespace client {
   class PiloteRendu;
@@ -29,6 +30,7 @@ namespace client {
     std::vector<engine::CommandSet*> command;
     int character;
     sf::Http http;
+    mutable std::mutex commands_mutex;
     // Operations
   public:
     Pilote ();
@@ -38,6 +40,7 @@ namespace client {
     void waitGetCommand (int characterAsked, int characterSender);
     bool getCommand (int characterAsked, int characterSender);
     bool postCommand (int characterSender);
+    void addCommand (engine::Command* command);
   };
 
 };
