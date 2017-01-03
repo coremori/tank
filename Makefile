@@ -31,8 +31,9 @@ build:
 	@make -s -j4 -C build
 
 run: build
-	./bin/server 8080
-	./bin/run
+	./bin/run&
+	./bin/server 8080 
+	
 
 test:
 	docker build -t plt-initial -f docker/plt-initial .

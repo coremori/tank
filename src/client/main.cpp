@@ -6,9 +6,12 @@
 
 
 #include "client/Pilote.h"
-
+#include <chrono>
+#include <ctime>
+#include <thread>
 int main ()
 {
+     std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //waiting for the server initialisation
   //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Multithreading - engine+IA et rendu >>>>>>>>>>>>>>>>>>>>>>
         //
     client::Pilote* pilote = new client::Pilote();
