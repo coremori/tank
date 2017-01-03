@@ -443,7 +443,7 @@ configure: failed program was:
 configure:12885: result: no
 configure:12783: checking whether pthreads work without any flags
 configure:12876: gcc -o conftest -g -O2     conftest.c   >&5
-/tmp/ccPFZrG5.o: In function `main':
+/tmp/ccUsGdAD.o: In function `main':
 /home/corentin/Documents/tank/extern/libmicrohttpd-0.9.46/conftest.c:30: undefined reference to `pthread_create'
 /home/corentin/Documents/tank/extern/libmicrohttpd-0.9.46/conftest.c:31: undefined reference to `pthread_join'
 /home/corentin/Documents/tank/extern/libmicrohttpd-0.9.46/conftest.c:33: undefined reference to `__pthread_register_cancel'
@@ -2219,7 +2219,7 @@ conftest.c: In function 'main':
 conftest.c:61:37: warning: implicit declaration of function 'gmtime_s' [-Wimplicit-function-declaration]
  struct tm now; time_t t; time (&t); gmtime_s (&now, &t)
                                      ^
-/tmp/ccmZEst3.o: In function `main':
+/tmp/ccRWu26J.o: In function `main':
 /home/corentin/Documents/tank/extern/libmicrohttpd-0.9.46/conftest.c:61: undefined reference to `gmtime_s'
 collect2: error: ld returned 1 exit status
 configure:14406: $? = 1
@@ -3031,7 +3031,7 @@ configure:15758: $? = 0
 configure:15786: result: no
 configure:15810: checking for _lseeki64
 configure:15810: gcc -o conftest -g -O2 -fno-strict-aliasing   conftest.c  >&5
-/tmp/ccORoxTA.o: In function `main':
+/tmp/ccZGeKDb.o: In function `main':
 /home/corentin/Documents/tank/extern/libmicrohttpd-0.9.46/conftest.c:100: undefined reference to `_lseeki64'
 collect2: error: ld returned 1 exit status
 configure:15810: $? = 1

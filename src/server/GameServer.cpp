@@ -37,17 +37,11 @@ namespace server {
 
         const User* userAsked = userDB.getUser(characterAsked);
         
-        
         if (!userAsked)
             throw ServiceException(HttpStatus::NOT_FOUND,"Invalid user id");// on regarde si le joueur existe (joueur dont on veut récupérer les commandes
-
         
         out["Character"] = characterAsked;
-
         engine::CommandSet* cmd = commandSaved[characterAsked];
-
-        
-        
         
         
         if(cmd->get(engine::VIEW_CATEGORY))
@@ -84,7 +78,7 @@ namespace server {
 
     //coté serveur, in sont les donnnées associé au POST reçu
 
-        const User* user = userDB.getUser(characterSender);
+         User* user = userDB.getUser(characterSender);
         if (!user)
             throw ServiceException(HttpStatus::NOT_FOUND,"Invalid user id");// on regarde si le joueur existe
 
@@ -95,13 +89,15 @@ namespace server {
 
             
             int other = characterSender ? 0:1;
-            const User* userOther = userDB.getUser(other);
+            User* userOther = userDB.getUser(other);
         if(!userOther->take_command_from[characterSender])
                     throw ServiceException(HttpStatus::SERVICE_UNAVAILABLE,"Other player didn't take the previous command");
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Partie lecture des données et conversion vers la liste de commande correspondante
         //Json::Value jsonIn;
         
+        userOther->take_command_from[characterSender] = false;
+        user->take_command_from[characterSender] = false;
         
         int player = in["character"].asInt();
         
@@ -109,19 +105,19 @@ namespace server {
             commandSaved[0]->add(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
             //engine.addCommand(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
             
-        if(jsonIn["Direction"].asInt()){
-            switch(jsonIn["Direction"].asInt()){
+        if(in["Direction"].asInt()){
+            switch(in["Direction"].asInt()){
                 case 1:
-                    engine.addCommand(new engine::DirectionCommand(player,left_down));
+                    engine->addCommand(new engine::DirectionCommand(player,state::left_down));
                     break;
                 case 2:
-                    engine.addCommand(new engine::DirectionCommand(player,left_up));
+                    engine->addCommand(new engine::DirectionCommand(player,state::left_up));
                     break;
                 case 3:
-                    engine.addCommand(new engine::DirectionCommand(player,right_down));
+                    engine->addCommand(new engine::DirectionCommand(player,state::right_down));
                     break;
                 case 4:
-                    engine.addCommand(new engine::DirectionCommand(player,right_up));
+                    engine->addCommand(new engine::DirectionCommand(player,state::right_up));
                     break;
             }
         }
@@ -131,25 +127,21 @@ namespace server {
         
         if(in["PowerShot"].asInt())
             commandSaved[0]->add(new engine::ShotCommand(player,in["PowerShot"].asInt()));
-            //engine.addCommand(new engine::ShotCommand(player,in["PowerShot"].asInt()));
+            //engine->addCommand(new engine::ShotCommand(player,in["PowerShot"].asInt()));
         
 
-        if(jsonIn["Mode"].asInt()){
-            switch(jsonIn["Mode"].asInt()){
-                case 0:
-                    engine.addCommand(new engine::ModeCommand(close));
-                    break;
+        if(in["Mode"].asInt()){
+            switch(in["Mode"].asInt()){
                 case 1:
-                    engine.addCommand(new engine::ModeCommand(play));
+                    engine->addCommand(new engine::ModeCommand(engine::play));
                     break;
                 case 2:
-                    engine.addCommand(new engine::ModeCommand(AI));
+                    engine->addCommand(new engine::ModeCommand(engine::AI));
                     break;
                 case 3:
-                    engine.addCommand(new engine::ModeCommand(replay));
-                    break;
-                case 4:
-                    engine.addCommand(new engine::ModeCommand(Finish));
+                    engine->addCommand(new engine::ModeCommand(engine::replay));
+                default:
+                    engine->addCommand(new engine::ModeCommand(engine::play));
                     break;
             }
         }
@@ -158,26 +150,6 @@ namespace server {
         return HttpStatus::NO_CONTENT;//ok & pas de donnée renvoyer
     }
 
-    //<<<<<<<<<<<<< done
-    /*
-    HttpStatus GameServer::put (Json::Value& out,const Json::Value& in) {
-    //modif des commandes -> pas utilisé, à viré
-        string name = in["name"].asString();
-        int age = in["age"].asInt();
-        out["id"] = userDB.addUser(make_unique<User>(name,age));
-        return HttpStatus::CREATED;
-    }
-    */
 
-    //<<<<<<<<<<<<<< done
-    /* HttpStatus GameServer::remove (int characterSender) {
-    // delete l'utilisateur
-        const User* user = userDB.getUser(characterSender);
-        if (!user)
-            throw ServiceException(HttpStatus::NOT_FOUND,"Invalid user id");
-        userDB.removeUser(id);
-        return HttpStatus::NO_CONTENT;//ok & pas de donnée renvoyer
-    }
-              */
 
 }

@@ -8,12 +8,26 @@
 #include "UserDB.hpp"
 #include "User.h"
 #include <map>
+#include <iostream>
+
 
 //<<<<<<<<<<<<<<<<<<<<<<< done
 
 namespace server {
     UserDB::UserDB() : idseq(0) {
-
+        
+        unique_ptr<User> usermod (new User());
+        usermod->take_command_from[0] = true;
+        usermod->take_command_from[1] = true;
+        usermod->ai = true;
+        users.insert(std::make_pair(0,std::move(usermod)));
+        
+        printf("Ndd\n");
+        unique_ptr<User> usermod2 (new User());
+        usermod2->take_command_from[0] = true;
+        usermod2->take_command_from[1] = true;
+        usermod2->ai = true;
+        users.insert(std::make_pair(1,std::move(usermod2)));
     }
 
     User* UserDB::getUser (int id) const {// récupéré un user
@@ -25,10 +39,17 @@ namespace server {
 
     int UserDB::addUser () {// ajouter un utilisateur
         int id = idseq++;
-        unique_ptr<User> usermod (new User());
-        usermod->take_command_from[0] = true;
-        usermod->take_command_from[1] = true;
-        users.insert(std::make_pair(id,std::move(usermod)));
+        if(id<2){
+            auto ite = users.find(id);
+            if (ite == users.end())
+                return -1;
+            users.erase(ite);
+            unique_ptr<User> usermod (new User());
+            usermod->take_command_from[0] = true;
+            usermod->take_command_from[1] = true;
+            users.insert(std::make_pair(0,std::move(usermod)));
+            usermod->ai = false;
+        }
         return id;
     }
 
@@ -36,7 +57,11 @@ namespace server {
         auto ite = users.find(id);
         if (ite == users.end())
             return;
-        users.erase(ite);
+       unique_ptr<User> usermod (new User());
+        usermod->take_command_from[0] = true;
+        usermod->take_command_from[1] = true;
+        users.insert(std::make_pair(0,std::move(usermod)));
+        usermod->ai = true;
     }
 }
 

@@ -121,11 +121,12 @@ main_handler (void *cls,
 int main(int argc, char *const *argv)
 {
 
-    printf("Need two people connected before starting the game");
+    printf("Need two people connected before starting the game\n");
     try {
         ServicesManager servicesManager;
-        
+        printf("Need two people connected before starting the game\n");
         UserDB userDB;
+          printf("Need two people connected before starting the game\n");
         servicesManager.registerService(make_unique<GameServer>(std::ref(userDB)));
         servicesManager.registerService(make_unique<UserService>(std::ref(userDB)));
         //servicesManager.registerService(make_unique<GameServer>(std::ref(userDB)));

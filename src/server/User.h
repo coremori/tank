@@ -10,6 +10,7 @@ namespace server {
     // Attributes
   public:
     bool take_command_from[2];
+    bool ai;
   };
 
 };

@@ -225,12 +225,41 @@ namespace client{
         if(jsonIn["Xmove"].asInt())
             engine.addCommand(new engine::MoveCommand(player,jsonIn["Xmove"].asInt(),jsonIn["Ymove"].asInt()));
         
-   /*     if(jsonIn["Direction"].asInt())//
-            engine.addCommand(new engine::DirectionCommand(player,jsonIn["Direction"].asInt()));
-        */
+        if(jsonIn["Direction"].asInt()){
+            switch(jsonIn["Direction"].asInt()){
+                case 1:
+                    engine.addCommand(new engine::DirectionCommand(player,state::left_down));
+                    break;
+                case 2:
+                    engine.addCommand(new engine::DirectionCommand(player,state::left_up));
+                    break;
+                case 3:
+                    engine.addCommand(new engine::DirectionCommand(player,state::right_down));
+                    break;
+                case 4:
+                    engine.addCommand(new engine::DirectionCommand(player,state::right_up));
+                    break;
+            }
+        }
+
         if(jsonIn["PowerShot"].asInt())
             engine.addCommand(new engine::ShotCommand(player,jsonIn["PowerShot"].asInt()));
         
+        if(jsonIn["Mode"].asInt()){
+            switch(jsonIn["Mode"].asInt()){
+                case 1:
+                    engine.addCommand(new engine::ModeCommand(engine::play));
+                    break;
+                case 2:
+                    engine.addCommand(new engine::ModeCommand(engine::AI));
+                    break;
+                case 3:
+                    engine.addCommand(new engine::ModeCommand(engine::replay));
+                default:
+                    engine.addCommand(new engine::ModeCommand(engine::play));
+                    break;
+            }
+        }
    /*     if(jsonIn["Mode"].asInt())
             engine.addCommand(new engine::ModeCommand(jsonIn["Mode"].asInt()));
     */       
