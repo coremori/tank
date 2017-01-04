@@ -29,13 +29,16 @@ configure:
 
 build:
 	@make -s -j4 -C build
+	gcc ./src/launch/ClientAndServer.c -o ./bin/launcher
 
 run: build
-	./bin/run&
-	./bin/server 8080 
+	./bin/launcher 
 	
 
 test:
+	$(info --- Docker don't work because it need python to compilate ---)
+	$(info --- Use make for compilate and make run for running ---)
+	$(info )
 	docker build -t plt-initial -f docker/plt-initial .
 	docker build -t plt-build -f docker/plt-build .
 	./docker/run_docker_x11.sh plt-build
