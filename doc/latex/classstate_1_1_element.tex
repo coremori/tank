@@ -1,0 +1,80 @@
+\hypertarget{classstate_1_1_element}{}\section{state\+:\+:Element Class Reference}
+\label{classstate_1_1_element}\index{state\+::\+Element@{state\+::\+Element}}
+
+
+class \hyperlink{classstate_1_1_element}{Element} -\/  
+
+
+
+
+{\ttfamily \#include $<$Element.\+h$>$}
+
+Inheritance diagram for state\+:\+:Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classstate_1_1_element}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a21519707215e66543dbd8f3c7a90a101}\label{classstate_1_1_element_a21519707215e66543dbd8f3c7a90a101}} 
+virtual Type\+Id {\bfseries get\+Type\+Id} () const =0
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a8f24736ef9d139c43de6170bbf12b934}\label{classstate_1_1_element_a8f24736ef9d139c43de6170bbf12b934}} 
+virtual bool {\bfseries is\+Static} () const =0
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_ae7bba399afdeb9e002c28a3d0d389fd0}\label{classstate_1_1_element_ae7bba399afdeb9e002c28a3d0d389fd0}} 
+bool \hyperlink{classstate_1_1_element_ae7bba399afdeb9e002c28a3d0d389fd0}{is\+Composite} ()
+\begin{DoxyCompactList}\small\item\em Permet de vérifié si cela est composite. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_ad255661bd2e71f48014e6a80dd914ab0}\label{classstate_1_1_element_ad255661bd2e71f48014e6a80dd914ab0}} 
+int {\bfseries getX} () const
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a064240b24695cc5c052fbfd4a55489f2}\label{classstate_1_1_element_a064240b24695cc5c052fbfd4a55489f2}} 
+int {\bfseries getY} () const
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a96672cf4848c5566115c2ea3fec8161d}\label{classstate_1_1_element_a96672cf4848c5566115c2ea3fec8161d}} 
+void {\bfseries setX} (int x)
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_aa66f35989d8c833ef566c01e23e63e10}\label{classstate_1_1_element_aa66f35989d8c833ef566c01e23e63e10}} 
+void {\bfseries setY} (int y)
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a0e2e8e4cc3e33c4ed57c49a876d09476}\label{classstate_1_1_element_a0e2e8e4cc3e33c4ed57c49a876d09476}} 
+void \hyperlink{classstate_1_1_element_a0e2e8e4cc3e33c4ed57c49a876d09476}{moveX} (int dx)
+\begin{DoxyCompactList}\small\item\em Permet de déplacer le bloc composite de dx. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_a26f3b97d04d24f2d2ffa6513099778db}\label{classstate_1_1_element_a26f3b97d04d24f2d2ffa6513099778db}} 
+void \hyperlink{classstate_1_1_element_a26f3b97d04d24f2d2ffa6513099778db}{moveY} (int dy)
+\begin{DoxyCompactList}\small\item\em Permet de déplacer le bloc composite de dy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_a676d60d605e100796ba0962d7b383415}\label{classstate_1_1_element_a676d60d605e100796ba0962d7b383415}} 
+bool \hyperlink{classstate_1_1_element_a676d60d605e100796ba0962d7b383415}{is\+Here} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Permet de vérifier la position pour un bloc composite. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_ad4e348a88665a7b251d2a671ad910fae}\label{classstate_1_1_element_ad4e348a88665a7b251d2a671ad910fae}} 
+std\+::vector$<$ \hyperlink{classstate_1_1_element}{Element} $\ast$ $>$ \hyperlink{classstate_1_1_element_ad4e348a88665a7b251d2a671ad910fae}{get\+Bloc} ()
+\begin{DoxyCompactList}\small\item\em Renvoie le bloc entier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_a9d35c7951f1aeaeea9775f5151dee98b}\label{classstate_1_1_element_a9d35c7951f1aeaeea9775f5151dee98b}} 
+bool \hyperlink{classstate_1_1_element_a9d35c7951f1aeaeea9775f5151dee98b}{add} (\hyperlink{classstate_1_1_element}{Element} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Ajoute un élément à la liste des membres (composite) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_element_aa11351137acee5ddcf2f5b52fadfda3b}\label{classstate_1_1_element_aa11351137acee5ddcf2f5b52fadfda3b}} 
+virtual \hyperlink{classstate_1_1_element}{Element} $\ast$ {\bfseries clone} () const =0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_aae18fab1d563f154f64760cf6b9d96c4}\label{classstate_1_1_element_aae18fab1d563f154f64760cf6b9d96c4}} 
+int {\bfseries x}
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a726a92bb1fa8a574359760c16febd212}\label{classstate_1_1_element_a726a92bb1fa8a574359760c16febd212}} 
+int {\bfseries y}
+\item 
+\mbox{\Hypertarget{classstate_1_1_element_a4fc0e453f7f839ef07e57ee9a95ee62c}\label{classstate_1_1_element_a4fc0e453f7f839ef07e57ee9a95ee62c}} 
+std\+::vector$<$ \hyperlink{classstate_1_1_element}{Element} $\ast$ $>$ {\bfseries composite}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \hyperlink{classstate_1_1_element}{Element} -\/ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/include/Element.\+h\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/src/Element.\+cpp\end{DoxyCompactItemize}

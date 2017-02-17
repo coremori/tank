@@ -1,0 +1,91 @@
+\hypertarget{namespacestate}{}\section{state Namespace Reference}
+\label{namespacestate}\index{state@{state}}
+
+
+Espace de nommage regroupant les données représentant l\textquotesingle{}état du jeu.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstate_1_1_element}{Element}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_element}{Element} -\/ \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_element_event}{Element\+Event}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_element_event}{Element\+Event} -\/ Event \char`\"{}\+Element\+\_\+\+Changed\char`\"{} \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_element_grid}{Element\+Grid}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_element_grid}{Element\+Grid} -\/ List of Elements with a height and witdh \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_element_list}{Element\+List}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_element_list}{Element\+List} -\/ List of Elements \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_element_named_list}{Element\+Named\+List}
+\item 
+class \hyperlink{classstate_1_1_global_state}{Global\+State}
+\begin{DoxyCompactList}\small\item\em class State -\/ Store the list of the elements of the background (grid) and the list of the tank(mobiles) \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_list_element}{List\+Element}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_element_list}{Element\+List} -\/ List of Elements \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_observable}{Observable}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_observable}{Observable} -\/ List of the class\textquotesingle{}s observers \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_obstacle}{Obstacle}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_obstacle}{Obstacle} -\/ \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_projectile_event}{Projectile\+Event}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_projectile_event}{Projectile\+Event} -\/ Event \char`\"{}\+Projectile\+\_\+\+Event\char`\"{} \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_space}{Space}
+\begin{DoxyCompactList}\small\item\em classe representant les elements traversable \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_state_event}{State\+Event}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_state_event}{State\+Event} -\/ Event concerning the state \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_state_observer}{State\+Observer}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_state_observer}{State\+Observer} -\/ \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_static_element}{Static\+Element}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_static_element}{Static\+Element} -\/ \end{DoxyCompactList}\item 
+class \hyperlink{classstate_1_1_tank}{Tank}
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_tank}{Tank} -\/ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacestate_acdd67f28d032af61c857718a6945df94}\label{namespacestate_acdd67f28d032af61c857718a6945df94}} 
+enum {\bfseries List\+Type} \{ {\bfseries terrestre} = 0, 
+{\bfseries aerien} = 1, 
+{\bfseries projectile} = 2, 
+{\bfseries paysage} = 3
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_a83db3ada133da88934c6ab78f39488af}\label{namespacestate_a83db3ada133da88934c6ab78f39488af}} 
+enum {\bfseries Obstacle\+Type\+Id} \{ {\bfseries sand} = 1, 
+{\bfseries border} = 2
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_a356fdb25c53a0d3f532a2f9770fdd63d}\label{namespacestate_a356fdb25c53a0d3f532a2f9770fdd63d}} 
+enum {\bfseries Orientation} \{ {\bfseries left\+\_\+down} =1, 
+{\bfseries left\+\_\+up} = 2, 
+{\bfseries right\+\_\+down} = 3, 
+{\bfseries right\+\_\+up} = 4
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_a1648cef1bd53299cc6dfd90eeee3c0f1}\label{namespacestate_a1648cef1bd53299cc6dfd90eeee3c0f1}} 
+enum {\bfseries Space\+Type\+Id} \{ {\bfseries sky} = 1, 
+{\bfseries greenery} = 2
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_a5a660a8300e8f8d4be0e2ec73800de09}\label{namespacestate_a5a660a8300e8f8d4be0e2ec73800de09}} 
+enum {\bfseries State\+Event\+Id} \{ {\bfseries Level\+\_\+\+Changed} = 1, 
+{\bfseries Element\+\_\+\+Changed} = 2, 
+{\bfseries Pv\+\_\+\+Changed} = 3, 
+{\bfseries Projectile\+\_\+\+Event} = 4
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_aff734372f7f087a0e1f635cb9716dd1a}\label{namespacestate_aff734372f7f087a0e1f635cb9716dd1a}} 
+enum {\bfseries Tank\+Type\+Id} \{ {\bfseries Little\+\_\+tank\+\_\+green} = 1, 
+{\bfseries Little\+\_\+tank\+\_\+grey} = 2, 
+{\bfseries Big\+\_\+tank\+\_\+green} = 3, 
+{\bfseries Big\+\_\+tank\+\_\+grey} = 4
+ \}
+\item 
+\mbox{\Hypertarget{namespacestate_a52ac81a498c9b1ebe1b905a40439c7d3}\label{namespacestate_a52ac81a498c9b1ebe1b905a40439c7d3}} 
+enum {\bfseries Type\+Id} \{ {\bfseries obstacle} = 1, 
+{\bfseries space} = 2, 
+{\bfseries tank} = 3
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Espace de nommage regroupant les données représentant l\textquotesingle{}état du jeu. 

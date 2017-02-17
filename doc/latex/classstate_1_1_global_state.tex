@@ -1,0 +1,68 @@
+\hypertarget{classstate_1_1_global_state}{}\section{state\+:\+:Global\+State Class Reference}
+\label{classstate_1_1_global_state}\index{state\+::\+Global\+State@{state\+::\+Global\+State}}
+
+
+class State -\/ Store the list of the elements of the background (grid) and the list of the tank(mobiles)  
+
+
+
+
+{\ttfamily \#include $<$Global\+State.\+h$>$}
+
+Inheritance diagram for state\+:\+:Global\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classstate_1_1_global_state}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_aafb29e5a90ae4f8e27d25ed3c186dd80}\label{classstate_1_1_global_state_aafb29e5a90ae4f8e27d25ed3c186dd80}} 
+\hyperlink{classstate_1_1_global_state_aafb29e5a90ae4f8e27d25ed3c186dd80}{Global\+State} ()
+\begin{DoxyCompactList}\small\item\em class State -\/ mobiles-\/$>$ liste des truc mobile (tank, missile) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a9d868ea2e34692ccbc1fd648bbbc7eea}\label{classstate_1_1_global_state_a9d868ea2e34692ccbc1fd648bbbc7eea}} 
+\hyperlink{classstate_1_1_element_grid}{Element\+Grid} \& {\bfseries get\+Grid} ()
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a41e3ba4093579173405af0ca54c0f06d}\label{classstate_1_1_global_state_a41e3ba4093579173405af0ca54c0f06d}} 
+const \hyperlink{classstate_1_1_element_grid}{Element\+Grid} \& {\bfseries get\+Grid} () const
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_abe00dc79287ea41a01127ae580b720f4}\label{classstate_1_1_global_state_abe00dc79287ea41a01127ae580b720f4}} 
+\hyperlink{classstate_1_1_list_element}{List\+Element} \& {\bfseries get\+Mobiles} ()
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a77b88d9885aba43976ec8eab9ef7db64}\label{classstate_1_1_global_state_a77b88d9885aba43976ec8eab9ef7db64}} 
+const \hyperlink{classstate_1_1_list_element}{List\+Element} \& {\bfseries get\+Mobiles} () const
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a2f2626fa22999e1d45d2fb82f5142f9f}\label{classstate_1_1_global_state_a2f2626fa22999e1d45d2fb82f5142f9f}} 
+\hyperlink{classstate_1_1_element}{Element} $\ast$ {\bfseries get\+Mobile} (int idx)
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_ac6fc2db0c360c6014fb161062b882679}\label{classstate_1_1_global_state_ac6fc2db0c360c6014fb161062b882679}} 
+const \hyperlink{classstate_1_1_element}{Element} $\ast$ {\bfseries get\+Mobile} (int idx) const
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_aec97fdccde7f2733b799b328375bdf81}\label{classstate_1_1_global_state_aec97fdccde7f2733b799b328375bdf81}} 
+void {\bfseries load} (const char $\ast$file\+\_\+name)
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a91c7898318ef25c9a3481a9863fd9c21}\label{classstate_1_1_global_state_a91c7898318ef25c9a3481a9863fd9c21}} 
+void {\bfseries notify\+Observer} (const \hyperlink{classstate_1_1_state_event}{State\+Event} \&event) const
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_abd600cd6bf17f0f2046d8af0c604b35f}\label{classstate_1_1_global_state_abd600cd6bf17f0f2046d8af0c604b35f}} 
+void {\bfseries copy} (const \hyperlink{classstate_1_1_global_state}{Global\+State} s)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a483c8cbfeb541e31b6aa486eb994b74f}\label{classstate_1_1_global_state_a483c8cbfeb541e31b6aa486eb994b74f}} 
+\hyperlink{classstate_1_1_list_element}{List\+Element} {\bfseries mobiles}
+\item 
+\mbox{\Hypertarget{classstate_1_1_global_state_a637c91d09cfc38a64ef28ce79c2a8927}\label{classstate_1_1_global_state_a637c91d09cfc38a64ef28ce79c2a8927}} 
+\hyperlink{classstate_1_1_element_grid}{Element\+Grid} {\bfseries grid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class State -\/ Store the list of the elements of the background (grid) and the list of the tank(mobiles) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/include/Global\+State.\+h\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/src/Global\+State.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,136 @@
+\hypertarget{classstate_1_1_space}{}\section{state\+:\+:Space Class Reference}
+\label{classstate_1_1_space}\index{state\+::\+Space@{state\+::\+Space}}
+
+
+classe representant les elements traversable  
+
+
+
+
+{\ttfamily \#include $<$Space.\+h$>$}
+
+Inheritance diagram for state\+:\+:Space\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classstate_1_1_space}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstate_1_1_space_a21cdd497cf2141748a05a30062ae2c4a}{Space} (Space\+Type\+Id id, int x, int y)
+\begin{DoxyCompactList}\small\item\em A Constructor ; Crée un \hyperlink{classstate_1_1_space}{Space} de type id situé en (x,y) \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classstate_1_1_space_ae6a875b398ebe11adca364c5dc8a94a9}{is\+Space} () const
+\begin{DoxyCompactList}\small\item\em Permet de determiner si l\textquotesingle{}éléments est un \hyperlink{classstate_1_1_space}{Space}. \end{DoxyCompactList}\item 
+Type\+Id \hyperlink{classstate_1_1_space_a07fcfd9de95acfebb26e66f24f4ef519}{get\+Type\+Id} () const
+\begin{DoxyCompactList}\small\item\em Permet de determiner le type d\textquotesingle{}élèment. \end{DoxyCompactList}\item 
+Space\+Type\+Id \hyperlink{classstate_1_1_space_af05208d104c93dbffdb2643e2e2f54cf}{get\+Space\+Type\+Id} () const
+\begin{DoxyCompactList}\small\item\em Permet de determiner l\textquotesingle{}aspect graphique de l\textquotesingle{}élèments. \end{DoxyCompactList}\item 
+\hyperlink{classstate_1_1_element}{Element} $\ast$ \hyperlink{classstate_1_1_space_a2259b287265855ae2fee5050c4e4f97d}{clone} () const
+\begin{DoxyCompactList}\small\item\em Fonction pour cloner l\textquotesingle{}élèment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+classe representant les elements traversable 
+
+La classe gére les élèments traversable en leurs fournissant un aspect graphique et une position 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classstate_1_1_space_a21cdd497cf2141748a05a30062ae2c4a}\label{classstate_1_1_space_a21cdd497cf2141748a05a30062ae2c4a}} 
+\index{state\+::\+Space@{state\+::\+Space}!Space@{Space}}
+\index{Space@{Space}!state\+::\+Space@{state\+::\+Space}}
+\subsubsection{\texorpdfstring{Space()}{Space()}}
+{\footnotesize\ttfamily state\+::\+Space\+::\+Space (\begin{DoxyParamCaption}\item[{Space\+Type\+Id}]{id,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+A Constructor ; Crée un \hyperlink{classstate_1_1_space}{Space} de type id situé en (x,y) 
+
+class \hyperlink{classstate_1_1_space}{Space} -\/
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \+: L\textquotesingle{}aspect graphique du space à crée \\
+\hline
+{\em x} & \+: La position x de l\textquotesingle{}élèment \\
+\hline
+{\em y} & \+: La position y de l\textquotesingle{}élèment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classstate_1_1_space_a2259b287265855ae2fee5050c4e4f97d}\label{classstate_1_1_space_a2259b287265855ae2fee5050c4e4f97d}} 
+\index{state\+::\+Space@{state\+::\+Space}!clone@{clone}}
+\index{clone@{clone}!state\+::\+Space@{state\+::\+Space}}
+\subsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily \hyperlink{classstate_1_1_element}{Element} $\ast$ state\+::\+Space\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fonction pour cloner l\textquotesingle{}élèment. 
+
+\begin{DoxyReturn}{Returns}
+Un pointeur vers une copie de l\textquotesingle{}élèment. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classstate_1_1_element}{state\+::\+Element}.
+
+\mbox{\Hypertarget{classstate_1_1_space_af05208d104c93dbffdb2643e2e2f54cf}\label{classstate_1_1_space_af05208d104c93dbffdb2643e2e2f54cf}} 
+\index{state\+::\+Space@{state\+::\+Space}!get\+Space\+Type\+Id@{get\+Space\+Type\+Id}}
+\index{get\+Space\+Type\+Id@{get\+Space\+Type\+Id}!state\+::\+Space@{state\+::\+Space}}
+\subsubsection{\texorpdfstring{get\+Space\+Type\+Id()}{getSpaceTypeId()}}
+{\footnotesize\ttfamily Space\+Type\+Id state\+::\+Space\+::get\+Space\+Type\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Permet de determiner l\textquotesingle{}aspect graphique de l\textquotesingle{}élèments. 
+
+\begin{DoxyReturn}{Returns}
+Le type de space. Permet de récupérer le type d\textquotesingle{}espace de l\textquotesingle{}élèment, en vue d\textquotesingle{}un display. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classstate_1_1_space_a07fcfd9de95acfebb26e66f24f4ef519}\label{classstate_1_1_space_a07fcfd9de95acfebb26e66f24f4ef519}} 
+\index{state\+::\+Space@{state\+::\+Space}!get\+Type\+Id@{get\+Type\+Id}}
+\index{get\+Type\+Id@{get\+Type\+Id}!state\+::\+Space@{state\+::\+Space}}
+\subsubsection{\texorpdfstring{get\+Type\+Id()}{getTypeId()}}
+{\footnotesize\ttfamily Type\+Id state\+::\+Space\+::get\+Type\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Permet de determiner le type d\textquotesingle{}élèment. 
+
+\begin{DoxyReturn}{Returns}
+Le type d\textquotesingle{}élèments, tel que symbolisé par un Type\+Id. Permet de récupérer le type d\textquotesingle{}élèment, en vue d\textquotesingle{}un cast et d\textquotesingle{}une utilisation en temps que tel. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classstate_1_1_element}{state\+::\+Element}.
+
+\mbox{\Hypertarget{classstate_1_1_space_ae6a875b398ebe11adca364c5dc8a94a9}\label{classstate_1_1_space_ae6a875b398ebe11adca364c5dc8a94a9}} 
+\index{state\+::\+Space@{state\+::\+Space}!is\+Space@{is\+Space}}
+\index{is\+Space@{is\+Space}!state\+::\+Space@{state\+::\+Space}}
+\subsubsection{\texorpdfstring{is\+Space()}{isSpace()}}
+{\footnotesize\ttfamily bool state\+::\+Space\+::is\+Space (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Permet de determiner si l\textquotesingle{}éléments est un \hyperlink{classstate_1_1_space}{Space}. 
+
+\begin{DoxyReturn}{Returns}
+True 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classstate_1_1_static_element}{state\+::\+Static\+Element}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/include/Space.\+h\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/src/\hyperlink{_space_8cpp}{Space.\+cpp}\end{DoxyCompactItemize}

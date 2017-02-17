@@ -1,0 +1,62 @@
+\hypertarget{classstate_1_1_list_element}{}\section{state\+:\+:List\+Element Class Reference}
+\label{classstate_1_1_list_element}\index{state\+::\+List\+Element@{state\+::\+List\+Element}}
+
+
+class \hyperlink{classstate_1_1_element_list}{Element\+List} -\/ List of Elements  
+
+
+
+
+{\ttfamily \#include $<$List\+Element.\+h$>$}
+
+Inheritance diagram for state\+:\+:List\+Element\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classstate_1_1_list_element}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a1471bc2a449803cfd9932ed15f153654}\label{classstate_1_1_list_element_a1471bc2a449803cfd9932ed15f153654}} 
+\hyperlink{classstate_1_1_list_element_a1471bc2a449803cfd9932ed15f153654}{List\+Element} ()
+\begin{DoxyCompactList}\small\item\em class \hyperlink{classstate_1_1_list_element}{List\+Element} -\/ c \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a70fef2b8268f830bdf7295d4c05c422c}\label{classstate_1_1_list_element_a70fef2b8268f830bdf7295d4c05c422c}} 
+int {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a514900215f7548c74e2f3290ff5e4d1c}\label{classstate_1_1_list_element_a514900215f7548c74e2f3290ff5e4d1c}} 
+\hyperlink{classstate_1_1_element}{Element} $\ast$ {\bfseries get} (int idx) const
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_ab7b04acd17cd9281f269b24e43a202ed}\label{classstate_1_1_list_element_ab7b04acd17cd9281f269b24e43a202ed}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_af9d588bb5d6c19a90a997d03d2fc538f}\label{classstate_1_1_list_element_af9d588bb5d6c19a90a997d03d2fc538f}} 
+void {\bfseries set} (int idx, \hyperlink{classstate_1_1_element}{Element} $\ast$e)
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a5a6f3a66e07bfca10a817d2b55702f16}\label{classstate_1_1_list_element_a5a6f3a66e07bfca10a817d2b55702f16}} 
+void {\bfseries load} (const char $\ast$path)
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a2ea8ec069e8691d7d3300792091280a8}\label{classstate_1_1_list_element_a2ea8ec069e8691d7d3300792091280a8}} 
+void {\bfseries notify\+Observer} (int idx=-\/1) const
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_ae60d45d8fab384b8ad942dc337ee273e}\label{classstate_1_1_list_element_ae60d45d8fab384b8ad942dc337ee273e}} 
+void {\bfseries notify\+Observer} (const \hyperlink{classstate_1_1_state_event}{State\+Event} \&event) const
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_a00524c983fc53699699e9ff5929103e7}\label{classstate_1_1_list_element_a00524c983fc53699699e9ff5929103e7}} 
+virtual void {\bfseries copy} (const \hyperlink{classstate_1_1_list_element}{List\+Element} e)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate_1_1_list_element_ad7d70434d4cd8450466d6e4a094b1ac3}\label{classstate_1_1_list_element_ad7d70434d4cd8450466d6e4a094b1ac3}} 
+std\+::vector$<$ \hyperlink{classstate_1_1_element}{Element} $\ast$ $>$ {\bfseries elements}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \hyperlink{classstate_1_1_element_list}{Element\+List} -\/ List of Elements 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/include/List\+Element.\+h\item 
+C\+:/\+Users/corentin/\+Desktop/projet tank/src modif/\+Tank\+State/src/List\+Element.\+cpp\end{DoxyCompactItemize}
