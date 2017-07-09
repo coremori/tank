@@ -1,0 +1,93 @@
+/**
+ * \file ElementBase.h
+ * \brief Basique element
+ * \author Coremori
+ * \version 0.1
+ * \date 08 july 2017
+ *
+ * Basique who does not have life and can't move
+ *
+ */
+
+
+#ifndef ELEMENTBASE__H
+#define ELEMENTBASE__H
+
+#include <string>
+
+#include "ElementGraphic.h"
+
+
+
+
+  /// class Element - 
+  class ElementBase   {
+    // Associations
+    // Attributes
+  protected:
+
+    // Operations
+  public:
+  ElementBase (int id, bool canBeGetAcross , std::string name );
+  virtual ~ElementBase();
+
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief getId
+  /// \return Element id
+  /////////////////////////////////////////////////////////////////////////    
+  int getId () const ;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief getCanBeGetAcross
+  /// \return f_canBeGetAcross
+  /////////////////////////////////////////////////////////////////////////    
+  bool getCanBeGetAcross () const ;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief getName
+  /// \return Element name
+  /////////////////////////////////////////////////////////////////////////    
+  std::string getName () const ;
+
+    ///////////////////////////////////////////////////////////////////////
+  /// \brief getGraphic
+  /// \return Element graphic
+  /////////////////////////////////////////////////////////////////////////    
+  ElementGraphic* getGraphic () const ;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief getLife
+  /// \return Element life if it exist, -1 otherwise
+  /////////////////////////////////////////////////////////////////////////    
+  virtual int getLife () const ;
+
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief takeDamage
+  /// \param power damage done to the life
+  /// \param ignoreDefense if true, the defense is ignored
+  /// \return void
+  /////////////////////////////////////////////////////////////////////////   
+  virtual void takeDamage(const int power, const bool ignoreDefense) ;
+
+  ///////////////////////////////////////////////////////////////////////
+  /// \brief move
+  /// \param dx mouvement x
+  /// \param dy mouvement y
+  /// \return void
+  /////////////////////////////////////////////////////////////////////////   
+  virtual  void move(const int dx, const int dy) ;
+
+
+
+  private :
+  int f_id;
+  int f_canBeGetAcross;
+  ElementGraphic *f_elementGraphic;
+  std::string f_name;
+
+    };
+
+
+#endif

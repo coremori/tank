@@ -1,45 +1,52 @@
-/* 
- * Author: Corentin Morisse & Pierre-Bernard Le Roux 
- * Created on October 25, 2016, 1:48 PM
+/**
+ * \file StateEvent.cpp
+ * \brief Basique Event
+ * \author Coremori
+ * \version 0.1
+ * \date 08 july 2017
  *
- * Part of tank */
+ * Basique Event
+ *
+ */
 
 
 #include "StateEvent.h"
 
-namespace state{
+StateEvent::StateEvent(StateEventId id):
+    f_id(id)
+{
+}
 
-    StateEvent::StateEvent(const State* s, StateEventId id) {
-        this->s = s;
-        this->id = id;
-    }
-       
-    
-    
-    StateEvent::~StateEvent() {
 
-    }
 
-    
-    
-   
-    bool StateEvent::operator==(StateEventId id) const {
-        return (this->id==id);
-    }
-    
-    
-    
-    
-    bool StateEvent::operator!=(StateEventId id) const {
-        return (this->id!=id);
-    }
-
-    
-    
-    
-    StateEvent* StateEvent::clone() const {
-        return new StateEvent(s, id);
-    }
-  
+StateEvent::~StateEvent() {
 
 }
+
+
+
+///////////////////////////////////////////////////////////////////////
+/// \fn operator==
+/// \brief compare the stateevent id
+/// \param id : StateEventId to compare
+/// \return true if the f_id is id
+/////////////////////////////////////////////////////////////////////////
+bool StateEvent::operator==(StateEventId id) const {
+    return (f_id==id);
+}
+
+
+
+///////////////////////////////////////////////////////////////////////
+/// \fn operator!=
+/// \brief compare the stateevent id
+/// \param id : StateEventId to compare
+/// \return false if the f_id is id
+/////////////////////////////////////////////////////////////////////////
+bool StateEvent::operator!=(StateEventId id) const {
+    return (f_id!=id);
+}
+
+
+
+

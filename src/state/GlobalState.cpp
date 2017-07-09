@@ -1,0 +1,83 @@
+/**
+ * \file GlobalState.cpp
+ * \brief Game Information
+ * \author Coremori
+ * \version 0.1
+ * \date 08 july 2017
+ *
+ * Game general information like score and the id of the current player.
+ *
+ */
+
+
+#include "GlobalState.h"
+
+GlobalState::GlobalState():
+    f_score(0),
+    f_idCurrentPlayer(-1),
+    f_nameCurrentPlayer("")
+{
+
+}
+
+///////////////////////////////////////////////////////////////////////
+/// \brief getIdCurrentPlayer
+/// \return Player's id
+/////////////////////////////////////////////////////////////////////////
+int GlobalState::getIdCurrentPlayer() const
+{
+    return f_idCurrentPlayer;
+}
+
+///////////////////////////////////////////////////////////////////////
+/// \brief getNameCurrentPlayer
+/// \return Player name
+/////////////////////////////////////////////////////////////////////////
+std::string GlobalState::getNameCurrentPlayer() const
+{
+    return f_nameCurrentPlayer;
+}
+
+
+///////////////////////////////////////////////////////////////////////
+/// \brief getScore
+/// \return Current Score
+/////////////////////////////////////////////////////////////////////////
+int GlobalState::getScore() const
+{
+    return f_score;
+}
+
+///////////////////////////////////////////////////////////////////////
+/// \brief setIdCurrentPlayer
+/// \param id : new player id
+/// \return void
+/////////////////////////////////////////////////////////////////////////
+void GlobalState::setIdCurrentPlayer(int id)
+{
+    if (id < -1) return;
+    f_idCurrentPlayer = id;
+}
+
+
+///////////////////////////////////////////////////////////////////////
+/// \brief setScore
+/// \param newScore : score
+/// \return void
+/////////////////////////////////////////////////////////////////////////
+void GlobalState::setScore(int newScore)
+{
+    if (newScore < 0) return;
+    f_score = newScore;
+}
+
+
+///////////////////////////////////////////////////////////////////////
+/// \brief setNameCurrentPlayer
+/// \param name : name of the player
+/// \return void
+/////////////////////////////////////////////////////////////////////////
+void GlobalState::setNameCurrentPlayer(std::string name)
+{
+    f_nameCurrentPlayer = name;
+}
