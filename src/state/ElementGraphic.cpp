@@ -13,6 +13,7 @@
 
 
   ElementGraphic::ElementGraphic (int textureX, int textureY, int orientation_serie, int width , int height, bool dontDisplay, int relativePositionX, int relativePositionY, ElementGraphic* master):
+    p_spriteNumber(0),
     f_textureX(textureX),
     f_textureY(textureY),
     f_orientation_serie(orientation_serie),

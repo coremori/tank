@@ -28,7 +28,7 @@
 
     // Operations
   public:
-  ElementBase (int id, bool canBeGetAcross , std::string name );
+  ElementBase (int id, bool canBeGetAcross , ElementGraphic* graphic, std::string name );
   virtual ~ElementBase();
 
 
@@ -54,7 +54,7 @@
   /// \brief getGraphic
   /// \return Element graphic
   /////////////////////////////////////////////////////////////////////////    
-  ElementGraphic* getGraphic () const ;
+  ElementGraphic* getGraphic () ;
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief getLife
@@ -78,8 +78,6 @@
   /// \return void
   /////////////////////////////////////////////////////////////////////////   
   virtual  void move(const int dx, const int dy) ;
-
-
 
   private :
   int f_id;

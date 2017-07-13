@@ -13,8 +13,8 @@
 #include "ElementLiving.h"
 
 
-  ElementLiving::ElementLiving (int life, int defense, int id, bool canBeGetAcross , std::string name ):
-    ElementBase(id, canBeGetAcross, name),
+  ElementLiving::ElementLiving (int life, int defense, int id, ElementGraphic* graphic, bool canBeGetAcross , std::string name ):
+    ElementBase(id, canBeGetAcross, graphic, name),
     f_life(life),
     f_defense(defense),
     f_lifeAnimation(nullptr),

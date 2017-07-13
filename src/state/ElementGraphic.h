@@ -103,7 +103,9 @@
   /////////////////////////////////////////////////////////////////////////   
 void setNewSubGraphic( ElementGraphic* SubGraphic) ;
 
-
+//Variable :
+public :
+int p_spriteNumber;
 
   private :
     int f_textureX ;

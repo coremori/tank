@@ -22,6 +22,9 @@
 
 #include "trace.h"
 
+#define STD_HEIGHT 8
+#define STD_WIDTH 8
+
 ElementFactory::ElementFactory()
 {
 
@@ -30,16 +33,28 @@ ElementFactory::ElementFactory()
 
 ///////////////////////////////////////////////////////////////////////
 /// \fn createElementSub
-/// \brief make a new instance of Element which symbol is str, and stock it in f_design
+/// \brief make a new instance of Element which symbol is str, and store it in f_design
 /// \param str : symbol of the element
 /// \return false if the symbol don't exist, true otherwise.
 /////////////////////////////////////////////////////////////////////////
 bool ElementFactory::createElementSub(std::string str)
 {
     std::string CONFIG_MAP("C:\\Users\\coren\\Documents\\tank\\tank\\res\\configmap");
+    //Tempo : one image file
+    //TODO : check that argument for std::stol are number (throw exception otherwise)
+
+    //Ecriture : x y direction move-type life defense id canbecrossed name
     std::ifstream configfile(CONFIG_MAP);
 
     int std_id = -1, life = -1, defense =-1, direction =-1, movetype=-1, x=-1, y=-1;
+
+    int spriteWith(STD_WIDTH);
+    int spriteHeight(STD_HEIGHT);
+    bool dontDisplay = false;
+    int textureX = 0, textureY = 0, orientation_serie = 0;
+    ElementGraphic *graphic;
+
+    // int textureX, int textureY, int orientation_serie, int width , int height, bool dontDisplay, int relativePositionX, int relativePositionY, ElementGraphic* master
     bool crossable;
     std::string name;
     char s;
@@ -54,6 +69,17 @@ bool ElementFactory::createElementSub(std::string str)
             // If it's the symbole we want
             if (line == str)
             {
+                getline(configfile,line,' ');
+                textureX =  std::stol(line);
+                
+                getline(configfile,line,' ');
+                textureY =  std::stol(line);
+                
+                getline(configfile,line,' ');
+                orientation_serie = std::stol(line);
+
+                graphic = new ElementGraphic(textureX, textureY, orientation_serie, spriteWith, spriteHeight, dontDisplay)
+
                 getline(configfile,line,' ');
 
                 // we check the object type
@@ -72,8 +98,9 @@ bool ElementFactory::createElementSub(std::string str)
                   getline(configfile,line,' ');
                   name = line;
 
+
                   // we create our element
-                  newElement = new ElementBase( std_id, crossable, name);
+                  newElement = new ElementBase( std_id, crossable, graphic, name);
                 }
                 else if (line == "l") // 'l' for ElementLiving
                 {
@@ -98,7 +125,7 @@ bool ElementFactory::createElementSub(std::string str)
                   name = line;
 
                   //we create our element
-                  newElement = new ElementLiving( life, defense, std_id, crossable, name);
+                  newElement = new ElementLiving( life, defense, std_id, graphic, crossable, name);
 
                 }
                 else if (line == "m") // 'm' for ElementMobile
@@ -142,7 +169,7 @@ bool ElementFactory::createElementSub(std::string str)
                     name = line;
 
                   //we create our element
-                  newElement = new ElementMobile(x, y, direction, MoveTypeEnum, life, defense, std_id, crossable, name);
+                  newElement = new ElementMobile(x, y, direction, MoveTypeEnum, life, defense, std_id, graphic, crossable, name);
 
                 }
                 else
@@ -153,7 +180,7 @@ bool ElementFactory::createElementSub(std::string str)
                 }
 
                 // Graphical go here
-
+                
 
                 //After that, we save it :)
                 f_design[str] = newElement;

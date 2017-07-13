@@ -14,6 +14,7 @@
 
 #include "Animation.h"
 #include "ElementBase.h"
+#include "ElementGraphic.h"
 #include <string>
 
 
@@ -27,7 +28,7 @@
 
     // Operations
   public:
-  ElementLiving (int life, int defense, int id, bool canBeGetAcross = false, std::string name = NULL);
+  ElementLiving (int life, int defense, int id,  , ElementGraphic* graphic, bool canBeGetAcross = false, std::string name = NULL);
       
   ~ElementLiving();
       

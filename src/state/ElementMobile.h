@@ -32,7 +32,7 @@
 
     // Operations
   public:
-    ElementMobile (int x, int y, int direction, Move_Type moveType, int life, int defense, int id, bool canBeGetAcross = false, std::string name = NULL);
+    ElementMobile (int x, int y, int direction, Move_Type moveType, int life, int defense, int id, ElementGraphic* graphic, bool canBeGetAcross = false, std::string name = NULL);
 
 
 	///////////////////////////////////////////////////////////////////////

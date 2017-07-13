@@ -13,8 +13,8 @@
 
 
 
-ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, int life, int defense, int id, bool canBeGetAcross , std::string name ):
-	ElementLiving(life, defense, id, canBeGetAcross, name),
+ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, int life, int defense, int id, ElementGraphic* graphic,  bool canBeGetAcross , std::string name ):
+	ElementLiving(life, defense, id, graphic, canBeGetAcross, name),
 	f_x(x),
 	f_y(y),
   f_direction(direction),
@@ -76,7 +76,11 @@ ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, 
    /// \return void
    /////////////////////////////////////////////////////////////////////////   
    void ElementMobile::setDirection(const int newDirection){
+    if (newDirection < 0)
+      return;
+
        f_direction = newDirection;
+       El
    }
 
 

@@ -15,9 +15,10 @@
 
 
 
-  ElementBase::ElementBase (int id, bool canBeGetAcross , std::string name ):
+  ElementBase::ElementBase (int id, bool canBeGetAcross , ElementGraphic* graphic, std::string name):
     f_id(id),
     f_canBeGetAcross(canBeGetAcross),
+    f_elementGraphic(graphic),
     f_name(name)
   { 
     //TODO : Graphique
@@ -60,7 +61,7 @@
   /// \brief getGraphic
   /// \return Element graphic
   /////////////////////////////////////////////////////////////////////////    
-  ElementGraphic* ElementBase::getGraphic () const {
+  ElementGraphic* ElementBase::getGraphic () {
     return f_elementGraphic;
   }
 

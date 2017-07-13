@@ -18,6 +18,7 @@
 
 #include "ElementBase.h"
 #include "ElementFactory.h"
+#include "GlobalState.h"
 
 class ElementManager
 {
@@ -91,6 +92,8 @@ public:
 //    void notifyObserver(const StateEvent* event);
 
 
+public:
+    GlobalState p_worldInfo;
 private:
     int f_width;
     int f_height;
