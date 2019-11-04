@@ -1,0 +1,7 @@
+Compile project : 
+ - install SFML : sudo apt-get install libsfml-dev
+ - install libxml2 : sudo apt-get install libxml2-dev
+
+ - Configure extern lib : in ./extern : ./configure
+  - Configure CMake : At the project root : ./dia2code/build.sh
+-Launch : ./bin/run

@@ -6,7 +6,7 @@ MAIN_DIR=$PWD
 cd "$MAIN_DIR" || exit 2
 tar -xzf jsoncpp-0.10.5.tar.gz || exit 2
 cd jsoncpp-0.10.5 || exit 2
-python amalgamate.py || exit 2
+python3 amalgamate.py || exit 2
 
 
 # libmicrohttpd
