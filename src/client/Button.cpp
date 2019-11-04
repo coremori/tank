@@ -2,6 +2,8 @@
  * Author: Corentin Morisse & Pierre-Bernard Le Roux 
  * Created on November 17, 2016, 3:35 PM
  *
+ * Class BUTTON
+ *
  * Part of tank */
 
 
@@ -15,8 +17,8 @@
 namespace client{
     
 
-
-    Button::Button(const char* image_file, engine::Command* command, unsigned int xTex, unsigned int widthButton, unsigned int heightButton, bool Hoover, unsigned int xPos, unsigned int yPos) {
+    Button::Button(const char* image_file, engine::Command* command, unsigned int xTex, unsigned int widthButton, 
+                    unsigned int heightButton, bool Hoover, unsigned int xPos, unsigned int yPos) {
         /* Dans l'ordre : 
          * image_file : emplacement texture
          * command : commande à exécuter lors d'un appuie
@@ -30,20 +32,26 @@ namespace client{
         
         this->command = command;//stockage de la commande a effectue en cas d'appuie
         
-        if (!m_tilesetButton.loadFromFile(image_file))//chargement de la texture
+        // Chargement de la texture
+        if (!m_tilesetButton.loadFromFile(image_file))
+        {
             std::cout << "Erreur - " << image_file <<" non chargé" << std::endl;
+            return;
+        }
        
         s_button.push_back(new sf::Sprite());
         s_button[0]->setTexture(m_tilesetButton);
         s_button[0]->setTextureRect(sf::IntRect(xTex, 0, widthButton, heightButton));
         s_button[0]->setPosition(xPos,yPos);
-        if(Hoover){// on a une texture pour le passage sur le boutton
+        // Si on a une texture pour le passage sur le boutton
+        if (Hoover){
             s_button.push_back(new sf::Sprite());
             s_button[1]->setTexture(m_tilesetButton);
             s_button[1]->setTextureRect(sf::IntRect(xTex, heightButton, widthButton, heightButton));//on suppose qu'ils sont alligné verticalement
             s_button[1]->setPosition(xPos,yPos); 
         }
-        this->frame = new sf::IntRect(xPos,yPos,widthButton,heightButton);//on enregistre la zone de réaction du boutton
+        // On enregistre la zone de réaction du boutton
+        this->frame = new sf::IntRect(xPos,yPos,widthButton,heightButton);
     }
         
     

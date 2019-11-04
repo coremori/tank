@@ -36,7 +36,7 @@ namespace client{
          */
         command = new engine::CommandSet();
         command_waiting = new engine::CommandSet();
-        http.setHost("http://localhost",8080);
+        http.setHost("http://localhost", 8080);
         sf::Http::Request request;
         request.setMethod(sf::Http::Request::Get);
         request.setUri("user");
@@ -56,9 +56,15 @@ namespace client{
             Json::Value jsonIn;
 
             if (!jsonReader.parse(response.getBody(),jsonIn))
+            {
                     std::cout << "Données invalides: "+jsonReader.getFormattedErrorMessages() << std::endl;
-            character = jsonIn["character"].asInt();
-            already = 1;
+            }
+            else
+            {
+                character = jsonIn["character"].asInt();
+                already = 1;
+            }
+
         }
         //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<    SFML    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         rendu = new PiloteSFML(&state, &engine, character, this);      

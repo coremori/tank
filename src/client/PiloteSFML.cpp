@@ -28,32 +28,32 @@ namespace client{
 
     
     
-    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, int character, Pilote* pilote){
+    PiloteSFML::PiloteSFML(state::State* state, engine::Engine* e, int character, Pilote* pilote):
+        pilote(pilote),
+        character(character)
+    {
         /* Set  the scene to display
          * Create the layer and register then to the state
          * Create the Surface
          * */
-        this->pilote = pilote;
-       // this->commandList = commandList;
-        this->character = character;
         this->scene = *(new render::Scene());
         obs.push_back(&scene);
-        obs.push_back(new render::LandscapeLayer());
-        obs.push_back(new render::MobileLayer());
-        obs.push_back(new render::CharLayer());
-
-        render::LandscapeLayer* landlayer = dynamic_cast<render::LandscapeLayer*>(obs[1]);
-        render::MobileLayer* mobilelayer = dynamic_cast<render::MobileLayer*>(obs[2]);
-        render::CharLayer* charlayer = dynamic_cast<render::CharLayer*>(obs[3]);
+       
+        render::LandscapeLayer* landlayer(new render::LandscapeLayer());
+        obs.push_back(landlayer);
+        render::MobileLayer* mobilelayer(new render::MobileLayer());
+        obs.push_back(mobilelayer);
+        render::CharLayer* charlayer(new render::CharLayer());
+        obs.push_back(charlayer);
 
         scene.setLayer(0,landlayer);
         scene.setLayer(1,mobilelayer);
         scene.setLayer(2,charlayer);
 
-        state->getGrid().registerObserver(obs[1]);
-        state->getMobiles().registerObserver(obs[2]);
-        state->getMobiles().registerObserver(obs[3]);
-        state->registerObserver(obs[0]);
+        state->getGrid().registerObserver(landlayer);
+        state->getMobiles().registerObserver(mobilelayer);
+        state->getMobiles().registerObserver(charlayer);
+        state->registerObserver(&scene);
 
         surfaces.push_back(new SurfaceSFML());
         surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour la victoire
