@@ -52,8 +52,8 @@ namespace server {
                 size_t pos = 0;
                 characterSender = stoi(end,&pos);//string to integer, pos devient = position juste après le dernier chiffre (425de -> pos = 3 (adresse de d))
                 end = end.substr(pos);
-                if(method == "GET"){
-                    if(end[0] != '/')
+                if (method == "GET"){
+                    if (end[0] != '/')
                          throw ServiceException(HttpStatus::BAD_REQUEST,"Url malformée (forme attendue: <service>/<nombre>/<nombre>)");
                     end = end.substr(1);
                     if (end.empty())// si pas de nombre

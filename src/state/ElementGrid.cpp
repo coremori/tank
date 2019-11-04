@@ -26,7 +26,7 @@ namespace state {
     };
           
     bool ElementGrid::isSpace (int i, int j)  const{
-        if(this->hasCell(i,j))
+        if (this->hasCell(i,j))
         {
             return elements[j*width+i]->getTypeId()==space;
         }
@@ -34,7 +34,7 @@ namespace state {
     };
     
     void ElementGrid::setCell (int i, int j, Element* e){
-        if(this->hasCell(i,j))
+        if (this->hasCell(i,j))
         {
             ElementList::set(j*width+i, e);
         }

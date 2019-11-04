@@ -33,11 +33,11 @@ namespace ai{
         Node* toDo = slaveGardener->Start();
         shot();
         nextOrientation();
-        if(toDo->choiceMove[0] == left){
+        if (toDo->choiceMove[0] == left){
             this->commands->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
         }
-        else if(toDo->choiceMove[0] == right){
+        else if (toDo->choiceMove[0] == right){
             this->commands->add(new engine::MoveCommand(character,8,0));
             //command move to the right
         }

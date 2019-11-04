@@ -16,7 +16,6 @@ namespace state {
     // Operations
   public:
     bool isStatic () const;
-    virtual bool isSpace () const = 0;
   };
 
 };

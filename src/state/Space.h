@@ -21,10 +21,10 @@ namespace state {
     // Operations
   public:
     Space (SpaceTypeId id, int x, int y);
-    virtual bool isSpace () const;
-    TypeId getTypeId () const;
+    virtual bool isSolid () const;
+    virtual TypeId getTypeId () const;
     SpaceTypeId getSpaceTypeId () const;
-    Element* clone () const;
+    virtual Element* clone () const;
   };
 
 };

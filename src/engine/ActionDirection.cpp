@@ -33,7 +33,7 @@ namespace engine {
         OldDirection = tank->getOrientation();
         tank->setOrientation(Newdirection);
         
-        if(notify==true){
+        if (notify==true){
             s->getMobiles().notifyObserver(character);
             std::cout << "character "<<character<<" regarde vers" ;
             switch(Newdirection){

@@ -16,8 +16,8 @@ namespace state{
         this->y=y;
     };
     
-    bool Obstacle::isSpace () const {
-        return false;
+    bool Obstacle::isSolid () const {
+        return true;
     };
     
     TypeId Obstacle::getTypeId () const {

@@ -41,7 +41,7 @@ namespace engine{
     
     bool Record::replayOne (){
         unsigned i = idx;
-        if(i >=actions.size())
+        if (i >=actions.size())
             return false;
         actions[idx]->apply();
         idx ++;
@@ -58,7 +58,7 @@ namespace engine{
         while(nofini)
         {
             elapsed = clock::now() - start;
-            if(elapsed.count()>=20)
+            if (elapsed.count()>=20)
             {
                 nofini = rollbackOne();
             }
@@ -66,7 +66,7 @@ namespace engine{
     }
     
     bool Record::rollbackOne (){
-        if(!actions.size())// Si pas de tour enregistrer (pas de tour précédent)
+        if (!actions.size())// Si pas de tour enregistrer (pas de tour précédent)
             return false;
         actions[actions.size()-1]->undo();
         actions.pop_back();

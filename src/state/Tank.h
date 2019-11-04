@@ -19,16 +19,12 @@ namespace state {
     // Associations
     state::TankTypeId TankType;
     state::Orientation orientation;
-    // Attributes
-  protected:
-    int pv;
     // Operations
   public:
     Tank (TankTypeId tanktypeid, Orientation orientation, int x, int y);
-    bool isStatic () const;
-    TypeId getTypeId () const;
-    void setPv (int pv);
-    int getPv () const;
+    virtual bool isStatic () const;
+    virtual bool isSolid () const;
+    virtual TypeId getTypeId () const;
     Orientation getOrientation () const;
     void setOrientation (Orientation o);
     void setTankTypeId (TankTypeId id);

@@ -39,7 +39,7 @@ namespace server {
     int UserDB::addUser () {// ajouter un utilisateur
                 
         int id = idseq++;
-        if(id<2){
+        if (id<2){
             auto ite = users.find(id);
             if (ite == users.end())
                 return -1;

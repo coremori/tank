@@ -12,8 +12,8 @@ namespace state {
         this->SpaceType = id;
     };
     
-    bool Space::isSpace () const {
-        return true;
+    bool Space::isSolid () const {
+        return false;
     };
     
     TypeId Space::getTypeId () const {

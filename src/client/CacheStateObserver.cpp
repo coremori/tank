@@ -14,19 +14,16 @@ namespace client{
 
             
     void CacheStateObserver::stateChanged(const state::StateEvent& e) {
-        /* Save the event create by the engine thread in stateEvent
+        /* Save the event create by the engine thread in SstateEvent
          */
         stateEvent.push_back(e.clone());
-    }
-
-    
-    
+    }   
     
     
     void CacheStateObserver::clear() {
         /* clear the stateEvent list
          */
-        for(unsigned int i = 0; i<stateEvent.size(); i++)
+        for(unsigned int i = 0; i < stateEvent.size(); i++)
             delete(stateEvent[i]);
         stateEvent.clear();
     }

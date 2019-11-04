@@ -26,6 +26,15 @@ namespace state {
     void Element::setY (int y){
         this->y = y;
     };
+
+    void Element::setPV (int pv){
+        // Les pv ne peuvent pas passer sous zéro
+        this->pv = pv < 0 ? 0 : pv;
+    };
+    
+    int Element::getPV () const {
+        return this->pv;
+    };
 };
 
 

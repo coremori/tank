@@ -68,7 +68,7 @@ namespace engine{
     
     void Engine::addCommand(Command* cmd) {//lock mutex commands and add them to "waitingcommands"
         commands_mutex.lock();
-        if(cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage ou c'est une commande prioritaire indépendante du joueur
+        if (cmd->getCharacter()==charTurn || cmd->getCharacter()==-1)//si c'est au tour du personnage ou c'est une commande prioritaire indépendante du joueur
             waitingcommands->add(cmd);
         commands_mutex.unlock();
     };
@@ -85,11 +85,11 @@ namespace engine{
         /* The engine mode will be the parameter
          * If it is already the mode, then the next mode will be "play"
          */
-        if(mode==m)
+        if (mode==m)
             mode = play;
         else 
             mode = m;
-        if(mode == replay){
+        if (mode == replay){
             update_mutex.lock();
             reccord.startReplay();
             update_mutex.unlock();
@@ -147,7 +147,7 @@ namespace engine{
         for(int i = 0; i<state->getMobiles().size(); i++)
         {
             state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
-            if(tank->getPv() == 0){
+            if (tank->getPV() == 0){
                 mode = Finish;
                 std::cout << "Victory character " << (i?0:1) << std::endl;
             }
@@ -196,7 +196,7 @@ namespace engine{
          * pas nécessaires pour vérifier leur existence (puisque le render ne peut pas les supprimer, juste les remplacer)
          */
         
-        if(waitingcommands->get(MAIN_CATEGORY))//Load commande
+        if (waitingcommands->get(MAIN_CATEGORY))//Load commande
         {
             update_mutex.lock();
             swapCommands();
@@ -204,9 +204,9 @@ namespace engine{
             state->load(load->getFileName());
             update_mutex.unlock();
         }
-        else if(waitingcommands->get(MODE_CATEGORY))
+        else if (waitingcommands->get(MODE_CATEGORY))
         {
-            if(!AnimRunning){
+            if (!AnimRunning){
             commands_mutex.lock();
             ModeCommand* modeCmd = dynamic_cast<ModeCommand*>(waitingcommands->get(MODE_CATEGORY));//on change le mode mais conserve la liste en attente
             setMode(modeCmd->getMode());
@@ -215,10 +215,10 @@ namespace engine{
             }
         }
         
-        if(mode == AI || mode == play){
-            if(waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
+        if (mode == AI || mode == play){
+            if (waitingcommands->get(END_CATEGORY) && !AnimRunning)//si pas d'anim en cours et commande fin de tour lancé
             {
-                if((timeNow-lastEndTurnTime)>=timeinterval){
+                if ((timeNow-lastEndTurnTime)>=timeinterval){
                     update_mutex.lock();
                     endTurn();
                     update_mutex.unlock();
@@ -229,11 +229,11 @@ namespace engine{
                 }
             }
         }
-        else if(mode == replay){
-            if((timeNow-lastEndTurnTime)>timeinterval){//timeinterval ms between each turn
+        else if (mode == replay){
+            if ((timeNow-lastEndTurnTime)>timeinterval){//timeinterval ms between each turn
                 update_mutex.lock();
-                if(!AnimRunning)
-                    if(!reccord.replayOne()){
+                if (!AnimRunning)
+                    if (!reccord.replayOne()){
                         mode = play;
                         endTurn();
                     }
@@ -260,27 +260,27 @@ namespace engine{
         
     
     void Engine::takeCommands(CommandSet* commandset) {/* prend un commandset et transfert les commandes vers celui de l'engine*/
-        if(commandset->get(MAIN_CATEGORY))
+        if (commandset->get(MAIN_CATEGORY))
         {
             addCommand(commandset->get(MAIN_CATEGORY));
         }
-        if(commandset->get(END_CATEGORY))
+        if (commandset->get(END_CATEGORY))
         {
             addCommand(commandset->get(END_CATEGORY));
         }
-        if(commandset->get(MODE_CATEGORY))
+        if (commandset->get(MODE_CATEGORY))
         {
             addCommand(commandset->get(MODE_CATEGORY));
         }
-        if(commandset->get(VIEW_CATEGORY))
+        if (commandset->get(VIEW_CATEGORY))
         {
             addCommand(commandset->get(VIEW_CATEGORY));
         }
-        if(commandset->get(MOVE_CATEGORY))
+        if (commandset->get(MOVE_CATEGORY))
         {
             addCommand(commandset->get(MOVE_CATEGORY));
         }
-        if(commandset->get(SHOT_CATEGORY))
+        if (commandset->get(SHOT_CATEGORY))
         {
             addCommand(commandset->get(SHOT_CATEGORY));
         }

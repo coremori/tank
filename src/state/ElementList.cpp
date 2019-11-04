@@ -42,7 +42,7 @@ namespace state {
     
   
     void ElementList::set ( int idx, Element* e){
-        if(idx==size())
+        if (idx==size())
             elements.push_back(e);
         elements[idx] = e;
     };
@@ -58,7 +58,7 @@ namespace state {
         int w,h;
         
         
-        if(myfile.is_open()){
+        if (myfile.is_open()){
             
             myfile >> w >> h;
             s.getGrid().setWidth(w);
@@ -70,23 +70,23 @@ namespace state {
                 
                 for(unsigned int i = 0; i < line.length(); i++){
                     
-                    if(line.at(i)=='.'){
+                    if (line.at(i)=='.'){
                         this->elements.push_back(new Space(sky,x,y));
                     }
-                    else if(line.at(i)=='|'){
+                    else if (line.at(i)=='|'){
                         this->elements.push_back(new Space(greenery,x,y));
                     }
-                    else if(line.at(i)=='-'){
+                    else if (line.at(i)=='-'){
                         this->elements.push_back(new Obstacle(sand,x,y));
                     }
-                    else if(line.at(i)=='~'){
+                    else if (line.at(i)=='~'){
                         this->elements.push_back(new Obstacle(border,x,y));
                     }
-                    else if(line.at(i)=='&'){ //Human tank
+                    else if (line.at(i)=='&'){ //Human tank
                         this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_green,right_down,x,y));
                     }
-                    else if(line.at(i)=='%'){ //AI tank
+                    else if (line.at(i)=='%'){ //AI tank
                         this->elements.push_back(new Space(sky,x,y));
                         s.getMobiles().elements.push_back(new Tank(Little_tank_grey,left_down,x,y));
                     }

@@ -144,7 +144,7 @@ namespace render {
     };
 
     void Layer::update (){// update tiles who have been modified
-        if(numTileToUpdate.size()==0)
+        if (numTileToUpdate.size()==0)
             return;
         for(unsigned int i = 0; i<numTileToUpdate.size(); i++)
             surface->setSpriteNum(numTileToUpdate[i],tiles[numTileToUpdate[i]]);
@@ -157,9 +157,9 @@ namespace render {
     }
         
     bool Layer::updateAnimation() {
-        if(animation != NULL)//animation existe
+        if (animation != NULL)//animation existe
         {
-            if(!animation->setNextTile(&tiles[tiles.size()-1]))//set the next tile of the animation and return false if it is finish
+            if (!animation->setNextTile(&tiles[tiles.size()-1]))//set the next tile of the animation and return false if it is finish
             {
                 delete(animation);
                 animation = NULL;

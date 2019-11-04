@@ -21,11 +21,11 @@ namespace state {
     // Operations
   public:
     Obstacle (ObstacleTypeId id, int x, int y);
-    virtual bool isSpace () const;
-    TypeId getTypeId () const;
+    virtual bool isSolid () const;
+    virtual TypeId getTypeId () const;
     void setObstacleTypeId (ObstacleTypeId id);
     ObstacleTypeId getObstacleTypeId () const;
-    Element* clone () const;
+    virtual Element* clone () const;
   };
 
 };

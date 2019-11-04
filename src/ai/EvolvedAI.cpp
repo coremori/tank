@@ -19,18 +19,18 @@ namespace ai{
     
     
     void EvolvedAI::nextOrientation() {//determine the next orientation        
-        if(distanceUtility.inMissileFireRange()){
-            if(distanceUtility.getDistance() < 0)
+        if (distanceUtility.inMissileFireRange()){
+            if (distanceUtility.getDistance() < 0)
                 commands->add(new engine::DirectionCommand(character,state::left_up));
             else
                 commands->add(new engine::DirectionCommand(character,state::right_up));
                 
-            //else if(distanceOtherChar()==0)
+            //else if (distanceOtherChar()==0)
                 //si ils sont au même endroit, on fait un suicide?
         }        
-        else if(distanceUtility.inShellFireRange(state,character))
+        else if (distanceUtility.inShellFireRange(state,character))
         {
-            if(distanceUtility.getDistance() < 0)
+            if (distanceUtility.getDistance() < 0)
                 commands->add(new engine::DirectionCommand(character,state::left_down));
             else
                 commands->add(new engine::DirectionCommand(character,state::right_down));
@@ -43,7 +43,7 @@ namespace ai{
     
     
     void EvolvedAI::shot() {//if we can shot the other player, we do it
-        if(distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
+        if (distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
             commands->add(new engine::ShotCommand(character,10));
     }
 }

@@ -42,9 +42,9 @@ namespace ai{
          * Use the minimax Recursion algorithme
          */
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        ActualpvDif  = tank->getPv(); // pv de notre joueur
+        ActualpvDif  = tank->getPV(); // pv de notre joueur
         tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
-        ActualpvDif  -= tank->getPv(); // pv du joueur adverse
+        ActualpvDif  -= tank->getPV(); // pv du joueur adverse
         //distanceUtility.updateDistance(state,character);
         Node* root = new Node();
         root->score = 0;
@@ -67,14 +67,14 @@ namespace ai{
          * score -= 1000 if lost
          */
         state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        int pvMe = tank->getPv(); // pv de notre joueur
+        int pvMe = tank->getPV(); // pv de notre joueur
         tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
-        int pvOther = tank->getPv(); // pv du joueur adverse
+        int pvOther = tank->getPV(); // pv du joueur adverse
         int score = 0;
-        if(pvOther == 0){
+        if (pvOther == 0){
             score += 1000;
         }
-        else if(pvMe == 0){
+        else if (pvMe == 0){
             score -= 1000;
         }
         
@@ -88,7 +88,7 @@ namespace ai{
     void Gardener::shot(int character) {
         /* If we can impact the other, we shot
          */
-        if(distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
+        if (distanceUtility.inMissileFireRange() || distanceUtility.inShellFireRange(state,character))
             commandsTest->add(new engine::ShotCommand(character,10));
     }
 
@@ -96,18 +96,18 @@ namespace ai{
         /* Create the command for the best next orientation
          * Orientation selected is the greatest damage 
          */
-        if(distanceUtility.inMissileFireRange()){
-            if(distanceUtility.getDistance() < 0)
+        if (distanceUtility.inMissileFireRange()){
+            if (distanceUtility.getDistance() < 0)
                 commandsTest->add(new engine::DirectionCommand(character,state::left_up));
             else
                 commandsTest->add(new engine::DirectionCommand(character,state::right_up));
                 
-            //else if(distanceOtherChar()==0)
+            //else if (distanceOtherChar()==0)
                 //si ils sont au même endroit, on fait un suicide?
         }        
-        else if(distanceUtility.inShellFireRange(state,character))
+        else if (distanceUtility.inShellFireRange(state,character))
         {
-            if(distanceUtility.getDistance() < 0)
+            if (distanceUtility.getDistance() < 0)
                 commandsTest->add(new engine::DirectionCommand(character,state::left_down));
             else
                 commandsTest->add(new engine::DirectionCommand(character,state::right_down));
@@ -135,7 +135,7 @@ namespace ai{
          * Calculate and return the maximun score of the children
          *
          */
-        if(node->depth == depthMax){
+        if (node->depth == depthMax){
             evaluateScore(node);
             return node;
         }
@@ -145,17 +145,17 @@ namespace ai{
             Node* examNode = NULL;
             for(int i = 0; i<3 ; i++){
                 createChild(node);
-                if(i==0){
+                if (i==0){
                     nodeWarehouse.back()->choiceMove.push_back(left);
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
                 }
-                else if(i==1){
+                else if (i==1){
                     nodeWarehouse.back()->choiceMove.push_back(noMove);
                     //commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command do nothing
                 }
-                else if(i==2){
+                else if (i==2){
                     nodeWarehouse.back()->choiceMove.push_back(right);
                     commandsTest->add(new engine::MoveCommand(character,8,0));
                     //command move to the right
@@ -175,9 +175,9 @@ namespace ai{
                 //ruler->apply();
                 
                 examNode = ApplyActionMin(nodeWarehouse.back());
-                if(maxNode == NULL)
+                if (maxNode == NULL)
                     maxNode = examNode;
-                else if(examNode->score > maxNode->score)
+                else if (examNode->score > maxNode->score)
                     maxNode = examNode;
                 
               //on repasse à l'état de départ
@@ -197,7 +197,7 @@ namespace ai{
          * Calculate and return the minimum score of the node's children
          *
          */
-        if(node->depth == depthMax){
+        if (node->depth == depthMax){
             evaluateScore(node);
             return node;
         }
@@ -208,17 +208,17 @@ namespace ai{
             for(int i = 0; i<3 ; i++){
                 createChild(node);
                 
-                if(i==0){
+                if (i==0){
                     nodeWarehouse.back()->choiceMove.push_back(left);
                     commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command move to the left
                 }
-                else if(i==1){
+                else if (i==1){
                     nodeWarehouse.back()->choiceMove.push_back(noMove);
                     //commandsTest->add(new engine::MoveCommand(character,-8,0));
                     //command do nothing
                 }
-                else if(i==2){
+                else if (i==2){
                     nodeWarehouse.back()->choiceMove.push_back(right);
                     commandsTest->add(new engine::MoveCommand(character,8,0));
                     //command move to the right
@@ -238,9 +238,9 @@ namespace ai{
                 
                 examNode = ApplyActionMin(nodeWarehouse.back());
                 
-                if(minNode == NULL)
+                if (minNode == NULL)
                     minNode = examNode;
-                else if(examNode->score > minNode->score)
+                else if (examNode->score > minNode->score)
                     minNode = examNode;
                 
                 

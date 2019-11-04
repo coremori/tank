@@ -35,7 +35,7 @@ namespace ai{
     bool DistanceUtility::inMissileFireRange() const {
         /*Returns true if fire a missile will impact the othe rplayer
          * */ 
-        if(distance==80 || distance==-80 )//si on vise en haut - à modifier lorsque la puissance de tir sera intégrée
+        if (distance==80 || distance==-80 )//si on vise en haut - à modifier lorsque la puissance de tir sera intégrée
             return true;
         else
             return false;
@@ -54,13 +54,13 @@ namespace ai{
         int other = (character)? 0:1;
         int distance = (state->getMobile(other)->getX()-state->getMobile(character)->getX())/8;        
         
-        if(!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
+        if (!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
             return false;
             
         int x = tank->getX()/8;
         int y = tank->getY()/8;
 
-        if(distance>=0)
+        if (distance>=0)
         {
             while(distance>=1 && (state->getGrid().isSpace(x,y)))
             {
@@ -69,7 +69,7 @@ namespace ai{
             }
 
         }
-        else if(distance<0)
+        else if (distance<0)
         {
             while(distance<=-1 && (state->getGrid().isSpace(x,y)))
             {

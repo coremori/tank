@@ -17,25 +17,17 @@ namespace state {
         return false;
     }
 
+    bool Tank::isSolid () const
+    {
+        // on ne peut pas être traversé
+        return true;
+    }
+
     
     TypeId Tank::getTypeId () const {
         return tank;
     };
-        
-    void Tank::setPv (int pv){
-        if(pv<0){
-            this->pv = 0;
-        }
-        else
-        {
-            this->pv = pv;
-        }
-    };
-    
-    int Tank::getPv () const {
-        return this->pv;
-    };
-    
+           
     state::Orientation Tank::getOrientation () const {
         return orientation;
     };
@@ -53,8 +45,8 @@ namespace state {
     };
         
     Element* Tank::clone() const {
-        Tank* newtank = new Tank(TankType,orientation,x,y);
-        newtank->setPv(pv);
+        Tank* newtank(new Tank(TankType, orientation, x, y));
+        newtank->setPV(pv);
         return newtank;
     }
 

@@ -21,10 +21,10 @@
 namespace render{
     void MobileLayer::applyStateChanged() {//move tank sprite's and create the projectiles
         for(unsigned int i = 0; i<stateEvent.size(); i++){
-            if(*stateEvent[i]==state::Element_Changed)
+            if (*stateEvent[i]==state::Element_Changed)
             {
                 const state::ElementEvent* event = static_cast<const state::ElementEvent*>(stateEvent[i]);
-                if(event->idx!=-1)// -1 = changement de niveau
+                if (event->idx!=-1)// -1 = changement de niveau
                 {
                     unsigned int idx = event->idx;
 
@@ -79,7 +79,7 @@ namespace render{
             {
                 const state::ProjectileEvent* event = static_cast<const state::ProjectileEvent*>(stateEvent[i]);
                         
-                if(event->yMax==-1)//type shell
+                if (event->yMax==-1)//type shell
                 {
                     tiles.push_back(*(new Tile(event->xStart, event->yStart, 8, 8)));
                     tiles[tiles.size()-1].setXTex(0);

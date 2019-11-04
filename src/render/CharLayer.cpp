@@ -39,7 +39,7 @@ namespace render {
                 clear();
                 /* for player 1*/
                 const state::Tank* tank = static_cast<const state::Tank*>(e.s->getMobile(0));            
-                std::string numStr = patch::to_string(tank->getPv());
+                std::string numStr = patch::to_string(tank->getPV());
                 for(i = 0; i<s.size(); i++)
                     charToTiles(s[i],XChar , 50 + 8*i);
                 
@@ -53,7 +53,7 @@ namespace render {
                 
                 /* for player 2*/                              
                 const state::Tank* tank2 = static_cast<const state::Tank*>(e.s->getMobile(1));            
-                numStr = patch::to_string(tank2->getPv());
+                numStr = patch::to_string(tank2->getPV());
                 for(i = 0; i<s.size(); i++)
                     charToTiles(s[i],XChar + 16 , 50 + 8*i);
                 

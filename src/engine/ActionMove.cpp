@@ -14,7 +14,7 @@ namespace engine {
         //next position is actual + (dx,dy))
         s->getMobile(character)->setX(s->getMobiles().get(character)->getX()+dx);
         s->getMobile(character)->setY(s->getMobiles().get(character)->getY()+dy);
-        if(notify==true){
+        if (notify==true){
             s->getMobiles().notifyObserver(character);
             std::cout << "character "<<character<<" bouge vers + ("<<dx/8<<","<<dy/8<<")" << std::endl;
         }

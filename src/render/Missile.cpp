@@ -20,13 +20,13 @@ namespace render{
             
     bool Missile::setNextTile(Tile* tile) {
         
-        if((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))//vertical d'impact
+        if ((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))//vertical d'impact
         {
-            if(tile->getY()>=yEnd)
+            if (tile->getY()>=yEnd)
             {
-                if(countTimeExplosion == 5)//dure 10 frame
+                if (countTimeExplosion == 5)//dure 10 frame
                     return false;
-                if(!countTimeExplosion)//Si on est au point d'impact, on explose
+                if (!countTimeExplosion)//Si on est au point d'impact, on explose
                 {
                     tile->setXTex(16);
                     tile->setYTex(112);
@@ -39,12 +39,12 @@ namespace render{
             }
             
         }
-        else if(tile->getY()<=yCeiling)//si on est sur l'horizontal
+        else if (tile->getY()<=yCeiling)//si on est sur l'horizontal
         {
-            if(rightDirection)//si on va à droite
+            if (rightDirection)//si on va à droite
             {
                 tile->setX(tile->getX()+3);
-                if(tile->getX()>=xEnd)
+                if (tile->getX()>=xEnd)
                 {
                     tile->setHeight(16);
                     tile->setWidth(8);
@@ -55,7 +55,7 @@ namespace render{
             else
             {
                 tile->setX(tile->getX()-3);
-                if(tile->getX()<=xEnd)
+                if (tile->getX()<=xEnd)
                 {
                     tile->setHeight(16);
                     tile->setWidth(8);
@@ -69,13 +69,13 @@ namespace render{
         else//si on est sur la verticale de tir
         {
             tile->setY(tile->getY()-3);
-            if(tile->getY()<0)
+            if (tile->getY()<0)
                     tile->setY(0);
-            if(tile->getY()<=yCeiling)
+            if (tile->getY()<=yCeiling)
             {
                 tile->setHeight(8);
                 tile->setWidth(16);
-                if(rightDirection)//on va à droite
+                if (rightDirection)//on va à droite
                 {
                     tile->setXTex(8);
                     tile->setYTex(96);

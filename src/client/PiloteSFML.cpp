@@ -24,6 +24,7 @@
 #include <thread>
 #include "Pilote.h"
 
+#include "dev_platform.h"
 namespace client{
 
     
@@ -56,14 +57,14 @@ namespace client{
         state->registerObserver(&scene);
 
         surfaces.push_back(new SurfaceSFML());
-        surfaces[0]->loadTexture("res/Textures/button.png"); // surface pour la victoire
+        surfaces[0]->loadTexture(TEXTURE_FILE_PATH); // surface pour la victoire
         surfaces.push_back(new SurfaceSFML());
-        surfaces[1]->loadTexture("res/Textures/button.png"); // surface pour la  defaite
+        surfaces[1]->loadTexture(TEXTURE_FILE_PATH); // surface pour la  defaite
         
         for(int i=0; i<scene.getLayerCount(); i++)
         {
             surfaces.push_back(new SurfaceSFML());
-            surfaces[i+2]->loadTexture("res/Textures/textures.png");
+            surfaces[i+2]->loadTexture(TEXTURE_FILE_PATH);
             scene.setSurface(i,surfaces[i+2]);
         }
 
@@ -71,15 +72,8 @@ namespace client{
     }
 
 
-
-
-
-
     PiloteSFML::~PiloteSFML() {}
-    
-    
-    
-    
+
     
     void PiloteSFML::createMenu() {
         /* create the window and the button
@@ -100,42 +94,30 @@ namespace client{
         /* Dans l'ordre : emplacement texture, commande à exécuter, position xTex, largeur de l'image, hauteur de l'image
          * présence d'un deuxième sprite lorsqu'on passe la souris dessus, position x dans l'écran, position y dans l'écran
          */
-        button.push_back(*(new Button("res/Textures/button.png", new engine::EndTurnCommand(this->character),0,104,23,true, (w-104)/2,h+8)));  
+        button.push_back(*(new Button(TEXTURE_FILE_PATH, new engine::EndTurnCommand(this->character),0,104,23,true, (w-104)/2,h+Pixel_def)));  
 
         //button "level 1"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level1.txt"),104,69,23,true, w-148,h+8)));
+        button.push_back(*(new Button(TEXTURE_FILE_PATH, new engine::LoadCommand("res/Levels/level1.txt"),104,69,23,true, w-148,h+Pixel_def)));
 
         //button "level 2"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::LoadCommand("res/Levels/level2.txt"),173,69,23,true, w-74,h+8)));
+        button.push_back(*(new Button(TEXTURE_FILE_PATH, new engine::LoadCommand("res/Levels/level2.txt"),173,69,23,true, w-74,h+Pixel_def)));
         
         //button "AI"
-        button.push_back(*(new Button("res/Textures/button.png", new engine::ModeCommand(engine::AI),1010,74,23,true, w-232,h+8)));
+        button.push_back(*(new Button(TEXTURE_FILE_PATH, new engine::ModeCommand(engine::AI),1010,74,23,true, w-232,h+Pixel_def)));
    
     }
     
-
-
-
-
-
-
-
-
 
     void PiloteSFML::applyChange() {
         /* Update the display if the state had changed
          */
         if (engine->getUpdateMutex().try_lock()) {
-                for(unsigned int i = 0; i<obs.size(); i++)
-                    obs[i]->applyStateChanged();
-                    engine->getUpdateMutex().unlock();
+            for(unsigned int i = 0; i<obs.size(); i++)
+                obs[i]->applyStateChanged();
+            engine->getUpdateMutex().unlock();
         }
         engine->setAnimRunning(scene.update());
     };
-
-    
-    
-    
     
     void PiloteSFML::eventUp() {
         /* Check if a key or a button was pressed
@@ -143,8 +125,10 @@ namespace client{
         sf::Event event;
         sf::Vector2i localPosition2;
         localPosition2 = sf::Mouse::getPosition(window);
-        while (window.pollEvent(event)){
-            if (event.type == sf::Event::Closed){
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
                 /* Window Closing 
                  * Set the mode to engine::Close for stopping the engine thread
                  */
@@ -229,7 +213,7 @@ namespace client{
 
         switch(engine->getMode()){
             case engine::Finish:
-                if(engine->getCharTurn() == character)
+                if (engine->getCharTurn() == character)
                     window.draw(*surfaces[1]);//Lost
                 else
                     window.draw(*surfaces[0]);//win

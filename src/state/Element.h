@@ -15,6 +15,9 @@ namespace state {
   class Element {
     // Associations
     // Attributes
+  public:
+    /// Point de vie de l'objet
+    int pv;
   protected:
     int x;
     int y;
@@ -23,12 +26,15 @@ namespace state {
     Element ();
     virtual ~Element ();
     virtual TypeId getTypeId () const = 0;
+    virtual bool isSolid () const = 0;
     virtual bool isStatic () const = 0;
     int getX () const;
     int getY () const;
     void setX (int x);
     void setY (int y);
     virtual Element* clone () const = 0;
+    virtual void setPV (int newPv);
+    virtual int getPV () const;
   };
 
 };

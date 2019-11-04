@@ -19,13 +19,13 @@ namespace render{
     
     bool Shell::setNextTile(Tile* tile) {//return false if the shell is at the target
         
-        if(countTimeExplosion == 5)//dure 10 frame
+        if (countTimeExplosion == 5)//dure 10 frame
             return false;
         
-        if((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))
+        if ((tile->getX()>=xEnd && rightDirection) || (tile->getX()<=xEnd && !rightDirection))
         {
             
-            if(!countTimeExplosion)
+            if (!countTimeExplosion)
             {
                 tile->setXTex(8);
                 tile->setYTex(112);
@@ -34,7 +34,7 @@ namespace render{
         }
         else
         {
-            if(rightDirection)
+            if (rightDirection)
                 tile->setX(tile->getX()+6);
             else
                 tile->setX(tile->getX()-6);

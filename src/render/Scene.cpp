@@ -28,7 +28,7 @@ namespace render {
     
         
     void Scene::setLayer (int idx, Layer* layer){
-        if(idx==getLayerCount())
+        if (idx==getLayerCount())
             layers.push_back(layer);
         layers[idx] = layer;
     };
@@ -51,7 +51,7 @@ namespace render {
         for(unsigned int i = 0; i<stateEvent.size(); i++){
             state::StateEvent e = *stateEvent[i];
             //notifié par son observateur
-            if(e==state::Level_Changed){//on charge tout le level
+            if (e==state::Level_Changed){//on charge tout le level
                 height = e.s->getGrid().getHeight();
                 width = e.s->getGrid().getWidth();
                 state::ElementGrid g = e.s->getGrid();

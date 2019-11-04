@@ -35,7 +35,7 @@ namespace ai{
         int other = (character)? 0:1;
         state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other)->clone());
 
-        if(tank->getPv()<=30 && othertank->getPv()>30)
+        if (tank->getPV()<=30 && othertank->getPV()>30)
             move(true);
         else
             move(false);
@@ -52,17 +52,17 @@ namespace ai{
          * else it will be to use the missile
          */ 
         int distance = distanceUtility.getDistance()/8;
-        if(esquive){//on fuit
-            if(distance == -9 || distance == -10|| distance == 11)//partir vers la gauche est plus rapide (et choix pour le centre)
+        if (esquive){//on fuit
+            if (distance == -9 || distance == -10|| distance == 11)//partir vers la gauche est plus rapide (et choix pour le centre)
                 commands->add(new engine::MoveCommand(character,-8,0));
-            else if( distance == 9 || distance == 10 || distance == -11 )//partir vers la droite est plus rapide (et choix pour le centre)
+            else if ( distance == 9 || distance == 10 || distance == -11 )//partir vers la droite est plus rapide (et choix pour le centre)
                 commands->add(new engine::MoveCommand(character,8,0));
         }
-        else if((distance>-10 && distance<0) || distance > 10)
+        else if ((distance>-10 && distance<0) || distance > 10)
         {
             commands->add(new engine::MoveCommand(character,8,0));
         }
-        else if((distance<10 && distance>0) || distance<-10){//on se rapproche si le missile n'est pas à porter
+        else if ((distance<10 && distance>0) || distance<-10){//on se rapproche si le missile n'est pas à porter
             commands->add(new engine::MoveCommand(character,-8,0));
         }
     }
