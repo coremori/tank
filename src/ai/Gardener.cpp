@@ -6,7 +6,7 @@
  */
 #include "Gardener.h"
 #include "Node.h"
-#include "state/Tank.h"
+// #include "state/Tank.h"
 #include "engine/ShotCommand.h"
 #include "engine/DirectionCommand.h"
 #include "engine/MoveCommand.h"
@@ -41,10 +41,10 @@ namespace ai{
         /* Calculate the best move 
          * Use the minimax Recursion algorithme
          */
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        ActualpvDif  = tank->getPV(); // pv de notre joueur
-        tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
-        ActualpvDif  -= tank->getPV(); // pv du joueur adverse
+        // state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        // ActualpvDif  = tank->getPV(); // pv de notre joueur
+        // tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
+        // ActualpvDif  -= tank->getPV(); // pv du joueur adverse
         //distanceUtility.updateDistance(state,character);
         Node* root = new Node();
         root->score = 0;
@@ -66,21 +66,21 @@ namespace ai{
          * score += 1000 if victory
          * score -= 1000 if lost
          */
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
-        int pvMe = tank->getPV(); // pv de notre joueur
-        tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
-        int pvOther = tank->getPV(); // pv du joueur adverse
-        int score = 0;
-        if (pvOther == 0){
-            score += 1000;
-        }
-        else if (pvMe == 0){
-            score -= 1000;
-        }
+        // state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character));
+        // int pvMe = tank->getPV(); // pv de notre joueur
+        // tank = dynamic_cast<state::Tank*>(state->getMobile(character?0:1));
+        // int pvOther = tank->getPV(); // pv du joueur adverse
+        // int score = 0;
+        // if (pvOther == 0){
+        //     score += 1000;
+        // }
+        // else if (pvMe == 0){
+        //     score -= 1000;
+        // }
         
-        score += ActualpvDif - pvOther + pvMe;
+        // score += ActualpvDif - pvOther + pvMe;
         
-        node->score = score;  
+        // node->score = score;  
     }
    
 
@@ -96,22 +96,22 @@ namespace ai{
         /* Create the command for the best next orientation
          * Orientation selected is the greatest damage 
          */
-        if (distanceUtility.inMissileFireRange()){
-            if (distanceUtility.getDistance() < 0)
-                commandsTest->add(new engine::DirectionCommand(character,state::left_up));
-            else
-                commandsTest->add(new engine::DirectionCommand(character,state::right_up));
+        // if (distanceUtility.inMissileFireRange()){
+        //     if (distanceUtility.getDistance() < 0)
+        //         commandsTest->add(new engine::DirectionCommand(character,state::left_up));
+        //     else
+        //         commandsTest->add(new engine::DirectionCommand(character,state::right_up));
                 
-            //else if (distanceOtherChar()==0)
-                //si ils sont au même endroit, on fait un suicide?
-        }        
-        else if (distanceUtility.inShellFireRange(state,character))
-        {
-            if (distanceUtility.getDistance() < 0)
-                commandsTest->add(new engine::DirectionCommand(character,state::left_down));
-            else
-                commandsTest->add(new engine::DirectionCommand(character,state::right_down));
-        }
+        //     //else if (distanceOtherChar()==0)
+        //         //si ils sont au même endroit, on fait un suicide?
+        // }        
+        // else if (distanceUtility.inShellFireRange(state,character))
+        // {
+        //     if (distanceUtility.getDistance() < 0)
+        //         commandsTest->add(new engine::DirectionCommand(character,state::left_down));
+        //     else
+        //         commandsTest->add(new engine::DirectionCommand(character,state::right_down));
+        // }
     }
     
 
@@ -255,8 +255,8 @@ namespace ai{
     }
     
     
-    void Gardener::changeMobile(state::ElementList* mobile) {
-        state->getMobiles().copy(*mobile);
-    }
+    // void Gardener::changeMobile(state::ElementList* mobile) {
+    //     state->getMobiles().copy(*mobile);
+    // }
 
 }

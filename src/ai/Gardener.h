@@ -7,7 +7,7 @@
 #include "engine/Ruler.h"
 #include "engine/CommandSet.h"
 #include "engine/ActionListTurn.h"
-#include "state/ElementList.h"
+// #include "state/ElementList.h"
 
 namespace ai {
   class Node;
@@ -37,7 +37,7 @@ namespace ai {
   public:
     Gardener (int depthMax, const state::State* state);
     Node* Start ();
-    void changeMobile (state::ElementList* mobile);
+    //void changeMobile (state::ElementList* mobile);
   protected:
     void createChild (Node* Node);
     void evaluateScore (Node* node);

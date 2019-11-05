@@ -7,7 +7,7 @@
 
 
 #include "HeuristicAI.h"
-#include "state/Tank.h"
+// #include "state/Tank.h"
 #include "engine/Engine.h"
 #include "engine/EndTurnCommand.h"
 #include "engine/DirectionCommand.h"
@@ -31,14 +31,14 @@ namespace ai{
     
     
     void HeuristicAI::choice() {//choice to attack or defend move
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
-        int other = (character)? 0:1;
-        state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other)->clone());
+        // state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
+        // int other = (character)? 0:1;
+        // state::Tank* othertank = dynamic_cast<state::Tank*>(state->getMobile(other)->clone());
 
-        if (tank->getPV()<=30 && othertank->getPV()>30)
-            move(true);
-        else
-            move(false);
+        // if (tank->getPV()<=30 && othertank->getPV()>30)
+        //     move(true);
+        // else
+        //     move(false);
     }    
     
     

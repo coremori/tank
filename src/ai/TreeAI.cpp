@@ -23,25 +23,25 @@ namespace ai{
          * Use Gardener for choising the move
          * The shot and orientation action are chosen by functions shot() and nextOrientation from EvolvedAI class
          */
-        this->commands = &commands;
-        distanceUtility.updateDistance(state,character);
+        // this->commands = &commands;
+        // distanceUtility.updateDistance(state,character);
         
-        state::State* cop = new state::State();
-        cop->copy(*state);
+        // state::State* cop = new state::State();
+        // cop->copy(*state);
         
-        slaveGardener->changeMobile(&cop->getMobiles());
-        Node* toDo = slaveGardener->Start();
-        shot();
-        nextOrientation();
-        if (toDo->choiceMove[0] == left){
-            this->commands->add(new engine::MoveCommand(character,-8,0));
-                    //command move to the left
-        }
-        else if (toDo->choiceMove[0] == right){
-            this->commands->add(new engine::MoveCommand(character,8,0));
-            //command move to the right
-        }
-        this->commands->add(new engine::EndTurnCommand(character));
+        // slaveGardener->changeMobile(&cop->getMobiles());
+        // Node* toDo = slaveGardener->Start();
+        // shot();
+        // nextOrientation();
+        // if (toDo->choiceMove[0] == left){
+        //     this->commands->add(new engine::MoveCommand(character,-8,0));
+        //             //command move to the left
+        // }
+        // else if (toDo->choiceMove[0] == right){
+        //     this->commands->add(new engine::MoveCommand(character,8,0));
+        //     //command move to the right
+        // }
+        // this->commands->add(new engine::EndTurnCommand(character));
     }
     
 

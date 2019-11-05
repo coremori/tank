@@ -2,8 +2,8 @@
 #ifndef ENGINE__ACTIONDIRECTION__H
 #define ENGINE__ACTIONDIRECTION__H
 
-#include "state/Orientation.h"
-#include "state/State.h"
+// #include "state/Orientation.h"
+ #include "state/State.h"
 
 namespace engine {
   class Action;
@@ -17,12 +17,12 @@ namespace engine {
   class ActionDirection : public engine::Action {
     // Attributes
   protected:
-    state::Orientation Newdirection;
+    int /*state::Orientation*/ Newdirection;
     int character;
-    state::Orientation OldDirection;
+    int /*state::Orientation*/ OldDirection;
     // Operations
   public:
-    ActionDirection (state::Orientation direction, int character);
+    ActionDirection (int /*state::Orientation*/ direction, int character);
     void apply (state::State* s, bool notify);
     void undo (state::State* s);
   };

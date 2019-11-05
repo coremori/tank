@@ -6,26 +6,18 @@
 
 
 #include "ActionDirection.h"
-#include "../state/Tank.h"
-#include "../state/Orientation.h"
+// #include "../state/Tank.h"
+// #include "../state/Orientation.h"
 
 #include <iostream>
 
 
 namespace engine {
-    
-    
-    
-    
-    ActionDirection::ActionDirection(state::Orientation direction, int character) {
+        
+    ActionDirection::ActionDirection(int /*state::Orientation*/ direction, int character) {
         this->Newdirection = direction;
         this->character = character;
     };
-    
-    
-    
-    
-    
     
     
     void ActionDirection::apply(state::State* s, bool notify) {
@@ -52,11 +44,6 @@ namespace engine {
             }
         }
     }
-    
-    
-    
-    
-    
     
     
     void ActionDirection::undo(state::State* s) {

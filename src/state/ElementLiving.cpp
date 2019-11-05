@@ -15,26 +15,19 @@
 
   ElementLiving::ElementLiving (int life, int defense, int id, bool canBeGetAcross , std::string name ):
     ElementBase(id, canBeGetAcross, name),
-    f_life(life),
-    f_defense(defense),
-    f_lifeAnimation(nullptr),
-    f_deadAnimation(nullptr)
+    f_Life(life),
+    f_Defense(defense)
   { 
     //TODO : Animation
   };
-      
-  ElementLiving::~ElementLiving()
-  {
-    if (f_lifeAnimation != nullptr) delete f_lifeAnimation;
-    if (f_deadAnimation != nullptr) delete f_deadAnimation;
-  }
       
   ///////////////////////////////////////////////////////////////////////
   /// \brief getLife
   /// \return Element f_life
   /////////////////////////////////////////////////////////////////////////    
-  int ElementLiving::getLife () const {
-    return f_life;
+  int ElementLiving::getLife () const
+  {
+    return f_Life;
   };
 
 
@@ -43,19 +36,7 @@
   /// \return Element f_defense
   /////////////////////////////////////////////////////////////////////////   
   int ElementLiving::getDefense () const {
-    return f_defense;
-  };
-
-  ///////////////////////////////////////////////////////////////////////
-  /// \brief getAnimation return the current animation
-  /// If life <= 0, it return f_deadAnimation, f_lifeAnimation otherwise
-  /// Please note that the function return a nullptr if no animation was specified
-  /// \return Element current animation (f_deadAnimation if life <= 0, f_lifeAnimation otherwise) 
-  /////////////////////////////////////////////////////////////////////////   
-  Animation* ElementLiving::getAnimation () const {
-
-   return f_life <= 0 ?  f_lifeAnimation :  f_deadAnimation;
-
+    return f_Defense;
   };
 
 
@@ -74,12 +55,16 @@
       return;
     }
 
-    //do we do damage ?
-    if (f_defense - power > 0) return;
+    // Si on frappe moins que la defense, on sort
+    if ((f_defense - power) > 0) return;
 
-    f_life =  f_life + f_defense - power;
-    return ;
+    f_life -=  (power - f_defense);
+
+    return;
   };
 
-
-
+  ElementBase* ElementLiving::clone () const
+  {
+    ElementLiving* newLivingElement = new ElementLiving(f_Life, f_Defense, f_Id, f_CanBeGetAcross, f_Name);
+    return newLivingElement;
+  }

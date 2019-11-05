@@ -132,15 +132,17 @@ bool ElementManager::loadFile(std::string filename)
     int x=0,y=-NB_STD_HEIGHT_SPRITE;
 
 
-    if(mapfile.is_open()){
-
+    if (mapfile.is_open())
+    {
+        // 1ere ligne : largeur puis hauteur du machin
         mapfile >> f_width >> f_height;
 
         while (getline(mapfile,line))
         {
             x = 0;
 
-             for(unsigned int i = 0; i < line.length(); i++){
+             for(unsigned int i = 0; i < line.length(); i++)
+             {
 
                 bric = Factorio->giveElementFromSymbol(line.substr(i,1));
                 if ( bric == nullptr)
@@ -149,6 +151,7 @@ bool ElementManager::loadFile(std::string filename)
                 }
                 else
                 {
+                    // TODO : Position à la création
                     f_world.push_back(bric);
                 }
 

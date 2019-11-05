@@ -11,21 +11,30 @@
 
 #include "ElementBase.h"
 
-
-
-
-
   ElementBase::ElementBase (int id, bool canBeGetAcross , std::string name ):
-    f_id(id),
-    f_canBeGetAcross(canBeGetAcross),
-    f_name(name)
+    f_X(0),
+    f_Y(0),
+    f_Id(id),
+    f_CanBeGetAcross(canBeGetAcross),
+    f_Name(name),
+    f_ElementGraphic(nullptr)
   { 
     //TODO : Graphique
   }
       
   ElementBase::~ElementBase()
   {
-    if (f_elementGraphic != nullptr) delete f_elementGraphic;
+    if (f_ElementGraphic != nullptr) delete f_ElementGraphic;
+  }
+
+  int ElementBase::getX () const
+  {
+    return f_X;
+  }
+
+  int ElementBase::getY () const
+  {
+    return f_Y;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -33,8 +42,9 @@
   /// \brief getId
   /// \return Element id
   /////////////////////////////////////////////////////////////////////////    
-  int ElementBase::getId () const {
-    return f_id;
+  int ElementBase::getId () const 
+  {
+    return f_Id;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -42,8 +52,9 @@
   /// \brief getCanBeGetAcross
   /// \return f_canBeGetAcross
   /////////////////////////////////////////////////////////////////////////    
-  bool ElementBase::getCanBeGetAcross () const {
-    return f_canBeGetAcross;
+  bool ElementBase::getCanBeGetAcross () const 
+  {
+    return f_CanBeGetAcross;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -51,8 +62,9 @@
   /// \brief getName
   /// \return Element name
   /////////////////////////////////////////////////////////////////////////    
-  std::string ElementBase::getName () const {
-    return f_name;
+  std::string ElementBase::getName () const 
+  {
+    return f_Name;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -60,8 +72,9 @@
   /// \brief getGraphic
   /// \return Element graphic
   /////////////////////////////////////////////////////////////////////////    
-  ElementGraphic* ElementBase::getGraphic () const {
-    return f_elementGraphic;
+  ElementGraphic* ElementBase::getGraphic () const 
+  {
+    return f_ElementGraphic;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -69,11 +82,21 @@
   /// \brief getLife
   /// \return Element life if it exist, -1 otherwise
   /////////////////////////////////////////////////////////////////////////    
-  int ElementBase::getLife () const {
+  int ElementBase::getLife () const 
+  {
+    // Pas de vie, donc -1.
     return -1;
   }
 
+  void setY (int y)
+  {
+    f_Y = y;
+  }
 
+  void setX (int x)
+  {
+    f_X = x;
+  }
   ///////////////////////////////////////////////////////////////////////
   /// \fn void ElementBase::takeDamage(const int power, const bool ignoreDefense)
   /// \brief takeDamage
@@ -83,7 +106,8 @@
   /////////////////////////////////////////////////////////////////////////   
   void ElementBase::takeDamage(const int power, const bool ignoreDefense)
   {    
-    return ;
+    // Pas de pv donc rien à faire
+    return;
   }
 
   ///////////////////////////////////////////////////////////////////////
@@ -93,11 +117,10 @@
   /// \param dy mouvement y
   /// \return void
   /////////////////////////////////////////////////////////////////////////   
-  void ElementBase::move(const int dx, const int dy){
-      return;
+  void ElementBase::move(const int dx, const int dy)
+  {
+    // On ne peut pas bouger donc rien à faire
+    return;
   }
-    
-
-
 
 

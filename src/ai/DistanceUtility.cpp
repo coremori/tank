@@ -6,7 +6,7 @@
 
 #include "DistanceUtility.h"
 #include "AI.h"
-#include "state/Tank.h"
+// #include "state/Tank.h"
 
 namespace ai{
 
@@ -27,7 +27,7 @@ namespace ai{
          * The value are negative for player at the left side, positive at the right side
          */
         int other = (character)? 0:1;
-        distance = state->getMobile(other)->getX()-state->getMobile(character)->getX(); 
+        distance = 0; //state->getMobile(other)->getX()-state->getMobile(character)->getX(); 
     }
     
     
@@ -46,38 +46,40 @@ namespace ai{
         /*Returns true if fire a shell will impact the other player
          *The shell is shot by CharShoting
          * */ 
-        int character = CharShoting;
+    //     int character = CharShoting;
         
-        state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
+    //     state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(character)->clone());
         
-        //distance to the other tank
-        int other = (character)? 0:1;
-        int distance = (state->getMobile(other)->getX()-state->getMobile(character)->getX())/8;        
+    //     //distance to the other tank
+    //     int other = (character)? 0:1;
+    //     int distance = (state->getMobile(other)->getX()-state->getMobile(character)->getX())/8;        
         
-        if (!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
-            return false;
+    //     if (!(((tank->getY()-state->getMobile(other)->getY())<=16) && ((tank->getY()-state->getMobile(other)->getY())>=0)))
+    //         return false;
             
-        int x = tank->getX()/8;
-        int y = tank->getY()/8;
+    //     int x = tank->getX()/8;
+    //     int y = tank->getY()/8;
 
-        if (distance>=0)
-        {
-            while(distance>=1 && (state->getGrid().isSpace(x,y)))
-            {
-                x ++;
-                distance --;                
-            }
+    //     if (distance>=0)
+    //     {
+    //         while(distance>=1 && (state->getGrid().isSpace(x,y)))
+    //         {
+    //             x ++;
+    //             distance --;                
+    //         }
 
-        }
-        else if (distance<0)
-        {
-            while(distance<=-1 && (state->getGrid().isSpace(x,y)))
-            {
-                x--;
-                distance ++;                
-            }
-        }
-        return not(distance); //si pas de mur touché (donc cible atteinte)
+    //     }
+    //     else if (distance<0)
+    //     {
+    //         while(distance<=-1 && (state->getGrid().isSpace(x,y)))
+    //         {
+    //             x--;
+    //             distance ++;                
+    //         }
+    //     }
+    //     return not(distance); //si pas de mur touché (donc cible atteinte)
+    // 
+        return false;
     }
 
 }

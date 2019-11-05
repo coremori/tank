@@ -4,7 +4,7 @@
 namespace engine {
 
 
-    DirectionCommand::DirectionCommand (int c, state::Orientation d){
+    DirectionCommand::DirectionCommand (int c, int /*state::Orientation*/ d){
         character = c;
         direction = d;
     };
@@ -13,7 +13,7 @@ namespace engine {
         return character;
     };
     
-    state::Orientation DirectionCommand::getDirection () const{
+    int /* state::Orientation */ DirectionCommand::getDirection () const{
         return direction;
     };
     
