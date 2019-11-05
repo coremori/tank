@@ -11,41 +11,16 @@
 
 #include "ElementMobile.h"
 
+namespace state {
 
-
-ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, int life, int defense, int id, bool canBeGetAcross , std::string name ):
-	ElementLiving(life, defense, id, canBeGetAcross, name),
+ElementMobile::ElementMobile (int x, int y, int direction,  int totalLife, int totalDefense, int id, bool canBeGetAcross , std::string name ):
+	ElementLiving(totalLife, totalDefense, id, canBeGetAcross, name),
   f_Direction(direction)
 { 
 }
     
 
-    
-   ///////////////////////////////////////////////////////////////////////
-   /// \brief getX
-   /// \return Element position x 
-   /////////////////////////////////////////////////////////////////////////    
-    int ElementMobile::getX () const {
-        return f_x;
-    }
-
-
-   ///////////////////////////////////////////////////////////////////////
-   /// \brief getY
-   /// \return Element position y
-   /////////////////////////////////////////////////////////////////////////   
-    int ElementMobile::getY () const {
-        return f_y;
-    }
-    
-   ///////////////////////////////////////////////////////////////////////
-   /// \brief getMoveType
-   /// \return Element Move_Type
-   /////////////////////////////////////////////////////////////////////////   
-    Move_Type ElementMobile::getMoveType () const {
-        return f_moveType;
-    }
-
+  
 
    ///////////////////////////////////////////////////////////////////////
    /// \brief move
@@ -54,8 +29,8 @@ ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, 
    /// \return void
    /////////////////////////////////////////////////////////////////////////   
     void ElementMobile::move(const int dx, const int dy){
-      f_x += dx;
-      f_y += dy;
+      f_X += dx;
+      f_Y += dy;
     }
     
    ///////////////////////////////////////////////////////////////////////
@@ -63,7 +38,7 @@ ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, 
    /// \return ElementDirection
    /////////////////////////////////////////////////////////////////////// 
     int ElementMobile::getDirection() const{
-        return f_direction;
+        return f_Direction;
     }
 
 
@@ -73,8 +48,12 @@ ElementMobile::ElementMobile (int x, int y, int direction,  Move_Type moveType, 
    /// \return void
    /////////////////////////////////////////////////////////////////////////   
    void ElementMobile::setDirection(const int newDirection){
-       f_direction = newDirection;
+       f_Direction = newDirection;
    }
 
+   ElementBase* ElementMobile::clone () const
+   {
+    
+   }
 
-
+}

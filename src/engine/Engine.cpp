@@ -12,7 +12,7 @@
 #include "EndTurnCommand.h"
 #include "ModeCommand.h"
 
-#include "state/Tank.h"
+// #include "state/Tank.h"
 #include "ai/DumbAI.h"
 #include "ai/HeuristicAI.h"
 #include <mutex>
@@ -140,18 +140,18 @@ namespace engine{
          * send the waitingcommand to the ruler and apply them
          * check if one player doesn't have any pv and the game is finish
          */
-        swapCommands();
-        charTurn = charTurn ? 0:1;
-        ruler.setCommandSet(currentcommands);
-        ruler.implementeRules();
-        for(int i = 0; i<state->getMobiles().size(); i++)
-        {
-            state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
-            if (tank->getPV() == 0){
-                mode = Finish;
-                std::cout << "Victory character " << (i?0:1) << std::endl;
-            }
-        }
+        // swapCommands();
+        // charTurn = charTurn ? 0:1;
+        // ruler.setCommandSet(currentcommands);
+        // ruler.implementeRules();
+        // for(int i = 0; i<state->getMobiles().size(); i++)
+        // {
+        //     state::Tank* tank = dynamic_cast<state::Tank*>(state->getMobile(i));
+        //     if (tank->getPV() == 0){
+        //         mode = Finish;
+        //         std::cout << "Victory character " << (i?0:1) << std::endl;
+        //     }
+        // }
             
     }
         

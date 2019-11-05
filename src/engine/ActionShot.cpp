@@ -6,10 +6,10 @@
 
 
 #include "ActionShot.h"
-#include "state/Tank.h"
+// #include "state/Tank.h"
 #include "state/ElementEvent.h"
 #include "state/ProjectileEvent.h"
-#include "state/Obstacle.h"
+// #include "state/Obstacle.h"
 
 
 #include <iostream>
@@ -28,45 +28,45 @@ namespace engine{
     }
     
     void ActionShot::apply(state::State* s, bool notify) {//apply the action
-        if (notify)
-            std::cout << "character "<<character ;
+        // if (notify)
+        //     std::cout << "character "<<character ;
 
         
-        state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
-        if (yMax==-1)
-        {
+        // state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(character));
+        // if (yMax==-1)
+        // {
             
-            if (notify==true){
-                std::cout << " tire un obus ";
-                if ((xImpact-tank->getX())>0)
-                    s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
-                else
-                    s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()-8,tank->getY()-7,xImpact,yImpact, false, yMax)));
-            }
-        }
-        else
-        {
+        //     if (notify==true){
+        //         std::cout << " tire un obus ";
+        //         if ((xImpact-tank->getX())>0)
+        //             s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()+8,tank->getY()-7,xImpact,yImpact, true, yMax)));
+        //         else
+        //             s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX()-8,tank->getY()-7,xImpact,yImpact, false, yMax)));
+        //     }
+        // }
+        // else
+        // {
             
-            if (notify==true){
-                std::cout << " tire un missile ";
-                if ((xImpact-tank->getX())>0)
-                    s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
-                else
-                    s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, false, yMax)));
-            }
-        }
-        if (characterTarget>=0)
-        {
-            state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(characterTarget));
-            tank->setPV(tank->getPV()-damage);
-                if (notify==true){
-                    s->getMobiles().notifyObserver(*(new state::StateEvent(s,state::Pv_Changed)));
-                    std::cout << "et touche Tank "<< characterTarget << " qui prend "<<damage<<" dégats " ;
-                }
+        //     if (notify==true){
+        //         std::cout << " tire un missile ";
+        //         if ((xImpact-tank->getX())>0)
+        //             s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, true, yMax)));
+        //         else
+        //             s->getMobiles().notifyObserver(*(new state::ProjectileEvent(tank->getX(),tank->getY()-16,xImpact,yImpact, false, yMax)));
+        //     }
+        // }
+        // if (characterTarget>=0)
+        // {
+        //     state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(characterTarget));
+        //     tank->setPV(tank->getPV()-damage);
+        //         if (notify==true){
+        //             s->getMobiles().notifyObserver(*(new state::StateEvent(s,state::Pv_Changed)));
+        //             std::cout << "et touche Tank "<< characterTarget << " qui prend "<<damage<<" dégats " ;
+        //         }
                 
-        }
-        if (notify)
-            std::cout << std::endl;
+        // }
+        // if (notify)
+        //     std::cout << std::endl;
         
     }
     
@@ -76,11 +76,11 @@ namespace engine{
     
     
     void ActionShot::undo(state::State* s) {
-        if (characterTarget>=0)
-        {
-            state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(characterTarget));
-            tank->setPV(tank->getPV()+damage);
-        }
+        // if (characterTarget>=0)
+        // {
+        //     state::Tank* tank = dynamic_cast<state::Tank*>(s->getMobile(characterTarget));
+        //     tank->setPV(tank->getPV()+damage);
+        // }
     }
 
 }

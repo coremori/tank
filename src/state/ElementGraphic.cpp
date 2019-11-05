@@ -11,10 +11,11 @@
 
 #include "ElementGraphic.h"
 
+// namespace state {
+//   ElementGraphic::ElementGraphic ()
+//   { 
 
-  ElementGraphic::ElementGraphic ()
-  { 
-
-  }
+//   }
       
 
+// }

@@ -134,20 +134,20 @@ namespace server {
             commandSaved[player]->add(new engine::MoveCommand(player,in["Xmove"].asInt(),in["Ymove"].asInt()));
             
         if (in["Direction"].asInt()){
-            switch(in["Direction"].asInt()){
-                case 1:
-                    commandSaved[player]->add(new engine::DirectionCommand(player,state::left_down));
-                    break;
-                case 2:
-                    commandSaved[player]->add(new engine::DirectionCommand(player,state::left_up));
-                    break;
-                case 3:
-                    commandSaved[player]->add(new engine::DirectionCommand(player,state::right_down));
-                    break;
-                case 4:
-                    commandSaved[player]->add(new engine::DirectionCommand(player,state::right_up));
-                    break;
-            }
+            // switch(in["Direction"].asInt()){
+            //     case 1:
+            //         commandSaved[player]->add(new engine::DirectionCommand(player,state::left_down));
+            //         break;
+            //     case 2:
+            //         commandSaved[player]->add(new engine::DirectionCommand(player,state::left_up));
+            //         break;
+            //     case 3:
+            //         commandSaved[player]->add(new engine::DirectionCommand(player,state::right_down));
+            //         break;
+            //     case 4:
+            //         commandSaved[player]->add(new engine::DirectionCommand(player,state::right_up));
+            //         break;
+            // }
         }
                     
             

@@ -11,6 +11,7 @@
 
 #include "ElementBase.h"
 
+namespace state {
   ElementBase::ElementBase (int id, bool canBeGetAcross , std::string name ):
     f_X(0),
     f_Y(0),
@@ -88,12 +89,12 @@
     return -1;
   }
 
-  void setY (int y)
+  void ElementBase::setY (int y)
   {
     f_Y = y;
   }
 
-  void setX (int x)
+  void ElementBase::setX (int x)
   {
     f_X = x;
   }
@@ -123,4 +124,4 @@
     return;
   }
 
-
+}

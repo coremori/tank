@@ -16,7 +16,7 @@ namespace engine{
         mainState = s;
         mainState->load("res/Levels/level1.txt");
         initState = new state::State();
-        initState->copy(*mainState);
+        // initState->copy(*mainState);
         idx = 0;
     }
 
@@ -36,7 +36,7 @@ namespace engine{
     }
     
     void Record::startReplay (){
-        mainState->copy(*initState);
+        // mainState->copy(*initState);
     }
     
     bool Record::replayOne (){

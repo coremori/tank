@@ -12,7 +12,7 @@
 
 #include "ElementLiving.h"
 
-
+namespace state {
   ElementLiving::ElementLiving (int life, int defense, int id, bool canBeGetAcross , std::string name ):
     ElementBase(id, canBeGetAcross, name),
     f_Life(life),
@@ -23,7 +23,7 @@
       
   ///////////////////////////////////////////////////////////////////////
   /// \brief getLife
-  /// \return Element f_life
+  /// \return Element f_Life
   /////////////////////////////////////////////////////////////////////////    
   int ElementLiving::getLife () const
   {
@@ -33,7 +33,7 @@
 
   ///////////////////////////////////////////////////////////////////////
   /// \brief getDefense
-  /// \return Element f_defense
+  /// \return Element f_Defense
   /////////////////////////////////////////////////////////////////////////   
   int ElementLiving::getDefense () const {
     return f_Defense;
@@ -51,14 +51,14 @@
     // if we ignore the defense
     if (ignoreDefense)
     {
-      f_life -= power;
+      f_Life -= power;
       return;
     }
 
     // Si on frappe moins que la defense, on sort
-    if ((f_defense - power) > 0) return;
+    if ((f_Defense - power) > 0) return;
 
-    f_life -=  (power - f_defense);
+    f_Life -=  (power - f_Defense);
 
     return;
   };
@@ -68,3 +68,4 @@
     ElementLiving* newLivingElement = new ElementLiving(f_Life, f_Defense, f_Id, f_CanBeGetAcross, f_Name);
     return newLivingElement;
   }
+}

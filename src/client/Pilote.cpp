@@ -240,20 +240,20 @@ namespace client{
         }
         
         if(jsonIn["Direction"].asInt()){
-            switch(jsonIn["Direction"].asInt()){
-                case 1:
-                    engine.addCommand(new engine::DirectionCommand(player,state::left_down));
-                    break;
-                case 2:
-                    engine.addCommand(new engine::DirectionCommand(player,state::left_up));
-                    break;
-                case 3:
-                    engine.addCommand(new engine::DirectionCommand(player,state::right_down));
-                    break;
-                case 4:
-                    engine.addCommand(new engine::DirectionCommand(player,state::right_up));
-                    break;
-            }
+            // switch(jsonIn["Direction"].asInt()){
+            //     case 1:
+            //         engine.addCommand(new engine::DirectionCommand(player,state::left_down));
+            //         break;
+            //     case 2:
+            //         engine.addCommand(new engine::DirectionCommand(player,state::left_up));
+            //         break;
+            //     case 3:
+            //         engine.addCommand(new engine::DirectionCommand(player,state::right_down));
+            //         break;
+            //     case 4:
+            //         engine.addCommand(new engine::DirectionCommand(player,state::right_up));
+            //         break;
+            // }
         }
 
         if(jsonIn["PowerShot"].asInt())

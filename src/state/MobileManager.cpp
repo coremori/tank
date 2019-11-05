@@ -1,6 +1,6 @@
 #include "MobileManager.h"
 
-
+namespace state {
     MobileManager::MobileManager ()
     {
 
@@ -32,3 +32,4 @@
     {
 
     }
+}

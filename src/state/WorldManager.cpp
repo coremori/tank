@@ -1,7 +1,7 @@
 #include "WorldManager.h"
 
-#define NB_PIXEL_BY_ELEMENT
-
+#define NB_PIXEL_BY_ELEMENT   8
+namespace state {
 
 WorldManager::WorldManager (int width, int height):
 f_Width(width),
@@ -18,9 +18,9 @@ WorldManager::~WorldManager ()
 ElementBase* WorldManager::getCell ( int posX, int posY) const
 {
 	// Si l'élèment existe bien
-    if ((posX < width) && (posY < height)
+    if ((posX < f_Width) && (posY < f_Height)
     	&& (0 <= posX) && (0 <= posY))
-    	return ElementList::elements[(posX * width + posY) / NB_PIXEL_BY_ELEMENT];
+    	return f_ElementList[(posX * f_Width + posY) / NB_PIXEL_BY_ELEMENT];
     else 
     	return nullptr;
 }
@@ -58,4 +58,5 @@ void WorldManager::clear ()
 void WorldManager::load (std::string path)
 {
 
+}
 }

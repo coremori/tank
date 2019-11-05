@@ -33,42 +33,42 @@ namespace client{
         pilote(pilote),
         character(character)
     {
-        /* Set  the scene to display
-         * Create the layer and register then to the state
-         * Create the Surface
-         * */
-        this->scene = *(new render::Scene());
-        obs.push_back(&scene);
+        // /* Set  the scene to display
+        //  * Create the layer and register then to the state
+        //  * Create the Surface
+        //  * */
+        // this->scene = *(new render::Scene());
+        // obs.push_back(&scene);
        
-        render::LandscapeLayer* landlayer(new render::LandscapeLayer());
-        obs.push_back(landlayer);
-        render::MobileLayer* mobilelayer(new render::MobileLayer());
-        obs.push_back(mobilelayer);
-        render::CharLayer* charlayer(new render::CharLayer());
-        obs.push_back(charlayer);
+        // render::LandscapeLayer* landlayer(new render::LandscapeLayer());
+        // obs.push_back(landlayer);
+        // render::MobileLayer* mobilelayer(new render::MobileLayer());
+        // obs.push_back(mobilelayer);
+        // render::CharLayer* charlayer(new render::CharLayer());
+        // obs.push_back(charlayer);
 
-        scene.setLayer(0,landlayer);
-        scene.setLayer(1,mobilelayer);
-        scene.setLayer(2,charlayer);
+        // scene.setLayer(0,landlayer);
+        // scene.setLayer(1,mobilelayer);
+        // scene.setLayer(2,charlayer);
 
-        state->getGrid().registerObserver(landlayer);
-        state->getMobiles().registerObserver(mobilelayer);
-        state->getMobiles().registerObserver(charlayer);
-        state->registerObserver(&scene);
+        // state->getGrid().registerObserver(landlayer);
+        // state->getMobiles().registerObserver(mobilelayer);
+        // state->getMobiles().registerObserver(charlayer);
+        // state->registerObserver(&scene);
 
-        surfaces.push_back(new SurfaceSFML());
-        surfaces[0]->loadTexture(TEXTURE_FILE_PATH); // surface pour la victoire
-        surfaces.push_back(new SurfaceSFML());
-        surfaces[1]->loadTexture(TEXTURE_FILE_PATH); // surface pour la  defaite
+        // surfaces.push_back(new SurfaceSFML());
+        // surfaces[0]->loadTexture(TEXTURE_FILE_PATH); // surface pour la victoire
+        // surfaces.push_back(new SurfaceSFML());
+        // surfaces[1]->loadTexture(TEXTURE_FILE_PATH); // surface pour la  defaite
         
-        for(int i=0; i<scene.getLayerCount(); i++)
-        {
-            surfaces.push_back(new SurfaceSFML());
-            surfaces[i+2]->loadTexture(TEXTURE_FILE_PATH);
-            scene.setSurface(i,surfaces[i+2]);
-        }
+        // for(int i=0; i<scene.getLayerCount(); i++)
+        // {
+        //     surfaces.push_back(new SurfaceSFML());
+        //     surfaces[i+2]->loadTexture(TEXTURE_FILE_PATH);
+        //     scene.setSurface(i,surfaces[i+2]);
+        // }
 
-        engine = e;
+        // engine = e;
     }
 
 
@@ -158,21 +158,21 @@ namespace client{
                         pilote->addCommand(new engine::MoveCommand(this->character,-8,0));
                         break;
 
-                    case sf::Keyboard::E :
-                        pilote->addCommand(new engine::DirectionCommand(this->character,state::right_up));
-                        break;
+                    // case sf::Keyboard::E :
+                    //     pilote->addCommand(new engine::DirectionCommand(this->character,state::right_up));
+                    //     break;
 
-                    case sf::Keyboard::Z :
-                        pilote->addCommand(new engine::DirectionCommand(this->character,state::left_up));
-                        break;
+                    // case sf::Keyboard::Z :
+                    //     pilote->addCommand(new engine::DirectionCommand(this->character,state::left_up));
+                    //     break;
 
-                    case sf::Keyboard::Q :
-                        pilote->addCommand(new engine::DirectionCommand(this->character,state::left_down));
-                        break;
+                    // case sf::Keyboard::Q :
+                    //     pilote->addCommand(new engine::DirectionCommand(this->character,state::left_down));
+                    //     break;
 
-                    case sf::Keyboard::D :
-                        pilote->addCommand(new engine::DirectionCommand(this->character,state::right_down));
-                        break;
+                    // case sf::Keyboard::D :
+                    //     pilote->addCommand(new engine::DirectionCommand(this->character,state::right_down));
+                    //     break;
 
                     case sf::Keyboard::Space :
                         pilote->addCommand(new engine::ShotCommand(this->character,10));

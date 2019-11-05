@@ -1,6 +1,7 @@
 #include "State.h"
-
-State::State()
+namespace state {
+State::State():
+grid(0,0)
 {
 
 }
@@ -9,7 +10,8 @@ State::~State ()
 {
 
 }
-State::load(const char* file_name)
+void State::load(const char* file_name)
 {
 
+}
 }

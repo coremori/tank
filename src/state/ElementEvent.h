@@ -15,13 +15,13 @@ namespace state {
   /// class ElementEvent - Event "Element_Changed"
   class ElementEvent : public state::StateEvent {
     // Attributes
-  public:
-    const ElementList* list;
-    int idx;
-    // Operations
-  public:
-    ElementEvent (const ElementList* list, int idx = -1);
-    StateEvent* clone () const;
+  // public:
+  //   const ElementList* list;
+  //   int idx;
+  //   // Operations
+  // public:
+  //   ElementEvent (const ElementList* list, int idx = -1);
+  //   StateEvent* clone () const;
   };
 
 };

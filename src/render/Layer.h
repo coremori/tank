@@ -3,7 +3,7 @@
 #define RENDER__LAYER__H
 
 #include <vector>
-#include "state/ElementList.h"
+// #include "state/ElementList.h"
 
 namespace render {
   class Surface;
@@ -36,7 +36,7 @@ namespace render {
     ~Layer ();
     void clear ();
     void charToTiles (char c, int Ypos, int Xpos);
-    void elementToTiles (const state::ElementList* list);
+    // void elementToTiles (const state::ElementList* list);
     Tile getTile (int i);
     void setTile (int idx, Tile tile);
     void setSurface (Surface* surface);

@@ -6,9 +6,9 @@
 
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
-#include "state/Obstacle.h"
-#include "state/Tank.h"
-#include "state/Space.h"
+// #include "state/Obstacle.h"
+// #include "state/Tank.h"
+// #include "state/Space.h"
 
 namespace render {
 
@@ -43,93 +43,93 @@ namespace render {
     };
     
     
-    void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
+    // void Layer::elementToTiles(const state::ElementList* e){//pas dans le dia
         
-        // std::vector<state::Element*> list;
-        state::Obstacle* obstacle = NULL;
-        state::Tank* tank = NULL;
-        state::Element* element = NULL;
-        state::Space* space = NULL;
-        unsigned prevSize = tiles.size();
+    //     // std::vector<state::Element*> list;
+    //     state::Obstacle* obstacle = NULL;
+    //     state::Tank* tank = NULL;
+    //     state::Element* element = NULL;
+    //     state::Space* space = NULL;
+    //     unsigned prevSize = tiles.size();
         
-        srand (time(NULL));
+    //     srand (time(NULL));
         
-        for(int i=0; i<e->size(); i++)
-        {   
-            element = e->get(i);
-            tiles.push_back(*(new Tile(element->getX(),element->getY())));
-            switch(element->getTypeId()){
-                case state::obstacle : //obstacle
-                        obstacle = dynamic_cast<state::Obstacle*>(element);
-                        switch(obstacle->getObstacleTypeId()){//if a la place
-                            case state::sand :
-                                tiles[i+prevSize].setXTex(72+(rand()%33));//some diversity
-                                tiles[i+prevSize].setYTex(96);//
-                                break;
-                            case  state::border:
-                                tiles[i+prevSize].setXTex(72+(rand()%33));
-                                tiles[i+prevSize].setYTex(88);
-                                break;
-                        }
-                    break;
+    //     for(int i=0; i<e->size(); i++)
+    //     {   
+    //         element = e->get(i);
+    //         tiles.push_back(*(new Tile(element->getX(),element->getY())));
+    //         switch(element->getTypeId()){
+    //             case state::obstacle : //obstacle
+    //                     obstacle = dynamic_cast<state::Obstacle*>(element);
+    //                     switch(obstacle->getObstacleTypeId()){//if a la place
+    //                         case state::sand :
+    //                             tiles[i+prevSize].setXTex(72+(rand()%33));//some diversity
+    //                             tiles[i+prevSize].setYTex(96);//
+    //                             break;
+    //                         case  state::border:
+    //                             tiles[i+prevSize].setXTex(72+(rand()%33));
+    //                             tiles[i+prevSize].setYTex(88);
+    //                             break;
+    //                     }
+    //                 break;
 
-                case state::tank :
-                        tank = dynamic_cast<state::Tank*>(element);
-                        tiles[i+prevSize].setHeight(24);
-                        tiles[i+prevSize].setWidth(24);
-                        tiles[i+prevSize].setX(tiles[i+prevSize].getX()-8);
-                        tiles[i+prevSize].setY(tiles[i+prevSize].getY()-2*8);
-                        switch(tank->getTankTypeId()){
-                            case state::Little_tank_green :
-                                tiles[i+prevSize].setXTex(0);
-                                tiles[i+prevSize].setYTex(0);
+    //             case state::tank :
+    //                     tank = dynamic_cast<state::Tank*>(element);
+    //                     tiles[i+prevSize].setHeight(24);
+    //                     tiles[i+prevSize].setWidth(24);
+    //                     tiles[i+prevSize].setX(tiles[i+prevSize].getX()-8);
+    //                     tiles[i+prevSize].setY(tiles[i+prevSize].getY()-2*8);
+    //                     switch(tank->getTankTypeId()){
+    //                         case state::Little_tank_green :
+    //                             tiles[i+prevSize].setXTex(0);
+    //                             tiles[i+prevSize].setYTex(0);
                                 
                                 
-                                break;
-                            case state::Little_tank_grey :
-                                tiles[i+prevSize].setXTex(96);
-                                tiles[i+prevSize].setYTex(0);
-                                break;
-                            case state::Big_tank_green :
-                                tiles[i+prevSize].setXTex(0);
-                                tiles[i+prevSize].setYTex(24);
-                                break;
-                            case state::Big_tank_grey :
-                                tiles[i+prevSize].setXTex(96);
-                                tiles[i+prevSize].setYTex(24);
-                                break;
-                        }
-                        switch(tank->getOrientation()){
-                            case state::right_down :
-                                break;
-                            case state::left_down :
-                                tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+24);
-                                break;
-                            case state::right_up:
-                                tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+48);
-                                break;
-                            case state::left_up :
-                                tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+72);
-                                break;
-                        }
-                    break;
-                default ://space
-                    space = dynamic_cast<state::Space*>(element);
-                        switch(space->getSpaceTypeId()){//if a la place
-                            case state::sky :
-                                tiles[i+prevSize].setXTex(32);//some diversity
-                                tiles[i+prevSize].setYTex(88);//
-                                break;
-                            case state::greenery:
-                                tiles[i+prevSize].setXTex(72+(rand()%5)*8);
-                                tiles[i+prevSize].setYTex(80);
-                                break;
-                        }
-                    break;                            
-            }
-        }
+    //                             break;
+    //                         case state::Little_tank_grey :
+    //                             tiles[i+prevSize].setXTex(96);
+    //                             tiles[i+prevSize].setYTex(0);
+    //                             break;
+    //                         case state::Big_tank_green :
+    //                             tiles[i+prevSize].setXTex(0);
+    //                             tiles[i+prevSize].setYTex(24);
+    //                             break;
+    //                         case state::Big_tank_grey :
+    //                             tiles[i+prevSize].setXTex(96);
+    //                             tiles[i+prevSize].setYTex(24);
+    //                             break;
+    //                     }
+    //                     switch(tank->getOrientation()){
+    //                         case state::right_down :
+    //                             break;
+    //                         case state::left_down :
+    //                             tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+24);
+    //                             break;
+    //                         case state::right_up:
+    //                             tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+48);
+    //                             break;
+    //                         case state::left_up :
+    //                             tiles[i+prevSize].setXTex(tiles[i+prevSize].getXTex()+72);
+    //                             break;
+    //                     }
+    //                 break;
+    //             default ://space
+    //                 space = dynamic_cast<state::Space*>(element);
+    //                     switch(space->getSpaceTypeId()){//if a la place
+    //                         case state::sky :
+    //                             tiles[i+prevSize].setXTex(32);//some diversity
+    //                             tiles[i+prevSize].setYTex(88);//
+    //                             break;
+    //                         case state::greenery:
+    //                             tiles[i+prevSize].setXTex(72+(rand()%5)*8);
+    //                             tiles[i+prevSize].setYTex(80);
+    //                             break;
+    //                     }
+    //                 break;                            
+    //         }
+    //     }
         
-    };
+    // };
     
     Tile Layer::getTile (int i){
         return tiles[i];
